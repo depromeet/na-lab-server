@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.11'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "org.sonarqube" version "4.0.0.2929"
 }
 
 group = 'me.nalab'
@@ -19,6 +20,14 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sonar {
+	properties {
+		property 'sonar.host.url', 'https://sonarcloud.io'
+		property 'sonar.organization', 'depromeet-1'
+		property 'sonar.projectKey', 'depromeet_na-lab-server'
+	}
 }
 
 subprojects {
@@ -67,5 +76,4 @@ subprojects {
 			}
 		}
 	}
-
 }
