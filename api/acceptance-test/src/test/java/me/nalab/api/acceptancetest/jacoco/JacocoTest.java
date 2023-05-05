@@ -7,7 +7,11 @@ class JacocoTest {
 
 	@Test
 	void JACOCO_GRADLE_SET_UP(){
-		assertEquals(1, 1);
+		assertNotEquals("hello", getWorld());
+	}
+
+	private String getWorld(){
+		return "world";
 	}
 
 }
