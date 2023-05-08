@@ -13,9 +13,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
+          
       - name: Run Coverage
         run: chmod +x gradlew && ./gradlew test && ./gradlew testCodeCoverageReport
-
+        
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.3
