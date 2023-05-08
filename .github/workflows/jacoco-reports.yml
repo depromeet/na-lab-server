@@ -16,12 +16,16 @@ jobs:
           
       - name: Run Coverage
         run: chmod +x gradlew && ./gradlew test && ./gradlew testCodeCoverageReport
-        
-      - name: Add coverage to PR
-        id: jacoco
-        uses: madrapps/jacoco-report@v1.3
+          
+      - name: JaCoCo Code Coverage Report
+        id: jacoco_reporter
+        uses: PavanMudigonda/jacoco-reporter@v4.8
         with:
-          paths: ${{ github.workspace }}/support/jacoco/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 70
-          min-coverage-changed-files: 0
+          coverage_results_path: ${{ github.workspace }}/support/jacoco/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
+          coverage_report_name: Coverage
+          coverage_report_title: JaCoCo
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_check_run: false
+          minimum_coverage: 70
+          fail_below_threshold: true
+          publish_only_summary: false
