@@ -1,0 +1,3 @@
+exclude me/nalab/api/NalabApplication
+exclude me/nalab/hello
+exclude me/test

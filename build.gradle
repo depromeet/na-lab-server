@@ -2,12 +2,23 @@ import java.util.stream.Collectors
 
 plugins {
 	id 'java'
+	id 'org.springframework.boot' version '2.7.11'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id "org.sonarqube" version "4.0.0.2929"
 }
 
 group = 'me.nalab'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+var excludeFromCoverage = new ArrayList<String>()
+file('coverage-exclude.luffy').withInputStream(){
+	it -> excludeFromCoverage.addAll(new BufferedReader(new InputStreamReader(it))
+			.lines()
+			.parallel()
+			.map(s -> s.substring(7).strip())
+			.collect(Collectors.toList()))
+}
 
 repositories {
 	mavenCentral()
@@ -22,8 +33,6 @@ sonar {
 		property 'sonar.projectKey', 'depromeet_na-lab-server'
 	}
 }
-
-var excludeFromCoverage = List.of('me/nalab/api/NalabApplication')
 
 subprojects {
 	apply plugin: 'java'
@@ -54,7 +63,7 @@ subprojects {
 		afterEvaluate {
 			classDirectories.setFrom(files(classDirectories.files.collect {
 				fileTree(dir: it, exclude: excludeFromCoverage.stream()
-						.map(s -> new String(s + ".class"))
+						.map(s -> s + ".class")
 						.collect(Collectors.toList()))
 			}))
 		}
@@ -67,7 +76,7 @@ subprojects {
 				enabled = true
 				element = 'CLASS'
 				excludes += excludeFromCoverage.stream()
-								.map(s -> new String(s.replace("/", ".")))
+								.map(s -> s.replace("/", "."))
 								.collect(Collectors.toList())
 
 				limit {
@@ -96,7 +105,7 @@ project(':support:jacoco'){
 						.collect {
 							it.fileTree(dir: "${it.buildDir}/classes/java/main", exclude:
 									excludeFromCoverage.stream()
-											.map(s -> new String(s + ".class"))
+											.map(s -> s + ".class")
 											.collect(Collectors.toList()))
 						})
 		)
