@@ -9,6 +9,15 @@ group = 'me.nalab'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+var excludeFromCoverage = new ArrayList<String>()
+file('coverage-exclude.luffy').withInputStream(){
+	it -> excludeFromCoverage.addAll(new BufferedReader(new InputStreamReader(it))
+			.lines()
+			.parallel()
+			.map(s -> s.substring(7).strip())
+			.collect(Collectors.toList()))
+}
+
 repositories {
 	mavenCentral()
 }
@@ -22,8 +31,6 @@ sonar {
 		property 'sonar.projectKey', 'depromeet_na-lab-server'
 	}
 }
-
-var excludeFromCoverage = List.of('me/nalab/api/NalabApplication')
 
 subprojects {
 	apply plugin: 'java'
