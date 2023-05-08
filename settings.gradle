@@ -8,4 +8,6 @@ findProject(':api:acceptance-test')?.name = 'acceptance-test'
 include 'support'
 include 'core:data'
 findProject(':core:data')?.name = 'data'
+include 'support:jacoco'
+findProject(':support:jacoco')?.name = 'jacoco'
 
