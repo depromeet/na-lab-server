@@ -1,6 +1,7 @@
-package me.nalab.api.acceptancetest.jacoco;
+package me.nalab.support.jacoco;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
 
 class JacocoTest {
