@@ -115,4 +115,13 @@ project(':support:jacoco'){
 						})
 		)
 	}
+
+	var allProjectsExcludeJacoco = allProjects.stream()
+			.filter(p -> !p.getDisplayName().contains('jacoco')
+					&& !p.getDisplayName().contains('root project'))
+			.collect(Collectors.toList())
+
+	dependencies {
+		implementation allProjectsExcludeJacoco
+	}
 }
