@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'jacoco-report-aggregation'
     id 'org.springframework.boot' version '2.7.11' apply false
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
@@ -19,8 +18,6 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation project(':api:acceptance-test')
-
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
