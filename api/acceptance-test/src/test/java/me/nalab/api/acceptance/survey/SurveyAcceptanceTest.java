@@ -35,7 +35,7 @@ class SurveyAcceptanceTest {
 	}
 
 	@Test
-	@DisplayName("질문폼_생성_인수_테스트")
+	@DisplayName("질문폼 생성 인수 테스트")
 	void CREATE_SURVEY_FORM_SUCCESS() throws Exception{
 		// given
 		String token = getToken();
@@ -46,6 +46,34 @@ class SurveyAcceptanceTest {
 
 		// then
 		testValidator.expectedIsCreated(result);
+	}
+
+	@Test
+	@DisplayName("질문폼 생성 실패 인수테스트 - 올바르지 않은 토큰")
+	void CREATE_SURVEY_FORM_FAIL_INVALID_TOKEN() throws Exception{
+		// given
+		String token = "invalid";
+		SurveyCreateRequest surveyCreateRequest = getDefaultSurveyCreateRequest();
+
+		// when
+		ResultActions result = testHelper.createSurvey(token, surveyCreateRequest);
+
+		// then
+		testValidator.expectedIsTokenInvalid(result);
+	}
+
+	@Test
+	@DisplayName("질문폼 생성 실패 인수테스트 - 만료된 토큰")
+	void CREATE_SURVEY_FORM_FAIL_EXPIRED_TOKEN() throws Exception{
+		// given
+		String token = "expired";
+		SurveyCreateRequest surveyCreateRequest = getDefaultSurveyCreateRequest();
+
+		// when
+		ResultActions result = testHelper.createSurvey(token, surveyCreateRequest);
+
+		// then
+		testValidator.expectedIsTokenInvalid(result);
 	}
 
 	private String getToken(){

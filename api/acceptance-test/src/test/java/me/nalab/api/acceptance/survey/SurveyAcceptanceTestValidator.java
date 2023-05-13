@@ -14,4 +14,20 @@ class SurveyAcceptanceTestValidator {
 		);
 	}
 
+	void expectedIsTokenExpired(ResultActions result) throws Exception{
+		result.andExpectAll(
+			MockMvcResultMatchers.status().isUnauthorized(),
+			MockMvcResultMatchers.header().string(HttpHeaders.CONTENT_TYPE, "application/json"),
+			MockMvcResultMatchers.jsonPath("$.response_messages").value("Expired token")
+		);
+	}
+
+	void expectedIsTokenInvalid(ResultActions result) throws Exception{
+		result.andExpectAll(
+			MockMvcResultMatchers.status().isUnauthorized(),
+			MockMvcResultMatchers.header().string(HttpHeaders.CONTENT_TYPE, "application/json"),
+			MockMvcResultMatchers.jsonPath("$.response_messages").value("Invalid token")
+		);
+	}
+
 }
