@@ -1,7 +1,6 @@
 package me.nalab.core.idgenerator.mock;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 import me.nalab.core.idgenerator.idcore.IdGenerator;
 
