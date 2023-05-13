@@ -94,6 +94,14 @@ subprojects {
 		}
 	}
 
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.24'
+		annotationProcessor 'org.projectlombok:lombok'
+
+		testCompileOnly 'org.projectlombok:lombok:1.18.24'
+		testAnnotationProcessor 'org.projectlombok:lombok'
+	}
+
 }
 
 var allProjects = getAllprojects().stream()
