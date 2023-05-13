@@ -4,11 +4,10 @@ import java.util.List;
 
 import lombok.Builder;
 import lombok.Getter;
-import me.nalab.survey.domain.survey.api.feedback.ChoiceFormQuestionFeedbackable;
 
 @Builder
 @Getter
-public class ChoiceFormQuestion extends FormQuestionable implements ChoiceFormQuestionFeedbackable {
+public class ChoiceFormQuestion extends FormQuestionable {
 
 	private final List<Choice> choiceList;
 	private final Integer maxSelectionCount;
