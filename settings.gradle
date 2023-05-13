@@ -13,3 +13,8 @@ include 'survey'
 
 include 'auth'
 
+include 'core:id-generator'
+include 'core:id-generator:id-core'
+include 'core:id-generator:mock-id-generator'
+include 'core:id-generator:id-generator-starter'
+
