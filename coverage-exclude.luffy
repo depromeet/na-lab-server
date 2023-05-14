@@ -1,1 +1,10 @@
 exclude me/nalab/api/NalabApplication
+exclude me/nalab/core/data/survey/Survey
+exclude me/nalab/core/data/survey/Choice
+exclude me/nalab/core/data/survey/ChoiceFormQuestion
+exclude me/nalab/core/data/survey/ChoiceFormQuestionType
+exclude me/nalab/core/data/survey/FormQuestion
+exclude me/nalab/core/data/survey/QuestionType
+exclude me/nalab/core/data/survey/ShortFormQuestion
+exclude me/nalab/core/data/survey/ShortFormQuestionType
+exclude me/nalab/core/data/survey/Target
