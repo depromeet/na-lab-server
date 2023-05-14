@@ -19,6 +19,7 @@ include 'support'
 include 'support:jacoco'
 
 include 'survey'
+include 'survey:domain'
 
 include 'auth'
 
