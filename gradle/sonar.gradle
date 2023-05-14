@@ -1,0 +1,7 @@
+sonar {
+    properties {
+        property 'sonar.host.url', '${sonarHostUrl}'
+        property 'sonar.organization', '${sonarOrganization}'
+        property 'sonar.projectKey', '${sonarProjectKey}'
+    }
+}

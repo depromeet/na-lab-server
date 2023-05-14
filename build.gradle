@@ -1,135 +1,24 @@
-import java.util.stream.Collectors
-
 plugins {
 	id 'java'
-	id "org.sonarqube" version "4.0.0.2929"
+	id 'org.springframework.boot' apply false
+	id 'io.spring.dependency-management'
+	id 'org.sonarqube'
 }
 
-group = 'me.nalab'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+apply from: 'gradle/spring.gradle'
+apply from: 'gradle/sonar.gradle'
+apply from: 'gradle/jacoco.gradle'
+apply from: 'gradle/junit.gradle'
+apply from: 'gradle/lombok.gradle'
 
-var excludeFromCoverage = new ArrayList<String>()
-file('coverage-exclude.luffy').withInputStream(){
-	it -> excludeFromCoverage.addAll(new BufferedReader(new InputStreamReader(it))
-			.lines()
-			.parallel()
-			.map(s -> s.substring(7).strip())
-			.collect(Collectors.toList()))
-}
+allprojects {
 
-repositories {
-	mavenCentral()
-}
-
-dependencies {}
-
-sonar {
-	properties {
-		property 'sonar.host.url', 'https://sonarcloud.io'
-		property 'sonar.organization', 'depromeet-1'
-		property 'sonar.projectKey', 'depromeet_na-lab-server'
-	}
-}
-
-subprojects {
-	apply plugin: 'java'
-	apply plugin: 'jacoco'
+	group = "${projectGroup}"
+	version = "${applicationVersion}"
+	sourceCompatibility = project.javaVersion
 
 	repositories {
 		mavenCentral()
 	}
 
-	jacoco {
-		toolVersion = '0.8.9'
-	}
-
-	test {
-		useJUnitPlatform()
-		finalizedBy 'jacocoTestReport'
-	}
-
-	jacocoTestReport {
-		reports {
-			html.required = true
-			csv.required = true
-			xml.required = true
-		}
-		finalizedBy 'jacocoTestCoverageVerification'
-		dependsOn test
-
-		afterEvaluate {
-			classDirectories.setFrom(files(classDirectories.files.collect {
-				fileTree(dir: it, exclude: excludeFromCoverage.stream()
-						.map(s -> s + ".class")
-						.collect(Collectors.toList()))
-			}))
-		}
-	}
-
-	jacocoTestCoverageVerification {
-		violationRules {
-
-			rule {
-				enabled = true
-				element = 'CLASS'
-				excludes += excludeFromCoverage.stream()
-								.map(s -> s.replace("/", "."))
-								.collect(Collectors.toList())
-
-				limit {
-					counter = 'LINE'
-					value = 'COVEREDRATIO'
-					minimum = 0.70
-				}
-
-				limit {
-					counter = 'BRANCH'
-					value = 'COVEREDRATIO'
-					minimum = 0.70
-				}
-
-			}
-
-		}
-	}
-
-	dependencies {
-		compileOnly 'org.projectlombok:lombok:1.18.24'
-		annotationProcessor 'org.projectlombok:lombok'
-
-		testCompileOnly 'org.projectlombok:lombok:1.18.24'
-		testAnnotationProcessor 'org.projectlombok:lombok'
-	}
-
-}
-
-var allProjects = getAllprojects().stream()
-		.filter(p -> !p.getDisplayName().contains('root project'))
-		.map(p -> p)
-		.collect(Collectors.toList())
-
-project(':support:jacoco'){
-	apply plugin: 'jacoco-report-aggregation'
-
-	testCodeCoverageReport {
-		getClassDirectories().setFrom(files(
-				allProjects
-						.collect {
-							it.fileTree(dir: "${it.buildDir}/classes/java/main", exclude:
-									excludeFromCoverage.stream()
-											.map(s -> s + ".class")
-											.collect(Collectors.toList()))
-						})
-		)
-	}
-
-	var allProjectsExcludeJacoco = allProjects.stream()
-			.filter(p -> !p.getDisplayName().contains('jacoco')
-					&& !p.getDisplayName().contains('root project'))
-			.collect(Collectors.toList())
-
-	dependencies {
-		implementation allProjectsExcludeJacoco
-	}
 }
