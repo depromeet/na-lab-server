@@ -41,8 +41,8 @@ public class Survey extends TimeBaseEntity {
 	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
 	private Long applicationId;
 
-	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY)
 	@Size(min = 5, max = 25)
+	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY)
 	private List<FormQuestion> formQuestionableList;
 
 	@ManyToOne(fetch = FetchType.LAZY)
