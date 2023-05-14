@@ -1,8 +1,10 @@
 package me.nalab.survey.domain.survey;
 
-import lombok.Builder;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
+@Getter
 public class ShortFormQuestion extends FormQuestionable {
 
 	private final ShortFormQuestionType shortFormQuestionType;

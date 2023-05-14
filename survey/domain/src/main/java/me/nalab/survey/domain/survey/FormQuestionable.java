@@ -2,18 +2,18 @@ package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
 public abstract class FormQuestionable {
 
-	private final Long id;
-	private final String title;
-	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
-	private final Integer order;
-	private final QuestionType questionType;
+	protected final Long id;
+	protected final String title;
+	protected final LocalDateTime createdAt;
+	protected final LocalDateTime updatedAt;
+	protected final Integer order;
+	protected final QuestionType questionType;
 
 }

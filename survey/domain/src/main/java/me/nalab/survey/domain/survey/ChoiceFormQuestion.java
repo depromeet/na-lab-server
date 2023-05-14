@@ -2,10 +2,10 @@ package me.nalab.survey.domain.survey;
 
 import java.util.List;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
 public class ChoiceFormQuestion extends FormQuestionable {
 
