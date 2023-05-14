@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,12 +29,8 @@ import me.nalab.core.data.survey.Survey;
 public class Target extends TimeBaseEntity {
 
 	@Id
-	@GeneratedValue
 	@Column(name = "target_id")
 	private Long id;
-
-	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
-	private Long applicationId;
 
 	@Column(name = "target_name", nullable = false)
 	private String nickname;

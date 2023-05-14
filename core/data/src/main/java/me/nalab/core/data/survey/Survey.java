@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,12 +32,8 @@ import me.nalab.core.data.target.Target;
 public class Survey extends TimeBaseEntity {
 
 	@Id
-	@GeneratedValue
 	@Column(name = "survey_id")
 	private Long id;
-
-	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
-	private Long applicationId;
 
 	@Size(min = 5, max = 25)
 	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY)

@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,12 +31,8 @@ import me.nalab.core.data.common.TimeBaseEntity;
 public abstract class FormQuestion extends TimeBaseEntity {
 
 	@Id
-	@GeneratedValue
 	@Column(name = "form_question_id")
 	protected Long id;
-
-	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
-	protected Long applicationId;
 
 	@Size(min = 1, max = 45)
 	@Column(name = "title", nullable = false, length = 45)
