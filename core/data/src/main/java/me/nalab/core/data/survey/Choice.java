@@ -33,21 +33,21 @@ public class Choice {
 	@Id
 	@GeneratedValue
 	@Column(name = "choice_id")
-	private Long choiceId;
+	private Long id;
 
 	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
 	private Long applicationId;
 
-	@Column(name = "content")
-	@Size(max = 18, min = 1)
+	@Size(min = 1, max = 18)
+	@Column(name = "content", length = 18, nullable = false)
 	private String content;
 
-	@Column(name = "order")
-	@Max(20)
 	@Min(1)
+	@Max(20)
+	@Column(name = "order", nullable = false)
 	private Integer order;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_question_id", nullable = false)
 	private ChoiceFormQuestion choiceFormQuestion;
 
