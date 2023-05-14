@@ -42,6 +42,7 @@ public class ChoiceFormQuestion extends FormQuestion {
 	private Integer maxSelectionCount;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "question_type")
 	private ChoiceFormQuestionType choiceFormQuestionType;
 
 }
