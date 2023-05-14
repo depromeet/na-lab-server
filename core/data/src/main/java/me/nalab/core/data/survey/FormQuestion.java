@@ -34,7 +34,7 @@ public class FormQuestion extends TimeBaseEntity {
 	@Id
 	@GeneratedValue
 	@Column(name = "form_question_id")
-	protected Long formQuestionId;
+	protected Long id;
 
 	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
 	protected Long applicationId;
@@ -43,12 +43,13 @@ public class FormQuestion extends TimeBaseEntity {
 	@Column(name = "title", nullable = false)
 	protected String title;
 
-	@Column(name = "order", nullable = false)
-	@Max(25)
 	@Min(1)
+	@Max(25)
+	@Column(name = "order", nullable = false)
 	protected Integer order;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "question_type")
 	protected QuestionType questionType;
 
 	@ManyToOne
