@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':survey:domain')
+    implementation project(':core:id-generator:id-generator-starter')
+}
