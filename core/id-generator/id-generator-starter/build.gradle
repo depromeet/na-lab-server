@@ -1,4 +1,4 @@
 dependencies {
-    implementation project(':core:id-generator:id-core')
+    api project(':core:id-generator:id-core')
     implementation project(':core:id-generator:mock-id-generator')
 }
