@@ -40,7 +40,7 @@ public abstract class FormQuestion extends TimeBaseEntity {
 	protected Long applicationId;
 
 	@Size(min = 1, max = 45)
-	@Column(name = "title", nullable = false)
+	@Column(name = "title", nullable = false, length = 45)
 	protected String title;
 
 	@Min(1)
