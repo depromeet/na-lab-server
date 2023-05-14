@@ -20,7 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import me.nalab.core.data.common.TimeStamp;
+import me.nalab.core.data.common.TimeBaseEntity;
 import me.nalab.core.data.target.Target;
 
 @Entity
@@ -31,7 +31,7 @@ import me.nalab.core.data.target.Target;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class Survey extends TimeStamp {
+public class Survey extends TimeBaseEntity {
 
 	@Id
 	@GeneratedValue

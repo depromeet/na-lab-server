@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import me.nalab.core.data.common.TimeStamp;
+import me.nalab.core.data.common.TimeBaseEntity;
 
 @Entity
 @Table(name = "form_question")
@@ -29,7 +29,7 @@ import me.nalab.core.data.common.TimeStamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class FormQuestion extends TimeStamp {
+public class FormQuestion extends TimeBaseEntity {
 
 	@Id
 	@GeneratedValue
