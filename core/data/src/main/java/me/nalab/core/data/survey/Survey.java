@@ -36,7 +36,7 @@ public class Survey extends TimeBaseEntity {
 	@Id
 	@GeneratedValue
 	@Column(name = "survey_id")
-	private Long surveyId;
+	private Long id;
 
 	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
 	private Long applicationId;

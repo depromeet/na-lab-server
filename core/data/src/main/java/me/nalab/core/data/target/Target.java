@@ -33,7 +33,7 @@ public class Target extends TimeBaseEntity {
 	@Id
 	@GeneratedValue
 	@Column(name = "target_id")
-	private Long targetId;
+	private Long id;
 
 	@Column(name = "application_id", nullable = false, unique = true, updatable = false)
 	private Long applicationId;
@@ -42,10 +42,7 @@ public class Target extends TimeBaseEntity {
 	private String nickname;
 
 
-	@OneToMany(mappedBy = "target",
-		cascade = CascadeType.ALL,
-		orphanRemoval = true,
-		fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "target", fetch = FetchType.LAZY)
 	private List<Survey> surveyList;
 
 }
