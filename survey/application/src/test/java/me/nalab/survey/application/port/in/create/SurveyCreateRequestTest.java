@@ -2,7 +2,6 @@ package me.nalab.survey.application.port.in.create;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -12,16 +11,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import me.nalab.core.idgenerator.idcore.IdGenerator;
+import me.nalab.survey.application.port.TestIdGenerator;
 import me.nalab.survey.domain.survey.ChoiceFormQuestion;
 import me.nalab.survey.domain.survey.FormQuestionable;
 import me.nalab.survey.domain.survey.ShortFormQuestion;
 
+import static me.nalab.survey.application.port.fixture.CreateSurveyFixture.*;
+
 class SurveyCreateRequestTest {
 
-	private static final IdGenerator ID_GENERATOR = () -> {
-		SecureRandom secureRandom = new SecureRandom();
-		return secureRandom.nextLong();
-	};
+	private static final IdGenerator ID_GENERATOR = new TestIdGenerator();
 
 	@ParameterizedTest
 	@MethodSource("createSurveyRequestStream")
@@ -82,37 +81,6 @@ class SurveyCreateRequestTest {
 			), ChoiceFormQuestion.class),
 			Arguments.of(getShortQuestionRequest(2, "hello-world1"), ShortFormQuestion.class)
 		);
-	}
-
-	private static SurveyCreateRequest getSurveyCreateRequest(Integer questionCount, List<Questionable<?>> questionableList){
-		return SurveyCreateRequest.builder()
-			.questionCount(questionCount)
-			.questionableList(questionableList)
-			.build();
-	}
-
-	private static Questionable<?> getChoiceQuestionRequest(String title, Integer maxSelectableCount,
-		Integer order, List<ChoiceRequest> choiceRequestList){
-		return ChoiceQuestionRequest.builder()
-			.title(title)
-			.maxSelectableCount(maxSelectableCount)
-			.order(order)
-			.choiceRequestList(choiceRequestList)
-			.build();
-	}
-
-	private static ChoiceRequest getChoiceRequest(Integer order, String content){
-		return ChoiceRequest.builder()
-			.order(order)
-			.content(content)
-			.build();
-	}
-
-	private static Questionable<?> getShortQuestionRequest(Integer order, String title){
-		return ShortQuestionRequest.builder()
-			.title(title)
-			.order(order)
-			.build();
 	}
 
 }
