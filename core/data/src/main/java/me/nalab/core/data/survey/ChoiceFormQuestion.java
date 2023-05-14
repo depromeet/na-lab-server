@@ -28,17 +28,14 @@ import lombok.experimental.SuperBuilder;
 @Valid
 public class ChoiceFormQuestion extends FormQuestion {
 
-	@OneToMany(mappedBy = "choiceFormQuestion",
-				cascade = CascadeType.ALL,
-				orphanRemoval = true,
-				fetch = FetchType.LAZY)
-	@Max(20)
 	@Min(1)
+	@Max(20)
+	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY)
 	private List<Choice> choiceList;
 
-	@Column(name = "max_selection_count")
-	@Max(20)
 	@Min(1)
+	@Max(20)
+	@Column(name = "max_selection_count")
 	private Integer maxSelectionCount;
 
 	@Enumerated(EnumType.STRING)
