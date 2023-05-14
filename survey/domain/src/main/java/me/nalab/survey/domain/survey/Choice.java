@@ -9,5 +9,6 @@ public class Choice {
 
 	private final Long id;
 	private final String content;
+	private final Integer order;
 
 }
