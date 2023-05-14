@@ -18,6 +18,6 @@ public enum ShortFormQuestionType {
 	/**
 	 * 타겟이 생성한 새로운 주관식 질문
 	 */
-	CUSTOM
+	CUSTOM,
 
 }

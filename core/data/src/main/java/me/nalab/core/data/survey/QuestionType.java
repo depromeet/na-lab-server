@@ -15,6 +15,6 @@ public enum QuestionType {
 	/**
 	 * 주관식
 	 */
-	SHORT
+	SHORT,
 
 }

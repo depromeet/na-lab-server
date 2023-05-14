@@ -9,10 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,16 +21,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Valid
 public class ChoiceFormQuestion extends FormQuestion {
 
-	@Min(1)
-	@Max(20)
 	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY)
 	private List<Choice> choiceList;
 
-	@Min(1)
-	@Max(20)
 	@Column(name = "max_selection_count")
 	private Integer maxSelectionCount;
 
