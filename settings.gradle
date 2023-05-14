@@ -21,6 +21,7 @@ include 'support:jacoco'
 include 'survey'
 
 include 'auth'
+include 'auth:mock'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
