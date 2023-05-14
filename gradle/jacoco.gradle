@@ -9,7 +9,7 @@ file('coverage-exclude.luffy').withInputStream(){
             .collect(Collectors.toList()))
 }
 
-allprojects {
+subprojects {
     apply plugin: 'java-library'
     apply plugin: 'jacoco'
 
