@@ -29,7 +29,7 @@ import me.nalab.core.data.common.TimeBaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Valid
-public class FormQuestion extends TimeBaseEntity {
+public abstract class FormQuestion extends TimeBaseEntity {
 
 	@Id
 	@GeneratedValue
