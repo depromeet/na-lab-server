@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.target;
 
 import java.util.List;
+import java.util.Objects;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,21 @@ public class Target {
 			", surveyList=" + surveyList +
 			", nickname='" + nickname + '\'' +
 			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof Target))
+			return false;
+		Target target = (Target)o;
+		return id.equals(target.id) && surveyList.equals(target.surveyList) && nickname.equals(target.nickname);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, surveyList, nickname);
 	}
 
 }

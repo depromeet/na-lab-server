@@ -1,5 +1,7 @@
 package me.nalab.survey.domain.survey;
 
+import java.util.Objects;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,4 +22,18 @@ public class Choice {
 			'}';
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(o == null || getClass() != o.getClass())
+			return false;
+		Choice choice = (Choice)o;
+		return id.equals(choice.id) && content.equals(choice.content) && order.equals(choice.order);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, content, order);
+	}
 }
