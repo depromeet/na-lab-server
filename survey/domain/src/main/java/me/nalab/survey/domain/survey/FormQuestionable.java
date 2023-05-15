@@ -18,4 +18,6 @@ public abstract class FormQuestionable {
 	protected final Integer order;
 	protected final QuestionType questionType;
 
+	abstract FormQuestionable ofIncreaseOrder(int defaultOrderSize);
+
 }
