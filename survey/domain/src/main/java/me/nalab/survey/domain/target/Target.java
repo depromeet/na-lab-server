@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import lombok.Builder;
 import lombok.Getter;
+import me.nalab.core.meta.coverage.Generated;
 import me.nalab.survey.domain.survey.Survey;
 
 @Builder
@@ -25,6 +26,7 @@ public class Target {
 	}
 
 	@Override
+	@Generated
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;
@@ -35,6 +37,7 @@ public class Target {
 	}
 
 	@Override
+	@Generated
 	public int hashCode() {
 		return Objects.hash(id, surveyList, nickname);
 	}

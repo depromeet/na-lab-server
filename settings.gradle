@@ -11,6 +11,7 @@ rootProject.name = 'luffy'
 
 include 'core'
 include 'core:data'
+include 'core:meta'
 
 include 'api'
 include 'api:acceptance-test'

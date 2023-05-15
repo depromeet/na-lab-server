@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import me.nalab.core.meta.coverage.Generated;
 
 @SuperBuilder
 @Getter
@@ -30,6 +31,7 @@ public class ChoiceFormQuestion extends FormQuestionable {
 	}
 
 	@Override
+	@Generated
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;
@@ -43,6 +45,7 @@ public class ChoiceFormQuestion extends FormQuestionable {
 	}
 
 	@Override
+	@Generated
 	public int hashCode() {
 		return Objects.hash(choiceList, maxSelectionCount, choiceFormQuestionType, id, title, createdAt, updatedAt,
 			order, questionType);

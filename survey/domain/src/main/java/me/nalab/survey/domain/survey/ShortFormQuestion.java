@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import me.nalab.core.meta.coverage.Generated;
 
 @SuperBuilder
 @Getter
@@ -25,6 +26,7 @@ public class ShortFormQuestion extends FormQuestionable {
 	}
 
 	@Override
+	@Generated
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;
@@ -37,6 +39,7 @@ public class ShortFormQuestion extends FormQuestionable {
 	}
 
 	@Override
+	@Generated
 	public int hashCode() {
 		return Objects.hash(shortFormQuestionType, id, title, createdAt, updatedAt, order, questionType);
 	}

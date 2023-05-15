@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import lombok.Builder;
 import lombok.Getter;
+import me.nalab.core.meta.coverage.Generated;
 
 @Builder
 @Getter
@@ -27,6 +28,7 @@ public class Survey {
 	}
 
 	@Override
+	@Generated
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;
@@ -38,6 +40,7 @@ public class Survey {
 	}
 
 	@Override
+	@Generated
 	public int hashCode() {
 		return Objects.hash(id, createdAt, updatedAt, formQuestionableList);
 	}
