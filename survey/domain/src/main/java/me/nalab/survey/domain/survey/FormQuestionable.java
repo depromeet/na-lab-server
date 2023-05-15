@@ -1,13 +1,14 @@
 package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Getter
+@ToString
 public abstract class FormQuestionable {
 
 	protected final Long id;
