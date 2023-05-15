@@ -11,4 +11,12 @@ public class Choice {
 	private final String content;
 	private final Integer order;
 
+	@Override
+	public String toString() {
+		return "Choice{" +
+			"id=" + id +
+			", content='" + content + '\'' +
+			", order=" + order +
+			'}';
+	}
 }

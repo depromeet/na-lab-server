@@ -14,4 +14,12 @@ public class Target {
 	private final List<Survey> surveyList;
 	private final String nickname;
 
+	@Override
+	public String toString() {
+		return "Target{" +
+			"id=" + id +
+			", surveyList=" + surveyList +
+			", nickname='" + nickname + '\'' +
+			'}';
+	}
 }

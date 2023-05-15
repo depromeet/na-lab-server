@@ -13,4 +13,18 @@ public class ChoiceFormQuestion extends FormQuestionable {
 	private final Integer maxSelectionCount;
 	private final ChoiceFormQuestionType choiceFormQuestionType;
 
+	@Override
+	public String toString() {
+		return "ChoiceFormQuestion{" +
+			"choiceList=" + choiceList +
+			", maxSelectionCount=" + maxSelectionCount +
+			", choiceFormQuestionType=" + choiceFormQuestionType +
+			", id=" + id +
+			", title='" + title + '\'' +
+			", createdAt=" + createdAt +
+			", updatedAt=" + updatedAt +
+			", order=" + order +
+			", questionType=" + questionType +
+			'}';
+	}
 }

@@ -15,4 +15,13 @@ public class Survey {
 	private final LocalDateTime updatedAt;
 	private final List<FormQuestionable> formQuestionableList;
 
+	@Override
+	public String toString() {
+		return "Survey{" +
+			"id=" + id +
+			", createdAt=" + createdAt +
+			", updatedAt=" + updatedAt +
+			", formQuestionableList=" + formQuestionableList +
+			'}';
+	}
 }
