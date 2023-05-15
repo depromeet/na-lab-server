@@ -22,6 +22,7 @@ include 'survey'
 include 'survey:domain'
 
 include 'auth'
+include 'auth:mock'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
