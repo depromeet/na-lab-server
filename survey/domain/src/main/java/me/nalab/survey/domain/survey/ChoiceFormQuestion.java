@@ -27,4 +27,5 @@ public class ChoiceFormQuestion extends FormQuestionable {
 			", questionType=" + questionType +
 			'}';
 	}
+
 }

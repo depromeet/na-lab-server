@@ -22,4 +22,5 @@ public class Target {
 			", nickname='" + nickname + '\'' +
 			'}';
 	}
+
 }

@@ -21,4 +21,5 @@ public class ShortFormQuestion extends FormQuestionable {
 			", questionType=" + questionType +
 			'}';
 	}
+
 }
