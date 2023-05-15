@@ -1,7 +1,6 @@
 package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
