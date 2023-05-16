@@ -20,6 +20,7 @@ include 'support:jacoco'
 
 include 'survey'
 include 'survey:domain'
+include 'survey:application'
 
 include 'auth'
 include 'auth:mock'
