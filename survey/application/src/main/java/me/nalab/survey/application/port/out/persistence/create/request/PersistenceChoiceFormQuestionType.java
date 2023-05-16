@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.out.persistence.create.request;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import me.nalab.survey.domain.survey.ChoiceFormQuestionType;
@@ -36,12 +36,13 @@ public enum PersistenceChoiceFormQuestionType {
 		Converter.TYPE_CONVERTER.put(choiceFormQuestionType, this);
 	}
 
-	public static PersistenceChoiceFormQuestionType convert(ChoiceFormQuestionType choiceFormQuestionType){
+	public static PersistenceChoiceFormQuestionType convert(ChoiceFormQuestionType choiceFormQuestionType) {
 		return Converter.TYPE_CONVERTER.get(choiceFormQuestionType);
 	}
 
 	private static final class Converter {
-		private static final Map<ChoiceFormQuestionType, PersistenceChoiceFormQuestionType> TYPE_CONVERTER = new HashMap<>();
+		private static final Map<ChoiceFormQuestionType, PersistenceChoiceFormQuestionType> TYPE_CONVERTER
+			= new EnumMap<>(ChoiceFormQuestionType.class);
 	}
 
 }

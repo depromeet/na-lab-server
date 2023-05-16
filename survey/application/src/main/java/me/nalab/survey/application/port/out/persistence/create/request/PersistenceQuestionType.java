@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.out.persistence.create.request;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import me.nalab.survey.domain.survey.QuestionType;
@@ -22,16 +22,17 @@ public enum PersistenceQuestionType {
 	SHORT(QuestionType.SHORT),
 	;
 
-	PersistenceQuestionType(QuestionType questionType){
+	PersistenceQuestionType(QuestionType questionType) {
 		Converter.TYPE_CONVERTER.put(questionType, this);
 	}
 
-	public static PersistenceQuestionType convert(QuestionType questionType){
+	public static PersistenceQuestionType convert(QuestionType questionType) {
 		return Converter.TYPE_CONVERTER.get(questionType);
 	}
 
 	private static final class Converter {
-		private static final Map<QuestionType, PersistenceQuestionType> TYPE_CONVERTER = new HashMap<>();
+		private static final Map<QuestionType, PersistenceQuestionType> TYPE_CONVERTER
+			= new EnumMap<>(QuestionType.class);
 	}
 
 }

@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.out.persistence.create.request;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import me.nalab.survey.domain.survey.ShortFormQuestionType;
@@ -31,12 +31,13 @@ public enum PersistenceShortFormQuestionType {
 		Converter.TYPE_CONVERTER.put(shortFormQuestionType, this);
 	}
 
-	public static PersistenceShortFormQuestionType convert(ShortFormQuestionType shortFormQuestionType){
+	public static PersistenceShortFormQuestionType convert(ShortFormQuestionType shortFormQuestionType) {
 		return Converter.TYPE_CONVERTER.get(shortFormQuestionType);
 	}
 
 	private static final class Converter {
-		private static final Map<ShortFormQuestionType, PersistenceShortFormQuestionType> TYPE_CONVERTER = new HashMap<>();
+		private static final Map<ShortFormQuestionType, PersistenceShortFormQuestionType> TYPE_CONVERTER
+			= new EnumMap<>(ShortFormQuestionType.class);
 	}
 
 }
