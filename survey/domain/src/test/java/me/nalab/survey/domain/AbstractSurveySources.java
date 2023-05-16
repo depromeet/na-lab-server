@@ -35,6 +35,31 @@ public abstract class AbstractSurveySources {
 		);
 	}
 
+	protected static Stream<Arguments> surveyCreateFailOrderSources() {
+		return Stream.of(
+			of(
+				surveyFunction(1L, LocalDateTime.now(), LocalDateTime.now())
+				, (Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(2L, "choice-form-fail1", LocalDateTime.now(), LocalDateTime.now(), 1
+						, List.of(choice(3L, 1, "choice1"), choice(4L, 2, "choice2")))
+					, shortFormQuestion(11L, "short-form-fail", LocalDateTime.now(), LocalDateTime.now(), 1)
+				)
+			)
+			, of(
+				surveyFunction(6L, LocalDateTime.now(), LocalDateTime.now())
+				, (Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(7L, "choice-form-fail3", LocalDateTime.now(), LocalDateTime.now(), 1
+						, List.of(
+							choice(8L, 2, "choice3")
+							, choice(4L, 2, "choice4")
+							, choice(4L, 2, "choice4")
+						)
+					)
+				)
+			)
+		);
+	}
+
 	static Function<Supplier<List<FormQuestionable>>, Survey> surveyFunction(Long id, LocalDateTime createAt,
 		LocalDateTime updatedAt) {
 		return T -> Survey.builder()
@@ -55,6 +80,7 @@ public abstract class AbstractSurveySources {
 			.order(order)
 			.questionType(QuestionType.CHOICE)
 			.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
+			.maxSelectionCount(choiceList.size())
 			.choiceList(choiceList)
 			.build();
 	}
@@ -79,6 +105,5 @@ public abstract class AbstractSurveySources {
 			.content(content)
 			.build();
 	}
-
 
 }

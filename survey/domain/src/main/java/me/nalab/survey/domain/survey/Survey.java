@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import me.nalab.survey.domain.survey.valid.SurveyValidator;
 
 @Builder
 @Getter
@@ -18,5 +19,14 @@ public class Survey {
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
 	private final List<FormQuestionable> formQuestionableList;
+
+	Survey(Long id, LocalDateTime createdAt, LocalDateTime updatedAt,
+		List<FormQuestionable> formQuestionableList) {
+		this.id = id;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.formQuestionableList = formQuestionableList;
+		SurveyValidator.validSelf(this);
+	}
 
 }
