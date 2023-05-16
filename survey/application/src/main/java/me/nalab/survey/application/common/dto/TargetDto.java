@@ -1,4 +1,4 @@
-package me.nalab.survey.application.port.in.create.request;
+package me.nalab.survey.application.common.dto;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,9 +9,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class CreateChoice {
+public class TargetDto {
 
-	private final String content;
-	private final Integer order;
+	private final Long id;
+	private final String nickname;
 
 }

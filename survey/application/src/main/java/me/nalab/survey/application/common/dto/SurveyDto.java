@@ -1,4 +1,4 @@
-package me.nalab.survey.application.port.out.persistence.create.request;
+package me.nalab.survey.application.common.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,12 +12,12 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class PersistenceSurveyRequest {
+public class SurveyDto {
 
 	private final Long id;
 	private final Long targetId;
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
-	private final List<PersistenceFormQuestionable> persistenceFormQuestionableList;
+	private final List<FormQuestionDtoable> formQuestionDtoableList;
 
 }

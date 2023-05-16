@@ -1,4 +1,4 @@
-package me.nalab.survey.application.port.out.persistence.create;
+package me.nalab.survey.application.port.out.persistence;
 
 /**
  * 저장되어있는 Target을 조회하는 인터페이스
