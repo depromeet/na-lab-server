@@ -60,6 +60,39 @@ public abstract class AbstractSurveySources {
 		);
 	}
 
+	protected static Stream<Arguments> surveyWithIdFailSources() {
+		return Stream.of(
+			of(
+				surveyFunction(null, LocalDateTime.now(), LocalDateTime.now()),
+				(Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(null, "choice-form-fail1", LocalDateTime.now(), LocalDateTime.now(), 1,
+						List.of(choice(null, 1, "choice1"), choice(1L, 2, "choice2")))
+				)
+			),
+			of(
+				surveyFunction(null, LocalDateTime.now(), LocalDateTime.now()),
+				(Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(null, "choice-form-fail1", LocalDateTime.now(), LocalDateTime.now(), 1,
+						List.of(choice(1L, 1, "choice1"), choice(1L, 2, "choice2")))
+				)
+			),
+			of(
+				surveyFunction(null, LocalDateTime.now(), LocalDateTime.now()),
+				(Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(1L, "choice-form-fail1", LocalDateTime.now(), LocalDateTime.now(), 1,
+						List.of(choice(1L, 1, "choice1"), choice(1L, 2, "choice2")))
+				)
+			),
+			of(
+				surveyFunction(1L, LocalDateTime.now(), LocalDateTime.now()),
+				(Supplier<List<FormQuestionable>>)() -> List.of(
+					choiceFormQuestion(1L, "choice-form-fail1", LocalDateTime.now(), LocalDateTime.now(), 1,
+						List.of(choice(1L, 1, "choice1"), choice(1L, 2, "choice2")))
+				)
+			)
+		);
+	}
+
 	static Function<Supplier<List<FormQuestionable>>, Survey> surveyFunction(Long id, LocalDateTime createAt,
 		LocalDateTime updatedAt) {
 		return T -> Survey.builder()
