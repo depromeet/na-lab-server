@@ -1,4 +1,4 @@
-package me.nalab.survey.application.port.out.persistence.create.request;
+package me.nalab.survey.application.common.dto;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class PersistenceChoice {
+public class ChoiceDto {
 
 	private final Long id;
 	private final String content;

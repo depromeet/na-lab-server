@@ -3,6 +3,7 @@ package me.nalab.survey.domain.survey;
 import java.time.LocalDateTime;
 import java.util.function.LongSupplier;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -12,6 +13,7 @@ import me.nalab.survey.domain.support.IdGeneratable;
 @SuperBuilder
 @Getter
 @ToString
+@EqualsAndHashCode
 public abstract class FormQuestionable implements IdGeneratable {
 
 	protected Long id;
