@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.out.persistence;
 
-import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.domain.survey.Survey;
 
 /**
  * 생성된 Survey를 저장하는 역할을 하는 인터페이스
@@ -11,8 +11,9 @@ public interface CreateSurveyPort {
 
 	/**
 	 * 이 메소드는 Survey를 저장함.
-	 * @param surveyDto 저장할 Survey의 정보
+	 * @param survey 저장할 Survey의 정보
+	 * @param targetId Survey를 생성한 Target의 id
 	 */
-	void persistenceSurvey(SurveyDto surveyDto);
+	void persistenceSurvey(Long targetId, Survey survey);
 
 }

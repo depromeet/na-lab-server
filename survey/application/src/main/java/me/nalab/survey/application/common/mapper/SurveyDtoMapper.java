@@ -1,6 +1,5 @@
 package me.nalab.survey.application.common.mapper;
 
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import me.nalab.survey.application.common.dto.ChoiceDto;
