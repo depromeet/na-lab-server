@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.survey;
 
 import java.util.List;
+import java.util.function.LongSupplier;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,6 +25,13 @@ public class ChoiceFormQuestion extends FormQuestionable {
 		maxSelectionCount = builder.maxSelectionCount;
 		choiceFormQuestionType = builder.choiceFormQuestionType;
 		ChoiceFormQuestionValidator.validSelf(this);
+	}
+
+	@Override
+	public void cascadeId(LongSupplier idSupplier) {
+		for(Choice choice : choiceList) {
+			choice.withId(idSupplier);
+		}
 	}
 
 }
