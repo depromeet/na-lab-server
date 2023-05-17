@@ -2,6 +2,7 @@ package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -9,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @ToString
+@EqualsAndHashCode
 public abstract class FormQuestionable {
 
 	protected final Long id;
