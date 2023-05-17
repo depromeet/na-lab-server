@@ -25,7 +25,7 @@ import me.nalab.survey.web.adaptor.survey.find.response.TargetResponse;
 class SurveyFindResponseMapperTest {
 
 	@Test
-	public void toSurveyFindResponse() {
+	void toSurveyFindResponse() {
 		TargetDto targetDto = TargetDto.builder().id(1L).nickname("sujin").build();
 
 		SurveyDto surveyDto = SurveyDto.builder()
