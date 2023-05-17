@@ -21,6 +21,7 @@ include 'support:jacoco'
 include 'survey'
 include 'survey:domain'
 include 'survey:application'
+include 'survey:web-adaptor'
 
 include 'auth'
 include 'auth:mock'
@@ -29,4 +30,3 @@ include 'core:id-generator'
 include 'core:id-generator:id-core'
 include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
-
