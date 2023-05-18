@@ -4,6 +4,6 @@ import me.nalab.survey.application.common.dto.SurveyDto;
 
 public interface SurveyFindPort {
 
-	SurveyDto findSurvey(Long surveyId);
+	SurveyDto getSurvey(Long surveyId);
 
 }

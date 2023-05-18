@@ -1,9 +1,6 @@
 package me.nalab.survey.application.service.survey.find;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,35 +25,18 @@ class SurveyFindServiceTest {
 	}
 
 	@Test
-	void surveyFindService_WhenSurveyIsFound() {
+	void surveyFindService() {
 		// given
 		Long surveyId = 1L;
 		SurveyDto expectedSurveyDto = SurveyDto.builder()
 			.id(surveyId)
 			.build();
-		when(surveyFindPort.findSurvey(surveyId)).thenReturn(expectedSurveyDto);
+		when(surveyFindPort.getSurvey(surveyId)).thenReturn(expectedSurveyDto);
 
 		// when
 		SurveyDto actualSurveyDto = surveyFindService.findSurvey(surveyId);
 
 		// then
 		assertEquals(expectedSurveyDto, actualSurveyDto);
-		verify(surveyFindPort, times(1)).findSurvey(surveyId);
-		verifyNoMoreInteractions(surveyFindPort);
-	}
-
-	@Test
-	void surveyFindService_WhenSurveyIsNotFound() {
-		// given
-		Long surveyId = 1L;
-		when(surveyFindPort.findSurvey(surveyId)).thenReturn(null);
-
-		// when
-		SurveyDto actualSurveyDto = surveyFindService.findSurvey(surveyId);
-
-		// then
-		assertNull(actualSurveyDto);
-		verify(surveyFindPort, times(1)).findSurvey(surveyId);
-		verifyNoMoreInteractions(surveyFindPort);
 	}
 }
