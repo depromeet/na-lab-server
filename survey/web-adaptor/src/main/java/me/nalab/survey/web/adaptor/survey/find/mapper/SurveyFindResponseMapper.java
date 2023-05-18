@@ -13,13 +13,17 @@ import me.nalab.survey.web.adaptor.survey.find.response.ChoiceFormQuestionRespon
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.FormQuestionResponseable;
-import me.nalab.survey.web.adaptor.survey.find.response.QuestionResponseType;
 import me.nalab.survey.web.adaptor.survey.find.response.ShortFormQuestionResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.TargetResponse;
 
 @Service
 public class SurveyFindResponseMapper {
-	public SurveyFindResponse toSurveyFindResponse(TargetDto targetDto, SurveyDto surveyDto) {
+
+	private SurveyFindResponseMapper() {
+		throw new UnsupportedOperationException("Cannot invoke constructor \"SurveyFindResponseMapper()\"");
+	}
+
+	public static SurveyFindResponse toSurveyFindResponse(TargetDto targetDto, SurveyDto surveyDto) {
 		return SurveyFindResponse.builder()
 			.surveyId(surveyDto.getId())
 			.target(TargetResponse.builder().id(targetDto.getId()).nickname(targetDto.getNickname()).build())
@@ -41,7 +45,7 @@ public class SurveyFindResponseMapper {
 	public static ChoiceFormQuestionResponse toChoiceFormQuestionResponse(ChoiceFormQuestionDto choiceFormQuestionDto) {
 		return ChoiceFormQuestionResponse.builder()
 			.questionId(choiceFormQuestionDto.getId())
-			.type(QuestionResponseType.toResponseType(choiceFormQuestionDto.getQuestionDtoType()))
+			.type(choiceFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
 			.title(choiceFormQuestionDto.getTitle())
 			.order(choiceFormQuestionDto.getOrder())
 			.maxSelectionCount(choiceFormQuestionDto.getMaxSelectionCount())
@@ -59,7 +63,7 @@ public class SurveyFindResponseMapper {
 	public static ShortFormQuestionResponse toShortFormQuestionResponse(ShortFormQuestionDto shortFormQuestionDto) {
 		return ShortFormQuestionResponse.builder()
 			.questionId(shortFormQuestionDto.getId())
-			.type(QuestionResponseType.toResponseType(shortFormQuestionDto.getQuestionDtoType()))
+			.type(shortFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
 			.title(shortFormQuestionDto.getTitle())
 			.order(shortFormQuestionDto.getOrder())
 			.build();
