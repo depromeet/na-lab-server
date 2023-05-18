@@ -28,7 +28,7 @@ class TargetFindServiceTest {
 	}
 
 	@Test
-	public void targetFindService_WhenTargetIsFound() {
+	void targetFindService_WhenTargetIsFound() {
 		// given
 		Long targetId = 1L;
 		TargetDto expectedTargetDto = TargetDto.builder()
@@ -47,7 +47,7 @@ class TargetFindServiceTest {
 	}
 
 	@Test
-	public void targetFindService_WhenTargetIsNotFound() {
+	void targetFindService_WhenTargetIsNotFound() {
 		// given
 		Long targetId = 1L;
 		when(targetFindPort.findTarget(targetId)).thenReturn(null);

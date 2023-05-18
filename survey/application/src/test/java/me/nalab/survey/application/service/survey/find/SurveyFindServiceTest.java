@@ -28,7 +28,7 @@ class SurveyFindServiceTest {
 	}
 
 	@Test
-	public void surveyFindService_WhenSurveyIsFound() {
+	void surveyFindService_WhenSurveyIsFound() {
 		// given
 		Long surveyId = 1L;
 		SurveyDto expectedSurveyDto = SurveyDto.builder()
@@ -46,7 +46,7 @@ class SurveyFindServiceTest {
 	}
 
 	@Test
-	public void surveyFindService_WhenSurveyIsNotFound() {
+	void surveyFindService_WhenSurveyIsNotFound() {
 		// given
 		Long surveyId = 1L;
 		when(surveyFindPort.findSurvey(surveyId)).thenReturn(null);
