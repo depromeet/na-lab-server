@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import me.nalab.survey.application.common.dto.QuestionDtoType;
 
 @Getter
 @ToString
@@ -15,8 +16,8 @@ public class ShortFormQuestionRequest extends FormQuestionRequestable {
 	private String shortFormQuestionType;
 
 	@Override
-	public String getQuestionFormType() {
-		return "short";
+	public QuestionDtoType getQuestionFormType() {
+		return QuestionDtoType.SHORT;
 	}
 
 }

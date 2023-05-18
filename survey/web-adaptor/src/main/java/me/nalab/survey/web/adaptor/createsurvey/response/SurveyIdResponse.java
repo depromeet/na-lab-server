@@ -2,11 +2,11 @@ package me.nalab.survey.web.adaptor.createsurvey.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-@Builder
+@RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class SurveyIdResponse {

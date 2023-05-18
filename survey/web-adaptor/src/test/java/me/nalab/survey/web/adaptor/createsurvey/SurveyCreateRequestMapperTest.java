@@ -5,10 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,28 +20,16 @@ class SurveyCreateRequestMapperTest {
 
 	@Test
 	@DisplayName("SurveyCreate Request -> SurveyDto 성공 테스트")
-	void SURVEY_CREATE_REQUEST_TO_SURVEY_DTO_SUCCESS() throws IOException, URISyntaxException {
+	void SURVEY_CREATE_REQUEST_TO_SURVEY_DTO_SUCCESS() throws IOException {
 		// given
-		String json = read("./src/test/java/me/nalab/survey/web/adaptor/createsurvey/test.json");
 		ObjectMapper objectMapper = new ObjectMapper();
-		SurveyCreateRequest surveyCreateRequest = objectMapper.readValue(json, SurveyCreateRequest.class);
+		SurveyCreateRequest surveyCreateRequest = objectMapper.readValue(TestJson.json, SurveyCreateRequest.class);
 
 		// when
 		SurveyDto surveyDto = SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest);
 
 		// then
 		assertRequestEqualDto(surveyCreateRequest, surveyDto);
-	}
-
-	private String read(String filePath) {
-		Path path = Paths.get(filePath);
-		StringBuilder sb = new StringBuilder();
-		try {
-			Files.readAllLines(path).forEach(sb::append);
-		} catch(IOException ioe) {
-			throw new IllegalStateException("Cannot read file from path \"" + filePath + "\"");
-		}
-		return sb.toString();
 	}
 
 	private void assertRequestEqualDto(SurveyCreateRequest surveyCreateRequest, SurveyDto surveyDto) {

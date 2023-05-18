@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import me.nalab.survey.application.common.dto.QuestionDtoType;
 
 @Getter
 @ToString
@@ -30,6 +31,6 @@ public abstract class FormQuestionRequestable {
 	@Max(value = 25, message = "질문지의 order 는 25보다 커지면 안됩니다.  ")
 	protected Integer order;
 
-	public abstract String getQuestionFormType();
+	public abstract QuestionDtoType getQuestionFormType();
 
 }

@@ -1,6 +1,7 @@
 package me.nalab.survey.web.adaptor.createsurvey;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,50 +26,58 @@ final class SurveyCreateRequestMapper {
 	}
 
 	static SurveyDto toSurveyDto(SurveyCreateRequest surveyCreateRequest) {
-		LocalDateTime createdAt = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now();
 		return SurveyDto.builder()
-			.createdAt(createdAt)
-			.updatedAt(createdAt)
+			.createdAt(now)
+			.updatedAt(now)
 			.formQuestionDtoableList(
-				surveyCreateRequest.getFormQuestionRequestableList()
-					.stream()
-					.map(fqr -> toFormQuestionDtoable(createdAt, fqr))
-					.collect(Collectors.toList())
+				toFormQuestionDtoableList(now, surveyCreateRequest.getFormQuestionRequestableList())
 			)
 			.build();
 	}
 
-	private static FormQuestionDtoable toFormQuestionDtoable(LocalDateTime createdAt,
-		FormQuestionRequestable formQuestionRequestable) {
-		if(formQuestionRequestable.getQuestionFormType().toUpperCase().equals(QuestionDtoType.CHOICE.name())) {
-			return toChoiceFormQuestionDto(createdAt, (ChoiceFormQuestionRequest)formQuestionRequestable);
-		}
-		return toShortFormQuestionDto(createdAt, (ShortFormQuestionRequest)formQuestionRequestable);
+	private static List<FormQuestionDtoable> toFormQuestionDtoableList(LocalDateTime now,
+		List<FormQuestionRequestable> formQuestionRequestableList) {
+		return formQuestionRequestableList.stream()
+			.map(fqr -> toFormQuestionDtoable(now, fqr))
+			.collect(Collectors.toList());
 	}
 
-	private static ChoiceFormQuestionDto toChoiceFormQuestionDto(LocalDateTime createdAt,
+	private static FormQuestionDtoable toFormQuestionDtoable(LocalDateTime now,
+		FormQuestionRequestable formQuestionRequestable) {
+		if(formQuestionRequestable.getQuestionFormType() == QuestionDtoType.CHOICE) {
+			return toChoiceFormQuestionDto(now, (ChoiceFormQuestionRequest)formQuestionRequestable);
+		}
+		return toShortFormQuestionDto(now, (ShortFormQuestionRequest)formQuestionRequestable);
+	}
+
+	private static ChoiceFormQuestionDto toChoiceFormQuestionDto(LocalDateTime now,
 		ChoiceFormQuestionRequest choiceFormQuestionRequest) {
 		return ChoiceFormQuestionDto.builder()
 			.title(choiceFormQuestionRequest.getTitle())
-			.questionDtoType(QuestionDtoType.CHOICE)
+			.questionDtoType(choiceFormQuestionRequest.getQuestionFormType())
 			.order(choiceFormQuestionRequest.getOrder())
-			.createdAt(createdAt)
-			.updatedAt(createdAt)
+			.createdAt(now)
+			.updatedAt(now)
 			.maxSelectionCount(choiceFormQuestionRequest.getMaxSelectableCount())
-			.choiceFormQuestionDtoType(
-				Stream.of(ChoiceFormQuestionDtoType.values())
-					.filter(
-						cft -> cft.name().toUpperCase().equals(choiceFormQuestionRequest.getChoiceFormQuestionType())
-					)
-					.findAny()
-					.orElse(ChoiceFormQuestionDtoType.CUSTOM)
-			)
-			.choiceDtoList(
-				choiceFormQuestionRequest.getChoiceRequestList().stream()
-					.map(SurveyCreateRequestMapper::toChoiceDto)
-					.collect(Collectors.toList())
-			)
+			.choiceFormQuestionDtoType(getChoiceFormQuestionDtoType(choiceFormQuestionRequest))
+			.choiceDtoList(toChoiceDtoList(choiceFormQuestionRequest.getChoiceRequestList()))
 			.build();
+	}
+
+	private static ChoiceFormQuestionDtoType getChoiceFormQuestionDtoType(
+		ChoiceFormQuestionRequest choiceFormQuestionRequest) {
+
+		return Stream.of(ChoiceFormQuestionDtoType.values())
+			.filter(cft -> cft.name().equalsIgnoreCase(choiceFormQuestionRequest.getChoiceFormQuestionType()))
+			.findAny()
+			.orElse(ChoiceFormQuestionDtoType.CUSTOM);
+	}
+
+	private static List<ChoiceDto> toChoiceDtoList(List<ChoiceRequest> choiceRequestList) {
+		return choiceRequestList.stream()
+			.map(SurveyCreateRequestMapper::toChoiceDto)
+			.collect(Collectors.toList());
 	}
 
 	private static ChoiceDto toChoiceDto(ChoiceRequest choiceRequest) {
@@ -78,21 +87,23 @@ final class SurveyCreateRequestMapper {
 			.build();
 	}
 
-	private static ShortFormQuestionDto toShortFormQuestionDto(LocalDateTime createdAt,
+	private static ShortFormQuestionDto toShortFormQuestionDto(LocalDateTime now,
 		ShortFormQuestionRequest shortFormQuestionRequest) {
 		return ShortFormQuestionDto.builder()
 			.title(shortFormQuestionRequest.getTitle())
-			.questionDtoType(QuestionDtoType.SHORT)
+			.questionDtoType(shortFormQuestionRequest.getQuestionFormType())
 			.order(shortFormQuestionRequest.getOrder())
-			.createdAt(createdAt)
-			.updatedAt(createdAt)
-			.shortFormQuestionDtoType(
-				Stream.of(ShortFormQuestionDtoType.values())
-					.filter(sft -> sft.name().toUpperCase().equals(shortFormQuestionRequest.getShortFormQuestionType()))
-					.findAny()
-					.orElse(ShortFormQuestionDtoType.CUSTOM)
-			)
+			.createdAt(now)
+			.updatedAt(now)
+			.shortFormQuestionDtoType(getShortFormQuestionDtoType(shortFormQuestionRequest))
 			.build();
+	}
+
+	private static ShortFormQuestionDtoType getShortFormQuestionDtoType(ShortFormQuestionRequest shortFormQuestionRequest){
+		return Stream.of(ShortFormQuestionDtoType.values())
+			.filter(sft -> sft.name().equalsIgnoreCase(shortFormQuestionRequest.getShortFormQuestionType()))
+			.findAny()
+			.orElse(ShortFormQuestionDtoType.CUSTOM);
 	}
 
 }
