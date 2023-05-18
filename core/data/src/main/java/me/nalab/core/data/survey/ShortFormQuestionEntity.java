@@ -17,10 +17,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShortFormQuestion extends FormQuestion {
+public class ShortFormQuestionEntity extends FormQuestionEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "short_form_question_type")
-	private ShortFormQuestionType shortFormQuestionType;
+	private ShortFormQuestionEntityType shortFormQuestionType;
 
 }

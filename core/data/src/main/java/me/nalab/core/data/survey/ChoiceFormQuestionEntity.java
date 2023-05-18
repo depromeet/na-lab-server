@@ -21,16 +21,16 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChoiceFormQuestion extends FormQuestion {
+public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 
 	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY)
-	private List<Choice> choiceList;
+	private List<ChoiceEntity> choiceList;
 
 	@Column(name = "max_selection_count")
 	private Integer maxSelectionCount;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "choice_question_type")
-	private ChoiceFormQuestionType choiceFormQuestionType;
+	private ChoiceFormQuestionEntityType choiceFormQuestionType;
 
 }

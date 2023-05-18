@@ -24,14 +24,14 @@ import me.nalab.core.data.common.TimeBaseEntity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Survey extends TimeBaseEntity {
+public class SurveyEntity extends TimeBaseEntity {
 
 	@Id
 	@Column(name = "survey_id")
 	private Long id;
 
 	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY)
-	private List<FormQuestion> formQuestionableList;
+	private List<FormQuestionEntity> formQuestionableList;
 
 	@JoinColumn(name = "target_id", nullable = false)
 	private Long targetId;
