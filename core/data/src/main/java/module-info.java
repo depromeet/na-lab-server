@@ -6,7 +6,6 @@ module luffy.core.data.main {
 
 	requires lombok;
 	requires java.persistence;
-	requires java.validation;
 	requires spring.data.commons;
 
 }
