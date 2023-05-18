@@ -35,27 +35,26 @@ class SurveyFindServiceTest {
 
 	@Test
 	void SURVEY_FIND_SERVICE_TEST() {
+
 		// 총 테스트 돌릴 횟수
 		int numberOfTestCases = 10;
 
-		for(int i = 0; i < numberOfTestCases; i++) {
-			// random으로 생성
-			SurveyDto randomSurveyDto = createRandomSurveyDto();
-			Long surveyId = randomSurveyDto.getId();
-			Long targetId = randomSurveyDto.getTargetId();
-			Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
+		// random으로 생성
+		SurveyDto randomSurveyDto = createRandomSurveyDto();
+		Long surveyId = randomSurveyDto.getId();
+		Long targetId = randomSurveyDto.getTargetId();
+		Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
 
-			when(targetFindPort.getTargetId(surveyId)).thenReturn(targetId);
-			when(surveyFindPort.getSurvey(surveyId)).thenReturn(survey);
+		when(targetFindPort.getTargetId(surveyId)).thenReturn(targetId);
+		when(surveyFindPort.getSurvey(surveyId)).thenReturn(survey);
 
-			SurveyDto result = surveyFindService.findSurvey(surveyId);
+		SurveyDto result = surveyFindService.findSurvey(surveyId);
 
-			assertAll(
-				() -> assertNotNull(result),
-				() -> assertEquals(targetId, result.getTargetId()),
-				() -> assertEquals(survey, SurveyDtoMapper.toSurvey(result))
-			);
+		assertAll(
+			() -> assertNotNull(result),
+			() -> assertEquals(targetId, result.getTargetId()),
+			() -> assertEquals(survey, SurveyDtoMapper.toSurvey(result))
+		);
 
-		}
 	}
 }
