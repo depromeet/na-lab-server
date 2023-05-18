@@ -11,6 +11,6 @@ public interface LatestSurveyIdFindUseCase {
 	 * @param targetId Survey를 조회할 타겟의 id
 	 * @return Long survey의 id
 	 */
-	Long getLatestCreatedSurveyId(Long targetId);
+	Long findLatestCreatedSurveyId(Long targetId);
 
 }
