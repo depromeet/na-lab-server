@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 
 	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY)
@@ -32,5 +30,23 @@ public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "choice_question_type")
 	private ChoiceFormQuestionEntityType choiceFormQuestionType;
+
+	public ChoiceFormQuestionEntity(FormQuestionEntityBuilder<?, ?> b, List<ChoiceEntity> choiceList,
+		Integer maxSelectionCount, ChoiceFormQuestionEntityType choiceFormQuestionType) {
+		super(b);
+		this.maxSelectionCount = maxSelectionCount;
+		this.choiceFormQuestionType = choiceFormQuestionType;
+		this.choiceList = choiceList;
+		cascadeChoiceFormQuestion();
+	}
+
+	private void cascadeChoiceFormQuestion() {
+		for(ChoiceEntity choiceEntity : choiceList) {
+			if(choiceEntity.getChoiceFormQuestion() == this) {
+				continue;
+			}
+			choiceEntity.setChoiceFormQuestion(this);
+		}
+	}
 
 }
