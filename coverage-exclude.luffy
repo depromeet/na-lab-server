@@ -8,4 +8,5 @@ exclude me/nalab/core/data/survey/QuestionType
 exclude me/nalab/core/data/survey/ShortFormQuestion
 exclude me/nalab/core/data/survey/ShortFormQuestionType
 exclude me/nalab/core/data/survey/Target
+exclude me/nalab/survey/web/adaptor/createsurvey/SurveyCreateController
 exclude me/nalab/survey/web/adaptor/survey/find/SurveyFindController
