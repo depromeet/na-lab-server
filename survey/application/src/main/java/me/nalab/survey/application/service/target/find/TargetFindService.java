@@ -5,8 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.mapper.TargetDtoMapper;
 import me.nalab.survey.application.port.in.web.target.find.TargetFindUseCase;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
+import me.nalab.survey.domain.target.Target;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ public class TargetFindService implements TargetFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public TargetDto findTarget(Long targetId) {
-		return targetFindPort.getTarget(targetId);
+		Target target = targetFindPort.getTarget(targetId);
+		return TargetDtoMapper.toTargetDto(target);
 	}
 }

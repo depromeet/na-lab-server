@@ -1,8 +1,10 @@
 package me.nalab.survey.application.port.out.persistence.target.find;
 
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.domain.target.Target;
 
 public interface TargetFindPort {
 
-	TargetDto getTarget(Long surveyId);
+	Target getTarget(Long targetId);
+
+	Long getTargetId(Long surveyId);
 }
