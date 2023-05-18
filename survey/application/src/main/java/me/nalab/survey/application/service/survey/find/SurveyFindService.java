@@ -12,6 +12,7 @@ import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPo
 public class SurveyFindService implements SurveyFindUseCase {
 
 	private final SurveyFindPort surveyFindPort;
+
 	@Override
 	public SurveyDto findSurvey(Long surveyId) {
 		return surveyFindPort.findSurvey(surveyId);

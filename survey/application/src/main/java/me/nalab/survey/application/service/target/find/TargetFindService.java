@@ -12,6 +12,7 @@ import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPo
 public class TargetFindService implements TargetFindUseCase {
 
 	private final TargetFindPort targetFindPort;
+
 	@Override
 	public TargetDto findTarget(Long targetId) {
 		return targetFindPort.findTarget(targetId);
