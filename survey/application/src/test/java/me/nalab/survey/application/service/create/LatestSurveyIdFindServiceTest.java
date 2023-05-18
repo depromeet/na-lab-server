@@ -38,7 +38,7 @@ class LatestSurveyIdFindServiceTest {
 		when(latestSurveyIdFindPort.getLatestSurveyIdByTargetId(targetId)).thenReturn(Optional.of(surveyId));
 
 		// then
-		assertEquals(surveyId, latestSurveyIdFindUseCase.getLatestSurveyIdByTaregetId(targetId));
+		assertEquals(surveyId, latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(targetId));
 	}
 
 	@Test
@@ -53,7 +53,7 @@ class LatestSurveyIdFindServiceTest {
 
 		// then
 		assertThrows(IllegalStateException.class,
-			() -> latestSurveyIdFindUseCase.getLatestSurveyIdByTaregetId(targetId));
+			() -> latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(targetId));
 	}
 
 }

@@ -1,11 +1,13 @@
 package me.nalab.survey.application.service.create;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.port.in.web.LatestSurveyIdFindUseCase;
 import me.nalab.survey.application.port.out.persistence.LatestSurveyIdFindPort;
 
+@Service
 @RequiredArgsConstructor
 public class LatestSurveyIdFindService implements LatestSurveyIdFindUseCase {
 
@@ -13,7 +15,7 @@ public class LatestSurveyIdFindService implements LatestSurveyIdFindUseCase {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Long getLatestSurveyIdByTaregetId(Long targetId) {
+	public Long getLatestSurveyIdByTargetId(Long targetId) {
 		return latestSurveyIdFindPort.getLatestSurveyIdByTargetId(targetId)
 			.orElseThrow(() -> {
 				throw new IllegalStateException(

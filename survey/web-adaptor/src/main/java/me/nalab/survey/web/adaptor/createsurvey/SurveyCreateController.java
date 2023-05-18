@@ -26,7 +26,7 @@ class SurveyCreateController {
 	@ResponseStatus(HttpStatus.CREATED)
 	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId, @RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
-		Long latestSurveyId = latestSurveyIdFindUseCase.getLatestSurveyIdByTaregetId(loginId);
+		Long latestSurveyId = latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId);
 		return new SurveyIdResponse(latestSurveyId);
 	}
 
