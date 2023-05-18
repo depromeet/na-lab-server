@@ -36,9 +36,6 @@ class SurveyFindServiceTest {
 	@Test
 	void SURVEY_FIND_SERVICE_TEST() {
 
-		// 총 테스트 돌릴 횟수
-		int numberOfTestCases = 10;
-
 		// random으로 생성
 		SurveyDto randomSurveyDto = createRandomSurveyDto();
 		Long surveyId = randomSurveyDto.getId();
