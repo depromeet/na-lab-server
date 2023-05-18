@@ -59,6 +59,7 @@ public class RandomSurveyDtoFixture {
 	public static SurveyDto createRandomSurveyDto() {
 		return SurveyDto.builder()
 			.id(randomIdGenerator.get())
+			.targetId(randomIdGenerator.get())
 			.createdAt(randomDateTimeGenerator.get())
 			.updatedAt(randomDateTimeGenerator.get())
 			.formQuestionDtoableList(getRandomFormQuestionDtoableList())
