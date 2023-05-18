@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +19,6 @@ import me.nalab.core.data.common.TimeBaseEntity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Valid
 public class Target extends TimeBaseEntity {
 
 	@Id
