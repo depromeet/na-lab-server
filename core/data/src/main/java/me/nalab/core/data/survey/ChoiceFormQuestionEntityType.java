@@ -5,7 +5,7 @@ package me.nalab.core.data.survey;
  *
  * @author devxb
  */
-public enum ChoiceFormQuestionType {
+public enum ChoiceFormQuestionEntityType {
 
 	/**
 	 * COLLABORATION_EXPERIENCE 는 기본질문중 `협업경험` 을 나타냅니다.

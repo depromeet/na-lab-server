@@ -5,7 +5,7 @@ package me.nalab.core.data.survey;
  *
  * @author devxb
  */
-public enum ShortFormQuestionType {
+public enum ShortFormQuestionEntityType {
 
 	/**
 	 * 주관식 기본질문중 `나의 강점` Type

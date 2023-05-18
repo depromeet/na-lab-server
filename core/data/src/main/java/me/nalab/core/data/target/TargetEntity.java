@@ -19,7 +19,7 @@ import me.nalab.core.data.common.TimeBaseEntity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Target extends TimeBaseEntity {
+public class TargetEntity extends TimeBaseEntity {
 
 	@Id
 	@Column(name = "target_id")
