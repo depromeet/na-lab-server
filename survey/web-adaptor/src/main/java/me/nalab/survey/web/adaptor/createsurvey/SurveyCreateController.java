@@ -24,7 +24,7 @@ class SurveyCreateController {
 	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId, SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
 		return SurveyIdResponse.builder()
-			.surveyId(latestSurveyIdFindUseCase.getLatestCreatedSurveyId(loginId))
+			.surveyId(latestSurveyIdFindUseCase.findLatestCreatedSurveyId(loginId))
 			.build();
 	}
 
