@@ -6,7 +6,7 @@ package me.nalab.core.data.survey;
  *
  * @author devxb
  */
-public enum QuestionType {
+public enum QuestionEntityType {
 
 	/**
 	 * 객관식

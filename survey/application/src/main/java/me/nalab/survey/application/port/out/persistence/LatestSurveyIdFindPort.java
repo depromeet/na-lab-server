@@ -1,7 +1,9 @@
 package me.nalab.survey.application.port.out.persistence;
 
+import java.util.Optional;
+
 public interface LatestSurveyIdFindPort {
 
-	Long findLatestCreatedSurveyId(Long targetId);
+	Optional<Long> getLatestSurveyIdByTargetId(Long targetId);
 
 }

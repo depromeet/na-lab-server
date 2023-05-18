@@ -21,7 +21,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Choice {
+public class ChoiceEntity {
 
 	@Id
 	@Column(name = "choice_id")
@@ -35,6 +35,6 @@ public class Choice {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_question_id", nullable = false)
-	private ChoiceFormQuestion choiceFormQuestion;
+	private ChoiceFormQuestionEntity choiceFormQuestion;
 
 }

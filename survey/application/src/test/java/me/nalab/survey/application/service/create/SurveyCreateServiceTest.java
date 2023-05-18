@@ -23,7 +23,6 @@ import me.nalab.survey.application.TestIdGenerator;
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
-import me.nalab.survey.application.port.out.persistence.LatestSurveyIdFindPort;
 import me.nalab.survey.application.port.out.persistence.SurveyCreatePort;
 import me.nalab.survey.application.port.out.persistence.TargetExistCheckPort;
 import me.nalab.survey.domain.exception.IdAlreadyGeneratedException;
@@ -43,9 +42,6 @@ class SurveyCreateServiceTest {
 
 	@MockBean
 	private TargetExistCheckPort findTargetPort;
-
-	@MockBean
-	private LatestSurveyIdFindPort latestSurveyIdFindPort;
 
 	@ParameterizedTest
 	@MethodSource("surveyDtoLargeNullIdSources")
@@ -88,10 +84,6 @@ class SurveyCreateServiceTest {
 		assertThrows(TargetDoesNotExistException.class, () -> createSurveyUseCase.createSurvey(targetId, null));
 	}
 
-	@Test
-	@DisplayName("최근 생성된 id 조회 성공 테스트")
-	voㅑㅇ
-
 	private static Stream<SurveyDto> surveyDtoLargeNullIdSources() {
 		RandomSurveyDtoFixture.initGenerator();
 		RandomSurveyDtoFixture.setRandomIdGenerator(() -> null);
@@ -102,7 +94,7 @@ class SurveyCreateServiceTest {
 		return surveyDtoList.stream();
 	}
 
-	private static Stream<SurveyDto> surveyDtoSmallNotNullIdSources(){
+	private static Stream<SurveyDto> surveyDtoSmallNotNullIdSources() {
 		RandomSurveyDtoFixture.initGenerator();
 		RandomSurveyDtoFixture.setRandomIdGenerator(() -> 1L);
 		List<SurveyDto> surveyDtoList = new ArrayList<>();

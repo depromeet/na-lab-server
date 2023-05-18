@@ -23,7 +23,7 @@ import me.nalab.core.data.common.TimeBaseEntity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class FormQuestion extends TimeBaseEntity {
+public abstract class FormQuestionEntity extends TimeBaseEntity {
 
 	@Id
 	@Column(name = "form_question_id")
@@ -37,10 +37,10 @@ public abstract class FormQuestion extends TimeBaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "question_type")
-	protected QuestionType questionType;
+	protected QuestionEntityType questionType;
 
 	@ManyToOne
 	@JoinColumn(name = "survey_id", nullable = false)
-	protected Survey survey;
+	protected SurveyEntity survey;
 
 }
