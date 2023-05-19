@@ -23,13 +23,13 @@ import me.nalab.survey.application.TestIdGenerator;
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
-import me.nalab.survey.application.port.out.persistence.CreateSurveyPort;
-import me.nalab.survey.application.port.out.persistence.FindTargetPort;
+import me.nalab.survey.application.port.out.persistence.SurveyCreatePort;
+import me.nalab.survey.application.port.out.persistence.TargetExistCheckPort;
 import me.nalab.survey.domain.exception.IdAlreadyGeneratedException;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {CreateSurveyService.class, TestIdGenerator.class})
-class CreateSurveyServiceTest {
+@ContextConfiguration(classes = {SurveyCreateService.class, TestIdGenerator.class})
+class SurveyCreateServiceTest {
 
 	@Autowired
 	private CreateSurveyUseCase createSurveyUseCase;
@@ -38,10 +38,10 @@ class CreateSurveyServiceTest {
 	private TestIdGenerator idGenerator;
 
 	@MockBean
-	private CreateSurveyPort createSurveyPort;
+	private SurveyCreatePort createSurveyPort;
 
 	@MockBean
-	private FindTargetPort findTargetPort;
+	private TargetExistCheckPort findTargetPort;
 
 	@ParameterizedTest
 	@MethodSource("surveyDtoLargeNullIdSources")
@@ -94,7 +94,7 @@ class CreateSurveyServiceTest {
 		return surveyDtoList.stream();
 	}
 
-	private static Stream<SurveyDto> surveyDtoSmallNotNullIdSources(){
+	private static Stream<SurveyDto> surveyDtoSmallNotNullIdSources() {
 		RandomSurveyDtoFixture.initGenerator();
 		RandomSurveyDtoFixture.setRandomIdGenerator(() -> 1L);
 		List<SurveyDto> surveyDtoList = new ArrayList<>();

@@ -1,35 +1,37 @@
 package me.nalab.survey.application.service.create;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import me.nalab.core.idgenerator.idcore.IdGenerator;
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
-import me.nalab.survey.application.port.out.persistence.CreateSurveyPort;
-import me.nalab.survey.application.port.out.persistence.FindTargetPort;
+import me.nalab.survey.application.port.out.persistence.SurveyCreatePort;
+import me.nalab.survey.application.port.out.persistence.TargetExistCheckPort;
 import me.nalab.survey.domain.survey.Survey;
 
 @Service
-@AllArgsConstructor
-class CreateSurveyService implements CreateSurveyUseCase {
+@RequiredArgsConstructor
+class SurveyCreateService implements CreateSurveyUseCase {
 
-	private final CreateSurveyPort createSurveyPort;
-	private final FindTargetPort findTargetPort;
+	private final SurveyCreatePort surveyCreatePort;
+	private final TargetExistCheckPort targetExistCheckPort;
 	private final IdGenerator idGenerator;
 
 	@Override
+	@Transactional
 	public void createSurvey(Long targetId, SurveyDto surveyDto) {
 		throwIfDoesNotExistTarget(targetId);
 		Survey survey = SurveyDtoMapper.toSurvey(surveyDto);
 		survey.withId(idGenerator::generate);
-		createSurveyPort.persistenceSurvey(targetId, survey);
+		surveyCreatePort.persistenceSurvey(targetId, survey);
 	}
 
 	private void throwIfDoesNotExistTarget(Long targetId) {
-		if(!findTargetPort.isExistTarget(targetId)) {
+		if(!targetExistCheckPort.isExistTarget(targetId)) {
 			throw new TargetDoesNotExistException(targetId);
 		}
 	}

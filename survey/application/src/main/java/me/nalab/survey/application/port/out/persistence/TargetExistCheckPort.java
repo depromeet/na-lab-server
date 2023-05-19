@@ -3,7 +3,7 @@ package me.nalab.survey.application.port.out.persistence;
 /**
  * 저장되어있는 Target을 조회하는 인터페이스
  */
-public interface FindTargetPort {
+public interface TargetExistCheckPort {
 
 	/**
 	 * targetId에 해당하는 target이 저장되어있는지 확인합니다.

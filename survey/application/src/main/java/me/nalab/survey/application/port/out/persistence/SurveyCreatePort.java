@@ -7,7 +7,7 @@ import me.nalab.survey.domain.survey.Survey;
  * <br>
  * 이 인터페이스의 구현체는 Survey 도메인을 저장해야함.
  */
-public interface CreateSurveyPort {
+public interface SurveyCreatePort {
 
 	/**
 	 * 이 메소드는 Survey를 저장함.
