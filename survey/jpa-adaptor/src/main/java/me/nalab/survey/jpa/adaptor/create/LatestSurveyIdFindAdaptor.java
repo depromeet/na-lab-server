@@ -4,17 +4,17 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.port.out.persistence.LatestSurveyIdFindPort;
 
 @Repository
-@RequiredArgsConstructor
 public class LatestSurveyIdFindAdaptor implements LatestSurveyIdFindPort {
 
-	private final EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	public Optional<Long> findLatestSurveyIdByTargetId(Long targetId) {
