@@ -30,11 +30,11 @@ public class ChoiceEntity {
 	@Column(name = "content", length = 18, nullable = false)
 	private String content;
 
-	@Column(name = "order", nullable = false)
+	@Column(name = "orders", nullable = false)
 	private Integer order;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "form_question_id", nullable = false)
+	@JoinColumn(name = "form_question_id")
 	private ChoiceFormQuestionEntity choiceFormQuestion;
 
 }

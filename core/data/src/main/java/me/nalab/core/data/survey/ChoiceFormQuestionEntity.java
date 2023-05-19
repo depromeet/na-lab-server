@@ -2,6 +2,7 @@ package me.nalab.core.data.survey;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 
-	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "choiceFormQuestion", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<ChoiceEntity> choiceList;
 
 	@Column(name = "max_selection_count")

@@ -2,6 +2,7 @@ package me.nalab.core.data.survey;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +29,7 @@ public class SurveyEntity extends TimeBaseEntity {
 	@Column(name = "survey_id")
 	private Long id;
 
-	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<FormQuestionEntity> formQuestionableList;
 
 	@JoinColumn(name = "target_id", nullable = false)

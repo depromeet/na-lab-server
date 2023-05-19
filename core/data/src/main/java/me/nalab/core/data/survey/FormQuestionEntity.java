@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,15 +33,15 @@ public abstract class FormQuestionEntity extends TimeBaseEntity {
 	@Column(name = "title", nullable = false, length = 45)
 	protected String title;
 
-	@Column(name = "order", nullable = false)
+	@Column(name = "orders", nullable = false)
 	protected Integer order;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "question_type")
 	protected QuestionEntityType questionType;
 
-	@ManyToOne
-	@JoinColumn(name = "survey_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "survey_id")
 	protected SurveyEntity survey;
 
 }
