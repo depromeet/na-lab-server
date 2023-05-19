@@ -11,6 +11,6 @@ public interface TargetExistCheckPort {
 	 * @param targetId 존재하는지 확인할 target의 ID
 	 * @return boolean 존재한다면 true / 존재하지 않는다면, false
 	 */
-	boolean isExistTarget(Long targetId);
+	boolean isExistTargetByTargetId(Long targetId);
 
 }

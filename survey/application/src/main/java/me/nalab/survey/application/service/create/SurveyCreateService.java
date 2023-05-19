@@ -27,11 +27,11 @@ class SurveyCreateService implements CreateSurveyUseCase {
 		throwIfDoesNotExistTarget(targetId);
 		Survey survey = SurveyDtoMapper.toSurvey(surveyDto);
 		survey.withId(idGenerator::generate);
-		surveyCreatePort.persistenceSurvey(targetId, survey);
+		surveyCreatePort.createSurvey(targetId, survey);
 	}
 
 	private void throwIfDoesNotExistTarget(Long targetId) {
-		if(!targetExistCheckPort.isExistTarget(targetId)) {
+		if(!targetExistCheckPort.isExistTargetByTargetId(targetId)) {
 			throw new TargetDoesNotExistException(targetId);
 		}
 	}

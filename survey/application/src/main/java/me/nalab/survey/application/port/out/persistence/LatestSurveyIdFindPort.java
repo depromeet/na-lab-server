@@ -13,6 +13,6 @@ public interface LatestSurveyIdFindPort {
 	 * @param targetId surveyId를 조회할 타겟의 ID
 	 * @return Optional 만약, 어떠한 SurveyId도 조회할 수 없을경우, Optional.empty() 를 반환해야 합니다.
 	 */
-	Optional<Long> getLatestSurveyIdByTargetId(Long targetId);
+	Optional<Long> findLatestSurveyIdByTargetId(Long targetId);
 
 }
