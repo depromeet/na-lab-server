@@ -10,7 +10,7 @@ import me.nalab.survey.domain.target.Target;
 class TargetEntityMapperTest {
 
 	@Test
-	public void testToTargetEntity() {
+	void testToTargetEntity() {
 		// Given
 		Target target = Target.builder()
 			.id(1L)
@@ -26,7 +26,7 @@ class TargetEntityMapperTest {
 	}
 
 	@Test
-	public void testToTarget() {
+	void testToTarget() {
 		// Given
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(1L)
