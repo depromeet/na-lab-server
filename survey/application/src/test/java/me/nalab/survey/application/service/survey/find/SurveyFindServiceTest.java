@@ -1,6 +1,9 @@
 package me.nalab.survey.application.service.survey.find;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static me.nalab.survey.application.RandomSurveyDtoFixture.createRandomSurveyDto;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,9 +12,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
+import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
+import me.nalab.survey.domain.survey.Survey;
 
 class SurveyFindServiceTest {
+
+	@Mock
+	private TargetFindPort targetFindPort;
 
 	@Mock
 	private SurveyFindPort surveyFindPort;
@@ -19,24 +28,30 @@ class SurveyFindServiceTest {
 	private SurveyFindService surveyFindService;
 
 	@BeforeEach
-	public void setUp() {
+	void setup() {
 		MockitoAnnotations.openMocks(this);
-		surveyFindService = new SurveyFindService(surveyFindPort);
+		surveyFindService = new SurveyFindService(targetFindPort, surveyFindPort);
 	}
 
 	@Test
-	void surveyFindService() {
-		// given
-		Long surveyId = 1L;
-		SurveyDto expectedSurveyDto = SurveyDto.builder()
-			.id(surveyId)
-			.build();
-		when(surveyFindPort.getSurvey(surveyId)).thenReturn(expectedSurveyDto);
+	void SURVEY_FIND_SERVICE_TEST() {
 
-		// when
-		SurveyDto actualSurveyDto = surveyFindService.findSurvey(surveyId);
+		// random으로 생성
+		SurveyDto randomSurveyDto = createRandomSurveyDto();
+		Long surveyId = randomSurveyDto.getId();
+		Long targetId = randomSurveyDto.getTargetId();
+		Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
 
-		// then
-		assertEquals(expectedSurveyDto, actualSurveyDto);
+		when(targetFindPort.getTargetId(surveyId)).thenReturn(targetId);
+		when(surveyFindPort.getSurvey(surveyId)).thenReturn(survey);
+
+		SurveyDto result = surveyFindService.findSurvey(surveyId);
+
+		assertAll(
+			() -> assertNotNull(result),
+			() -> assertEquals(targetId, result.getTargetId()),
+			() -> assertEquals(survey, SurveyDtoMapper.toSurvey(result))
+		);
+
 	}
 }

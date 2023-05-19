@@ -9,7 +9,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.mapper.TargetDtoMapper;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
+import me.nalab.survey.domain.target.Target;
 
 class TargetFindServiceTest {
 
@@ -19,25 +21,25 @@ class TargetFindServiceTest {
 	private TargetFindService targetFindService;
 
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		MockitoAnnotations.openMocks(this);
 		targetFindService = new TargetFindService(targetFindPort);
 	}
 
 	@Test
-	void targetFindService() {
-		// given
-		Long targetId = 1L;
-		TargetDto expectedTargetDto = TargetDto.builder()
-			.id(1L)
+	void TARGET_FIND_SERVICE_TEST() {
+
+		Long targetId = 123L;
+		Target target = Target.builder()
+			.id(targetId)
 			.nickname("sujin")
 			.build();
-		when(targetFindPort.getTarget(targetId)).thenReturn(expectedTargetDto);
 
-		// when
-		TargetDto actualTargetDto = targetFindService.findTarget(targetId);
+		when(targetFindPort.getTarget(targetId)).thenReturn(target);
 
-		// then
-		assertEquals(expectedTargetDto, actualTargetDto);
+		TargetDto result = targetFindService.findTarget(targetId);
+
+		assertEquals(TargetDtoMapper.toTargetDto(target), result);
+
 	}
 }
