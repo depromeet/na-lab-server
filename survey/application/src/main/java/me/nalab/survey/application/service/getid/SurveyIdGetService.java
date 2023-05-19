@@ -1,4 +1,4 @@
-package me.nalab.survey.application.service.findid;
+package me.nalab.survey.application.service.getid;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.exception.EmptySurveyIdListException;
-import me.nalab.survey.application.port.in.web.findid.SurveyIdFindUseCase;
+import me.nalab.survey.application.port.in.web.getid.SurveyIdGetUseCase;
 import me.nalab.survey.application.port.out.persistence.findid.SurveyIdFindPort;
 
 @Service
 @RequiredArgsConstructor
-public class SurveyIdFindService implements SurveyIdFindUseCase {
+public class SurveyIdGetService implements SurveyIdGetUseCase {
 
 	private final SurveyIdFindPort surveyIdFindPort;
 
