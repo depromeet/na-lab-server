@@ -35,12 +35,11 @@ public class SurveyEntity extends TimeBaseEntity {
 	@JoinColumn(name = "target_id", nullable = false)
 	private Long targetId;
 
-	public SurveyEntity(TimeBaseEntityBuilder<?, ?> b, Long id, List<FormQuestionEntity> formQuestionableList,
-		Long targetId) {
-		super(b);
-		this.id = id;
-		this.targetId = targetId;
-		this.formQuestionableList = formQuestionableList;
+	SurveyEntity(SurveyEntityBuilder<?, ?> surveyEntityBuilder){
+		super(surveyEntityBuilder);
+		this.id = surveyEntityBuilder.id;
+		this.formQuestionableList = surveyEntityBuilder.formQuestionableList;
+		this.targetId = surveyEntityBuilder.targetId;
 		cascadeSurvey();
 	}
 

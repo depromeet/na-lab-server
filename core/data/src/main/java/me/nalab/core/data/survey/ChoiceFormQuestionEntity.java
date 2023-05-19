@@ -32,12 +32,11 @@ public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 	@Column(name = "choice_question_type")
 	private ChoiceFormQuestionEntityType choiceFormQuestionType;
 
-	public ChoiceFormQuestionEntity(FormQuestionEntityBuilder<?, ?> b, List<ChoiceEntity> choiceList,
-		Integer maxSelectionCount, ChoiceFormQuestionEntityType choiceFormQuestionType) {
-		super(b);
-		this.maxSelectionCount = maxSelectionCount;
-		this.choiceFormQuestionType = choiceFormQuestionType;
-		this.choiceList = choiceList;
+	ChoiceFormQuestionEntity(ChoiceFormQuestionEntityBuilder<?, ?> choiceFormQuestionEntityBuilder) {
+		super(choiceFormQuestionEntityBuilder);
+		this.maxSelectionCount = choiceFormQuestionEntityBuilder.maxSelectionCount;
+		this.choiceFormQuestionType = choiceFormQuestionEntityBuilder.choiceFormQuestionType;
+		this.choiceList = choiceFormQuestionEntityBuilder.choiceList;
 		cascadeChoiceFormQuestion();
 	}
 
