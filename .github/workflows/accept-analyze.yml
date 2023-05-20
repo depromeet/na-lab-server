@@ -1,15 +1,8 @@
-name: sonarcloud-analyze
+name: acceptance-analyze-with-sonarcloud
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request.
-  push:
+  pull_request:
     branches:
       - main
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
 
 jobs:
   build:
@@ -38,7 +31,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Build and analyze
-        run: ./gradlew test jacocoTestReport testCodeCoverageReport sonar --info
+        run: ./gradlew clean test jacocoTestReport testCodeCoverageReport sonar --info
         env:
           # Needed to get some information about the pull request, if any
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
