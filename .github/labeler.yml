@@ -1,0 +1,7 @@
+🚀 rebase merge:
+  head: "main"
+  base: "main"
+
+🚀 squash merge:
+  head: "*/dev/*"
+  base: "*/dev/*"
