@@ -10,4 +10,5 @@ module luffy.survey.jpa.adaptor.main {
 	requires java.persistence;
 	requires spring.context;
 
+	requires spring.tx;
 }
