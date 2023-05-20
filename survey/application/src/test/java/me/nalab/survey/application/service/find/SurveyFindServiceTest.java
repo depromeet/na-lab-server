@@ -1,10 +1,10 @@
-package me.nalab.survey.application.service.survey.find;
+package me.nalab.survey.application.service.find;
 
 import static me.nalab.survey.application.RandomSurveyDtoFixture.createRandomSurveyDto;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
+import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
 import me.nalab.survey.domain.survey.Survey;
@@ -35,23 +36,28 @@ class SurveyFindServiceTest {
 
 	@Test
 	void SURVEY_FIND_SERVICE_TEST() {
-
-		// random으로 생성
 		SurveyDto randomSurveyDto = createRandomSurveyDto();
 		Long surveyId = randomSurveyDto.getId();
 		Long targetId = randomSurveyDto.getTargetId();
 		Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
 
-		when(targetFindPort.getTargetId(surveyId)).thenReturn(targetId);
-		when(surveyFindPort.getSurvey(surveyId)).thenReturn(survey);
+		when(targetFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
+		when(surveyFindPort.findSurvey(surveyId)).thenReturn(Optional.of(survey));
 
 		SurveyDto result = surveyFindService.findSurvey(surveyId);
 
-		assertAll(
-			() -> assertNotNull(result),
-			() -> assertEquals(targetId, result.getTargetId()),
-			() -> assertEquals(survey, SurveyDtoMapper.toSurvey(result))
-		);
+		assertNotNull(result);
+		assertEquals(targetId, result.getTargetId());
+		assertEquals(surveyId, result.getId());
+	}
 
+	@Test
+	void SURVEY_FIND_FAIL_SERVICE_TEST() {
+		Long surveyId = 2L;
+
+		when(targetFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.empty());
+		when(surveyFindPort.findSurvey(surveyId)).thenReturn(Optional.empty());
+
+		assertThrows(SurveyDoesNotExistException.class, () -> surveyFindService.findSurvey(surveyId));
 	}
 }
