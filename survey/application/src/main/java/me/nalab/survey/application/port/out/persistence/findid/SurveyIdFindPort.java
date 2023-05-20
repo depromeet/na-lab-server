@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.out.persistence.findid;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * TargetId에 해당하는 Survey의 ID List를 persistence영역에서 조회하는 인터페이스
@@ -13,6 +13,6 @@ public interface SurveyIdFindPort {
 	 * @param targetId surveyId를 생성한 유저의 id
 	 * @return Optional 만약, 어떤 survey도 찾을 수 없으면 Optional<Long>을 반환해야함
 	 */
-	Optional<Long> findSurveyIdByTargetId(Long targetId);
+	List<Long> findAllSurveyIdByTargetId(Long targetId);
 
 }

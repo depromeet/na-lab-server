@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,22 +33,35 @@ class SurveyIdGetServiceTest {
 	@DisplayName("SurveyId List 조회 성공 테스트")
 	void GET_SURVEY_ID_LIST_SUCCESS() {
 		// given
-		Long expectedSurveyId = 1L;
+		List<Long> expectedSurveyIdList = List.of(1L);
 
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(Optional.of(expectedSurveyId));
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
 
-		Long resultSurveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
+		Long result = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
 
 		// then
-		assertEquals(expectedSurveyId, resultSurveyIdList);
+		assertEquals(expectedSurveyIdList.get(0), result);
 	}
 
 	@Test
-	@DisplayName("SurveyId List 조회 실패 테스트 - empty")
-	void GET_SURVEY_ID_LIST_FAIL_EMPTY_OPTIONAL() {
+	@DisplayName("SurveyId List 조회 실패 테스트 - List가 비어있음")
+	void GET_SURVEY_ID_LIST_FAIL_EMPTY_LIST() {
+		// given
+		List<Long> expectedSurveyIdList = List.of();
+
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(Optional.empty());
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
+
+		// then
+		assertThrows(TargetDoesNotHasSurveyException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
+	}
+
+	@Test
+	@DisplayName("SurveyId List 조회 실패 테스트 - List가 null")
+	void GET_SURVEY_ID_LIST_FAIL_NULL_LIST() {
+		// when
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(null);
 
 		// then
 		assertThrows(TargetDoesNotHasSurveyException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));

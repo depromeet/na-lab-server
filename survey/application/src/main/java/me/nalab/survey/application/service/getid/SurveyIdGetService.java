@@ -1,5 +1,7 @@
 package me.nalab.survey.application.service.getid;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +19,14 @@ public class SurveyIdGetService implements SurveyIdGetUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public Long getSurveyIdByTargetId(Long targetId) {
-		return surveyIdFindPort.findSurveyIdByTargetId(targetId)
-			.orElseThrow(() -> {
-				throw new TargetDoesNotHasSurveyException(targetId);
-			});
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
+		if(surveyIdList == null || surveyIdList.isEmpty()) {
+			throw new TargetDoesNotHasSurveyException(targetId);
+		}
+		if(surveyIdList.size() > 1) {
+			throw new IllegalStateException("Survey created more than 1");
+		}
+		return surveyIdList.get(0);
 	}
 
 }
