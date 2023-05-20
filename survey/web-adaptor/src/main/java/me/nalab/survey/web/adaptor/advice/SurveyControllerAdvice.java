@@ -1,14 +1,14 @@
 package me.nalab.survey.web.adaptor.advice;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import me.nalab.survey.application.exception.EmptySurveyIdListException;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 
-@RestController
+@ControllerAdvice
 public class SurveyControllerAdvice {
 
 	@ExceptionHandler(EmptySurveyIdListException.class)
