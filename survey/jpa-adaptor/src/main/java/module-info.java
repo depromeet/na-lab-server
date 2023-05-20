@@ -7,5 +7,7 @@ module luffy.survey.jpa.adaptor.main {
 	requires spring.data.jpa;
 
 	requires lombok;
+	requires java.persistence;
+	requires spring.context;
 
 }

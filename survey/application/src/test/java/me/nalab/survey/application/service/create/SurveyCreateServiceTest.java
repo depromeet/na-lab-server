@@ -51,7 +51,7 @@ class SurveyCreateServiceTest {
 		idGenerator.setIdGenerateAlgorithm(() -> 1L);
 
 		// when
-		when(findTargetPort.isExistTarget(targetId)).thenReturn(true);
+		when(findTargetPort.isExistTargetByTargetId(targetId)).thenReturn(true);
 
 		// then
 		assertDoesNotThrow(() -> createSurveyUseCase.createSurvey(targetId, surveyDto));
@@ -65,7 +65,7 @@ class SurveyCreateServiceTest {
 		idGenerator.setIdGenerateAlgorithm(() -> 1L);
 
 		// when
-		when(findTargetPort.isExistTarget(targetId)).thenReturn(true);
+		when(findTargetPort.isExistTargetByTargetId(targetId)).thenReturn(true);
 
 		// then
 		assertThrows(IdAlreadyGeneratedException.class, () -> createSurveyUseCase.createSurvey(targetId, surveyDto));
@@ -78,7 +78,7 @@ class SurveyCreateServiceTest {
 		Long targetId = 1L;
 
 		// when
-		when(findTargetPort.isExistTarget(targetId)).thenReturn(false);
+		when(findTargetPort.isExistTargetByTargetId(targetId)).thenReturn(false);
 
 		// then
 		assertThrows(TargetDoesNotExistException.class, () -> createSurveyUseCase.createSurvey(targetId, null));

@@ -16,7 +16,7 @@ public class LatestSurveyIdFindService implements LatestSurveyIdFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public Long getLatestSurveyIdByTargetId(Long targetId) {
-		return latestSurveyIdFindPort.getLatestSurveyIdByTargetId(targetId)
+		return latestSurveyIdFindPort.findLatestSurveyIdByTargetId(targetId)
 			.orElseThrow(() -> {
 				throw new IllegalStateException(
 					"Cannot find any survey. \"This method must be called after one or more surveys have been created.\""

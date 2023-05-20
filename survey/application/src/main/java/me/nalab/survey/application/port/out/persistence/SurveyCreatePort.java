@@ -14,6 +14,6 @@ public interface SurveyCreatePort {
 	 * @param survey 저장할 Survey의 정보
 	 * @param targetId Survey를 생성한 Target의 id
 	 */
-	void persistenceSurvey(Long targetId, Survey survey);
+	void createSurvey(Long targetId, Survey survey);
 
 }
