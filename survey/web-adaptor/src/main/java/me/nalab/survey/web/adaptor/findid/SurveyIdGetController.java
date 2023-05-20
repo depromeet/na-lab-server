@@ -22,9 +22,9 @@ public class SurveyIdGetController {
 
 	@GetMapping("/surveys-id")
 	@ResponseStatus(HttpStatus.OK)
-	SurveyIdResponse getSurveyId(@RequestAttribute("logined") Long loginId){
+	SurveyIdResponse getSurveyId(@RequestAttribute("logined") Long loginId) {
 		List<Long> surveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(loginId);
-		if(surveyIdList.size() > 1){
+		if(surveyIdList.size() > 1) {
 			throw new IllegalStateException("Survey created more than 1");
 		}
 		return new SurveyIdResponse(surveyIdList.get(0));
