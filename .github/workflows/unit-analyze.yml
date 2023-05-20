@@ -1,10 +1,5 @@
 name: unit-test-analyze-with-sonarcloud
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request.
-  push:
-    branches:
-      - **/dev/**
   pull_request:
     branches:
       - **/dev/**
