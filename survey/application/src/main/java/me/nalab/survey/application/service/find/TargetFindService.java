@@ -19,7 +19,7 @@ public class TargetFindService implements TargetFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public TargetDto findTarget(Long targetId) {
-		Target target = targetFindPort.getTarget(targetId);
+		Target target = targetFindPort.findTarget(targetId);
 		return TargetDtoMapper.toTargetDto(target);
 	}
 }

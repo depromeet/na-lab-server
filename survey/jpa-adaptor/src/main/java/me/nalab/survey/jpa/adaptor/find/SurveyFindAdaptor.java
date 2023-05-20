@@ -1,5 +1,7 @@
 package me.nalab.survey.jpa.adaptor.persistence;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,23 +26,31 @@ public class SurveyFindAdaptor implements SurveyFindPort, TargetFindPort {
 	private final TargetRepository targetRepository;
 
 	@Override
-	public Survey getSurvey(Long surveyId) {
-		SurveyEntity surveyEntity = surveyRepository.findById(surveyId)
-			.orElseThrow(() -> new SurveyDoesNotExistException(surveyId));
-		return SurveyEntityMapper.toSurvey(surveyEntity);
+	public Optional<Survey> findSurvey(Long surveyId) {
+		Optional<SurveyEntity> surveyEntity = surveyRepository.findById(surveyId);
+		if (surveyEntity.isEmpty()) {
+			return Optional.empty();
+		}
+		Survey survey = SurveyEntityMapper.toSurvey(surveyEntity.get());
+		return Optional.of(survey);
 	}
 
 	@Override
-	public Target getTarget(Long targetId) {
-		TargetEntity targetEntity = targetRepository.findById(targetId)
-			.orElseThrow(() -> new TargetDoesNotExistException(targetId));
-		return TargetEntityMapper.toTarget(targetEntity);
+	public Optional<Target> findTarget(Long targetId) {
+		Optional<TargetEntity> targetEntity = targetRepository.findById(targetId);
+		if (targetEntity.isEmpty()) {
+			return Optional.empty();
+		}
+		Target target = TargetEntityMapper.toTarget(targetEntity.get());
+		return Optional.of(target);
 	}
 
 	@Override
-	public Long getTargetId(Long surveyId) {
-		SurveyEntity surveyEntity = surveyRepository.findById(surveyId)
-			.orElseThrow(() -> new SurveyDoesNotExistException(surveyId));
-		return surveyEntity.getTargetId();
+	public Optional<Long> findTargetIdBySurveyId(Long surveyId) {
+		Optional<SurveyEntity> surveyEntity = surveyRepository.findById(surveyId);
+		if (surveyEntity.isEmpty()) {
+			return Optional.empty();
+		}
+		return Optional.of(surveyEntity.get().getTargetId());
 	}
 }

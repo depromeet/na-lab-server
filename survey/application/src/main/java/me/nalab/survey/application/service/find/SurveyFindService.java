@@ -21,8 +21,8 @@ public class SurveyFindService implements SurveyFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public SurveyDto findSurvey(Long surveyId) {
-		Long targetId = targetFindPort.getTargetId(surveyId);
-		Survey survey = surveyFindPort.getSurvey(surveyId);
+		Long targetId = targetFindPort.findTargetIdBySurveyId(surveyId);
+		Survey survey = surveyFindPort.findSurvey(surveyId);
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
