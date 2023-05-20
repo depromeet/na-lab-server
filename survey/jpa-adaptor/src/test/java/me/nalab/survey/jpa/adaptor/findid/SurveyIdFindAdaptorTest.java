@@ -93,7 +93,7 @@ class SurveyIdFindAdaptorTest {
 		entityManager.flush();
 		entityManager.clear();
 
-		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(123L);
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
 		// then
 		assertSurveyId(surveyIdList, surveyEntityList.toArray(new SurveyEntity[]{}));
