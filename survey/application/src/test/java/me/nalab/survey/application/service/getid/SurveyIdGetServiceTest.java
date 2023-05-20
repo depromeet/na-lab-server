@@ -1,6 +1,6 @@
 package me.nalab.survey.application.service.getid;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.when;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import me.nalab.survey.application.exception.EmptySurveyIdListException;
+import me.nalab.survey.application.exception.TargetDoesNotHasSurveyException;
 import me.nalab.survey.application.port.in.web.getid.SurveyIdGetUseCase;
 import me.nalab.survey.application.port.out.persistence.findid.SurveyIdFindPort;
 
@@ -33,15 +33,15 @@ class SurveyIdGetServiceTest {
 	@DisplayName("SurveyId List 조회 성공 테스트")
 	void GET_SURVEY_ID_LIST_SUCCESS() {
 		// given
-		List<Long> expectedSurveyIdList = List.of(1L, 2L, 3L);
+		List<Long> expectedSurveyIdList = List.of(1L);
 
 		// when
 		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
 
-		List<Long> resultSurveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
+		Long result = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
 
 		// then
-		assertIterableEquals(expectedSurveyIdList, resultSurveyIdList);
+		assertEquals(expectedSurveyIdList.get(0), result);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class SurveyIdGetServiceTest {
 		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
 
 		// then
-		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
+		assertThrows(TargetDoesNotHasSurveyException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
 	}
 
 	@Test
@@ -64,7 +64,7 @@ class SurveyIdGetServiceTest {
 		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(null);
 
 		// then
-		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
+		assertThrows(TargetDoesNotHasSurveyException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
 	}
 
 }

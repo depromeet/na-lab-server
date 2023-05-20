@@ -7,6 +7,8 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.in.web.target.find;
 	exports me.nalab.survey.application.port.out.persistence.survey.find;
 	exports me.nalab.survey.application.port.out.persistence.target.find;
+	exports me.nalab.survey.application.port.in.web.getid;
+	exports me.nalab.survey.application.exception;
 	exports me.nalab.survey.application.port.out.persistence.findid;
 
 	requires luffy.survey.domain.main;

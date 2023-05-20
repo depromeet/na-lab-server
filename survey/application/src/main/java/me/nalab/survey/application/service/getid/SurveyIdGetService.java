@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.exception.EmptySurveyIdListException;
+import me.nalab.survey.application.exception.TargetDoesNotHasSurveyException;
 import me.nalab.survey.application.port.in.web.getid.SurveyIdGetUseCase;
 import me.nalab.survey.application.port.out.persistence.findid.SurveyIdFindPort;
 
@@ -18,12 +18,15 @@ public class SurveyIdGetService implements SurveyIdGetUseCase {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Long> getSurveyIdByTargetId(Long targetId) {
+	public Long getSurveyIdByTargetId(Long targetId) {
 		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
-		if(surveyIdList == null || surveyIdList.isEmpty()){
-			throw new EmptySurveyIdListException(targetId);
+		if(surveyIdList == null || surveyIdList.isEmpty()) {
+			throw new TargetDoesNotHasSurveyException(targetId);
 		}
-		return surveyIdList;
+		if(surveyIdList.size() > 1) {
+			throw new IllegalStateException("Survey created more than 1");
+		}
+		return surveyIdList.get(0);
 	}
 
 }
