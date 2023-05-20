@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
@@ -55,7 +57,8 @@ class SurveyIdFindAdaptorTest {
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.build();
-		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey());
+		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId,
+			RandomSurveyFixture.createRandomSurvey());
 
 		testTargetJpaRepository.save(targetEntity);
 		testSurveyJpaRepository.save(surveyEntity);
@@ -82,7 +85,7 @@ class SurveyIdFindAdaptorTest {
 			.updatedAt(LocalDateTime.now())
 			.build();
 		List<SurveyEntity> surveyEntityList = new ArrayList<>();
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 5; i++) {
 			surveyEntityList.add(SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey()));
 		}
 
@@ -96,7 +99,7 @@ class SurveyIdFindAdaptorTest {
 		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
 		// then
-		assertSurveyId(surveyIdList, surveyEntityList.toArray(new SurveyEntity[]{}));
+		assertSurveyId(surveyIdList, surveyEntityList.toArray(new SurveyEntity[] {}));
 	}
 
 	@Test
@@ -126,7 +129,10 @@ class SurveyIdFindAdaptorTest {
 
 	private void assertSurveyId(List<Long> expectedSurveyIdList, SurveyEntity... resultEntities) {
 		assertEquals(expectedSurveyIdList.size(), resultEntities.length);
-		Stream.of(resultEntities).forEach(re -> assertTrue(expectedSurveyIdList.contains(re.getId())));
+
+		Set<Long> resultLongSet = Stream.of(resultEntities).map(SurveyEntity::getId).collect(Collectors.toSet());
+
+		expectedSurveyIdList.forEach(e -> assertTrue(resultLongSet.contains(e)));
 	}
 
 }
