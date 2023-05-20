@@ -2,12 +2,6 @@ name: PR Branch Labeler
 
 on: pull_request
 
-🚀 rebase merge:
-  head: "main"
-
-🚀 squash merge:
-  head: "*/dev/*"
-
 jobs:
   label_prs:
     runs-on: ubuntu-latest
@@ -17,3 +11,7 @@ jobs:
         uses: ffittschen/pr-branch-labeler@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          🚀 squash merge:
+            base: "*/dev/*"
+          🚀 rebase merge:
+            head: "main"
