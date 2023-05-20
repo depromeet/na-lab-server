@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -47,13 +48,14 @@ class SurveyIdFindAdaptorTest {
 	@DisplayName("Survey Id 조회 성공 테스트 - Survey Id가 1개")
 	void FIND_SURVEY_ID_SUCCESS() {
 		// given
+		Long targetId = 123L;
 		TargetEntity targetEntity = TargetEntity.builder()
-			.id(123L)
+			.id(targetId)
 			.nickname("james")
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.build();
-		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
+		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey());
 
 		// when
 		testTargetJpaRepository.save(targetEntity);
@@ -62,7 +64,7 @@ class SurveyIdFindAdaptorTest {
 		entityManager.flush();
 		entityManager.clear();
 
-		List<Long> surveyIdList = surveyIdFindPort.findSurveyIdByTargetId(123L);
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
 		// then
 		assertSurveyId(surveyIdList, surveyEntity);
@@ -72,38 +74,38 @@ class SurveyIdFindAdaptorTest {
 	@DisplayName("Survey Id 조회 성공 테스트 - survey Id가 여러개")
 	void FIND_SURVEY_ID_SUCCESS_MULTIPLE_SURVEY_ID() {
 		// given
+		Long targetId = 123L;
 		TargetEntity targetEntity = TargetEntity.builder()
-			.id(123L)
+			.id(targetId)
 			.nickname("james")
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.build();
-		SurveyEntity surveyEntity1 = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
-		SurveyEntity surveyEntity2 = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
-		SurveyEntity surveyEntity3 = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
-		SurveyEntity surveyEntity4 = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
-		SurveyEntity surveyEntity5 = SurveyEntityMapper.toSurveyEntity(123L, RandomSurveyFixture.createRandomSurvey());
+		List<SurveyEntity> surveyEntityList = new ArrayList<>();
+		for(int i = 0; i < 5; i++){
+			surveyEntityList.add(SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey()));
+		}
 
 		// when
 		testTargetJpaRepository.save(targetEntity);
-		testSurveyJpaRepository.saveAll(
-			List.of(surveyEntity1, surveyEntity2, surveyEntity3, surveyEntity4, surveyEntity5));
+		testSurveyJpaRepository.saveAll(surveyEntityList);
 
 		entityManager.flush();
 		entityManager.clear();
 
-		List<Long> surveyIdList = surveyIdFindPort.findSurveyIdByTargetId(123L);
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(123L);
 
 		// then
-		assertSurveyId(surveyIdList, surveyEntity1, surveyEntity2, surveyEntity3, surveyEntity4, surveyEntity5);
+		assertSurveyId(surveyIdList, surveyEntityList.toArray(new SurveyEntity[]{}));
 	}
 
 	@Test
 	@DisplayName("Survey Id 조회 성공 테스트 - 어떤 surveyId도 찾을 수 없음")
 	void FIND_SURVEY_ID_SUCCESS_EMPTY_SURVEY_LIST() {
 		// given
+		Long targetId = 123L;
 		TargetEntity targetEntity = TargetEntity.builder()
-			.id(123L)
+			.id(targetId)
 			.nickname("james")
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
@@ -115,7 +117,7 @@ class SurveyIdFindAdaptorTest {
 		entityManager.flush();
 		entityManager.clear();
 
-		List<Long> surveyIdList = surveyIdFindPort.findSurveyIdByTargetId(123L);
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
 		// then
 		assertSurveyId(surveyIdList);

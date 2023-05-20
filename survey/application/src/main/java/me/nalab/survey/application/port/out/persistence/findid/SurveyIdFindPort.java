@@ -14,6 +14,6 @@ public interface SurveyIdFindPort {
 	 * @param targetId surveyId를 생성한 유저의 id
 	 * @return List SurveyId의 list
 	 */
-	List<Long> findSurveyIdByTargetId(Long targetId);
+	List<Long> findAllSurveyIdByTargetId(Long targetId);
 
 }

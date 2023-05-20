@@ -19,7 +19,7 @@ public class SurveyIdGetService implements SurveyIdGetUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Long> getSurveyIdByTargetId(Long targetId) {
-		List<Long> surveyIdList = surveyIdFindPort.findSurveyIdByTargetId(targetId);
+		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 		if(surveyIdList == null || surveyIdList.isEmpty()){
 			throw new EmptySurveyIdListException(targetId);
 		}
