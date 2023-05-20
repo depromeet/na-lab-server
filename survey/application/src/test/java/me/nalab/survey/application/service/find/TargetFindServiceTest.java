@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.dto.TargetDto;
 import me.nalab.survey.application.common.mapper.TargetDtoMapper;
+import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
 import me.nalab.survey.domain.target.Target;
 
@@ -53,6 +54,6 @@ class TargetFindServiceTest {
 
 		when(targetFindPort.findTarget(targetId)).thenReturn(Optional.empty());
 
-		assertThrows(IllegalStateException.class, () -> targetFindService.findTarget(targetId));
+		assertThrows(TargetDoesNotExistException.class, () -> targetFindService.findTarget(targetId));
 	}
 }

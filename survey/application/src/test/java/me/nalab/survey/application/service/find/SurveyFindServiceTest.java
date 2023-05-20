@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
+import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
 import me.nalab.survey.domain.survey.Survey;
@@ -57,6 +58,6 @@ class SurveyFindServiceTest {
 		when(targetFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.empty());
 		when(surveyFindPort.findSurvey(surveyId)).thenReturn(Optional.empty());
 
-		assertThrows(IllegalStateException.class, () -> surveyFindService.findSurvey(surveyId));
+		assertThrows(SurveyDoesNotExistException.class, () -> surveyFindService.findSurvey(surveyId));
 	}
 }
