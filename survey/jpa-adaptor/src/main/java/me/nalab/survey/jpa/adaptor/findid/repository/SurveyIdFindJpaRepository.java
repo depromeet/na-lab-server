@@ -11,6 +11,6 @@ import me.nalab.core.data.survey.SurveyEntity;
 public interface SurveyIdFindJpaRepository extends JpaRepository<SurveyEntity, Long> {
 
 	@Query("select s.id from SurveyEntity s where s.targetId = :targetId")
-	List<Long> findIdByTargetId(@Param("targetId") Long targetId);
+	List<Long> findAllIdByTargetId(@Param("targetId") Long targetId);
 
 }

@@ -16,7 +16,7 @@ public class SurveyIdFindAdaptor implements SurveyIdFindPort {
 
 	@Override
 	public List<Long> findAllSurveyIdByTargetId(Long targetId) {
-		return surveyIdFindJpaRepository.findIdByTargetId(targetId);
+		return surveyIdFindJpaRepository.findAllIdByTargetId(targetId);
 	}
 
 }
