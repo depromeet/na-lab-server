@@ -1,4 +1,4 @@
-package me.nalab.survey.application.service.target.find;
+package me.nalab.survey.application.service.find;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,12 @@ public class TargetFindService implements TargetFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public TargetDto findTarget(Long targetId) {
-		Target target = targetFindPort.findTarget(targetId);
+		Target target = targetFindPort.findTarget(targetId).orElseThrow(() -> {
+			throw new IllegalStateException(
+				"Cannot find any target. \"This method must be called after target has been created.\""
+			);
+		});
 		return TargetDtoMapper.toTargetDto(target);
 	}
+
 }

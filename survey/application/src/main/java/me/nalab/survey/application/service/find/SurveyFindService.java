@@ -1,4 +1,4 @@
-package me.nalab.survey.application.service.survey.find;
+package me.nalab.survey.application.service.find;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +21,18 @@ public class SurveyFindService implements SurveyFindUseCase {
 	@Override
 	@Transactional(readOnly = true)
 	public SurveyDto findSurvey(Long surveyId) {
-		Long targetId = targetFindPort.findTargetIdBySurveyId(surveyId);
-		Survey survey = surveyFindPort.findSurvey(surveyId);
+
+		Long targetId = targetFindPort.findTargetIdBySurveyId(surveyId).orElseThrow(() -> {
+			throw new IllegalStateException(
+				"Cannot find any survey. \"This method must be called after survey has been created.\""
+			);
+		});
+
+		Survey survey = surveyFindPort.findSurvey(surveyId).orElseThrow(() -> {
+			throw new IllegalStateException(
+				"Cannot find any survey. \"This method must be called after survey has been created.\""
+			);
+		});
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
