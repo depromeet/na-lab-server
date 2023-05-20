@@ -1,12 +1,12 @@
 # .github/workflows/pr-labeler.yml
 
-name: Squash labeler
+name: Reabase labeler
 
 on:
   pull_request:
     branches:
-      - '**/dev/**'
-    
+      - 'main'
+
 jobs:
   labeler:
     runs-on: ubuntu-latest
@@ -19,13 +19,13 @@ jobs:
         uses: jimschubert/labeler-action@v1
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          
+
 enable:
   issues: false
   prs: true
 
 # 레이블
 labels:
-  'sqaush merge':
+  '🚀 rebase merge':
     include:
       - '\b\b'
