@@ -57,12 +57,12 @@ class SurveyIdFindAdaptorTest {
 			.build();
 		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey());
 
-		// when
 		testTargetJpaRepository.save(targetEntity);
 		testSurveyJpaRepository.save(surveyEntity);
 
 		entityManager.flush();
 		entityManager.clear();
+		// when
 
 		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
@@ -86,12 +86,12 @@ class SurveyIdFindAdaptorTest {
 			surveyEntityList.add(SurveyEntityMapper.toSurveyEntity(targetId, RandomSurveyFixture.createRandomSurvey()));
 		}
 
-		// when
 		testTargetJpaRepository.save(targetEntity);
 		testSurveyJpaRepository.saveAll(surveyEntityList);
 
 		entityManager.flush();
 		entityManager.clear();
+		// when
 
 		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
@@ -111,11 +111,12 @@ class SurveyIdFindAdaptorTest {
 			.updatedAt(LocalDateTime.now())
 			.build();
 
-		// when
 		testTargetJpaRepository.save(targetEntity);
 
 		entityManager.flush();
 		entityManager.clear();
+
+		// when
 
 		List<Long> surveyIdList = surveyIdFindPort.findAllSurveyIdByTargetId(targetId);
 
