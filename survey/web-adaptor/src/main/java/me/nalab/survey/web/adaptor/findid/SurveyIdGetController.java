@@ -1,7 +1,5 @@
 package me.nalab.survey.web.adaptor.findid;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -23,11 +21,8 @@ public class SurveyIdGetController {
 	@GetMapping("/surveys-id")
 	@ResponseStatus(HttpStatus.OK)
 	SurveyIdResponse getSurveyId(@RequestAttribute("logined") Long loginId) {
-		List<Long> surveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(loginId);
-		if(surveyIdList.size() > 1) {
-			throw new IllegalStateException("Survey created more than 1");
-		}
-		return new SurveyIdResponse(surveyIdList.get(0));
+		Long surveyId = surveyIdGetUseCase.getSurveyIdByTargetId(loginId);
+		return new SurveyIdResponse(surveyId);
 	}
 
 }

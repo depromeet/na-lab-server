@@ -1,11 +1,11 @@
 package me.nalab.survey.application.service.getid;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import me.nalab.survey.application.exception.EmptySurveyIdListException;
+import me.nalab.survey.application.exception.TargetDoesNotHasSurveyException;
 import me.nalab.survey.application.port.in.web.getid.SurveyIdGetUseCase;
 import me.nalab.survey.application.port.out.persistence.findid.SurveyIdFindPort;
 
@@ -33,38 +33,25 @@ class SurveyIdGetServiceTest {
 	@DisplayName("SurveyId List 조회 성공 테스트")
 	void GET_SURVEY_ID_LIST_SUCCESS() {
 		// given
-		List<Long> expectedSurveyIdList = List.of(1L, 2L, 3L);
+		Long expectedSurveyId = 1L;
 
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
+		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(Optional.of(expectedSurveyId));
 
-		List<Long> resultSurveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
+		Long resultSurveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
 
 		// then
-		assertIterableEquals(expectedSurveyIdList, resultSurveyIdList);
+		assertEquals(expectedSurveyId, resultSurveyIdList);
 	}
 
 	@Test
-	@DisplayName("SurveyId List 조회 실패 테스트 - List가 비어있음")
-	void GET_SURVEY_ID_LIST_FAIL_EMPTY_LIST() {
-		// given
-		List<Long> expectedSurveyIdList = List.of();
-
+	@DisplayName("SurveyId List 조회 실패 테스트 - empty")
+	void GET_SURVEY_ID_LIST_FAIL_EMPTY_OPTIONAL() {
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
+		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(Optional.empty());
 
 		// then
-		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
-	}
-
-	@Test
-	@DisplayName("SurveyId List 조회 실패 테스트 - List가 null")
-	void GET_SURVEY_ID_LIST_FAIL_NULL_LIST() {
-		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(null);
-
-		// then
-		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
+		assertThrows(TargetDoesNotHasSurveyException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
 	}
 
 }
