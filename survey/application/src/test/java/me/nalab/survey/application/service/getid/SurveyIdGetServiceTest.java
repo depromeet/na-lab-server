@@ -36,7 +36,7 @@ class SurveyIdGetServiceTest {
 		List<Long> expectedSurveyIdList = List.of(1L, 2L, 3L);
 
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
 
 		List<Long> resultSurveyIdList = surveyIdGetUseCase.getSurveyIdByTargetId(1L);
 
@@ -51,7 +51,7 @@ class SurveyIdGetServiceTest {
 		List<Long> expectedSurveyIdList = List.of();
 
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
 
 		// then
 		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
@@ -61,7 +61,7 @@ class SurveyIdGetServiceTest {
 	@DisplayName("SurveyId List 조회 실패 테스트 - List가 null")
 	void GET_SURVEY_ID_LIST_FAIL_NULL_LIST() {
 		// when
-		when(surveyIdFindPort.findSurveyIdByTargetId(anyLong())).thenReturn(null);
+		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(null);
 
 		// then
 		assertThrows(EmptySurveyIdListException.class, () -> surveyIdGetUseCase.getSurveyIdByTargetId(1L));
