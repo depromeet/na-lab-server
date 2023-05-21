@@ -1,12 +1,10 @@
 package me.nalab.survey.application.service.find;
 
 import static me.nalab.survey.application.RandomSurveyDtoFixture.createRandomSurveyDto;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
