@@ -3,7 +3,7 @@ name: Rebase labeler
 on:
   pull_request:
     branches:
-      - '**/dev/**'
+      - '**/base-**'
 
 jobs:
   add_label:
