@@ -1,16 +1,21 @@
 package me.nalab.survey.application.service.find;
 
 import static me.nalab.survey.application.RandomSurveyDtoFixture.createRandomSurveyDto;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import me.nalab.survey.application.common.dto.FormQuestionDtoable;
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
@@ -46,9 +51,15 @@ class SurveyFindServiceTest {
 
 		SurveyDto result = surveyFindService.findSurvey(surveyId);
 
+		boolean isSortedByOrder = result.getFormQuestionDtoableList().stream()
+			.sorted(Comparator.comparingInt(FormQuestionDtoable::getOrder))
+			.collect(Collectors.toList())
+			.equals(result.getFormQuestionDtoableList());
+
 		assertNotNull(result);
 		assertEquals(targetId, result.getTargetId());
 		assertEquals(surveyId, result.getId());
+		assertEquals(isSortedByOrder, true);
 	}
 
 	@Test

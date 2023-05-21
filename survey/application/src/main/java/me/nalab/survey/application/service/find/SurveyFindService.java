@@ -1,5 +1,10 @@
 package me.nalab.survey.application.service.find;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +15,7 @@ import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.survey.find.SurveyFindUseCase;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
+import me.nalab.survey.domain.survey.FormQuestionable;
 import me.nalab.survey.domain.survey.Survey;
 
 @Service
@@ -30,6 +36,8 @@ public class SurveyFindService implements SurveyFindUseCase {
 		Survey survey = surveyFindPort.findSurvey(surveyId).orElseThrow(() -> {
 			throw new SurveyDoesNotExistException(surveyId);
 		});
+
+		survey.getFormQuestionableList().sort(Comparator.comparing(FormQuestionable::getOrder));
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
