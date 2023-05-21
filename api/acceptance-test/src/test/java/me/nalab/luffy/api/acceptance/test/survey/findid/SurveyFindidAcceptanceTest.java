@@ -1,11 +1,8 @@
-package me.nalab.luffy.api.acceptance.test.survey.create;
+package me.nalab.luffy.api.acceptance.test.survey.findid;
 
-import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyCreated;
+import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.*;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +27,7 @@ import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
 @ComponentScan("me.nalab")
 @EnableJpaRepositories(basePackages = {"me.nalab"})
 @EntityScan(basePackages = {"me.nalab"})
-class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
+class SurveyFindidAcceptanceTest extends AbstractSurveyTestSupporter {
 
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;
@@ -38,43 +35,40 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	@Autowired
 	private TargetInitializer targetInitializer;
 
-	@PersistenceContext
-	private EntityManager entityManager;
-
 	@Test
-	@DisplayName("새로운 Survey 생성 성공 테스트 - 기본 질문")
-	void CREATE_NEW_SURVEY_SUCCESS_DEFAULT() throws Exception {
+	@DisplayName("로그인된 타겟의 survey id 조회 성공 테스트")
+	void GET_LOGINED_SURVEY_ID_SUCCESS() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
-		String token = "luffy's-double-token";
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
 			.build());
 
 		// when
-		ResultActions resultActions = createSurvey(token, RequestSample.DEFAULT_JSON);
+		createSurvey(token, RequestSample.DEFAULT_JSON);
+		ResultActions result = getLoginedSurveyId(token);
 
 		// then
-		assertIsSurveyCreated(resultActions);
+		assertIsSurveyFound(result);
 	}
 
 	@Test
-	@DisplayName("새로우 Survey 생성 성공 테스트 - 커스텀 질문 포함")
-	void CREATE_NEW_SURVEY_SUCCESS_SUCCESS_CUSTOM() throws Exception {
+	@DisplayName("로그인된 타겟의 survey id 조회 실패 테스트 - 생성된 survey가 없음")
+	void GET_LOGINED_SURVEY_ID_FAIL_NO_SURVEY() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
-		String token = "luffy's-double-token";
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
 			.build());
 
-		// when
-		ResultActions resultActions = createSurvey(token, RequestSample.CUSTOM_JSON);
+		ResultActions result = getLoginedSurveyId(token);
 
 		// then
-		assertIsSurveyCreated(resultActions);
+		assertIsTargetDoesNotHasAnySurvey(result);
 	}
 
 }
