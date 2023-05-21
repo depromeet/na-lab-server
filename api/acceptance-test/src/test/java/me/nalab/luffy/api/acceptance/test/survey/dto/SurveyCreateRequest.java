@@ -1,4 +1,4 @@
-package me.nalab.luffy.api.acceptance.test.survey.create.dto;
+package me.nalab.luffy.api.acceptance.test.survey.dto;
 
 import java.util.List;
 

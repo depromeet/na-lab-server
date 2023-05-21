@@ -1,4 +1,4 @@
-package me.nalab.luffy.api.acceptance.test.survey.create;
+package me.nalab.luffy.api.acceptance.test.survey;
 
 import java.util.List;
 
@@ -7,16 +7,16 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import me.nalab.luffy.api.acceptance.test.survey.create.dto.ChoiceFormQuestionRequest;
-import me.nalab.luffy.api.acceptance.test.survey.create.dto.ChoiceRequest;
-import me.nalab.luffy.api.acceptance.test.survey.create.dto.ShortFormQuestionRequest;
-import me.nalab.luffy.api.acceptance.test.survey.create.dto.SurveyCreateRequest;
+import me.nalab.luffy.api.acceptance.test.survey.dto.ChoiceFormQuestionRequest;
+import me.nalab.luffy.api.acceptance.test.survey.dto.ChoiceRequest;
+import me.nalab.luffy.api.acceptance.test.survey.dto.ShortFormQuestionRequest;
+import me.nalab.luffy.api.acceptance.test.survey.dto.SurveyCreateRequest;
 
-final class RequestSample {
+public final class RequestSample {
 
 	private static final ObjectMapper OBJECT_MAPPER;
-	static final String DEFAULT_JSON;
-	static final String CUSTOM_JSON;
+	public static final String DEFAULT_JSON;
+	public static final String CUSTOM_JSON;
 
 	static {
 		OBJECT_MAPPER = new ObjectMapper();
