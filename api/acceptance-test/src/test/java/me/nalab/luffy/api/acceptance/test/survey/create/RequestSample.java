@@ -33,7 +33,7 @@ final class RequestSample {
 				.formQuestionRequestableList(
 					List.of(ChoiceFormQuestionRequest.builder()
 							.questionType("choice")
-							.choiceFormQuestionType("position")
+							.choiceFormQuestionType("custom")
 							.title("당신의 포지션을 알려주세요.")
 							.maxSelectableCount(1)
 							.order(3)
@@ -130,7 +130,7 @@ final class RequestSample {
 				.formQuestionRequestableList(
 					List.of(ChoiceFormQuestionRequest.builder()
 							.questionType("choice")
-							.choiceFormQuestionType("position")
+							.choiceFormQuestionType("custom")
 							.title("당신의 포지션을 알려주세요.")
 							.maxSelectableCount(1)
 							.order(3)

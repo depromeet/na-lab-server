@@ -66,15 +66,7 @@ class CommonDtoEnumTest {
 	private static Stream<Arguments> choiceQuestionTypeDtoSources() {
 		return Stream.of(
 			of(ChoiceFormQuestionType.TENDENCY, ChoiceFormQuestionDtoType.TENDENCY, true),
-			of(ChoiceFormQuestionType.POSITION, ChoiceFormQuestionDtoType.POSITION, true),
-			of(ChoiceFormQuestionType.COLLABORATION_EXPERIENCE, ChoiceFormQuestionDtoType.COLLABORATION_EXPERIENCE,
-				true),
-			of(ChoiceFormQuestionType.CUSTOM, ChoiceFormQuestionDtoType.CUSTOM, true),
-
-			of(ChoiceFormQuestionType.TENDENCY, ChoiceFormQuestionDtoType.POSITION, false),
-			of(ChoiceFormQuestionType.POSITION, ChoiceFormQuestionDtoType.CUSTOM, false),
-			of(ChoiceFormQuestionType.COLLABORATION_EXPERIENCE, ChoiceFormQuestionDtoType.TENDENCY, false),
-			of(ChoiceFormQuestionType.CUSTOM, ChoiceFormQuestionDtoType.POSITION, false)
+			of(ChoiceFormQuestionType.CUSTOM, ChoiceFormQuestionDtoType.CUSTOM, true)
 		);
 	}
 
