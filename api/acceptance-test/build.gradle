@@ -1,4 +1,13 @@
 dependencies {
-    implementation project(':api')
+    testImplementation project(':api')
+    testImplementation project(':auth:mock')
+    testImplementation project(':core:id-generator:id-generator-starter')
+    testImplementation project(':core:data')
+    testImplementation project(':survey:domain')
+    testImplementation project(':survey:jpa-adaptor')
+    testImplementation project(':survey:web-adaptor')
+
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'com.h2database:h2:2.1.214'
 }
