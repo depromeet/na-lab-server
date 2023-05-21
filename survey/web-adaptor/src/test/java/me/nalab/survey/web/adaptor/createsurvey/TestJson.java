@@ -41,7 +41,7 @@ class TestJson {
 		+ "    },\n"
 		+ "    {\n"
 		+ "      \"type\": \"choice\",\n"
-		+ "      \"form_type\": \"position\",\n"
+		+ "      \"form_type\": \"custom\",\n"
 		+ "      \"title\": \"저는 UI, UX, GUI 중에 어떤 분야를 가장 잘하는 것 같나요?\",\n"
 		+ "      \"choices\": [\n"
 		+ "        {\n"
