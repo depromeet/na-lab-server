@@ -28,6 +28,15 @@ public abstract class AbstractSurveyTestSupporter {
 			.content(content));
 	}
 
+	protected ResultActions getLoginedSurveyId(String token) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get(API_VERSION + "/surveys-id")
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;

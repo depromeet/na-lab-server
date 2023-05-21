@@ -17,4 +17,20 @@ public class SurveyAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsSurveyFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.survey_id").isNumber()
+		);
+	}
+
+	public static void assertIsTargetDoesNotHasAnySurvey(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isNotFound(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.response_messages").isString()
+		);
+	}
+
 }
