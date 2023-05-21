@@ -57,7 +57,7 @@ class SurveyFindServiceTest {
 		assertNotNull(result);
 		assertEquals(targetId, result.getTargetId());
 		assertEquals(surveyId, result.getId());
-		assertEquals(isSortedByOrder, true);
+		assertEquals(true, isSortedByOrder);
 	}
 
 	@Test
