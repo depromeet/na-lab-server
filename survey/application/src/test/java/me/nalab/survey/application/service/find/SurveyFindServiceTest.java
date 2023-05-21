@@ -4,9 +4,7 @@ import static me.nalab.survey.application.RandomSurveyDtoFixture.createRandomSur
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-import java.util.Comparator;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +36,7 @@ class SurveyFindServiceTest {
 	}
 
 	@Test
-	void SURVEY_FIND_SERVICE_TEST() {
+	void SURVEY_FIND_SERVICE_TEST() throws RuntimeException {
 		SurveyDto randomSurveyDto = createRandomSurveyDto();
 		Long surveyId = randomSurveyDto.getId();
 		Long targetId = randomSurveyDto.getTargetId();
@@ -49,15 +47,21 @@ class SurveyFindServiceTest {
 
 		SurveyDto result = surveyFindService.findSurvey(surveyId);
 
-		boolean isSortedByOrder = result.getFormQuestionDtoableList().stream()
-			.sorted(Comparator.comparingInt(FormQuestionDtoable::getOrder))
-			.collect(Collectors.toList())
-			.equals(result.getFormQuestionDtoableList());
+		boolean isAscendingOrder = result.getFormQuestionDtoableList().stream()
+			.map(FormQuestionDtoable::getOrder)
+			.reduce((prev, current) -> {
+				if(prev.compareTo(current) < 0) {
+					return current;
+				} else {
+					throw new RuntimeException();
+				}
+			})
+			.isPresent();
 
 		assertNotNull(result);
 		assertEquals(targetId, result.getTargetId());
 		assertEquals(surveyId, result.getId());
-		assertEquals(true, isSortedByOrder);
+		assertTrue(isAscendingOrder);
 	}
 
 	@Test

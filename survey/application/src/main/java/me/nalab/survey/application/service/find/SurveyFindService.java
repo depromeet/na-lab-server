@@ -1,7 +1,5 @@
 package me.nalab.survey.application.service.find;
 
-import java.util.Comparator;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +32,7 @@ public class SurveyFindService implements SurveyFindUseCase {
 			throw new SurveyDoesNotExistException(surveyId);
 		});
 
-		survey.getFormQuestionableList().sort(Comparator.comparing(FormQuestionable::getOrder));
+		survey.getFormQuestionableList().sort(FormQuestionable::compareTo);
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
