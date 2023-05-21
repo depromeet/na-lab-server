@@ -8,14 +8,6 @@ package me.nalab.core.data.survey;
 public enum ChoiceFormQuestionEntityType {
 
 	/**
-	 * COLLABORATION_EXPERIENCE 는 기본질문중 `협업경험` 을 나타냅니다.
-	 */
-	COLLABORATION_EXPERIENCE,
-	/**
-	 * POSITION 은 기본질문중 `직군` 을 나타냅니다.
-	 */
-	POSITION,
-	/**
 	 * TENDENCY 는 기본질문중 `성향` 을 나타냅니다.
 	 */
 	TENDENCY,

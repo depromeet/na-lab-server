@@ -11,14 +11,6 @@ import me.nalab.survey.domain.survey.ChoiceFormQuestionType;
 public enum ChoiceFormQuestionDtoType {
 
 	/**
-	 * 기본타입 `나와의 협업 경험 유무`
-	 */
-	COLLABORATION_EXPERIENCE(ChoiceFormQuestionType.COLLABORATION_EXPERIENCE),
-	/**
-	 * 기본타입 `리뷰어의 직군`
-	 */
-	POSITION(ChoiceFormQuestionType.POSITION),
-	/**
 	 * 기본타입 `나의 성향`
 	 */
 	TENDENCY(ChoiceFormQuestionType.TENDENCY),
