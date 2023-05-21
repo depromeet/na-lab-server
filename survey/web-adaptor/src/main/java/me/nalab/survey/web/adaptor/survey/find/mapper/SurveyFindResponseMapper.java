@@ -2,8 +2,6 @@ package me.nalab.survey.web.adaptor.survey.find.mapper;
 
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
-
 import me.nalab.survey.application.common.dto.ChoiceFormQuestionDto;
 import me.nalab.survey.application.common.dto.FormQuestionDtoable;
 import me.nalab.survey.application.common.dto.ShortFormQuestionDto;
@@ -11,12 +9,11 @@ import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.dto.TargetDto;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceFormQuestionResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceResponse;
-import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.FormQuestionResponseable;
 import me.nalab.survey.web.adaptor.survey.find.response.ShortFormQuestionResponse;
+import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.TargetResponse;
 
-@Service
 public class SurveyFindResponseMapper {
 
 	private SurveyFindResponseMapper() {

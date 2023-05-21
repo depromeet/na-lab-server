@@ -1,25 +1,23 @@
 package me.nalab.luffy.api.acceptance.test.survey;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Transactional;
 
-import me.nalab.core.data.target.TargetEntity;
-import me.nalab.core.idgenerator.idcore.IdGenerator;
-import me.nalab.luffy.api.acceptance.test.AbstractDatabaseCleaner;
+import me.nalab.luffy.api.acceptance.test.DatabaseCleaner;
 
-public abstract class AbstractSurveyTestSupporter extends AbstractDatabaseCleaner {
+public abstract class AbstractSurveyTestSupporter {
 
 	private MockMvc mockMvc;
-	private IdGenerator idGenerator;
+	private DatabaseCleaner databaseCleaner;
 	private static final String API_VERSION = "/v1";
+	private static final Set<String> tableNameSet = Set.of("target", "survey", "form_question", "choice");
 
 	protected ResultActions createSurvey(String token, String content) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
@@ -30,31 +28,19 @@ public abstract class AbstractSurveyTestSupporter extends AbstractDatabaseCleane
 			.content(content));
 	}
 
-	@Transactional
-	protected Long saveTarget(String name, LocalDateTime date) {
-		TargetEntity targetEntity = TargetEntity.builder()
-			.id(idGenerator.generate())
-			.nickname(name)
-			.createdAt(date)
-			.updatedAt(date)
-			.build();
-		entityManager.persist(targetEntity);
-		return targetEntity.getId();
-	}
-
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;
 	}
 
 	@Autowired
-	final void setIdGenerator(IdGenerator idGenerator) {
-		this.idGenerator = idGenerator;
+	public void setDatabaseCleaner(DatabaseCleaner databaseCleaner) {
+		this.databaseCleaner = databaseCleaner;
 	}
 
-	@Override
-	protected Set<String> getTableNameCollection() {
-		return Set.of("target", "survey", "form_question", "choice");
+	@BeforeEach
+	void cleanDb() {
+		databaseCleaner.dbCleanUp(tableNameSet);
 	}
 
 }
