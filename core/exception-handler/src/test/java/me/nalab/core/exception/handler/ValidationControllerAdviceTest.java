@@ -29,7 +29,7 @@ class ValidationControllerAdviceTest {
 	private ObjectMapper objectMapper;
 
 	@BeforeEach
-	private void setObjectMapper(){
+	private void setObjectMapper() {
 		objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 	}
 
@@ -61,7 +61,7 @@ class ValidationControllerAdviceTest {
 
 	@Test
 	@DisplayName("Validation controller advice 예외 핸들링 테스트 - blank")
-	void VALID_BLANK() throws Exception{
+	void VALID_BLANK() throws Exception {
 		// given
 		TestRequest testRequest = new TestRequest("   ");
 
