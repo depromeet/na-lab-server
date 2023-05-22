@@ -1,5 +1,6 @@
 package me.nalab.survey.domain.survey;
 
+import java.util.Comparator;
 import java.util.function.LongSupplier;
 
 import lombok.Builder;
@@ -13,7 +14,7 @@ import me.nalab.survey.domain.support.IdGeneratable;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Choice implements IdGeneratable {
+public class Choice implements IdGeneratable, Comparable<Choice> {
 
 	private Long id;
 	private final String content;
@@ -27,4 +28,9 @@ public class Choice implements IdGeneratable {
 		id = idSupplier.getAsLong();
 	}
 
+	@Override
+	public int compareTo(Choice other) {
+		return Comparator.comparingInt(Choice::getOrder)
+			.compare(this, other);
+	}
 }
