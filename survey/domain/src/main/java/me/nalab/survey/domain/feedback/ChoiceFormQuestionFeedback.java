@@ -21,7 +21,7 @@ public class ChoiceFormQuestionFeedback extends FormQuestionFeedbackable {
 	public boolean isValidQuestionFeedback(FormQuestionable formQuestionable) {
 		if(formQuestionable instanceof ChoiceFormQuestion) {
 			ChoiceFormQuestion choiceFormQuestion = (ChoiceFormQuestion)formQuestionable;
-			return isSelectCountDoesNotOverflow(choiceFormQuestion) || isSelectedIdMissMatched(choiceFormQuestion);
+			return isSelectCountDoesNotOverflow(choiceFormQuestion) && isSelectedIdMissMatched(choiceFormQuestion);
 		}
 		return false;
 	}
