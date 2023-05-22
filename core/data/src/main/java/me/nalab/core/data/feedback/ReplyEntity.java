@@ -32,5 +32,5 @@ public class ReplyEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_feedback_id")
-	private ShortFormFeedbackEntity shortFormFeedbackEntity;
+	private ShortFormFeedbackEntity shortFormFeedback;
 }
