@@ -59,7 +59,7 @@ public class Survey implements IdGeneratable {
 		if(feedbackable.isValidFeedback(this)) {
 			return;
 		}
-		throw new IllegalFeedbackException(feedbackable);
+		throw new IllegalFeedbackException(this, feedbackable);
 	}
 
 	private void cascadeFeedbackToFormQuestion(FeedbackValidable<? extends QuestionFeedbackValidable> feedbackable) {
@@ -69,6 +69,7 @@ public class Survey implements IdGeneratable {
 		feedbackable.getAllQuestionFeedbackValidable().forEach(
 			qf -> {
 				if(!formQuestionableMap.containsKey(qf.getFormQuestionId())) {
+					System.out.println("여기냐?");
 					throw new IllegalQuestionFeedbackException(qf);
 				}
 				formQuestionableMap.get(qf.getFormQuestionId()).throwIfIsNotValidQuestionFeedback(qf);

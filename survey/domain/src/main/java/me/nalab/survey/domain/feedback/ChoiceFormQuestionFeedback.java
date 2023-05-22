@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import me.nalab.survey.domain.survey.Choice;
 import me.nalab.survey.domain.survey.ChoiceFormQuestion;
 import me.nalab.survey.domain.survey.FormQuestionable;
 
@@ -31,7 +32,13 @@ public class ChoiceFormQuestionFeedback extends FormQuestionFeedbackable {
 	}
 
 	private boolean isSelectedIdMissMatched(ChoiceFormQuestion choiceFormQuestion) {
-		return choiceFormQuestion.getChoiceList().stream().anyMatch(c -> !selectedChoiceIdSet.contains(c.getId()));
+		for(Choice choice : choiceFormQuestion.getChoiceList()) {
+			if(selectedChoiceIdSet.contains(choice.getId())){
+				continue;
+			}
+			return false;
+		}
+		return true;
 	}
 
 }
