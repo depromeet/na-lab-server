@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.function.Function;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,6 +81,32 @@ class SurveyDomainTest extends AbstractSurveySources {
 
 		// then
 		assertThrows(IdAlreadyGeneratedException.class, () -> survey.withId(supplier));
+	}
+
+	@ParameterizedTest
+	@MethodSource("surveyCreateSuccessSources")
+	void SURVEY_QUESTION_AND_CHOICELIST_ORDER_VALIDATION_TEST(
+		Function<Supplier<List<FormQuestionable>>, Survey> surveyCreate,
+		Supplier<List<FormQuestionable>> formQuestionSupplier) {
+
+		Survey survey = surveyCreate.apply(formQuestionSupplier);
+		assertTrue(isFormQuestionableListSorted(survey.getFormQuestionableList()));
+	}
+
+	private boolean isFormQuestionableListSorted(List<FormQuestionable> formQuestionableList) {
+		return IntStream.range(1, formQuestionableList.size())
+			.allMatch(i -> formQuestionableList.get(i - 1).getOrder() < formQuestionableList.get(i).getOrder())
+			&& formQuestionableList.stream().allMatch(this::isChoiceFormQuestionListIsSorted);
+	}
+
+	private boolean isChoiceFormQuestionListIsSorted(FormQuestionable formQuestionable) {
+		if(formQuestionable instanceof ChoiceFormQuestion) {
+			ChoiceFormQuestion choiceFormQuestion = (ChoiceFormQuestion)formQuestionable;
+			List<Choice> choiceList = choiceFormQuestion.getChoiceList();
+			return IntStream.range(1, choiceList.size())
+				.allMatch(i -> choiceList.get(i - 1).getOrder() < choiceList.get(i).getOrder());
+		}
+		return true;
 	}
 
 	private void assertIsAllIdExpected(Long expected, Survey survey) {
