@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import me.nalab.survey.domain.exception.IllegalQuestionFeedbackException;
+import me.nalab.survey.domain.survey.spi.QuestionFeedbackValidable;
 import me.nalab.survey.domain.survey.valid.ChoiceFormQuestionValidator;
 
 @SuperBuilder
@@ -31,6 +33,13 @@ public class ChoiceFormQuestion extends FormQuestionable {
 	public void cascadeId(LongSupplier idSupplier) {
 		for(Choice choice : choiceList) {
 			choice.withId(idSupplier);
+		}
+	}
+
+	@Override
+	void throwIfIsNotValidQuestionFeedback(QuestionFeedbackValidable questionFeedbackable) {
+		if(!questionFeedbackable.isValidQuestionFeedback(this)) {
+			throw new IllegalQuestionFeedbackException(questionFeedbackable);
 		}
 	}
 
