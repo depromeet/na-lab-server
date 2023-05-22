@@ -2,6 +2,7 @@ package me.nalab.survey.domain.survey;
 
 import java.util.List;
 import java.util.function.LongSupplier;
+import java.util.stream.Collectors;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,10 +22,16 @@ public class ChoiceFormQuestion extends FormQuestionable {
 
 	ChoiceFormQuestion(ChoiceFormQuestionBuilder<?, ?> builder) {
 		super(builder);
-		choiceList = builder.choiceList;
+		choiceList = sortChoiceList(builder.choiceList);
 		maxSelectionCount = builder.maxSelectionCount;
 		choiceFormQuestionType = builder.choiceFormQuestionType;
 		ChoiceFormQuestionValidator.validSelf(this);
+	}
+
+	private List<Choice> sortChoiceList(List<Choice> choiceList) {
+		return choiceList.stream()
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	@Override
