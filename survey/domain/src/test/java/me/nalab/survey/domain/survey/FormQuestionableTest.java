@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,26 +12,28 @@ class FormQuestionableTest {
 	@Test
 	void testCompareTo() {
 
+		List<Choice> choiceList1 = new ArrayList<>();
+		choiceList1.add(Choice.builder().id(2L).content("content").order(2).build());
+		choiceList1.add(Choice.builder().id(3L).content("content").order(3).build());
 		ChoiceFormQuestion question1 = ChoiceFormQuestion.builder()
 			.title("Question 1")
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.order(1)
 			.questionType(QuestionType.CHOICE)
-			.choiceList(List.of(Choice.builder().id(1L).content("content").order(1).build(),
-				Choice.builder().id(2L).content("content").order(2).build(),
-				Choice.builder().id(3L).content("content").order(3).build()))
+			.choiceList(choiceList1)
 			.build();
 
+		List<Choice> choiceList2 = new ArrayList<>();
+		choiceList2.add(Choice.builder().id(2L).content("content").order(2).build());
+		choiceList2.add(Choice.builder().id(3L).content("content").order(3).build());
 		FormQuestionable question2 = ChoiceFormQuestion.builder()
 			.title("Question 2")
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.order(2)
 			.questionType(QuestionType.CHOICE)
-			.choiceList(List.of(Choice.builder().id(1L).content("content").order(1).build(),
-				Choice.builder().id(2L).content("content").order(2).build(),
-				Choice.builder().id(3L).content("content").order(3).build()))
+			.choiceList(choiceList2)
 			.build();
 
 		FormQuestionable question3 = ShortFormQuestion.builder()
