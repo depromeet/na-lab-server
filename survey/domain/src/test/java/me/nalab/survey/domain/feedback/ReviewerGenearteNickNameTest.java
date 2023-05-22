@@ -37,7 +37,7 @@ class ReviewerGenearteNickNameTest {
 
 	@Test
 	@DisplayName("Reviewer의 이름 생성 테스트 - 경계값")
-	void CREATE_REVIEWER_NICK_NAME_CREATE_BOUND(){
+	void CREATE_REVIEWER_NICK_NAME_CREATE_BOUND() {
 		// given
 		String expected = "AAAAAAA";
 		Reviewer reviewer = Reviewer.builder().build();
@@ -51,7 +51,7 @@ class ReviewerGenearteNickNameTest {
 
 	@Test
 	@DisplayName("Reviewer의 이름 생성 테스트 - 중간값 변경")
-	void CREATE_REVIEWER_NAME_CHANGE_MIDDLE(){
+	void CREATE_REVIEWER_NAME_CHANGE_MIDDLE() {
 		// given
 		String expected = "ZZZBAAA";
 		Reviewer reviewer = Reviewer.builder().build();
