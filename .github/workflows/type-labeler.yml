@@ -54,7 +54,4 @@ jobs:
         if: ${{ startsWith(github.event.pull_request.title, '[docs]') }}
         with:
           labels: 📝 docs
-
-
-
-  ${{ github.event.pull_request.title }}
+          
