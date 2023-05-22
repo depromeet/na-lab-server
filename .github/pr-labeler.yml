@@ -1,4 +1,4 @@
-feature: '[feat]**'
+feature: '[feat]*'
 🐛bug-fix: 'fix*'
 ♻️refactor: 'refactor*'
 🎨style: 'style*'
