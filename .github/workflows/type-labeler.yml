@@ -1,0 +1,60 @@
+name: Type labeler
+
+on:
+  pull_request:
+
+jobs:
+  add_label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: add ✨ feature label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[feat]') }}
+        with:
+          labels: ✨ feature
+
+      - name: add 🐛 bug-fix label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[fix]') }}
+        with:
+          labels: 🐛 bug-fix
+
+      - name: add ♻️ refactor label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[refactor]') }}
+        with:
+          labels: ♻️ refactor
+
+      -name: add 🎨 style label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[style]') }}
+        with:
+          labels: 🎨 style
+
+      -name: add 🍻 chore label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[chore]') }}
+        with:
+          labels: 🍻 chore
+
+      -name: add ✅ test label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[test]') }}
+        with:
+          labels: ✅ test
+
+      -name: add 📝 docs label
+        uses: actions-ecosystem/action-add-labels@v1
+        if: ${{ startsWith(github.event.pull_request.title, '[docs]') }}
+        with:
+          labels: 📝 docs
+
+
+
+  ${{ github.event.pull_request.title }}
