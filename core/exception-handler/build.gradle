@@ -1,0 +1,6 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'javax.validation:validation-api:2.0.1.Final'
+    testImplementation 'org.springframework.boot:spring-boot-starter-validation'
+}
