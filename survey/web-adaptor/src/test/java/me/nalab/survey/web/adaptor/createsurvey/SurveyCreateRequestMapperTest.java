@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import me.nalab.survey.application.common.dto.ChoiceFormQuestionDto;
-import me.nalab.survey.application.common.dto.ShortFormQuestionDto;
-import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.web.adaptor.createsurvey.request.SurveyCreateRequest;
 
 class SurveyCreateRequestMapperTest {

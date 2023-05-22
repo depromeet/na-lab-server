@@ -9,6 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDtoType;
 import me.nalab.survey.domain.survey.ChoiceFormQuestionType;
 import me.nalab.survey.domain.survey.QuestionType;
 import me.nalab.survey.domain.survey.ShortFormQuestionType;

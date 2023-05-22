@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import me.nalab.survey.application.common.dto.QuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
 
 @Getter
 @ToString

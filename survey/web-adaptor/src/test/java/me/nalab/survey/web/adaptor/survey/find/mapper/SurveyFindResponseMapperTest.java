@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
-import me.nalab.survey.application.common.dto.ChoiceDto;
-import me.nalab.survey.application.common.dto.ChoiceFormQuestionDto;
-import me.nalab.survey.application.common.dto.QuestionDtoType;
-import me.nalab.survey.application.common.dto.ShortFormQuestionDto;
-import me.nalab.survey.application.common.dto.SurveyDto;
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceFormQuestionResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;

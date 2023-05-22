@@ -1,8 +1,8 @@
 package me.nalab.survey.web.adaptor.survey.find;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.common.dto.SurveyDto;
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
 import me.nalab.survey.application.port.in.web.survey.find.SurveyFindUseCase;
 import me.nalab.survey.application.port.in.web.target.find.TargetFindUseCase;
 import me.nalab.survey.web.adaptor.survey.find.mapper.SurveyFindResponseMapper;

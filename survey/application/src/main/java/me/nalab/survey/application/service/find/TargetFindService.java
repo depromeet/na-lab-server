@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.common.dto.TargetDto;
-import me.nalab.survey.application.common.mapper.TargetDtoMapper;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
+import me.nalab.survey.application.common.survey.mapper.TargetDtoMapper;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.target.find.TargetFindUseCase;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;

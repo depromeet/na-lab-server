@@ -1,6 +1,6 @@
 module luffy.survey.application.main {
 
-	exports me.nalab.survey.application.common.dto;
+	exports me.nalab.survey.application.common.survey.dto;
 	exports me.nalab.survey.application.port.in.web;
 	exports me.nalab.survey.application.port.out.persistence;
 	exports me.nalab.survey.application.port.in.web.survey.find;

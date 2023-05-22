@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import me.nalab.survey.application.common.dto.TargetDto;
-import me.nalab.survey.application.common.mapper.TargetDtoMapper;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
+import me.nalab.survey.application.common.survey.mapper.TargetDtoMapper;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
 import me.nalab.survey.domain.target.Target;
