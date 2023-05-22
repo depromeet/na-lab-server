@@ -3,6 +3,7 @@ package me.nalab.survey.domain.survey;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.LongSupplier;
+import java.util.stream.Collectors;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -28,8 +29,14 @@ public class Survey implements IdGeneratable {
 		this.id = id;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.formQuestionableList = formQuestionableList;
+		this.formQuestionableList = sortFormQuestionableList(formQuestionableList);
 		SurveyValidator.validSelf(this);
+	}
+
+	private List<FormQuestionable> sortFormQuestionableList(List<FormQuestionable> formQuestionableList) {
+		return formQuestionableList.stream()
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	@Override
