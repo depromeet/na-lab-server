@@ -120,7 +120,8 @@ class FeedbackDomainTest {
 			.stream()
 			.map(Choice::getId)
 			.collect(Collectors.toSet());
-		selectedChoiceIdSet.add(1000L);
+
+		selectedChoiceIdSet.add(-1L);
 
 		ChoiceFormQuestionFeedback choiceFormQuestionFeedback = ChoiceFormQuestionFeedback.builder()
 			.questionId(1L)

@@ -69,7 +69,6 @@ public class Survey implements IdGeneratable {
 		feedbackable.getAllQuestionFeedbackValidable().forEach(
 			qf -> {
 				if(!formQuestionableMap.containsKey(qf.getFormQuestionId())) {
-					System.out.println("여기냐?");
 					throw new IllegalQuestionFeedbackException(qf);
 				}
 				formQuestionableMap.get(qf.getFormQuestionId()).throwIfIsNotValidQuestionFeedback(qf);
