@@ -8,6 +8,14 @@ exclude me/nalab/core/data/survey/QuestionEntityType
 exclude me/nalab/core/data/survey/ShortFormQuestionEntity
 exclude me/nalab/core/data/survey/ShortFormQuestionEntityType
 exclude me/nalab/core/data/survey/TargetEntity
+exclude me/nalab/core/data/feedback/ChoiceFormFeedbackEntity
+exclude me/nalab/core/data/feedback/FeedbackEntity
+exclude me/nalab/core/data/feedback/FeedbackEntityType
+exclude me/nalab/core/data/feedback/FormFeedbackEntity
+exclude me/nalab/core/data/feedback/ReplyEntity
+exclude me/nalab/core/data/feedback/ReviewerEntity
+exclude me/nalab/core/data/feedback/SelectEntity
+exclude me/nalab/core/data/feedback/ShortFormFeedbackEntity
 exclude me/nalab/survey/web/adaptor/createsurvey/SurveyCreateController
 exclude me/nalab/survey/web/adaptor/survey/find/SurveyFindController
 exclude me/nalab/survey/web/adaptor/findid/SurveyIdGetController
