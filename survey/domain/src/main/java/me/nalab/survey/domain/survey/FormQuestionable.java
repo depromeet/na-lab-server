@@ -10,6 +10,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import me.nalab.survey.domain.exception.IdAlreadyGeneratedException;
 import me.nalab.survey.domain.support.IdGeneratable;
+import me.nalab.survey.domain.survey.spi.QuestionFeedbackValidable;
 
 @SuperBuilder
 @Getter
@@ -32,6 +33,8 @@ public abstract class FormQuestionable implements IdGeneratable, Comparable<Form
 		this.id = idSupplier.getAsLong();
 		cascadeId(idSupplier);
 	}
+
+	abstract void throwIfIsNotValidQuestionFeedback(QuestionFeedbackValidable questionFeedbackable);
 
 	protected void cascadeId(LongSupplier idSupplier) {
 	}
