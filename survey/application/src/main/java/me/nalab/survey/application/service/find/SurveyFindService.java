@@ -10,7 +10,6 @@ import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.survey.find.SurveyFindUseCase;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
 import me.nalab.survey.application.port.out.persistence.target.find.TargetFindPort;
-import me.nalab.survey.domain.survey.FormQuestionable;
 import me.nalab.survey.domain.survey.Survey;
 
 @Service
@@ -32,7 +31,6 @@ public class SurveyFindService implements SurveyFindUseCase {
 			throw new SurveyDoesNotExistException(surveyId);
 		});
 
-		survey.getFormQuestionableList().sort(FormQuestionable::compareTo);
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
