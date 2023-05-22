@@ -1,15 +1,10 @@
 name: Type labeler
 on:
-  issues:
-    types: [opened, edited, milestoned]
-  pull_request_target:
-    types: [opened]
+  pull_request:
 
 jobs:
-
   labeler:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check Labels
         id: labeler
