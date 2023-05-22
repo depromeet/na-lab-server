@@ -30,26 +30,26 @@ jobs:
         if: ${{ startsWith(github.event.pull_request.title, '[refactor]') }}
         with:
           labels: ♻️ refactor
-
-      -name: add 🎨 style label
+          
+      - name: add 🎨 style label
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.pull_request.title, '[style]') }}
         with:
           labels: 🎨 style
 
-      -name: add 🍻 chore label
+      - name: add 🍻 chore label
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.pull_request.title, '[chore]') }}
         with:
           labels: 🍻 chore
 
-      -name: add ✅ test label
+      - name: add ✅ test label
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.pull_request.title, '[test]') }}
         with:
           labels: ✅ test
 
-      -name: add 📝 docs label
+      - name: add 📝 docs label
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.pull_request.title, '[docs]') }}
         with:
