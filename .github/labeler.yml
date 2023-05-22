@@ -1,20 +1,8 @@
-enable:
-  issues: false
-  prs: true
-
-labels:
-  '✨ feature':
-    - '\b\[feat\].*\b'
-  '🐛 bug-fix':
-    - '\b\[fix\].*\b'
-  '♻️ refactor':
-    - '\b\[refactor\].*\b'
-  '🎨 style':
-    - '\b\[style\].*\b'
-  '➕ chore':
-    - '\b\[chore\].*\b'
-  '✅ test':
-    - '\b\[test\].*\b'
-  '📝 docs':
-    - '\b\[docs\].*\b'
+✨ feature: '[feat]*'
+🐛 bug-fix: '[fix]*'
+♻️ refactor: '[refactor]*'
+🎨 style: '[style]*'
+➕ chore: '[chore]*'
+✅ test: '[test]*'
+📝 docs: '[docs]*'
 
