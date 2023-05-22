@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
@@ -132,41 +133,41 @@ class SurveyDomainTest extends AbstractSurveySources {
 	}
 
 	private List<FormQuestionable> getDefaultQuestionFormList() {
-		return List.of(
-			ShortFormQuestion.builder()
-				.title("short")
-				.questionType(QuestionType.SHORT)
-				.shortFormQuestionType(ShortFormQuestionType.CUSTOM)
-				.order(1)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.build(),
-			ChoiceFormQuestion.builder()
-				.title("choice")
-				.questionType(QuestionType.CHOICE)
-				.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.order(2)
-				.maxSelectionCount(1)
-				.choiceList(
-					getDefaultChoiceList()
-				)
-				.build()
-		);
+		List<FormQuestionable> formQuestionableList = new ArrayList<>();
+		formQuestionableList.add(ShortFormQuestion.builder()
+			.title("short")
+			.questionType(QuestionType.SHORT)
+			.shortFormQuestionType(ShortFormQuestionType.CUSTOM)
+			.order(1)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.build());
+		formQuestionableList.add(ChoiceFormQuestion.builder()
+			.title("choice")
+			.questionType(QuestionType.CHOICE)
+			.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.order(2)
+			.maxSelectionCount(1)
+			.choiceList(
+				getDefaultChoiceList()
+			)
+			.build());
+		return formQuestionableList;
 	}
 
 	private List<Choice> getDefaultChoiceList() {
-		return List.of(
-			Choice.builder()
-				.content("choice1")
-				.order(1)
-				.build(),
-			Choice.builder()
-				.content("choce2")
-				.order(2)
-				.build()
-		);
+		List<Choice> choiceList = new ArrayList<>();
+		choiceList.add(Choice.builder()
+			.content("choice1")
+			.order(1)
+			.build());
+		choiceList.add(Choice.builder()
+			.content("choce2")
+			.order(2)
+			.build());
+		return choiceList;
 	}
 
 }
