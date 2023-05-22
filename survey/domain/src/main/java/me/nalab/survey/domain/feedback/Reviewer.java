@@ -31,7 +31,8 @@ public class Reviewer implements IdGeneratable {
 	private String getNextNickName(String lastName) {
 		for(int i = lastName.length() - 1; i >= 0; i--) {
 			if(lastName.charAt(i) != 'Z') {
-				return lastName.substring(0, i) + (char)(lastName.charAt(i) + 1) + "A".repeat(lastName.length() - (i + 1));
+				return lastName.substring(0, i) + (char)(lastName.charAt(i) + 1) + "A".repeat(
+					lastName.length() - (i + 1));
 			}
 		}
 		return "A".repeat(Math.max(0, lastName.length() + 1));
