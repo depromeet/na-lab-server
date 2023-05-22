@@ -1,6 +1,6 @@
-package me.nalab.survey.application.common.mapper;
+package me.nalab.survey.application.common.survey.mapper;
 
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
 import me.nalab.survey.domain.target.Target;
 
 public class TargetDtoMapper {

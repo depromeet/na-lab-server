@@ -1,6 +1,6 @@
 package me.nalab.survey.application.port.in.web.target.find;
 
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
 
 /**
  * Target을 조회하는 Usecase

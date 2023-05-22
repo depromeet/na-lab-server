@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.idgenerator.idcore.IdGenerator;
-import me.nalab.survey.application.common.dto.SurveyDto;
-import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
 import me.nalab.survey.application.port.out.persistence.SurveyCreatePort;

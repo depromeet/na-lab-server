@@ -10,7 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.domain.survey.Survey;
 
 class SurveyDtoMapperTest {

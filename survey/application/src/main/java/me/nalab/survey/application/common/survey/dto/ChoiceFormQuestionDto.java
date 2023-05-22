@@ -1,4 +1,4 @@
-package me.nalab.survey.application.common.dto;
+package me.nalab.survey.application.common.survey.dto;
 
 import java.util.List;
 

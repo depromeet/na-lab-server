@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import me.nalab.survey.application.common.dto.TargetDto;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
+import me.nalab.survey.application.common.survey.mapper.TargetDtoMapper;
 import me.nalab.survey.domain.target.Target;
 
 class TargetDtoMapperTest {

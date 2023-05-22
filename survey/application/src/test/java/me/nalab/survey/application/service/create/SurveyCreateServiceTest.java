@@ -20,7 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.survey.application.RandomSurveyDtoFixture;
 import me.nalab.survey.application.TestIdGenerator;
-import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
 import me.nalab.survey.application.port.out.persistence.SurveyCreatePort;

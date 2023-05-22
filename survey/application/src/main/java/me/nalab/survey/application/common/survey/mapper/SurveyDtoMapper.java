@@ -1,15 +1,15 @@
-package me.nalab.survey.application.common.mapper;
+package me.nalab.survey.application.common.survey.mapper;
 
 import java.util.stream.Collectors;
 
-import me.nalab.survey.application.common.dto.ChoiceDto;
-import me.nalab.survey.application.common.dto.ChoiceFormQuestionDto;
-import me.nalab.survey.application.common.dto.ChoiceFormQuestionDtoType;
-import me.nalab.survey.application.common.dto.FormQuestionDtoable;
-import me.nalab.survey.application.common.dto.QuestionDtoType;
-import me.nalab.survey.application.common.dto.ShortFormQuestionDto;
-import me.nalab.survey.application.common.dto.ShortFormQuestionDtoType;
-import me.nalab.survey.application.common.dto.SurveyDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.FormQuestionDtoable;
+import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDtoType;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.domain.survey.Choice;
 import me.nalab.survey.domain.survey.ChoiceFormQuestion;
 import me.nalab.survey.domain.survey.FormQuestionable;
