@@ -18,7 +18,7 @@ public class FeedbackDto {
 	private Long surveyId;
 	private final List<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoableList;
 	private final boolean isRead;
-	private final ReviewerDto reviewer;
+	private final ReviewerDto reviewerDto;
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
 
