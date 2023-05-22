@@ -49,19 +49,6 @@ class ValidationControllerAdviceTest {
 	}
 
 	@Test
-	@DisplayName("Validation controller advice 예외 핸들링 테스트 - null")
-	void VALID_NULL() throws Exception {
-		// given
-		TestRequest testRequest = new TestRequest(null);
-
-		// when
-		ResultActions resultActions = callHello(testRequest);
-
-		// then
-		assertIsNull(resultActions);
-	}
-
-	@Test
 	@DisplayName("Validation controller advice 예외 핸들링 테스트 - blank")
 	void VALID_BLANK() throws Exception {
 		// given

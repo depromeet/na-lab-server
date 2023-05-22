@@ -17,7 +17,6 @@ import lombok.Setter;
 class TestRequest {
 
 	@Length(max = 5, message = "overflow")
-	@NotNull(message = "null")
 	@NotBlank(message = "blank")
 	private String hello;
 
