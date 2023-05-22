@@ -13,3 +13,9 @@ exclude me/nalab/survey/web/adaptor/survey/find/SurveyFindController
 exclude me/nalab/survey/web/adaptor/findid/SurveyIdGetController
 exclude me/nalab/survey/web/adaptor/advice/SurveyControllerAdvice
 exclude me/nalab/survey/web/adaptor/advice/ErrorTemplate
+exclude me/nalab/survey/application/common/feedback/dto/ChoiceFormQuestionFeedbackDto
+exclude me/nalab/survey/application/common/feedback/dto/FeedbackDto
+exclude me/nalab/survey/application/common/feedback/dto/FormQuestionFeedbackDto
+exclude me/nalab/survey/application/common/feedback/dto/ReviewerDto
+exclude me/nalab/survey/application/common/feedback/dto/ShortFormQuestionFeedbackDto
+exclude me/nalab/survey/application/common/feedback/mapper/FeedbackDtoMapper
