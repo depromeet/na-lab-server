@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.function.LongSupplier;
 
 import lombok.EqualsAndHashCode;
@@ -14,7 +15,7 @@ import me.nalab.survey.domain.support.IdGeneratable;
 @Getter
 @ToString
 @EqualsAndHashCode
-public abstract class FormQuestionable implements IdGeneratable {
+public abstract class FormQuestionable implements IdGeneratable, Comparable<FormQuestionable> {
 
 	protected Long id;
 	protected final String title;
@@ -35,4 +36,9 @@ public abstract class FormQuestionable implements IdGeneratable {
 	protected void cascadeId(LongSupplier idSupplier) {
 	}
 
+	@Override
+	public int compareTo(FormQuestionable other) {
+		return Comparator.comparingInt(FormQuestionable::getOrder)
+			.compare(this, other);
+	}
 }

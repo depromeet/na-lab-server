@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.survey;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.LongSupplier;
 
@@ -29,7 +30,12 @@ public class Survey implements IdGeneratable {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.formQuestionableList = formQuestionableList;
+		withSortedQuestionList(this.formQuestionableList);
 		SurveyValidator.validSelf(this);
+	}
+
+	private void withSortedQuestionList(List<FormQuestionable> formQuestionableList) {
+		Collections.sort(formQuestionableList);
 	}
 
 	@Override

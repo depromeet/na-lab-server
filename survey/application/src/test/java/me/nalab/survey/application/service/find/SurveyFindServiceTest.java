@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import me.nalab.survey.application.common.dto.FormQuestionDtoable;
 import me.nalab.survey.application.common.dto.SurveyDto;
 import me.nalab.survey.application.common.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
@@ -35,7 +36,7 @@ class SurveyFindServiceTest {
 	}
 
 	@Test
-	void SURVEY_FIND_SERVICE_TEST() {
+	void SURVEY_FIND_SERVICE_TEST() throws RuntimeException {
 		SurveyDto randomSurveyDto = createRandomSurveyDto();
 		Long surveyId = randomSurveyDto.getId();
 		Long targetId = randomSurveyDto.getTargetId();
@@ -46,9 +47,21 @@ class SurveyFindServiceTest {
 
 		SurveyDto result = surveyFindService.findSurvey(surveyId);
 
+		boolean isAscendingOrder = result.getFormQuestionDtoableList().stream()
+			.map(FormQuestionDtoable::getOrder)
+			.reduce((prev, current) -> {
+				if(prev.compareTo(current) < 0) {
+					return current;
+				} else {
+					throw new RuntimeException();
+				}
+			})
+			.isPresent();
+
 		assertNotNull(result);
 		assertEquals(targetId, result.getTargetId());
 		assertEquals(surveyId, result.getId());
+		assertTrue(isAscendingOrder);
 	}
 
 	@Test

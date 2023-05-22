@@ -4,13 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -81,6 +84,32 @@ class SurveyDomainTest extends AbstractSurveySources {
 		assertThrows(IdAlreadyGeneratedException.class, () -> survey.withId(supplier));
 	}
 
+	@ParameterizedTest
+	@MethodSource("surveyCreateSuccessSources")
+	void SURVEY_QUESTION_AND_CHOICELIST_ORDER_VALIDATION_TEST(
+		Function<Supplier<List<FormQuestionable>>, Survey> surveyCreate,
+		Supplier<List<FormQuestionable>> formQuestionSupplier) {
+
+		Survey survey = surveyCreate.apply(formQuestionSupplier);
+		assertTrue(isFormQuestionableListSorted(survey.getFormQuestionableList()));
+	}
+
+	private boolean isFormQuestionableListSorted(List<FormQuestionable> formQuestionableList) {
+		return IntStream.range(1, formQuestionableList.size())
+			.allMatch(i -> formQuestionableList.get(i - 1).getOrder() < formQuestionableList.get(i).getOrder())
+			&& formQuestionableList.stream().allMatch(this::isChoiceFormQuestionListIsSorted);
+	}
+
+	private boolean isChoiceFormQuestionListIsSorted(FormQuestionable formQuestionable) {
+		if(formQuestionable instanceof ChoiceFormQuestion) {
+			ChoiceFormQuestion choiceFormQuestion = (ChoiceFormQuestion)formQuestionable;
+			List<Choice> choiceList = choiceFormQuestion.getChoiceList();
+			return IntStream.range(1, choiceList.size())
+				.allMatch(i -> choiceList.get(i - 1).getOrder() < choiceList.get(i).getOrder());
+		}
+		return true;
+	}
+
 	private void assertIsAllIdExpected(Long expected, Survey survey) {
 		assertEquals(expected, survey.getId());
 		survey.getFormQuestionableList().forEach(
@@ -104,41 +133,41 @@ class SurveyDomainTest extends AbstractSurveySources {
 	}
 
 	private List<FormQuestionable> getDefaultQuestionFormList() {
-		return List.of(
-			ShortFormQuestion.builder()
-				.title("short")
-				.questionType(QuestionType.SHORT)
-				.shortFormQuestionType(ShortFormQuestionType.CUSTOM)
-				.order(1)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.build(),
-			ChoiceFormQuestion.builder()
-				.title("choice")
-				.questionType(QuestionType.CHOICE)
-				.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.order(2)
-				.maxSelectionCount(1)
-				.choiceList(
-					getDefaultChoiceList()
-				)
-				.build()
-		);
+		List<FormQuestionable> formQuestionableList = new ArrayList<>();
+		formQuestionableList.add(ShortFormQuestion.builder()
+			.title("short")
+			.questionType(QuestionType.SHORT)
+			.shortFormQuestionType(ShortFormQuestionType.CUSTOM)
+			.order(1)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.build());
+		formQuestionableList.add(ChoiceFormQuestion.builder()
+			.title("choice")
+			.questionType(QuestionType.CHOICE)
+			.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.order(2)
+			.maxSelectionCount(1)
+			.choiceList(
+				getDefaultChoiceList()
+			)
+			.build());
+		return formQuestionableList;
 	}
 
 	private List<Choice> getDefaultChoiceList() {
-		return List.of(
-			Choice.builder()
-				.content("choice1")
-				.order(1)
-				.build(),
-			Choice.builder()
-				.content("choce2")
-				.order(2)
-				.build()
-		);
+		List<Choice> choiceList = new ArrayList<>();
+		choiceList.add(Choice.builder()
+			.content("choice1")
+			.order(1)
+			.build());
+		choiceList.add(Choice.builder()
+			.content("choce2")
+			.order(2)
+			.build());
+		return choiceList;
 	}
 
 }

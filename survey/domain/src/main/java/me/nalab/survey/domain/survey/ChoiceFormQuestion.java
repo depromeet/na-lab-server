@@ -1,5 +1,6 @@
 package me.nalab.survey.domain.survey;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.LongSupplier;
 
@@ -21,10 +22,15 @@ public class ChoiceFormQuestion extends FormQuestionable {
 
 	ChoiceFormQuestion(ChoiceFormQuestionBuilder<?, ?> builder) {
 		super(builder);
-		choiceList = builder.choiceList;
-		maxSelectionCount = builder.maxSelectionCount;
-		choiceFormQuestionType = builder.choiceFormQuestionType;
+		this.choiceList = builder.choiceList;
+		withSortedChoiceList(this.choiceList);
+		this.maxSelectionCount = builder.maxSelectionCount;
+		this.choiceFormQuestionType = builder.choiceFormQuestionType;
 		ChoiceFormQuestionValidator.validSelf(this);
+	}
+
+	private void withSortedChoiceList(List<Choice> choiceList) {
+		Collections.sort(choiceList);
 	}
 
 	@Override

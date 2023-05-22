@@ -30,6 +30,7 @@ public class SurveyFindService implements SurveyFindUseCase {
 		Survey survey = surveyFindPort.findSurvey(surveyId).orElseThrow(() -> {
 			throw new SurveyDoesNotExistException(surveyId);
 		});
+
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
