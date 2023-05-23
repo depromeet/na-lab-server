@@ -41,10 +41,10 @@ public class FeedbackCreateService implements FeedbackCreateUseCase {
 		feedbackSavePort.saveFeedback(feedback);
 	}
 
-	private void generateNickName(Long surveyId, Reviewer reviewer){
+	private void generateNickName(Long surveyId, Reviewer reviewer) {
 		synchronized(LOCK) {
 			String latestReviewerName = reviewerLatestNameFindPort.getLatestReviewerNameBySurveyId(surveyId)
-					.orElse(null);
+				.orElse(null);
 			if(latestReviewerName == null) {
 				reviewer.generateFirstReviewerNickName();
 				return;

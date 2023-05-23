@@ -1,6 +1,5 @@
 package me.nalab.survey.application;
 
-import java.security.SecureRandom;
 import java.util.function.Supplier;
 
 import me.nalab.core.idgenerator.idcore.IdGenerator;
