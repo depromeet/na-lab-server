@@ -11,11 +11,12 @@ public class TestIdGenerator implements IdGenerator {
 
 	public TestIdGenerator() {
 		idGenerateAlgorithm = new Supplier<>() {
-			final SecureRandom secureRandom = new SecureRandom();
+			private Long id = 0L;
 
 			@Override
 			public Long get() {
-				return secureRandom.nextLong();
+				id++;
+				return id;
 			}
 		};
 	}
