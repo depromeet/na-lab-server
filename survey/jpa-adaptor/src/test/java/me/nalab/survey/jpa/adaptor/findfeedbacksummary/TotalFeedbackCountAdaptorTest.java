@@ -44,7 +44,7 @@ class TotalFeedbackCountAdaptorTest {
 
 		Long surveyId = 1L;
 		int resultCount = totalFeedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
-		assertEquals(resultCount, 0);
+		assertEquals(0, resultCount);
 	}
 
 	@Test
