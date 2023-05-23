@@ -6,11 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
-import me.nalab.survey.web.adaptor.createsurvey.request.ChoiceFormQuestionRequest;
-import me.nalab.survey.web.adaptor.createsurvey.request.ShortFormQuestionRequest;
 
 @Getter
 @ToString
