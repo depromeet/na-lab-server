@@ -32,9 +32,9 @@ public class FeedbackCreateController {
 
 	private final FeedbackCreateUseCase feedbackCreateUseCase;
 
-	@PostMapping("/feedbacks?survey-id={survey_id}")
+	@PostMapping("/feedbacks")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createFeedback(@RequestParam("survey_id") Long surveyId,
+	public void createFeedback(@RequestParam("survey-id") Long surveyId,
 		@Validated @RequestBody FeedbackCreateRequest feedbackCreateRequest) {
 		feedbackCreateUseCase.createFeedback(surveyId, toFeedbackDto(feedbackCreateRequest));
 	}
