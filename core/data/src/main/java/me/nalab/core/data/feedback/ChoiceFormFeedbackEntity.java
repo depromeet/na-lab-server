@@ -1,9 +1,12 @@
 package me.nalab.core.data.feedback;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +22,9 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class ChoiceFormFeedbackEntity extends FormFeedbackEntity {
 
-	@OneToMany(mappedBy = "choiceFormFeedbackEntity")
-	private List<SelectEntity> selectList;
+	@ElementCollection
+	@CollectionTable(name = "select", joinColumns = @JoinColumn(name = "form_feedback_id"))
+	@Column(name = "selects")
+	private Set<Long> selectSet;
+
 }

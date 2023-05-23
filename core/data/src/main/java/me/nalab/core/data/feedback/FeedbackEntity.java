@@ -1,9 +1,14 @@
 package me.nalab.core.data.feedback;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,10 +36,33 @@ public class FeedbackEntity extends TimeBaseEntity {
 	private Long surveyId;
 
 	@JoinColumn(name = "is_read", nullable = false)
-	private Boolean isRead;
+	private boolean isRead;
 
 	@OneToOne
 	@JoinColumn(name = "reviewer_id")
 	private ReviewerEntity reviewer;
+
+	@OneToMany(mappedBy = "feedbackEntity", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<FormFeedbackEntity> formFeedbackEntityList;
+
+	public FeedbackEntity(FeedbackEntityBuilder<?, ?> b) {
+		super(b);
+		this.id = b.id;
+		this.surveyId = b.surveyId;
+		this.isRead = b.isRead;
+		this.reviewer = b.reviewer;
+		this.formFeedbackEntityList = b.formFeedbackEntityList;
+		cascadeFeedback();
+	}
+
+	private void cascadeFeedback() {
+		formFeedbackEntityList.forEach(
+			f -> {
+				if(f.getFeedbackEntity() != this) {
+					f.setFeedbackEntity(this);
+				}
+			}
+		);
+	}
 
 }
