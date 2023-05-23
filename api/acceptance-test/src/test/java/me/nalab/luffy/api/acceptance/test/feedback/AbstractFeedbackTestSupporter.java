@@ -22,7 +22,7 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 
 	protected ResultActions createFeedback(Long surveyId, String content) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.post("/v1/surveys/" + surveyId)
+			.post("/v1/feedbacks?survey-id=" + surveyId)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(content)
