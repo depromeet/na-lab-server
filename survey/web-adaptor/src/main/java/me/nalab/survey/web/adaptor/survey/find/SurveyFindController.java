@@ -20,7 +20,7 @@ public class SurveyFindController {
 	private final TargetFindUseCase targetFindUseCase;
 	private final SurveyFindUseCase surveyFindUseCase;
 
-	@GetMapping("/v1/surveys/{survey_id}")
+	@GetMapping("/v1/surveys/{surveyId}")
 	public ResponseEntity<SurveyFindResponse> getSurvey(@PathVariable Long surveyId) {
 		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
 		TargetDto targetDto = targetFindUseCase.findTarget(surveyDto.getTargetId());
