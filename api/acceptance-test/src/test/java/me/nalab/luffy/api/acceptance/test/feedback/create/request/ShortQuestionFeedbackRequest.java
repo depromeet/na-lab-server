@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @NoArgsConstructor
-public class ShortQuestionFeedbackRequest extends AbstractQuestionFeedbackRequest{
+public class ShortQuestionFeedbackRequest extends AbstractQuestionFeedbackRequest {
 
 	@JsonProperty("reply")
 	private List<String> replyList;
