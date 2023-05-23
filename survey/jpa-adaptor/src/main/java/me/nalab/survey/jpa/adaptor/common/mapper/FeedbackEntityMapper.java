@@ -1,5 +1,6 @@
 package me.nalab.survey.jpa.adaptor.common.mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,7 +75,7 @@ public final class FeedbackEntityMapper {
 		return FeedbackEntity.builder()
 			.id(feedback.getId())
 			.surveyId(feedback.getSurveyId())
-			.reviewer(getReviewerEntity(feedback.getReviewer()))
+			.reviewer(getReviewerEntity(feedback.getReviewer(), feedback.getCreatedAt()))
 			.formFeedbackEntityList(getFormFeedbackEntityList(feedback))
 			.createdAt(feedback.getCreatedAt())
 			.updatedAt(feedback.getUpdatedAt())
@@ -82,12 +83,14 @@ public final class FeedbackEntityMapper {
 			.build();
 	}
 
-	private static ReviewerEntity getReviewerEntity(Reviewer reviewer) {
+	private static ReviewerEntity getReviewerEntity(Reviewer reviewer, LocalDateTime now) {
 		return ReviewerEntity.builder()
 			.id(reviewer.getId())
 			.nickName(reviewer.getNickName())
 			.position(reviewer.getPosition())
 			.collaborationExperience(reviewer.isCollaborationExperience())
+			.createdAt(now)
+			.updatedAt(now)
 			.build();
 	}
 
