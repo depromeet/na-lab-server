@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 public class ChoiceFormFeedbackEntity extends FormFeedbackEntity {
 
 	@ElementCollection
-	@CollectionTable(name = "select", joinColumns = @JoinColumn(name = "form_feedback_id"))
+	@CollectionTable(name = "selects", joinColumns = @JoinColumn(name = "form_feedback_id"))
 	@Column(name = "selects")
 	private Set<Long> selectSet;
 
