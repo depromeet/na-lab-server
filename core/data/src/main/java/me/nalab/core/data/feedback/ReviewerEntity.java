@@ -26,11 +26,11 @@ public class ReviewerEntity extends TimeBaseEntity {
 	private Long id;
 
 	@Column(name = "collaboration_experience", nullable = false)
-	private Boolean collaborationExperience;
+	private boolean collaborationExperience;
 
 	@Column(name = "position", nullable = false)
 	private String position;
 
-	@Column(name = "nickname", nullable = false)
-	private String nickname;
+	@Column(name = "nick_name", nullable = false)
+	private String nickName;
 }
