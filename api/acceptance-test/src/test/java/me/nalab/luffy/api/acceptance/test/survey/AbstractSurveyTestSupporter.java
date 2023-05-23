@@ -37,9 +37,9 @@ public abstract class AbstractSurveyTestSupporter {
 		);
 	}
 
-	protected ResultActions findSurvey(Long surveyId) throws Exception {
+	protected ResultActions findSurvey(Long survey_Id) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.get(API_VERSION + "/surveys" + "/" + surveyId)
+			.get(API_VERSION + "/surveys" + "/" + survey_Id)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 		);
