@@ -1,5 +1,10 @@
 package me.nalab.luffy.api.acceptance.test.feedback;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 public final class FeedbackAcceptanceValidator {
