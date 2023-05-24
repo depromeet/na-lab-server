@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.feedback;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,8 +33,13 @@ public class ChoiceFormQuestionFeedback extends FormQuestionFeedbackable {
 	}
 
 	private boolean isSelectedIdMissMatched(ChoiceFormQuestion choiceFormQuestion) {
-		for(Choice choice : choiceFormQuestion.getChoiceList()) {
-			if(selectedChoiceIdSet.contains(choice.getId())){
+		Set<Long> choiceableIdSet = choiceFormQuestion.getChoiceList()
+			.stream()
+			.map(Choice::getId)
+			.collect(Collectors.toSet());
+		
+		for(Long selected : selectedChoiceIdSet) {
+			if(choiceableIdSet.contains(selected)) {
 				continue;
 			}
 			return false;
