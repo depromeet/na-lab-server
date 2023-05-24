@@ -22,36 +22,76 @@ import me.nalab.core.data.feedback.ReviewerEntity;
 @DataJpaTest
 @EnableJpaRepositories
 @EntityScan("me.nalab.core.data")
-@ContextConfiguration(classes = UpdatedFeedbackCountAdaptor.class)
+@ContextConfiguration(classes = FeedbackCountAdaptor.class)
 @TestPropertySource("classpath:h2.properties")
-class UpdatedFeedbackCountAdaptorTest {
+class FeedbackCountAdaptorTest {
 
 	@Autowired
-	private UpdatedFeedbackCountAdaptor updatedFeedbackCountAdaptor;
+	private FeedbackCountAdaptor feedbackCountAdaptor;
 
-	@Autowired
-	private TestFeedbackSaveRepository testFeedbackSaveRepository;
-	
 	@Autowired
 	private TestReviewerSaveRepository testReviewerSaveRepository;
-	
+
+	@Autowired
+	private TestFeedbackCountJpaRepository testFeedbackCountJpaRepository;
+
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Test
-	@DisplayName("질문 폼에 해당하는 피드백이 없는 경우")
-	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_NO_FEEDBACK() {
+	@DisplayName("전체 조회 - 질문 폼에 해당하는 피드백이 없는 경우")
+	void FIND_TOTAL_FEEDBACK_COUNT_TEST_WITH_NO_FEEDBACK() {
 
 		Long surveyId = 1L;
-		int resultCount = updatedFeedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+		int resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
 		assertEquals(0, resultCount);
 	}
 
 	@Test
-	@DisplayName("질문 폼에 해당하는 읽지 않은 피드백이 없는 경우")
+	@DisplayName("전체 조회 - 질문 폼에 해당하는 피드백이 있는 경우")
+	void FIND_TOTAL_FEEDBACK_COUNT_TEST_WITH_FEEDBACKS() {
+
+		Long surveyId = 1L;
+		createAndSaveSurveyWithFeedback(surveyId);
+
+		int resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
+
+		assertEquals(2, resultCount);
+	}
+
+	@Test
+	@DisplayName("읽지 않은 피드백 조회 - 질문 폼에 해당하는 피드백이 없는 경우")
+	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_NO_FEEDBACK() {
+
+		Long surveyId = 1L;
+		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+		assertEquals(0, resultCount);
+	}
+
+	@Test
+	@DisplayName("읽지 않은 피드백 조회 - 질문 폼에 해당하는 읽지 않은 피드백이 없는 경우")
 	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_ALL_READ() {
 
 		Long surveyId = 1L;
+		createAndSaveSurveyWithFeedback(surveyId);
+
+		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+
+		assertEquals(0, resultCount);
+	}
+
+	@Test
+	@DisplayName("읽지 않은 피드백 조회 - 질문 폼에 해당하는 읽지 않은 피드백이 존재하는 경우")
+	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_NOT_READ() {
+		Long surveyId = 1L;
+		createAndSaveSurveyWithUpdatedFeedback(surveyId);
+
+		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+
+		assertEquals(1, resultCount);
+	}
+
+	private void createAndSaveSurveyWithFeedback(Long surveyId) {
 		ReviewerEntity reviewerEntity1 = ReviewerEntity.builder()
 			.id(1L)
 			.collaborationExperience(true)
@@ -89,20 +129,13 @@ class UpdatedFeedbackCountAdaptorTest {
 
 		testReviewerSaveRepository.saveAndFlush(reviewerEntity1);
 		testReviewerSaveRepository.saveAndFlush(reviewerEntity2);
-		testFeedbackSaveRepository.saveAndFlush(feedbackEntity1);
-		testFeedbackSaveRepository.saveAndFlush(feedbackEntity2);
+		testFeedbackCountJpaRepository.saveAndFlush(feedbackEntity1);
+		testFeedbackCountJpaRepository.saveAndFlush(feedbackEntity2);
 
 		entityManager.clear();
-
-		int resultCount = updatedFeedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
-
-		assertEquals(0, resultCount);
 	}
 
-	@Test
-	@DisplayName("질문 폼에 해당하는 읽지 않은 피드백이 존재하는 경우")
-	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_NOT_READ() {
-		Long surveyId = 1L;
+	private void createAndSaveSurveyWithUpdatedFeedback(Long surveyId) {
 		ReviewerEntity reviewerEntity1 = ReviewerEntity.builder()
 			.id(1L)
 			.collaborationExperience(true)
@@ -158,14 +191,10 @@ class UpdatedFeedbackCountAdaptorTest {
 		testReviewerSaveRepository.saveAndFlush(reviewerEntity1);
 		testReviewerSaveRepository.saveAndFlush(reviewerEntity2);
 		testReviewerSaveRepository.saveAndFlush(reviewerEntity3);
-		testFeedbackSaveRepository.saveAndFlush(feedbackEntity1);
-		testFeedbackSaveRepository.saveAndFlush(feedbackEntity2);
-		testFeedbackSaveRepository.saveAndFlush(feedbackEntity3);
+		testFeedbackCountJpaRepository.saveAndFlush(feedbackEntity1);
+		testFeedbackCountJpaRepository.saveAndFlush(feedbackEntity2);
+		testFeedbackCountJpaRepository.saveAndFlush(feedbackEntity3);
 
 		entityManager.clear();
-
-		int resultCount = updatedFeedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
-
-		assertEquals(1, resultCount);
 	}
 }
