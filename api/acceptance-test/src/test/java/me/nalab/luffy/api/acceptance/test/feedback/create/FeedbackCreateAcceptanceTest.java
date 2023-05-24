@@ -177,6 +177,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private ChoiceQuestionFeedbackRequest getChoiceQuestionFeedbackRequest(
 		ChoiceFormQuestionResponse choiceFormQuestionResponse) {
 		return ChoiceQuestionFeedbackRequest.builder()
+			.type("choice")
 			.questionId(choiceFormQuestionResponse.getQuestionId())
 			.choiceList(List.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId()))
 			.build();
