@@ -43,7 +43,7 @@ class ReviewerSummaryGetServiceTest {
 		when(reviewerFindPort.findAllReviewer(anyLong())).thenReturn(reviewerList);
 		when(surveyExistCheckPort.isExistSurveyBySurveyId(anyLong())).thenReturn(true);
 
-		ReviewerSummaryDto summaryResponse = reviewerSummaryGetUseCase.summarizeReviewer(anyLong());
+		ReviewerSummaryDto summaryResponse = reviewerSummaryGetUseCase.summarizeReviewerBySurveyId(anyLong());
 
 		// then
 		assertEquals(expected, summaryResponse);

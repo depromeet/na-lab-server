@@ -18,7 +18,7 @@ public interface ReviewerSummarizeUseCase {
 	 * @param surveyId 조회할 survey의 id
 	 * @return ReviewerSummaryDto 요약된 리뷰어의 정보
 	 */
-	ReviewerSummaryDto summarizeReviewer(Long surveyId);
+	ReviewerSummaryDto summarizeReviewerBySurveyId(Long surveyId);
 
 	@Getter
 	@Builder

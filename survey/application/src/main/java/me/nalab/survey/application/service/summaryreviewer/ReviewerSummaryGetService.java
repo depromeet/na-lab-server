@@ -23,7 +23,7 @@ public class ReviewerSummaryGetService implements ReviewerSummarizeUseCase {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ReviewerSummaryDto summarizeReviewer(Long surveyId) {
+	public ReviewerSummaryDto summarizeReviewerBySurveyId(Long surveyId) {
 		throwIfSurveyDoesNotExist(surveyId);
 		List<Reviewer> reviewerList = reviewerFindPort.findAllReviewer(surveyId);
 		int collaborationExperienceCount = getCollaborationExperienceCount(reviewerList);
