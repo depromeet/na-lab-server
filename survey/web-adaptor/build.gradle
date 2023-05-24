@@ -1,4 +1,5 @@
 dependencies {
+    implementation project(':survey:domain')
     implementation project(':survey:application')
     testImplementation project(':survey:application')
 
