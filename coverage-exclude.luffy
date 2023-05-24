@@ -28,3 +28,4 @@ exclude me/nalab/survey/application/common/feedback/dto/ReviewerDto
 exclude me/nalab/survey/application/common/feedback/dto/ShortFormQuestionFeedbackDto
 exclude me/nalab/survey/application/common/feedback/mapper/FeedbackDtoMapper
 exclude me/nalab/survey/jpa/adaptor/common/mapper/FeedbackEntityMapper
+exclude me/nalab/survey/web/adaptor/createfeedback/**
