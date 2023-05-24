@@ -15,13 +15,11 @@ public class MockAuthInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		System.out.println("METHOD : " + request.getMethod() + " uri : " + request.getRequestURI());
-		if(isExcludedURI(request)) {
-			return true;
+		if(!isExcludedURI(request)) {
+			String token = request.getHeader("Authorization");
+			throwIfCannotValidToken(token);
+			request.setAttribute("logined", expectedId);
 		}
-		String token = request.getHeader("Authorization");
-		throwIfCannotValidToken(token);
-		request.setAttribute("logined", expectedId);
 		return true;
 	}
 
