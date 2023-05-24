@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -26,6 +27,15 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(content)
+		);
+	}
+
+	protected ResultActions summarizeReviewer(String token, Long surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get("/v1/reviewers/summary?survey-id=" + surveyId)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
 		);
 	}
 
