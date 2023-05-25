@@ -83,7 +83,7 @@ class ReviewerSummarizeAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		List<FeedbackCreateRequest> feedbackCreateRequestList = List.of(
 			getFeedbackCreateRequest(surveyFindResponse, true, "developer"),
-			getFeedbackCreateRequest(surveyFindResponse, true, "developer"));
+			getFeedbackCreateRequest(surveyFindResponse, false, "developer"));
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequestList.get(0)));
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequestList.get(1)));
 

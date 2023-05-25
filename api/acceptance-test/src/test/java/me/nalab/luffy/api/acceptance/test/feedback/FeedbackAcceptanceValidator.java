@@ -19,7 +19,7 @@ public final class FeedbackAcceptanceValidator {
 		resultActions.andExpectAll(
 			jsonPath("$.collaboration_experience.yes").isNumber(),
 			jsonPath("$.collaboration_experience.no").isNumber(),
-			jsonPath("$.position.developer").isNumber(),
+			jsonPath("$.position.designer").isNumber(),
 			jsonPath("$.position.product-manager").isNumber(),
 			jsonPath("$.position.programmer").isNumber(),
 			jsonPath("$.position.other").isNumber()
