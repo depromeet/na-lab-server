@@ -34,6 +34,9 @@ public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFe
 		}
 		id = idSupplier.getAsLong();
 		formQuestionFeedbackableList.forEach(f -> f.withId(idSupplier));
+		if(reviewer != null) {
+			reviewer.withId(idSupplier);
+		}
 	}
 
 	@Override

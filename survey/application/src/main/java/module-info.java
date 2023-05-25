@@ -10,6 +10,9 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.in.web.getid;
 	exports me.nalab.survey.application.exception;
 	exports me.nalab.survey.application.port.out.persistence.findid;
+	exports me.nalab.survey.application.port.out.persistence.createfeedback;
+	exports me.nalab.survey.application.port.in.web.createfeedback;
+	exports me.nalab.survey.application.common.feedback.dto;
 	exports me.nalab.survey.application.port.out.persistence.feedbacksummary;
 
 	requires luffy.survey.domain.main;

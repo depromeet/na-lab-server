@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - '**/base-**'
+    types:
+      - opened
 
 jobs:
   add_label:

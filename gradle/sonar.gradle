@@ -1,7 +1,20 @@
+import java.util.stream.Collectors
+
+var excludeFromCoverage = new ArrayList<String>()
+file('coverage-exclude.luffy').withInputStream(){
+    it -> excludeFromCoverage.addAll(new BufferedReader(new InputStreamReader(it))
+            .lines()
+            .parallel()
+            .map(s -> "**/" + s.substring(7).strip() + ".java")
+            .collect(Collectors.toList()))
+}
+
+
 sonar {
     properties {
         property 'sonar.host.url', 'https://sonarcloud.io'
         property 'sonar.organization', 'depromeet-1'
         property 'sonar.projectKey', 'depromeet_na-lab-server'
+        property 'sonar.coverage.exclusions', excludeFromCoverage.toArray()
     }
 }
