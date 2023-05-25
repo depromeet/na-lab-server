@@ -19,7 +19,6 @@ exclude me/nalab/core/data/feedback/ShortFormFeedbackEntity
 exclude me/nalab/survey/web/adaptor/createsurvey/SurveyCreateController
 exclude me/nalab/survey/web/adaptor/survey/find/SurveyFindController
 exclude me/nalab/survey/web/adaptor/findid/SurveyIdGetController
-exclude me/nalab/survey/web/adaptor/feedbacksummary/FeedbackSummaryController
 exclude me/nalab/survey/web/adaptor/advice/*
 exclude me/nalab/survey/web/adaptor/advice/ErrorTemplate
 exclude me/nalab/survey/application/common/feedback/dto/ChoiceFormQuestionFeedbackDto
