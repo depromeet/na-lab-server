@@ -1,7 +1,5 @@
 package me.nalab.survey.web.adaptor.findfeedback;
 
-import static me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackResponse.builder;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +28,7 @@ final class ResponseMapper {
 	}
 
 	static QuestionFeedbackResponse toQuestionFeedbackResponse(SurveyDto surveyDto, List<FeedbackDto> feedbackDtoList) {
-		return builder()
+		return QuestionFeedbackResponse.builder()
 			.abstractSurveyResponse(surveyDto.getFormQuestionDtoableList().stream().map(
 				f -> {
 					if(f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
