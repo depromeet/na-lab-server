@@ -1,17 +1,17 @@
 package me.nalab.survey.web.adaptor.summaryreviewer;
 
-import me.nalab.survey.application.port.in.web.summaryreviewer.ReviewerSummaryGetUseCase;
+import me.nalab.survey.application.port.in.web.summaryreviewer.ReviewerSummarizeUseCase;
 import me.nalab.survey.web.adaptor.summaryreviewer.response.CollaborationSummaryResponse;
 import me.nalab.survey.web.adaptor.summaryreviewer.response.PositionSummaryReponse;
 
 final class ReviewerSummaryResponseMapper {
 
-	private ReviewerSummaryResponseMapper(){
+	private ReviewerSummaryResponseMapper() {
 		throw new UnsupportedOperationException("Cannot invoke constructor \"ReviewerSummaryResponseMapper()\"");
 	}
 
 	static CollaborationSummaryResponse getCollaborationSummaryResponse(
-		ReviewerSummaryGetUseCase.ReviewerSummaryDto reviewerSummaryDto) {
+		ReviewerSummarizeUseCase.ReviewerSummaryDto reviewerSummaryDto) {
 
 		return CollaborationSummaryResponse.builder()
 			.yes(reviewerSummaryDto.getCollaborationExperience().getYes())
@@ -20,7 +20,7 @@ final class ReviewerSummaryResponseMapper {
 	}
 
 	static PositionSummaryReponse getPositionSummaryResponse(
-		ReviewerSummaryGetUseCase.ReviewerSummaryDto reviewerSummaryDto) {
+		ReviewerSummarizeUseCase.ReviewerSummaryDto reviewerSummaryDto) {
 
 		return PositionSummaryReponse.builder()
 			.designer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("designer", 0))
