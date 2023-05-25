@@ -21,6 +21,7 @@ public class ChoiceSurveyResponse extends AbstractSurveyResponse {
 	@JsonProperty("feedbacks")
 	private final List<ChoiceFeedbackResponse> choiceFeedbackResponseList;
 
+	@Getter
 	@Builder
 	@ToString
 	public static final class QuestionResponse {

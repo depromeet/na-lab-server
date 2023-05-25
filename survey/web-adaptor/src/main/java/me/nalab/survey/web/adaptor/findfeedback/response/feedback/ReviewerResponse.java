@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class ReviewerResponse {
 
+	@JsonProperty("reviewer_id")
 	private final Long id;
 	@JsonProperty("nickname")
 	private final String nickName;

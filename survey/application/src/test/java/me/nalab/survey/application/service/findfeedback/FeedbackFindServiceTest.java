@@ -44,7 +44,7 @@ class FeedbackFindServiceTest {
 	@MockBean
 	private FeedbackFindPort feedbackFindPort;
 
-	@MockBean
+	@MockBean(name = "findfeedback.SurveyExistCheckAdaptor")
 	private SurveyExistCheckPort surveyExistCheckPort;
 
 	@ParameterizedTest

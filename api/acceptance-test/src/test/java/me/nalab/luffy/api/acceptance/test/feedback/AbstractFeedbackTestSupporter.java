@@ -44,6 +44,7 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 			.get("/v1/feedbacks?survey-id=" + surveyId)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
 		);
 	}
 

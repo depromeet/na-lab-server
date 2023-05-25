@@ -1,14 +1,11 @@
 package me.nalab.luffy.api.acceptance.test.feedback;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 public final class FeedbackAcceptanceValidator {
 
@@ -62,7 +59,15 @@ public final class FeedbackAcceptanceValidator {
 			content().contentType(MediaType.APPLICATION_JSON),
 
 			jsonPath("$.question_feedback").isArray(),
-			jsonPath("$.question_feedback").isEmpty()
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isNumber(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString(),
+
+			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
+			jsonPath("$.question_feedback.[0].feedbacks").isEmpty()
 		);
 	}
 

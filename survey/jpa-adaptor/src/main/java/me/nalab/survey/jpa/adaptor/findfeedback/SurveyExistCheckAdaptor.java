@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.jpa.adaptor.findfeedback.repository.SurveyExistCheckJpaRepository;
 
-@Repository
+@Repository("findfeedback.SurveyExistCheckAdaptor")
 public class SurveyExistCheckAdaptor implements SurveyExistCheckPort {
 
 	private final SurveyExistCheckJpaRepository surveyExistCheckJpaRepository;
