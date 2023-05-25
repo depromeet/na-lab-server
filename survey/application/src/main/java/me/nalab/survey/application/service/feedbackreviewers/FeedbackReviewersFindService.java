@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.port.in.web.feedbackreviewers.FeedbackReviewersFindUseCase;
 import me.nalab.survey.application.port.out.persistence.feedbackreviewers.FeedbacksFindPort;
-import me.nalab.survey.domain.feedback.Feedback;
 
 @Service
 @RequiredArgsConstructor
