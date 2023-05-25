@@ -15,6 +15,7 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.out.persistence.createfeedback;
 	exports me.nalab.survey.application.port.in.web.createfeedback;
 	exports me.nalab.survey.application.common.feedback.dto;
+	exports me.nalab.survey.application.port.in.web.findfeedback;
 	exports me.nalab.survey.application.port.out.persistence.findfeedback;
 
 	requires luffy.survey.domain.main;
