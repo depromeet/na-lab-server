@@ -22,11 +22,10 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 
 	//: TODO 여기에 Feedback api관련된 호출 메소드를 만들어 주세요. AbstractSurveyTestSupporter 참고해서 작성하면 됩니다.
 
-	//: TODO
 	protected ResultActions findFeedbackSummary(String token, String surveyId) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.get(API_VERSION + "/feedbacks/summary")
-			.queryParam("survey_id", surveyId)
+			.queryParam("survey-id", surveyId)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)

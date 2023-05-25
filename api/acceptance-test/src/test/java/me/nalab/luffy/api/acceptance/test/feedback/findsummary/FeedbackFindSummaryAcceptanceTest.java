@@ -1,4 +1,4 @@
-package me.nalab.luffy.api.acceptance.test.feedback.findsummery;
+package me.nalab.luffy.api.acceptance.test.feedback.findsummary;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackSummaryFound;
 
@@ -40,19 +40,22 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 	@DisplayName("질문 폼의 전체 피드백 수와 읽지 않은 피드백 수 조회")
 	void FEEFBACK_SUMMARY_FIND_SUCCESS_TEST() throws Exception {
 
-		String token = "luffy's-double-token";
+		// given
+		String token = "token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
-
 		Long surveyId = createSurveyAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
 
+		// when
 		ResultActions resultActions = findFeedbackSummary(token, surveyId.toString());
 
+		// then
 		assertIsFeedbackSummaryFound(resultActions);
 	}
 
 	private Long createSurveyAndGetSurveyId(String token, String content) throws Exception {
+
 		String stringResponse = createSurvey(token, content).andReturn()
 			.getResponse()
 			.getContentAsString();
