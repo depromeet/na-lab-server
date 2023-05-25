@@ -9,9 +9,7 @@ module luffy.survey.jpa.adaptor.main {
 	requires lombok;
 	requires java.persistence;
 	requires spring.context;
-	requires spring.boot;
 	requires spring.data.commons;
 
 	requires spring.tx;
-	requires spring.beans;
 }
