@@ -35,7 +35,7 @@ public class FeedbackEntity extends TimeBaseEntity {
 	@JoinColumn(name = "survey_id", nullable = false)
 	private Long surveyId;
 
-	@JoinColumn(name = "is_read", nullable = false)
+	@Column(name = "is_read", nullable = false)
 	private boolean isRead;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
