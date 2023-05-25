@@ -9,11 +9,11 @@ public interface FeedbackSummaryFindUseCase {
 	 * surveyId에 해당하는 survey의 전체 피드백의 수를
 	 * 반환합니다
 	 */
-	int getTotalFeedbackCount(Long surveyId);
+	long getTotalFeedbackCount(Long surveyId);
 
 	/**
 	 * surveyId에 해당하는 survey의 읽지 않은 피드백의 수를
 	 * 반환합니다
 	 */
-	int getUpdatedFeedbackCount(Long surveyId);
+	long getUpdatedFeedbackCount(Long surveyId);
 }

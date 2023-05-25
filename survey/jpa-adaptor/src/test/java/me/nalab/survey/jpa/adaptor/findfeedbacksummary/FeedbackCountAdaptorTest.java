@@ -43,7 +43,7 @@ class FeedbackCountAdaptorTest {
 	void FIND_TOTAL_FEEDBACK_COUNT_TEST_WITH_NO_FEEDBACK() {
 
 		Long surveyId = 1L;
-		int resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
+		long resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
 		assertEquals(0, resultCount);
 	}
 
@@ -54,9 +54,9 @@ class FeedbackCountAdaptorTest {
 		Long surveyId = 1L;
 		createAndSaveSurveyWithFeedback(surveyId);
 
-		int resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
+		long resultCount = feedbackCountAdaptor.getTotalFeedbackCountBySurveyId(surveyId);
 
-		assertEquals(2, resultCount);
+		assertEquals(2L, resultCount);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ class FeedbackCountAdaptorTest {
 	void FIND_UPDATED_FEEDBACK_COUNT_TEST_WITH_NO_FEEDBACK() {
 
 		Long surveyId = 1L;
-		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+		long resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
 		assertEquals(0, resultCount);
 	}
 
@@ -75,7 +75,7 @@ class FeedbackCountAdaptorTest {
 		Long surveyId = 1L;
 		createAndSaveSurveyWithFeedback(surveyId);
 
-		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+		long resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
 
 		assertEquals(0, resultCount);
 	}
@@ -86,9 +86,9 @@ class FeedbackCountAdaptorTest {
 		Long surveyId = 1L;
 		createAndSaveSurveyWithUpdatedFeedback(surveyId);
 
-		int resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
+		long resultCount = feedbackCountAdaptor.getUpdatedFeedbackCountBySurveyId(surveyId);
 
-		assertEquals(1, resultCount);
+		assertEquals(1L, resultCount);
 	}
 
 	private void createAndSaveSurveyWithFeedback(Long surveyId) {

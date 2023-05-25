@@ -9,7 +9,7 @@ public interface UpdatedFeedbackCountPort {
 	 * surveyId에 해당하는 읽지 않은 Feedback의 수를 반환합니다.
 	 *
 	 * @param surveyId Survey의 ID
-	 * @return int 만약, 읽지 않은 피드백도 없을 경우, 0을 반환해야 합니다.
+	 * @return long 만약, 읽지 않은 피드백도 없을 경우, 0을 반환해야 합니다.
 	 */
-	int getUpdatedFeedbackCountBySurveyId(Long surveyId);
+	long getUpdatedFeedbackCountBySurveyId(Long surveyId);
 }
