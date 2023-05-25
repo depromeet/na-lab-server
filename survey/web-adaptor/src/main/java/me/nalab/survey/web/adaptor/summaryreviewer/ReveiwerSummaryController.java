@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.port.in.web.summaryreviewer.ReviewerSummaryGetUseCase;
-import me.nalab.survey.web.adaptor.summaryreviewer.response.CollaborationSummaryResponse;
-import me.nalab.survey.web.adaptor.summaryreviewer.response.PositionSummaryReponse;
 import me.nalab.survey.web.adaptor.summaryreviewer.response.ReviewerSummaryResponse;
 
 @RestController
@@ -28,28 +26,9 @@ public class ReveiwerSummaryController {
 			.getReviewerSummary(surveyId);
 
 		return ReviewerSummaryResponse.builder()
-			.collaborationSummaryResponse(getCollaborationSummaryResponse(reviewerSummaryDto))
-			.positionSummaryReponse(getPositionSummaryResponse(reviewerSummaryDto))
-			.build();
-	}
-
-	private CollaborationSummaryResponse getCollaborationSummaryResponse(
-		ReviewerSummaryGetUseCase.ReviewerSummaryDto reviewerSummaryDto) {
-
-		return CollaborationSummaryResponse.builder()
-			.yes(reviewerSummaryDto.getCollaborationExperience().getYes())
-			.no(reviewerSummaryDto.getCollaborationExperience().getNo())
-			.build();
-	}
-
-	private PositionSummaryReponse getPositionSummaryResponse(
-		ReviewerSummaryGetUseCase.ReviewerSummaryDto reviewerSummaryDto) {
-
-		return PositionSummaryReponse.builder()
-			.designer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("designer", 0))
-			.productManager(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("product-manager", 0))
-			.programmer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("programmer", 0))
-			.other(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("other", 0))
+			.collaborationSummaryResponse(
+				ReviewerSummaryResponseMapper.getCollaborationSummaryResponse(reviewerSummaryDto))
+			.positionSummaryReponse(ReviewerSummaryResponseMapper.getPositionSummaryResponse(reviewerSummaryDto))
 			.build();
 	}
 
