@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
@@ -22,7 +21,9 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 	private final SurveyExistCheckPort surveyExistCheckPort;
 	private final FeedbackFindPort feedbackFindPort;
 
-	public FeedbackFindService(@Qualifier("findfeedback.SurveyExistCheckAdaptor")SurveyExistCheckPort surveyExistCheckPort, FeedbackFindPort feedbackFindPort) {
+	public FeedbackFindService(
+		@Qualifier("findfeedback.SurveyExistCheckAdaptor") SurveyExistCheckPort surveyExistCheckPort,
+		FeedbackFindPort feedbackFindPort) {
 		this.surveyExistCheckPort = surveyExistCheckPort;
 		this.feedbackFindPort = feedbackFindPort;
 	}
