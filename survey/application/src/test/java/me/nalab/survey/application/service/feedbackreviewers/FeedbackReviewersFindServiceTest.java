@@ -13,11 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
-import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.port.out.persistence.feedbackreviewers.FeedbacksFindPort;
-import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
 class FeedbackReviewersFindServiceTest {
@@ -39,7 +37,7 @@ class FeedbackReviewersFindServiceTest {
 		Long surveyId = 1L;
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(List.of());
 
-		List<Feedback> actualFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
+		List<FeedbackDto> actualFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
 
 		assertEquals(0, actualFeedbacks.size());
 	}
@@ -52,13 +50,11 @@ class FeedbackReviewersFindServiceTest {
 		Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
 		FeedbackDto feedbackDto1 = getRandomFeedbackDtoBySurvey(survey);
 		FeedbackDto feedbackDto2 = getRandomFeedbackDtoBySurvey(survey);
-		Feedback feedback1 = FeedbackDtoMapper.toDomain(survey, feedbackDto1);
-		Feedback feedback2 = FeedbackDtoMapper.toDomain(survey, feedbackDto2);
-		List<Feedback> feedbacks = List.of(feedback1, feedback2);
+		List<FeedbackDto> feedbacks = List.of(feedbackDto1, feedbackDto2);
 
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(feedbacks);
 
-		List<Feedback> resultFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
+		List<FeedbackDto> resultFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
 
 		assertEquals(feedbacks, resultFeedbacks);
 	}

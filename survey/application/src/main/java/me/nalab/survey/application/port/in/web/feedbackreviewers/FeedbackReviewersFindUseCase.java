@@ -2,7 +2,7 @@ package me.nalab.survey.application.port.in.web.feedbackreviewers;
 
 import java.util.List;
 
-import me.nalab.survey.domain.feedback.Feedback;
+import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 
 /**
  * 질문 폼의 모든 피드백을 반환하는 인터페이스입니다.
@@ -17,5 +17,5 @@ public interface FeedbackReviewersFindUseCase {
 	 * 없다면, 빈 리스트를 반환합니다.
 	 */
 
-	List<Feedback> findAllFeedback(Long surveyId);
+	List<FeedbackDto> findAllFeedback(Long surveyId);
 }

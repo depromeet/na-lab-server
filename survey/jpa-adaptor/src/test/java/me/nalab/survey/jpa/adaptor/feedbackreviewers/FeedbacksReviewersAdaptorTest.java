@@ -13,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
 import me.nalab.core.data.feedback.FeedbackEntity;
+import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
+import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 import me.nalab.survey.jpa.adaptor.RandomFeedbackFixture;
@@ -48,18 +50,20 @@ class FeedbacksReviewersAdaptorTest {
 
 		Feedback feedback1 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
 		FeedbackEntity feedbackEntity1 = FeedbackEntityMapper.toEntity(feedback1);
+		FeedbackDto feedbackDto1 = FeedbackDtoMapper.toDto(feedback1);
 		Feedback feedback2 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
 		FeedbackEntity feedbackEntity2 = FeedbackEntityMapper.toEntity(feedback2);
+		FeedbackDto feedbackDto2 = FeedbackDtoMapper.toDto(feedback2);
 		testFeedbackFindJpaRepository.saveAndFlush(feedbackEntity1);
 		testFeedbackFindJpaRepository.saveAndFlush(feedbackEntity2);
 
-		List<Feedback> expected = List.of(feedback1, feedback2);
+		List<FeedbackDto> expected = List.of(feedbackDto1, feedbackDto2);
 
 		// when
-		List<Feedback> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
+		List<FeedbackDto> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
 
 		// then
-		assertEquals(resultFeedbacks.size(), expected.size());
+		assertEquals(expected.size(), resultFeedbacks.size());
 
 	}
 
@@ -75,7 +79,7 @@ class FeedbacksReviewersAdaptorTest {
 		testSurveyCreateJpaRepository.saveAndFlush(SurveyEntityMapper.toSurveyEntity(targetId, survey));
 
 		// when
-		List<Feedback> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
+		List<FeedbackDto> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
 
 		// then
 		assertEquals(expected, resultFeedbacks.size());

@@ -2,7 +2,7 @@ package me.nalab.survey.application.port.out.persistence.feedbackreviewers;
 
 import java.util.List;
 
-import me.nalab.survey.domain.feedback.Feedback;
+import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 
 /**
  * SurveyId에 해당하는 모든 Feedback을 찾는 port 입니다.
@@ -16,5 +16,5 @@ public interface FeedbacksFindPort {
 	 * @param surveyId Feedback 을 조회할 survey 의 id
 	 * @return List Survey에 응답한 모든 Feedback
 	 */
-	List<Feedback> findAllFeedback(Long surveyId);
+	List<FeedbackDto> findAllFeedback(Long surveyId);
 }
