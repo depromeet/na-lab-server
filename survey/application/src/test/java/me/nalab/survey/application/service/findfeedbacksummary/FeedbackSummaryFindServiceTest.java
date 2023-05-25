@@ -32,10 +32,10 @@ class FeedbackSummaryFindServiceTest {
 	void FEEDBACK_SUMMARY_FIND_SERVICE_SUCCESS_TEST() {
 
 		Long surveyId = 1L;
-		int expectedCount = 10;
+		long expectedCount = 10L;
 		when(totalFeedbackCountPort.getTotalFeedbackCountBySurveyId(surveyId)).thenReturn(expectedCount);
 
-		int actualCount = feedbackSummaryFindService.getTotalFeedbackCount(surveyId);
+		long actualCount = feedbackSummaryFindService.getTotalFeedbackCount(surveyId);
 
 		assertEquals(expectedCount, actualCount);
 		verify(totalFeedbackCountPort).getTotalFeedbackCountBySurveyId(surveyId);
@@ -45,10 +45,10 @@ class FeedbackSummaryFindServiceTest {
 	void FEEDBACK_SUMMARY_FIND_SERVICE_FAIL_TEST() {
 
 		Long surveyId = 1L;
-		int expectedCount = 5;
+		long expectedCount = 5L;
 		when(updatedFeedbackCountPort.getUpdatedFeedbackCountBySurveyId(surveyId)).thenReturn(expectedCount);
 
-		int actualCount = feedbackSummaryFindService.getUpdatedFeedbackCount(surveyId);
+		long actualCount = feedbackSummaryFindService.getUpdatedFeedbackCount(surveyId);
 
 		assertEquals(expectedCount, actualCount);
 		verify(updatedFeedbackCountPort).getUpdatedFeedbackCountBySurveyId(surveyId);

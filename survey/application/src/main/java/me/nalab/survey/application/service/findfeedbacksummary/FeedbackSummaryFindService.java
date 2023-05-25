@@ -15,12 +15,12 @@ public class FeedbackSummaryFindService implements FeedbackSummaryFindUseCase {
 	private final UpdatedFeedbackCountPort updatedFeedbackCountPort;
 
 	@Override
-	public int getTotalFeedbackCount(Long surveyId) {
+	public long getTotalFeedbackCount(Long surveyId) {
 		return totalFeedbackCountPort.getTotalFeedbackCountBySurveyId(surveyId);
 	}
 
 	@Override
-	public int getUpdatedFeedbackCount(Long surveyId) {
+	public long getUpdatedFeedbackCount(Long surveyId) {
 		return updatedFeedbackCountPort.getUpdatedFeedbackCountBySurveyId(surveyId);
 	}
 }

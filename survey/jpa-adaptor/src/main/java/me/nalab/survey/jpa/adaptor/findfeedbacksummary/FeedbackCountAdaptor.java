@@ -15,12 +15,12 @@ public class FeedbackCountAdaptor implements TotalFeedbackCountPort, UpdatedFeed
 	private final FeedbackCountJpaRepository feedbackCountJpaRepository;
 
 	@Override
-	public int getTotalFeedbackCountBySurveyId(Long surveyId) {
-		return feedbackCountJpaRepository.countBySurveyId(surveyId).intValue();
+	public long getTotalFeedbackCountBySurveyId(Long surveyId) {
+		return feedbackCountJpaRepository.countBySurveyId(surveyId);
 	}
 
 	@Override
-	public int getUpdatedFeedbackCountBySurveyId(Long surveyId) {
-		return feedbackCountJpaRepository.countBySurveyIdAndIsReadFalse(surveyId).intValue();
+	public long getUpdatedFeedbackCountBySurveyId(Long surveyId) {
+		return feedbackCountJpaRepository.countBySurveyIdAndIsReadFalse(surveyId);
 	}
 }

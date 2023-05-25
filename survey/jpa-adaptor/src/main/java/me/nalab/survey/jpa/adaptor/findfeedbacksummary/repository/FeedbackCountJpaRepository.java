@@ -6,8 +6,8 @@ import me.nalab.core.data.feedback.FeedbackEntity;
 
 public interface FeedbackCountJpaRepository extends JpaRepository<FeedbackEntity, Long> {
 
-	Long countBySurveyId(Long surveyId);
+	long countBySurveyId(Long surveyId);
 
-	Long countBySurveyIdAndIsReadFalse(Long surveyId);
+	long countBySurveyIdAndIsReadFalse(Long surveyId);
 
 }
