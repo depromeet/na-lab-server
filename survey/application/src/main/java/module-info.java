@@ -11,6 +11,7 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.exception;
 	exports me.nalab.survey.application.port.out.persistence.findid;
 	exports me.nalab.survey.application.port.out.persistence.feedbacksummary;
+	exports me.nalab.survey.application.port.in.web.feedbacksummary;
 
 	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;
