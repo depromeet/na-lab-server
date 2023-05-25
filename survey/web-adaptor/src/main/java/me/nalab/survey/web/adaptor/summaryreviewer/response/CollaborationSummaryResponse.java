@@ -3,7 +3,6 @@ package me.nalab.survey.web.adaptor.summaryreviewer.response;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
