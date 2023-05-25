@@ -17,7 +17,7 @@ import me.nalab.survey.domain.survey.spi.FeedbackValidable;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFeedbackable> {
+public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFeedbackable>, Comparable<Feedback> {
 
 	private Long id;
 	private Long surveyId;
@@ -47,6 +47,23 @@ public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFe
 	@Override
 	public List<FormQuestionFeedbackable> getAllQuestionFeedbackValidable() {
 		return formQuestionFeedbackableList;
+	}
+
+	@Override
+	public int compareTo(Feedback feedback) {
+		if(updatedAt.isAfter(feedback.getUpdatedAt())) {
+			return -1;
+		}
+		if(updatedAt.isBefore(feedback.getUpdatedAt())) {
+			return 1;
+		}
+		if(createdAt.isAfter(feedback.getCreatedAt())) {
+			return -1;
+		}
+		if(createdAt.isBefore(feedback.getCreatedAt())) {
+			return 1;
+		}
+		return 0;
 	}
 
 }
