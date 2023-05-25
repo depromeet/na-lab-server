@@ -49,6 +49,16 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 		);
 	}
 
+	protected ResultActions findReviewers(String token, String surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get(API_VERSION + "/reviewers")
+			.queryParam("survey-id", surveyId)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
 
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {

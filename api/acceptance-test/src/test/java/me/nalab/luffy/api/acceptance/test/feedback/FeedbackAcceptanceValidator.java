@@ -37,4 +37,27 @@ public final class FeedbackAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsReviewersNotFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.feedbacks").isArray(),
+			jsonPath("$.feedbacks").isEmpty()
+		);
+	}
+
+	public static void assertIsReviewersFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.feedbacks").isArray(),
+			jsonPath("$.feedbacks[0].feedback_id").isNumber(),
+			jsonPath("$.feedbacks[0].created_at").isNotEmpty(),
+			jsonPath("$.feedbacks[0].reviewer.nickname").isString(),
+			jsonPath("$.feedbacks[0].reviewer.collaboration_experience").isBoolean(),
+			jsonPath("$.feedbacks[0].reviewer.position").isString(),
+			jsonPath("$.feedbacks[0].is_read").isBoolean()
+		);
+	}
+
 }
