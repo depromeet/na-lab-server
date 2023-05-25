@@ -39,6 +39,17 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 		);
 	}
 
+	protected ResultActions findFeedbackSummary(String token, String surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get(API_VERSION + "/feedbacks/summary")
+			.queryParam("survey-id", surveyId)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
+
 	protected ResultActions findFeedback(String token, Long surveyId) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.get("/v1/feedbacks?survey-id=" + surveyId)
