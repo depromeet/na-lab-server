@@ -28,7 +28,7 @@ class FeedbackReviewersResponseMapperTest {
 		FeedbackReviewer feedbackReviewer = response.getFeedbacks().get(0);
 
 		assertAll(
-			() -> assertThat(response.getFeedbacks().size()).isEqualTo(1),
+			() -> assertThat(response.getFeedbacks()).hasSize(1),
 			() -> assertThat(feedbackReviewer.getFeedbackId()).isEqualTo(1L),
 			() -> assertThat(feedbackReviewer.getIsRead()).isTrue(),
 			() -> assertThat(feedbackReviewer.getReviewer().getNickname()).isEqualTo("sujin"),
