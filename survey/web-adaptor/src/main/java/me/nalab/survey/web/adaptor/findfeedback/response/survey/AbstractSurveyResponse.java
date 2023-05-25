@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @ToString
 @SuperBuilder
-public class AbstractSurveyResponse {
+public abstract class AbstractSurveyResponse {
 
 	@JsonProperty("question_id")
 	private final Long questionId;

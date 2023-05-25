@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @ToString
 @SuperBuilder
-public class AbstractFeedbackResponse {
+public abstract class AbstractFeedbackResponse {
 
 	private final Long id;
 	@JsonProperty("created_at")
