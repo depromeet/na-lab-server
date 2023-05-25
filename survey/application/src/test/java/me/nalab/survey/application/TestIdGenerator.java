@@ -1,5 +1,6 @@
 package me.nalab.survey.application;
 
+import java.security.SecureRandom;
 import java.util.function.Supplier;
 
 import me.nalab.core.idgenerator.idcore.IdGenerator;
@@ -10,12 +11,11 @@ public class TestIdGenerator implements IdGenerator {
 
 	public TestIdGenerator() {
 		idGenerateAlgorithm = new Supplier<>() {
-			private Long id = 0L;
+			final SecureRandom secureRandom = new SecureRandom();
 
 			@Override
 			public Long get() {
-				id++;
-				return id;
+				return secureRandom.nextLong();
 			}
 		};
 	}
