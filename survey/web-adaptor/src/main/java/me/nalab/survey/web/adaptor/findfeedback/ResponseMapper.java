@@ -18,6 +18,7 @@ import me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackRespons
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ChoiceFeedbackResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ReviewerResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ShortFeedbackResponse;
+import me.nalab.survey.web.adaptor.findfeedback.response.survey.AbstractSurveyResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.survey.ChoiceSurveyResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.survey.ShortSurveyResponse;
 
@@ -39,7 +40,7 @@ final class ResponseMapper {
 			).collect(Collectors.toList())).build();
 	}
 
-	private static ChoiceSurveyResponse toChoiceSurveyResponse(ChoiceFormQuestionDto choiceFormQuestionDto,
+	private static AbstractSurveyResponse toChoiceSurveyResponse(ChoiceFormQuestionDto choiceFormQuestionDto,
 		List<FeedbackDto> feedbackDto) {
 		return ChoiceSurveyResponse.builder()
 			.questionId(choiceFormQuestionDto.getId())
@@ -95,7 +96,7 @@ final class ResponseMapper {
 			.build();
 	}
 
-	private static ShortSurveyResponse toShortSurveyResponse(ShortFormQuestionDto shortFormQuestionDto,
+	private static AbstractSurveyResponse toShortSurveyResponse(ShortFormQuestionDto shortFormQuestionDto,
 		List<FeedbackDto> feedbackDtoList) {
 		return ShortSurveyResponse.builder()
 			.questionId(shortFormQuestionDto.getId())
