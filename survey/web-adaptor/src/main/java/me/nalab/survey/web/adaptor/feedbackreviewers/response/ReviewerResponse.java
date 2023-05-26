@@ -13,7 +13,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class ReviewerResponse {
 
-	private String nickname;
+	@JsonProperty("nickname")
+	private String nickName;
 
 	@JsonProperty("collaboration_experience")
 	private Boolean collaborationExperience;

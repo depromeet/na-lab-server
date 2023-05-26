@@ -19,7 +19,7 @@ class FeedbackReviewersResponseMapper {
 				.feedbackId(it.getId())
 				.createdAt(it.getCreatedAt())
 				.reviewer(ReviewerResponse.builder()
-					.nickname(it.getReviewerDto().getNickName())
+					.nickName(it.getReviewerDto().getNickName())
 					.collaborationExperience(it.getReviewerDto().isCollaborationExperience())
 					.position(it.getReviewerDto().getPosition())
 					.build())
