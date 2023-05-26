@@ -22,6 +22,7 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.out.persistence.feedbackreviewers;
 	exports me.nalab.survey.application.service.feedbackreviewers;
 	exports me.nalab.survey.application.common.feedback.mapper;
+	exports me.nalab.survey.application.port.out.persistence.findspecific;
 
 	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;
