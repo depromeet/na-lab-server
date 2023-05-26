@@ -34,3 +34,6 @@ include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
 
 include 'core:exception-handler'
+include 'user'
+include 'user:domain'
+
