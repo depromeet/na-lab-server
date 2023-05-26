@@ -17,7 +17,7 @@ public class TimeUtil {
 
 	private final Instant instant;
 
-	private TimeUtil() {
+	public TimeUtil() {
 		instant = Instant.now();
 	}
 
