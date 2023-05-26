@@ -15,6 +15,8 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.out.persistence.createfeedback;
 	exports me.nalab.survey.application.port.in.web.createfeedback;
 	exports me.nalab.survey.application.common.feedback.dto;
+	exports me.nalab.survey.application.port.in.web.findfeedback;
+	exports me.nalab.survey.application.port.out.persistence.findfeedback;
 	exports me.nalab.survey.application.port.out.persistence.feedbacksummary;
 	exports me.nalab.survey.application.port.in.web.feedbacksummary;
 
@@ -27,5 +29,6 @@ module luffy.survey.application.main {
 	requires spring.boot.autoconfigure;
 	requires spring.context;
 	requires spring.tx;
+	requires spring.beans;
 
 }

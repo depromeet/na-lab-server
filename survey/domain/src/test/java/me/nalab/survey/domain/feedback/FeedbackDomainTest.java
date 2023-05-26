@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -153,6 +156,40 @@ class FeedbackDomainTest {
 		assertThrows(IdAlreadyGeneratedException.class, () -> reviewer.withId(LONG_SUPPLIER));
 		assertThrows(IdAlreadyGeneratedException.class, () -> shortFormQuestionFeedback.withId(LONG_SUPPLIER));
 		assertThrows(IdAlreadyGeneratedException.class, () -> choiceFormQuestionFeedback.withId(LONG_SUPPLIER));
+	}
+
+	@Test
+	@DisplayName("feedback domain 정렬 테스트")
+	void FEEDBACK_DOMAIN_SORTING_SUCCESS() {
+		// given
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime year1Ago = LocalDateTime.now().minusYears(1);
+		LocalDateTime year2Ago = LocalDateTime.now().minusYears(2);
+
+		List<Feedback> feedbackList = Arrays.asList(Feedback.builder().createdAt(year1Ago).updatedAt(year1Ago).build(),
+			Feedback.builder().createdAt(year2Ago).updatedAt(year2Ago).build(),
+			Feedback.builder().createdAt(year1Ago).updatedAt(year1Ago).build(),
+			Feedback.builder().createdAt(year2Ago).updatedAt(year2Ago).build(),
+			Feedback.builder().createdAt(now).updatedAt(now).build(),
+			Feedback.builder().createdAt(year1Ago).updatedAt(now).build());
+
+		// when
+		Collections.sort(feedbackList);
+
+		// then
+		assertIsSorted(feedbackList);
+	}
+
+	private void assertIsSorted(List<Feedback> feedbackList) {
+		Feedback before = null;
+		for(Feedback current : feedbackList) {
+			if(before == null) {
+				before = current;
+				continue;
+			}
+			assertTrue(before.getUpdatedAt().isAfter(current.getUpdatedAt()) || before.getCreatedAt()
+				.isAfter(current.getCreatedAt()));
+		}
 	}
 
 	private Feedback getFeedback(Survey survey, String name, boolean isCollaborated, String position) {

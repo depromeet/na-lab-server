@@ -28,6 +28,49 @@ public final class FeedbackAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsFeedbackFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].question_id").isNumber(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString(),
+
+			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
+			jsonPath("$.question_feedback.[0].feedbacks").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].feedback_id").isNumber(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].created_at").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].is_read").isBoolean(),
+
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id").isNumber(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.nickname").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.collaboration_experience").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.position").isString()
+		);
+	}
+
+	public static void assertIsFeedbackNotFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isNumber(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString(),
+
+			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
+			jsonPath("$.question_feedback.[0].feedbacks").isEmpty()
+		);
+	}
+
 	public static void assertIsFeedbackSummaryFound(ResultActions resultActions) throws Exception {
 		resultActions.andExpectAll(
 			status().isOk(),
