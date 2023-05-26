@@ -18,7 +18,7 @@ import me.nalab.survey.web.adaptor.findspecific.response.ReviewerResponse;
 import me.nalab.survey.web.adaptor.findspecific.response.ShortFormFeedbackResponse;
 import me.nalab.survey.web.adaptor.findspecific.response.SpecificFeedbackResponse;
 
-final class SpecificFeedbackResponseMapper {
+class SpecificFeedbackResponseMapper {
 
 	private SpecificFeedbackResponseMapper() {
 		throw new UnsupportedOperationException("Cannot invoke constructor \"SpecificFeedbackResponseMapper()\"");
@@ -37,7 +37,7 @@ final class SpecificFeedbackResponseMapper {
 			.build();
 	}
 
-	private static List<FormFeedbackResponseable> getQuestionFeedbackResponses(SurveyDto surveyDto, FeedbackDto feedbackDto) {
+	static List<FormFeedbackResponseable> getQuestionFeedbackResponses(SurveyDto surveyDto, FeedbackDto feedbackDto) {
 		return surveyDto.getFormQuestionDtoableList().stream()
 			.map(i -> {
 				if (i instanceof ShortFormQuestionDto) {
@@ -50,18 +50,18 @@ final class SpecificFeedbackResponseMapper {
 			.collect(Collectors.toList());
 	}
 
-	private static FormQuestionFeedbackDtoable findFormQuestionFeedbackableByQuestionId(
+	static FormQuestionFeedbackDtoable findFormQuestionFeedbackableByQuestionId(
 		List<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoableList, Long questionId) {
 		Optional<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoable = formQuestionFeedbackDtoableList.stream()
 			.filter(it -> it.getQuestionId().equals(questionId))
 			.findFirst();
 		if (formQuestionFeedbackDtoable.isEmpty()) {
-			throw new IllegalStateException("error");
+			throw new IllegalStateException();
 		}
 		return formQuestionFeedbackDtoable.get();
 	}
 
-	private static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto, ShortFormQuestionFeedbackDto feedbackDto) {
+	static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto, ShortFormQuestionFeedbackDto feedbackDto) {
 		return ShortFormFeedbackResponse.builder()
 			.questionId(questionDto.getId())
 			.type("short")
@@ -72,7 +72,7 @@ final class SpecificFeedbackResponseMapper {
 			.build();
 	}
 
-	private static ChoiceFormFeedbackResponse toChoiceFormFeedbackResponse(ChoiceFormQuestionDto questionDto, ChoiceFormQuestionFeedbackDto feedbackDto) {
+	static ChoiceFormFeedbackResponse toChoiceFormFeedbackResponse(ChoiceFormQuestionDto questionDto, ChoiceFormQuestionFeedbackDto feedbackDto) {
 		List<ChoiceResponse> choices = questionDto.getChoiceDtoList().stream()
 			.filter(it -> feedbackDto.getSelectedChoiceIdSet().contains(it.getId()))
 			.map(it -> ChoiceResponse.builder()
