@@ -39,3 +39,6 @@ include 'core:secure'
 
 include 'user'
 include 'user:domain'
+include 'user:jpa-adapter'
+include 'user:application'
+
