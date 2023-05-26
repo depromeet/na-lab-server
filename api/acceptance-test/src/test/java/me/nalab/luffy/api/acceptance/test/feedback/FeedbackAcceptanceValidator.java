@@ -103,4 +103,22 @@ public final class FeedbackAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsSpecificFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.feedback_id").isNumber(),
+			jsonPath("$.created_at").isString(),
+			jsonPath("$.reviewer.nickname").isString(),
+			jsonPath("$.reviewer.collaboration_experience").isBoolean(),
+			jsonPath("$.reviewer.position").isString(),
+			jsonPath("$.question").isArray(),
+			jsonPath("$.question[0].question_id").isNumber(),
+			jsonPath("$.question[0].type").isString(),
+			jsonPath("$.question[0].title").isString(),
+			jsonPath("$.question[0].order").isNumber(),
+			jsonPath("$.question[0].is_read").isBoolean()
+		);
+	}
+
 }
