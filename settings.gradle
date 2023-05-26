@@ -36,4 +36,6 @@ include 'core:id-generator:id-generator-starter'
 include 'core:exception-handler'
 include 'user'
 include 'user:domain'
+include 'user:jpa-adapter'
+include 'user:application'
 
