@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,12 +17,23 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 public abstract class TimeBaseEntity {
 
-	@CreatedDate
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
+	@Column(name = "created_at", columnDefinition = "TIMESTAMP(6)", nullable = false, updatable = false)
 	protected LocalDateTime createdAt;
 
-	@LastModifiedDate
-	@Column(name = "updated_at", columnDefinition = "TIMESTAMP", nullable = false)
+	@Column(name = "updated_at", columnDefinition = "TIMESTAMP(6)", nullable = false)
 	protected LocalDateTime updatedAt;
+
+	@PrePersist
+ 	void prePersist() {
+		var now = LocalDateTime.now();
+
+		createdAt = createdAt != null ? createdAt : now;
+		updatedAt = updatedAt != null ? updatedAt : now;
+	}
+
+	@PreUpdate
+	void preUpdate() {
+		updatedAt = updatedAt != null ? updatedAt : LocalDateTime.now();
+	}
 
 }
