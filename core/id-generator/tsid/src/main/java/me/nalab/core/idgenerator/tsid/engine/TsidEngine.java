@@ -9,6 +9,7 @@ public final class TsidEngine {
 
 	private static final TsidFactory DEFAULT_ENGINE = TsidFactory.newInstance256();
 	private static final HashMap<Long, TsidFactory> THREAD_ENGINE = new HashMap<>();
+	private static final ThreadEngineSupplier THREAD_ENGINE_SUPPLIER = new ThreadEngineSupplier();
 
 	private TsidEngine() {
 		throw new UnsupportedOperationException("Cannot invoke constructor \"TsidEngine()\"");
@@ -19,14 +20,10 @@ public final class TsidEngine {
 	}
 
 	public static Supplier<TsidFactory> threadEngine() {
-		return ThreadEngineSupplier.instance();
+		return THREAD_ENGINE_SUPPLIER;
 	}
 
 	private static final class ThreadEngineSupplier implements Supplier<TsidFactory> {
-
-		private static ThreadEngineSupplier instance() {
-			return SingletonHelper.INSTANCE;
-		}
 
 		@Override
 		public TsidFactory get() {
@@ -40,10 +37,6 @@ public final class TsidEngine {
 				return;
 			}
 			THREAD_ENGINE.put(threadId, TsidFactory.newInstance256((int)threadId));
-		}
-
-		private static final class SingletonHelper {
-			private static final ThreadEngineSupplier INSTANCE = new ThreadEngineSupplier();
 		}
 
 	}
