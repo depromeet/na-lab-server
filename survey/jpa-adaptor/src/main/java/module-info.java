@@ -13,4 +13,5 @@ module luffy.survey.jpa.adaptor.main {
 	requires spring.data.commons;
 
 	requires spring.tx;
+	requires spring.beans;
 }
