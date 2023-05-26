@@ -13,8 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
 import me.nalab.core.data.feedback.FeedbackEntity;
-import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
-import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 import me.nalab.survey.jpa.adaptor.RandomFeedbackFixture;
