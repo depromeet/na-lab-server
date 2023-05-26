@@ -29,8 +29,8 @@ include 'auth:mock'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
+include 'core:id-generator:tsid'
 include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
 
 include 'core:exception-handler'
-
