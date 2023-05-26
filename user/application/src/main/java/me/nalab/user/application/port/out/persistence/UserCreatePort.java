@@ -9,7 +9,7 @@ public interface UserCreatePort {
 
 	/**
 	 * user domain 객체를 영속화
-	 * @param user 저장할 Survey의 정보
+	 * @param user 저장할 유저의 정보
 	 */
 	void createUser(User user);
 
