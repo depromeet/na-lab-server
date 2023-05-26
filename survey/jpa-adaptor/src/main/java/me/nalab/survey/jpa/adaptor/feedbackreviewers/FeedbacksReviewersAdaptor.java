@@ -21,13 +21,10 @@ public class FeedbacksReviewersAdaptor implements FeedbacksFindPort {
 	private final FeedbackFindJpaRepository feedbackReviewerFindJpaRepository;
 
 	@Override
-	public List<FeedbackDto> findAllFeedback(Long surveyId) {
+	public List<Feedback> findAllFeedback(Long surveyId) {
 		List<FeedbackEntity> feedbackEntities = feedbackReviewerFindJpaRepository.findBySurveyId(surveyId);
-		List<Feedback> feedbacks = feedbackEntities.stream()
+		return feedbackEntities.stream()
 			.map(FeedbackEntityMapper::toDomain)
-			.collect(Collectors.toList());
-		return feedbacks.stream()
-			.map(FeedbackDtoMapper::toDto)
 			.collect(Collectors.toList());
 	}
 }

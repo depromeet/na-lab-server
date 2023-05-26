@@ -50,17 +50,15 @@ class FeedbacksReviewersAdaptorTest {
 
 		Feedback feedback1 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
 		FeedbackEntity feedbackEntity1 = FeedbackEntityMapper.toEntity(feedback1);
-		FeedbackDto feedbackDto1 = FeedbackDtoMapper.toDto(feedback1);
 		Feedback feedback2 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
 		FeedbackEntity feedbackEntity2 = FeedbackEntityMapper.toEntity(feedback2);
-		FeedbackDto feedbackDto2 = FeedbackDtoMapper.toDto(feedback2);
 		testFeedbackFindJpaRepository.saveAndFlush(feedbackEntity1);
 		testFeedbackFindJpaRepository.saveAndFlush(feedbackEntity2);
 
-		List<FeedbackDto> expected = List.of(feedbackDto1, feedbackDto2);
+		List<Feedback> expected = List.of(feedback1, feedback2);
 
 		// when
-		List<FeedbackDto> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
+		List<Feedback> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
 
 		// then
 		assertEquals(expected.size(), resultFeedbacks.size());
@@ -79,7 +77,7 @@ class FeedbacksReviewersAdaptorTest {
 		testSurveyCreateJpaRepository.saveAndFlush(SurveyEntityMapper.toSurveyEntity(targetId, survey));
 
 		// when
-		List<FeedbackDto> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
+		List<Feedback> resultFeedbacks = feedbacksReviewersAdaptor.findAllFeedback(surveyId);
 
 		// then
 		assertEquals(expected, resultFeedbacks.size());

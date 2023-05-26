@@ -13,9 +13,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
+import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.port.out.persistence.feedbackreviewers.FeedbacksFindPort;
+import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
 class FeedbackReviewersFindServiceTest {
@@ -37,9 +39,9 @@ class FeedbackReviewersFindServiceTest {
 		Long surveyId = 1L;
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(List.of());
 
-		List<FeedbackDto> actualFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
+		List<FeedbackDto> resultFeedbackDtos = feedbackReviewersFindService.findAllFeedback(surveyId);
 
-		assertEquals(0, actualFeedbacks.size());
+		assertEquals(0, resultFeedbackDtos.size());
 	}
 
 	@Test
@@ -48,15 +50,19 @@ class FeedbackReviewersFindServiceTest {
 		SurveyDto randomSurveyDto = createRandomSurveyDto();
 		Long surveyId = randomSurveyDto.getId();
 		Survey survey = SurveyDtoMapper.toSurvey(randomSurveyDto);
-		FeedbackDto feedbackDto1 = getRandomFeedbackDtoBySurvey(survey);
-		FeedbackDto feedbackDto2 = getRandomFeedbackDtoBySurvey(survey);
-		List<FeedbackDto> feedbacks = List.of(feedbackDto1, feedbackDto2);
+		Feedback feedback1 = FeedbackDtoMapper.toDomain(survey, getRandomFeedbackDtoBySurvey(survey));
+		Feedback feedback2 = FeedbackDtoMapper.toDomain(survey, getRandomFeedbackDtoBySurvey(survey));
+		List<Feedback> feedbacks = List.of(feedback1, feedback2);
+		List<FeedbackDto> expectedFeedbacks = List.of(
+			FeedbackDtoMapper.toDto(feedback1),
+			FeedbackDtoMapper.toDto(feedback2)
+		);
 
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(feedbacks);
 
 		List<FeedbackDto> resultFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
 
-		assertEquals(feedbacks, resultFeedbacks);
+		assertEquals(expectedFeedbacks, resultFeedbacks);
 	}
 
 }
