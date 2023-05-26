@@ -69,6 +69,15 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 		);
 	}
 
+	protected ResultActions findSpecific(String token, Long feedbackId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get("/v1/feedbacks/" + feedbackId)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;
