@@ -2,11 +2,14 @@ package me.nalab.user.jpa.adaptor.create.common.mapper;
 
 import org.springframework.util.Assert;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import me.nalab.core.data.user.UserEntity;
 import me.nalab.user.domain.user.Provider;
 import me.nalab.user.domain.user.User;
 
-public class UserEntityMapper {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class UserObjectMapper {
 	public static UserEntity toEntity(User user) {
 		Assert.notNull(user, "");
 		Provider provider = user.getProvider();

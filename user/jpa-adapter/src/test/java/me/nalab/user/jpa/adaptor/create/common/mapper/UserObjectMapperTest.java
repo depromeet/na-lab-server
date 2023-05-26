@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import me.nalab.user.domain.user.Provider;
 import me.nalab.user.jpa.adaptor.create.UserTestUtils;
 
-class UserEntityMapperTest {
+class UserObjectMapperTest {
 
 	@Test
 	@DisplayName("유저 도메인 객체 엔티티로 변환 성공 테스트")
@@ -23,7 +23,7 @@ class UserEntityMapperTest {
 		var userDomain = UserTestUtils.createUserDomain(id, provider, token, createdAt, null);
 
 		// when
-		var entity = UserEntityMapper.toEntity(userDomain);
+		var entity = UserObjectMapper.toEntity(userDomain);
 
 		// then
 		UserTestUtils.assertEquals(entity, userDomain);
@@ -40,7 +40,7 @@ class UserEntityMapperTest {
 		var userDomain = UserTestUtils.createUserDomain(id, provider, token, createdAt, null);
 
 		// when
-		var entity = UserEntityMapper.toEntity(userDomain);
+		var entity = UserObjectMapper.toEntity(userDomain);
 
 		// then
 		UserTestUtils.assertEquals(entity, userDomain);
@@ -51,7 +51,7 @@ class UserEntityMapperTest {
 	void NULL_USER_DOMAIN_TO_ENTITY_FAIL() {
 		// given
 		// when
-		var throwable = Assertions.catchThrowable(() -> UserEntityMapper.toEntity(null));
+		var throwable = Assertions.catchThrowable(() -> UserObjectMapper.toEntity(null));
 
 		// then
 		Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
@@ -67,7 +67,7 @@ class UserEntityMapperTest {
 		var entity = UserTestUtils.createUserEntity(id, provider, token, createdAt, null);
 
 		// when
-		var domain = UserEntityMapper.toDomain(entity);
+		var domain = UserObjectMapper.toDomain(entity);
 
 		// then
 		UserTestUtils.assertEquals(domain, entity);
@@ -84,7 +84,7 @@ class UserEntityMapperTest {
 		var entity = UserTestUtils.createUserEntity(id, provider, token, createdAt, null);
 
 		// when
-		var domain = UserEntityMapper.toDomain(entity);
+		var domain = UserObjectMapper.toDomain(entity);
 
 		// then
 		UserTestUtils.assertEquals(domain, entity);
@@ -95,7 +95,7 @@ class UserEntityMapperTest {
 	void NULL_USER_ENTITY_TO_DOMAIN_FAIL() {
 		// given
 		// when
-		var throwable = Assertions.catchThrowable(() -> UserEntityMapper.toDomain(null));
+		var throwable = Assertions.catchThrowable(() -> UserObjectMapper.toDomain(null));
 
 		// then
 		Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
