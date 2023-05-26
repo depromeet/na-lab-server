@@ -52,7 +52,7 @@ public final class FeedbackAcceptanceValidator {
 			content().contentType(MediaType.APPLICATION_JSON),
 			jsonPath("$.feedbacks").isArray(),
 			jsonPath("$.feedbacks[0].feedback_id").isNumber(),
-			jsonPath("$.feedbacks[0].created_at").isNotEmpty(),
+			jsonPath("$.feedbacks[0].created_at").isString(),
 			jsonPath("$.feedbacks[0].reviewer.nickname").isString(),
 			jsonPath("$.feedbacks[0].reviewer.collaboration_experience").isBoolean(),
 			jsonPath("$.feedbacks[0].reviewer.position").isString(),
