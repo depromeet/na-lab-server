@@ -13,8 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class User {
 	private final long id;
-	private Provider provider;
-	private String token;
+	private final Provider provider;
+	private final String token;
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
 }
