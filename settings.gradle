@@ -14,7 +14,6 @@ include 'core:data'
 
 include 'api'
 include 'api:acceptance-test'
-include 'api:api-mock'
 
 include 'support'
 include 'support:jacoco'
@@ -35,7 +34,8 @@ include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
 
 include 'core:exception-handler'
-
 include 'core:time'
 include 'core:secure'
 
+include 'user'
+include 'user:domain'
