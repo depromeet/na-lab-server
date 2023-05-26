@@ -17,6 +17,9 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.common.feedback.dto;
 	exports me.nalab.survey.application.port.out.persistence.feedbacksummary;
 	exports me.nalab.survey.application.port.in.web.feedbacksummary;
+	exports me.nalab.survey.application.port.out.persistence.feedbackreviewers;
+	exports me.nalab.survey.application.service.feedbackreviewers;
+	exports me.nalab.survey.application.common.feedback.mapper;
 
 	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;
