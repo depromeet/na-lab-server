@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':core:id-generator:id-core')
+
+    api 'com.github.f4b6a3:tsid-creator:5.2.4' // MIT LICENSE
+
+    testImplementation 'org.awaitility:awaitility:4.2.0'
+}
