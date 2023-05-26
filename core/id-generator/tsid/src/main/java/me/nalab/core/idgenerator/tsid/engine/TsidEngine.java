@@ -10,6 +10,10 @@ public final class TsidEngine {
 	private static final TsidFactory DEFAULT_ENGINE = TsidFactory.newInstance256();
 	private static final HashMap<Long, TsidFactory> THREAD_ENGINE = new HashMap<>();
 
+	private TsidEngine() {
+		throw new UnsupportedOperationException("Cannot invoke constructor \"TsidEngine()\"");
+	}
+
 	public static Supplier<TsidFactory> defaultEngine() {
 		return () -> DEFAULT_ENGINE;
 	}
