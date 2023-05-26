@@ -4,5 +4,6 @@ module luffy.core.time.main {
 	requires spring.beans;
 
 	exports me.nalab.core.time;
+	exports me.nalab.core.time.request;
 
 }

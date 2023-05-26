@@ -14,11 +14,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 class TestController {
 
+	private final TimeUtil timeUtil;
+
 	@GetMapping("/get-time")
 	@ResponseStatus(HttpStatus.OK)
 	public Map<String, Long> getTime() {
-		return Map.of("instant", TimeUtilProxy.toInstant().toEpochMilli(),
-			"local", TimeUtilProxy.toLocalDateTime().toEpochSecond(ZoneOffset.UTC));
+		return Map.of("instant", timeUtil.toInstant().toEpochMilli(),
+			"local", timeUtil.toLocalDateTime().toEpochSecond(ZoneOffset.UTC));
 	}
 
 }

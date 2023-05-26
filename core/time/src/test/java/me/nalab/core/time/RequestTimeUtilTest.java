@@ -14,9 +14,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import me.nalab.core.time.request.RequestTimeUtil;
+
 @WebMvcTest
-@ContextConfiguration(classes = {TimeUtil.class, TestController.class, TimeUtilProxy.class})
-class TimeUtilTest {
+@ContextConfiguration(classes = {RequestTimeUtil.class, TestController.class})
+class RequestTimeUtilTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -30,10 +32,6 @@ class TimeUtilTest {
 
 		// then
 		assertTrue(before < after);
-	}
-
-	private void assertTime(long[] before, long[] after) {
-		assertTrue(before[0] < after[0]);
 	}
 
 	private long getRequestArrivalTime() throws Exception {
