@@ -16,5 +16,5 @@ public class User {
 	private final Provider provider;
 	private final String token;
 	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
+	private LocalDateTime updatedAt;
 }
