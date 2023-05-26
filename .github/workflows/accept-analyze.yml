@@ -1,5 +1,8 @@
 name: acceptance-analyze-with-sonarcloud
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
