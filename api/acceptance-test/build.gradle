@@ -1,5 +1,4 @@
 dependencies {
-    testImplementation project(':api')
     testImplementation project(':auth:mock')
     testImplementation project(':core:id-generator:id-generator-starter')
     testImplementation project(':core:data')

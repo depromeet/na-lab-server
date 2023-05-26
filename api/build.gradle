@@ -1,0 +1,13 @@
+dependencies {
+
+    implementation project(':survey:web-adaptor')
+    implementation project(':survey:jpa-adaptor')
+
+    implementation project(':core:exception-handler')
+
+    //:TODO AUTH 관련 모듈 의존성 설정
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2:2.1.214'
+}
