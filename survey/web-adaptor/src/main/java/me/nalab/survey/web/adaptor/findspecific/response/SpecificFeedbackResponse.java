@@ -18,13 +18,13 @@ import lombok.ToString;
 public class SpecificFeedbackResponse {
 
 	@JsonProperty("feedback_id")
-	private Long feedbackId;
+	private final Long feedbackId;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	@JsonProperty("created_at")
-	private LocalDateTime createdAt;
+	private final LocalDateTime createdAt;
 
-	private ReviewerResponse reviewer;
+	private final ReviewerResponse reviewer;
 
-	private List<FormFeedbackResponseable> question;
+	private final List<FormFeedbackResponseable> question;
 }

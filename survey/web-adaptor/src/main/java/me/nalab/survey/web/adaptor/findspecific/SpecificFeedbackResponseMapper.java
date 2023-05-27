@@ -56,7 +56,7 @@ class SpecificFeedbackResponseMapper {
 		List<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoableList, Long questionId) {
 		Optional<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoable = formQuestionFeedbackDtoableList.stream()
 			.filter(it -> it.getQuestionId().equals(questionId))
-			.findFirst();
+			.findAny();
 		if (formQuestionFeedbackDtoable.isEmpty()) {
 			throw new IllegalStateException();
 		}

@@ -14,10 +14,10 @@ import lombok.ToString;
 public class ReviewerResponse {
 
 	@JsonProperty("nickname")
-	private String nickName;
+	private final String nickName;
 
 	@JsonProperty("collaboration_experience")
-	private boolean collaborationExperience;
+	private final boolean collaborationExperience;
 
-	private String position;
+	private final String position;
 }

@@ -14,9 +14,9 @@ import lombok.ToString;
 public class ChoiceResponse {
 
 	@JsonProperty("choice_id")
-	private long choiceId;
+	private final long choiceId;
 
-	private String content;
+	private final String content;
 
-	private int order;
+	private final int order;
 }

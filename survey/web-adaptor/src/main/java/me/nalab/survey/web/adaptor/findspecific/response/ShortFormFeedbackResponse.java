@@ -13,5 +13,5 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 public class ShortFormFeedbackResponse extends FormFeedbackResponseable {
 
-	private List<String> reply;
+	private final List<String> reply;
 }

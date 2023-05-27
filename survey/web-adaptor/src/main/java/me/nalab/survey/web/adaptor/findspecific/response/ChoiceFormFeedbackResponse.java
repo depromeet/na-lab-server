@@ -13,5 +13,5 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 public class ChoiceFormFeedbackResponse extends FormFeedbackResponseable {
 
-	List<ChoiceResponse> choices;
+	private final List<ChoiceResponse> choices;
 }
