@@ -17,7 +17,7 @@ public class ReviewerResponse {
 	private String nickName;
 
 	@JsonProperty("collaboration_experience")
-	private Boolean collaborationExperience;
+	private boolean collaborationExperience;
 
 	private String position;
 }

@@ -2,26 +2,22 @@ package me.nalab.survey.web.adaptor.findspecific.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
-@Getter
-@ToString
-@EqualsAndHashCode
-public class FormFeedbackResponseable {
+@Data
+public abstract class FormFeedbackResponseable {
 
 	@JsonProperty("question_id")
-	private Long questionId;
+	private final long questionId;
 
-	private String type;
+	private final String type;
 
-	private String title;
+	private final String title;
 
-	private Integer order;
+	private final int order;
 
 	@JsonProperty("is_read")
-	private Boolean isRead;
+	private final boolean isRead;
 }
