@@ -15,5 +15,5 @@ public interface UserFindByProviderAndTokenPort {
 	 * @param request ProviderName, Token을 포함하는 요청 객체
 	 * @return user 도메인 객체 혹은 Optional.Empty()
 	 */
-	Optional<User> findByProviderAndToken(FindByProviderAndTokenRequest request);
+	Optional<User> findByProviderAndToken(FindByProviderAndTokenRequest.Out request);
 }

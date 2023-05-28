@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 import lombok.RequiredArgsConstructor;
 import me.nalab.user.application.common.dto.FindByProviderAndTokenRequest;
 import me.nalab.user.application.port.out.persistence.UserFindByProviderAndTokenPort;
-import me.nalab.user.domain.user.Provider;
 import me.nalab.user.domain.user.User;
 import me.nalab.user.jpa.adaptor.create.common.mapper.UserObjectMapper;
 import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
@@ -20,11 +19,12 @@ public class UserFindByProviderAndTokenAdaptor implements UserFindByProviderAndT
 	private final UserJpaRepository userJpaRepository;
 
 	@Override
-	public Optional<User> findByProviderAndToken(FindByProviderAndTokenRequest request) {
+	public Optional<User> findByProviderAndToken(FindByProviderAndTokenRequest.Out request) {
 		Assert.notNull(request, "");
+		Assert.notNull(request.getProvider(), "");
 		Assert.notNull(request.getToken(), "");
 
-		var provider = Provider.valueOf(request.getProviderName());
+		var provider = request.getProvider();
 		var token = request.getToken();
 
 		var userEntity = userJpaRepository.findByProviderAndToken(provider, token);
