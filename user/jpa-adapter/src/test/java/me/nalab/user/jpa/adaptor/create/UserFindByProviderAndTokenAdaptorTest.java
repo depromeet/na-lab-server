@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
-import me.nalab.core.data.user.UserEntity;
 import me.nalab.user.application.common.dto.FindByProviderAndTokenRequest;
 import me.nalab.user.domain.user.Provider;
 import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
