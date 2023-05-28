@@ -3,10 +3,13 @@ package me.nalab.user.application.common.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.nalab.user.domain.user.Provider;
 
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FindByProviderAndTokenRequest {
 	@Data
 	public static class In {
