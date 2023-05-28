@@ -11,4 +11,5 @@ module luffy.user.jpa.adapter.main {
 	requires spring.beans;
 	requires spring.data.commons;
 	requires spring.tx;
+	requires spring.core;
 }
