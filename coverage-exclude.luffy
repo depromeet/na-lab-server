@@ -30,8 +30,8 @@ exclude me/nalab/survey/application/common/feedback/dto/ReviewerDto
 exclude me/nalab/survey/application/common/feedback/dto/ShortFormQuestionFeedbackDto
 exclude me/nalab/survey/application/common/feedback/mapper/FeedbackDtoMapper
 exclude me/nalab/survey/jpa/adaptor/common/mapper/FeedbackEntityMapper
-exclude me/nalab/survey/web/adaptor/createfeedback/**
-exclude me/nalab/survey/web/adaptor/summaryreviewer/**
-exclude me/nalab/survey/web/adaptor/findfeedback/**
-exclude me/nalab/survey/web/adaptor/findspecific/**
+exclude me/nalab/survey/web/adaptor/createfeedback/*
+exclude me/nalab/survey/web/adaptor/summaryreviewer/*
+exclude me/nalab/survey/web/adaptor/findfeedback/*
+exclude me/nalab/survey/web/adaptor/findspecific/*
 exclude me/nalab/core/idgenerator/tsid/engine/TsidEngine
