@@ -1,12 +1,13 @@
 import java.util.stream.Collectors
 
-StringBuilder excludeBuilder = new StringBuilder()
+var exclusionList = new ArrayList();
 file('coverage-exclude.luffy').withInputStream(){
-    it -> new BufferedReader(new InputStreamReader(it))
+    exclusionList.addAll(new BufferedReader(new InputStreamReader(it))
             .lines()
             .parallel()
             .map(s -> '**/' + s.substring(7).strip() + '.java')
-            .forEach(s -> excludeBuilder.append('\'').append(s).append('\','))
+            .collect(Collectors.toList())
+    )
 }
 
 sonar {
@@ -14,6 +15,6 @@ sonar {
         property 'sonar.host.url', 'https://sonarcloud.io'
         property 'sonar.organization', 'depromeet-1'
         property 'sonar.projectKey', 'depromeet_na-lab-server'
-        property 'sonar.coverage.exclusions', "\"" + excludeBuilder.toString() + "\""
+        property 'sonar.exclusions', exclusionList
     }
 }
