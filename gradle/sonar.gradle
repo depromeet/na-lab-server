@@ -5,7 +5,7 @@ file('coverage-exclude.luffy').withInputStream(){
     exclusionList.addAll(new BufferedReader(new InputStreamReader(it))
             .lines()
             .parallel()
-            .map(s -> '**/' + s.substring(7).strip() + '.java')
+            .map(s -> s.substring(7).strip() + '.java')
             .collect(Collectors.toList())
     )
 }
