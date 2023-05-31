@@ -41,7 +41,7 @@ public abstract class FormQuestionEntity extends TimeBaseEntity {
 	protected QuestionEntityType questionType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "survey_id")
+	@JoinColumn(name = "survey_id", nullable = false)
 	protected SurveyEntity survey;
 
 }

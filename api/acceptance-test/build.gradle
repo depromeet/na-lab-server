@@ -9,4 +9,5 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     testImplementation 'com.h2database:h2:2.1.214'
+    testImplementation 'org.flywaydb:flyway-core:9.16.0'
 }

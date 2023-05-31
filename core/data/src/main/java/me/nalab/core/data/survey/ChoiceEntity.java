@@ -34,7 +34,7 @@ public class ChoiceEntity {
 	private Integer order;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "form_question_id")
+	@JoinColumn(name = "form_question_id", nullable = false)
 	private ChoiceFormQuestionEntity choiceFormQuestion;
 
 }
