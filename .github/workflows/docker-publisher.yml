@@ -2,9 +2,9 @@ name: Docker image publisher
 
 on:
   release:
-    tags:
-      - 'v*'
-
+    types: 
+      - published
+    
 jobs:
   docker:
     name: Push Docker image to Docker Hub
