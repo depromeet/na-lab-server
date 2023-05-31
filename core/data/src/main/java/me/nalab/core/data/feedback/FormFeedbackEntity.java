@@ -26,14 +26,15 @@ public abstract class FormFeedbackEntity {
 	@Column(name = "form_feedback_id")
 	protected Long id;
 
-	@Column(name = "question_id")
+	@Column(name = "form_question_id")
+	@JoinColumn(name = "form_question_id", nullable = false)
 	protected Long questionId;
 
 	@Column(name = "is_read")
 	protected boolean isRead;
 
 	@ManyToOne
-	@JoinColumn(name = "feedback_id")
+	@JoinColumn(name = "feedback_id", nullable = false)
 	protected FeedbackEntity feedbackEntity;
 
 }

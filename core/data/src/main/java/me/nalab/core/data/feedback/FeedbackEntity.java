@@ -39,7 +39,7 @@ public class FeedbackEntity extends TimeBaseEntity {
 	private boolean isRead;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name = "reviewer_id")
+	@JoinColumn(name = "reviewer_id", nullable = false)
 	private ReviewerEntity reviewer;
 
 	@OneToMany(mappedBy = "feedbackEntity", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
