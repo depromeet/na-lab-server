@@ -39,6 +39,4 @@ include 'user:domain'
 include 'user:jpa-adapter'
 include 'user:application'
 include 'auth:auth-application'
-findProject(':auth:auth-application')?.name = 'auth-application'
-include 'client'
 
