@@ -10,7 +10,7 @@ on:
     branches:
       - main
 
-  start_server:
+  deployment:
     name: start server
     runs-on: ubuntu-latest
     steps:
