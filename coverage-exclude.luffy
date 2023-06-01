@@ -36,3 +36,4 @@ exclude me/nalab/survey/web/adaptor/summaryreviewer/**
 exclude me/nalab/survey/web/adaptor/findfeedback/**
 exclude me/nalab/user/application/common/dto/*
 exclude me/nalab/user/jpa/adaptor/**/common/mapper
+exclude me/nalab/auth/common/*
