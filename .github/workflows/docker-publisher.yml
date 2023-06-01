@@ -2,9 +2,9 @@ name: Docker image publisher
 
 on:
   push:
-    branches: 
+    branches:
       - release
-    
+
 jobs:
   docker:
     name: Push Docker image to Docker Hub
@@ -47,5 +47,6 @@ jobs:
             DB_URL=${{ secrets.DB_URL }} 
             DB_USERNAME=${{ secrets.DB_USERNAME }} 
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: | 
+            samillmu/luffy:latest
+            ${{ steps.meta.outputs.tags }}
