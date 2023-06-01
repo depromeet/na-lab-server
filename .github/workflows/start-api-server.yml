@@ -6,9 +6,7 @@ on:
       - "Docker image publisher"
     types:
       - completed
-  pull_request:
-    branches:
-      - main
+      
 jobs:
   server_start:
     name: start server
