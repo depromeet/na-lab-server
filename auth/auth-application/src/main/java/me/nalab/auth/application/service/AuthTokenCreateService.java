@@ -1,6 +1,7 @@
 package me.nalab.auth.application.service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,19 @@ public class AuthTokenCreateService implements AuthTokenCreateUseCase {
 
 	@Override
 	public AuthToken create(CreateAuthTokenRequest request) {
-		var payload = new HashSet<Payload>();
-		payload.add(new Payload(Payload.Key.USER_ID, request.getUserId()));
-		payload.add(new Payload(Payload.Key.NICKNAME, request.getNickname()));
+		var userId = request.getUserId();
+		var nickname = request.getNickname();
+		if (userId.isBlank() || nickname.isBlank()) throw new IllegalArgumentException();
 
-		var jwt = jwtService.createAccessToken(payload);
-		return new AuthToken(jwt);
+		Set<Payload> payload = new HashSet<>();
+		payload.add(new Payload(Payload.Key.USER_ID, userId));
+		payload.add(new Payload(Payload.Key.NICKNAME, nickname));
+
+		String token = createToken(payload);
+		return new AuthToken(token);
+	}
+
+	private String createToken(Set<Payload> payload) {
+		return jwtService.createAccessToken(payload);
 	}
 }
