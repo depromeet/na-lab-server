@@ -1,9 +1,9 @@
 name: Docker image publisher
 
 on:
-  release:
-    types: 
-      - published
+  push:
+    branches: 
+      - release
     
 jobs:
   docker:
