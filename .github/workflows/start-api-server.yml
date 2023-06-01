@@ -9,8 +9,8 @@ on:
   pull_request:
     branches:
       - main
-
-  deployment:
+jobs:
+  server_start:
     name: start server
     runs-on: ubuntu-latest
     steps:
