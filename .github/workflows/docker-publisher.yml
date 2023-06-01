@@ -46,7 +46,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          build-args: [DB_URL=${{ secrets.DB_URL }}, DB_USERNAME=${{ secrets.DB_USERNAME }}, DB_PASSWORD=${{ secrets.DB_PASSWORD }}]
+          build-args: |
+            DB_URL=${{ secrets.DB_URL }} 
+            DB_USERNAME=${{ secrets.DB_USERNAME }} 
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           tags: | 
             samillmu/luffy:latest
             ${{ steps.meta.outputs.tags }}
