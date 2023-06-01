@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.auth.application.common.dto.CreateAuthTokenRequest;
+import me.nalab.auth.application.common.utils.JwtUtils;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AuthTokenCreateService.class})
@@ -24,7 +25,7 @@ class AuthTokenCreateServiceTest {
 	private AuthTokenCreateService authTokenCreateService;
 
 	@MockBean
-	private JwtService jwtService;
+	private JwtUtils jwtUtils;
 
 	@ParameterizedTest
 	@ValueSource(strings = {"", "\t", "\n"})
@@ -65,7 +66,7 @@ class AuthTokenCreateServiceTest {
 		var request = new CreateAuthTokenRequest(userId, nickname);
 		var expectedToken = "token";
 
-		when(jwtService.createAccessToken(any())).thenReturn(expectedToken);
+		when(jwtUtils.createAccessToken(any())).thenReturn(expectedToken);
 
 		// when
 		var authToken = authTokenCreateService.create(request);

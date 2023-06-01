@@ -1,11 +1,11 @@
-package me.nalab.auth.application.service;
+package me.nalab.auth.application.common.utils;
 
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -16,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 import me.nalab.auth.application.common.dto.Payload;
 import me.nalab.auth.application.common.property.JwtProperties;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class JwtService {
+public class JwtUtils {
 
 	private final JwtProperties properties;
 

@@ -9,13 +9,14 @@ import lombok.RequiredArgsConstructor;
 import me.nalab.auth.application.common.dto.AuthToken;
 import me.nalab.auth.application.common.dto.CreateAuthTokenRequest;
 import me.nalab.auth.application.common.dto.Payload;
+import me.nalab.auth.application.common.utils.JwtUtils;
 import me.nalab.auth.application.port.in.web.AuthTokenCreateUseCase;
 
 @Service
 @RequiredArgsConstructor
 public class AuthTokenCreateService implements AuthTokenCreateUseCase {
 
-	private final JwtService jwtService;
+	private final JwtUtils jwtUtils;
 
 	@Override
 	public AuthToken create(CreateAuthTokenRequest request) {
@@ -32,6 +33,6 @@ public class AuthTokenCreateService implements AuthTokenCreateUseCase {
 	}
 
 	private String createToken(Set<Payload> payload) {
-		return jwtService.createAccessToken(payload);
+		return jwtUtils.createAccessToken(payload);
 	}
 }
