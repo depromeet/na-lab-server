@@ -2,9 +2,12 @@ name: Docker image publisher
 
 on:
   push:
-    branches: 
+    branches:
       - release
-    
+  pull_request: # 테스트용
+    branches:
+      - main
+
 jobs:
   docker:
     name: Push Docker image to Docker Hub
@@ -43,9 +46,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          build-args: |
-            DB_URL=${{ secrets.DB_URL }} 
-            DB_USERNAME=${{ secrets.DB_USERNAME }} 
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          build-args: [DB_URL=${{ secrets.DB_URL }}, DB_USERNAME=${{ secrets.DB_USERNAME }}, DB_PASSWORD=${{ secrets.DB_PASSWORD }}]
+          tags: | 
+            samillmu/luffy:latest
+            ${{ steps.meta.outputs.tags }}
