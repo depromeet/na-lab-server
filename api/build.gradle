@@ -4,6 +4,7 @@ dependencies {
     implementation project(':survey:jpa-adaptor')
 
     implementation project(':core:exception-handler')
+    implementation project(':core:secure')
 
     //:TODO AUTH 관련 모듈 의존성 설정
 
