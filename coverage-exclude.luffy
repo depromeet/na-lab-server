@@ -35,3 +35,4 @@ exclude me/nalab/survey/web/adaptor/summaryreviewer/*
 exclude me/nalab/survey/web/adaptor/findfeedback/*
 exclude me/nalab/survey/web/adaptor/findspecific/*
 exclude me/nalab/core/idgenerator/tsid/engine/TsidEngine
+exclude me/nalab/api/mock/MockController

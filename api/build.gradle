@@ -6,6 +6,8 @@ dependencies {
     implementation project(':core:exception-handler')
     implementation project(':core:secure')
 
+    implementation project(':api:api-mock')
+
     //:TODO AUTH 관련 모듈 의존성 설정
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
