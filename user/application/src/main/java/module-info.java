@@ -4,9 +4,9 @@ module luffy.user.application.main {
 	exports me.nalab.user.application.port.out.persistence;
 
 	requires luffy.user.domain.main;
+	requires luffy.core.id.generator.id.core.main;
 
 	requires lombok;
-	requires java.validation;
 
 	requires spring.boot;
 	requires spring.boot.autoconfigure;
