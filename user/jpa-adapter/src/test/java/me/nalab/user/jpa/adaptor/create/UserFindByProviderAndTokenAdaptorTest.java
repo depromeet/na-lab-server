@@ -2,6 +2,8 @@ package me.nalab.user.jpa.adaptor.create;
 
 import java.time.LocalDateTime;
 
+import me.nalab.core.data.user.UserOAuthInfoEntity;
+import me.nalab.user.jpa.adaptor.create.repository.UserOAuthInfoJpaRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,11 +31,14 @@ class UserFindByProviderAndTokenAdaptorTest {
 	private UserFindByProviderAndTokenAdaptor userFindByProviderAndTokenAdaptor;
 
 	@Autowired
+	private UserOAuthInfoJpaRepository userOAuthInfoJpaRepository;
+
+	@Autowired
 	private UserJpaRepository userJpaRepository;
 
 	@ParameterizedTest
 	@EnumSource(Provider.class)
-	@DisplayName("해당 provider와 token에 해당하는 user가 없다면, empty를 반환한다")
+	@DisplayName("해당 provider와 token에 해당하는 userOAuth가 없다면, empty를 반환한다")
 	void RETURN_EMPTY_WHEN_NOT_FIND_USER(Provider provider) {
 		// given
 		var token = "token";
@@ -53,16 +58,16 @@ class UserFindByProviderAndTokenAdaptorTest {
 		// given
 		var token = "token";
 		var request = new FindByProviderAndTokenRequest.Out(provider, token);
-		var userEntity = UserTestUtils.createUserEntity(1L, provider, token, LocalDateTime.now(), LocalDateTime.now());
-		userJpaRepository.saveAndFlush(userEntity);
+		var nickname = "nickname";
+		var userEntity = UserTestUtils.createUserEntity(1L, nickname, "email", LocalDateTime.now(), LocalDateTime.now());
+		userJpaRepository.save(userEntity);
+		var oauthInfoEntity = new UserOAuthInfoEntity(1L, provider.name(), token, nickname, null, userEntity);
+		userOAuthInfoJpaRepository.saveAndFlush(oauthInfoEntity);
 
 		// when
 		var result = userFindByProviderAndTokenAdaptor.findByProviderAndToken(request);
 
 		// then
 		Assertions.assertThat(result).isPresent();
-		var user = result.get();
-		Assertions.assertThat(user.getProvider()).isEqualTo(provider);
-		Assertions.assertThat(user.getToken()).isEqualTo(token);
 	}}
 

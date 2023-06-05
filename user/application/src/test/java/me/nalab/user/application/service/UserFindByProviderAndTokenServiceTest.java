@@ -74,7 +74,7 @@ class UserFindByProviderAndTokenServiceTest {
 		var token = "token";
 		var request = new FindByProviderAndTokenRequest.In(providerName, token);
 		var expectedUserId = 1L;
-		var user = new User(expectedUserId, provider, token, LocalDateTime.now(), null);
+		var user = new User(expectedUserId, "nickname", "email@gmail.com", LocalDateTime.now(), null);
 
 		when(userFindByProviderAndTokenPort.findByProviderAndToken(any())).thenReturn(Optional.of(user));
 
