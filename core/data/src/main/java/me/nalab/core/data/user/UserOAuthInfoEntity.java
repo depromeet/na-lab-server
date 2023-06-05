@@ -32,7 +32,7 @@ public class UserOAuthInfoEntity extends TimeBaseEntity {
 	@Column(nullable = true)
 	private String username;
 
-	@Column(nullable = true)
+	@Column(nullable = true, name = "phone_number")
 	private String phoneNumber;
 
 	@ManyToOne
