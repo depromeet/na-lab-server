@@ -1,8 +1,6 @@
 package me.nalab.user.jpa.adaptor.create;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
+import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
-import me.nalab.user.domain.user.Provider;
-import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
+import java.time.LocalDateTime;
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -34,35 +31,15 @@ class UserCreateAdaptorTest {
 	void CREATE_USER_SUCCESS() {
 		// given
 		var id = 1L;
-		var provider = Provider.KAKAO;
-		var token = UUID.randomUUID().toString();
-		var user = UserTestUtils.createUserDomain(id, provider, token, LocalDateTime.now(), null);
+		var nickname = "nickname";
+		var email = "test@test.com";
+		var user = UserTestUtils.createUserDomain(id, nickname, email, LocalDateTime.now(), null);
 
 		// when
 		userCreateAdaptor.createUser(user);
 
-		// given
+		// given;
 		var isExist = userJpaRepository.existsById(id);
 		Assertions.assertThat(isExist).isTrue();
 	}
-
-	@Test
-	@DisplayName("유저 생성 성공 테스트 - provider와 token null")
-	void CREATE_USER_SUCCESS2() {
-		// given
-		var id = 1L;
-		Provider provider = null;
-		String token = null;
-		var user = UserTestUtils.createUserDomain(id, provider, token, LocalDateTime.now(), null);
-
-		// when
-		userCreateAdaptor.createUser(user);
-
-		// given
-		var isExist = userJpaRepository.existsById(id);
-		Assertions.assertThat(isExist).isTrue();
-	}
-
-
-
 }
