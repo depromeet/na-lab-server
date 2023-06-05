@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import me.nalab.core.data.common.TimeBaseEntity;
 
-@Table(name = "user_oauth_info)")
+@Table(name = "user_oauth_info")
 @Entity
 @Getter
 @SuperBuilder
