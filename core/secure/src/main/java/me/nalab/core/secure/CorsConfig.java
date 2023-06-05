@@ -7,12 +7,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 class CorsConfig implements WebMvcConfigurer {
-	private static final String[] ALLOWED_METHOD_NAMES = new String[]{"GET","HEAD","POST","PUT","DELETE","TRACE","OPTIONS","PATCH"};
+	private static final String[] ALLOWED_METHOD_NAMES = new String[] {"GET", "HEAD", "POST", "PUT", "DELETE", "TRACE",
+		"OPTIONS", "PATCH"};
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
+			.allowedOrigins("*")
 			.allowedMethods(ALLOWED_METHOD_NAMES)
-			.exposedHeaders(HttpHeaders.LOCATION);
+			.exposedHeaders(HttpHeaders.LOCATION)
+			.maxAge(3600);
 	}
 }
