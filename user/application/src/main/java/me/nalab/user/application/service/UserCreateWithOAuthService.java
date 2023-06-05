@@ -10,6 +10,7 @@ import me.nalab.user.domain.user.UserOAuthInfo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -20,14 +21,19 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
 
     @Override
     public void createUser(CreateUserWithOAuthRequest request) {
+        var provider = request.getProvider();
+        var email = request.getEmail();
+        Objects.requireNonNull(provider, "유저를 생성하기 위해서는 제공자 값은 필수입니다.");
+        Objects.requireNonNull(email, "유저를 생성하기 위해서는 이메일 값은 필수입니다.");
+
         var userId = idGenerator.generate();
         var now = LocalDateTime.now();
 
-        var user = new User(userId, request.getUsername(), request.getEmail(), now, now);
+        var user = new User(userId, request.getUsername(), email, now, now);
         var userOAuthInfo = new UserOAuthInfo(
                 idGenerator.generate(),
-                request.getProvider(),
-                request.getEmail(),
+                provider,
+                email,
                 request.getUsername(),
                 request.getPhoneNumber(),
                 now,
