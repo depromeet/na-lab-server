@@ -240,7 +240,7 @@ public class MockController {
 			+ "}";
 	}
 
-	@GetMapping("/v1/surveys/{surveyId}")
+	@GetMapping("/surveys/{surveyId}")
 	@ResponseStatus(HttpStatus.OK)
 	Object getSurvey(@PathVariable(name = "surveyId", required = false) Long surveyId) {
 		return "{\n"
