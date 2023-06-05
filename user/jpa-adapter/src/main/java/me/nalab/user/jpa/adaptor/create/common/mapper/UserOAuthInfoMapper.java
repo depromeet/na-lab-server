@@ -26,7 +26,7 @@ public class UserOAuthInfoMapper {
 			.build();
 	}
 
-	public static UserOAuthInfo toDomain(UserOAuthInfoEntity entity, long userId) {
+	public static UserOAuthInfo toDomain(UserOAuthInfoEntity entity) {
 		Assert.notNull(entity, "");
 		Provider provider = Provider.valueOf(entity.getProvider());
 		return UserOAuthInfo.builder()
@@ -37,7 +37,7 @@ public class UserOAuthInfoMapper {
 			.phoneNumber(entity.getPhoneNumber())
 			.createdAt(entity.getCreatedAt())
 			.updatedAt(entity.getUpdatedAt())
-			.userId(userId)
+			.userId(entity.getUserEntity().getId())
 			.build();
 	}
 
