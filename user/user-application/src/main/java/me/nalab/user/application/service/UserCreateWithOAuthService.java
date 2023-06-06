@@ -2,6 +2,8 @@ package me.nalab.user.application.service;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.idgenerator.idcore.IdGenerator;
+import me.nalab.survey.application.common.target.dto.CreateTargetRequest;
+import me.nalab.survey.application.port.in.web.CreateTargetUseCase;
 import me.nalab.user.application.common.dto.CreateUserWithOAuthRequest;
 import me.nalab.user.application.port.in.UserCreateWithOAuthUseCase;
 import me.nalab.user.application.port.out.persistence.UserCreateWithOAuthPort;
@@ -17,6 +19,7 @@ import java.util.Objects;
 public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
 
     private final UserCreateWithOAuthPort userCreateWithOAuthPort;
+    private final CreateTargetUseCase createTargetUseCase;
     private final IdGenerator idGenerator;
 
     @Override
@@ -40,6 +43,10 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
                 now,
                 userId
         );
+
+        // 테스트 코드 작성 필요
+        var createTargetRequest = new CreateTargetRequest(request.getUsername());
+        createTargetUseCase.create(createTargetRequest);
 
         return userCreateWithOAuthPort.createUserWithOAuth(user, userOAuthInfo);
     }

@@ -1,5 +1,7 @@
 dependencies {
     implementation project(':user:user-domain')
+    implementation project(':survey:domain')
+    implementation project(':survey:application')
     implementation project(':core:id-generator:id-generator-starter')
     testImplementation project(':user:user-domain')
 
