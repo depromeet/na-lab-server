@@ -1,6 +1,7 @@
 package me.nalab.user.application.service;
 
 import me.nalab.core.idgenerator.mock.MockIdGenerator;
+import me.nalab.survey.application.port.in.web.CreateTargetUseCase;
 import me.nalab.user.application.common.dto.CreateUserWithOAuthRequest;
 import me.nalab.user.application.port.out.persistence.UserCreateWithOAuthPort;
 import me.nalab.user.domain.user.Provider;
@@ -25,6 +26,9 @@ class UserCreateWithOAuthServiceTest {
 
     @MockBean
     private UserCreateWithOAuthPort userCreateWithOAuthPort;
+
+    @MockBean
+    private CreateTargetUseCase createTargetUseCase;
 
     @MockBean
     private MockIdGenerator mockIdGenerator;
