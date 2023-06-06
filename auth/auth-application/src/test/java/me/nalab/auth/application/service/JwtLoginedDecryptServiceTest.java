@@ -1,6 +1,7 @@
 package me.nalab.auth.application.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.util.Set;
 
@@ -58,7 +59,8 @@ class JwtLoginedDecryptServiceTest {
 		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
 	}
 
-	private void assertDecryptedInfo(LoginedInfo response, String expectedName, Long expectedUserId, Long expectedTargetId) {
+	private void assertDecryptedInfo(LoginedInfo response, String expectedName, Long expectedUserId,
+		Long expectedTargetId) {
 		Assertions.assertEquals(response.getNickName(), expectedName);
 		Assertions.assertEquals(response.getUserId(), expectedUserId);
 		Assertions.assertEquals(response.getTargetId(), expectedTargetId);
