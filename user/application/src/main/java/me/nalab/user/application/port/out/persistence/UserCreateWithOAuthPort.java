@@ -12,7 +12,8 @@ public interface UserCreateWithOAuthPort {
      * user domain과 userOAuthInfo domain 객체를 영속화
      * @param user 저장할 유저의 정보
      * @param userOAuthInfo 저장할 유저의 OAuth 정보
+     * @return 새로 생성된 유저 객체의 식별자
      */
-    void createUserWithOAuth(User user, UserOAuthInfo userOAuthInfo);
+    long createUserWithOAuth(User user, UserOAuthInfo userOAuthInfo);
 
 }

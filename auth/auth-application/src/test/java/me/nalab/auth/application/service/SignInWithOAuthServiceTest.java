@@ -82,6 +82,23 @@ class SignInWithOAuthServiceTest {
         Assertions.assertThat(authToken).isEqualTo(expectedToken);
     }
 
+    @Test
+    @DisplayName("정상적인 인자지만 회원가입이 안되어 있더라도 회원 가입 후 토큰을 반환한다")
+    void RETURN_AUTH_TOKEN_WHEN_VALID_INPUT_AND_NOT_SIGN_UP() {
+        // given
+        var expectedToken = new AuthToken("token");
+        when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.empty());
+        when(signUpWithOAuthUseCase.signUpWithOAuth(any())).thenReturn(1L);
+        when(authTokenCreateUseCase.create(any())).thenReturn(expectedToken);
+        var request = createRequest().build();
+
+        // when
+        var authToken = signInWithOAuthService.signInWithOAuth(request);
+
+        // then
+        Assertions.assertThat(authToken).isEqualTo(expectedToken);
+    }
+
 
 
     private SignInWithOAuthRequest.SignInWithOAuthRequestBuilder createRequest() {

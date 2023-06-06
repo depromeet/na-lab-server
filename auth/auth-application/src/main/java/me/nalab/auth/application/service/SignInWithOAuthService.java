@@ -52,7 +52,7 @@ public class SignInWithOAuthService implements SignInWithOAuthUseCase {
                 .username(request.getUsername())
                 .phoneNumber(request.getPhoneNumber())
                 .build();
-        signUpWithOAuthUseCase.signUpWithOAuth(signUpRequest);
-        return userFindByProviderAndTokenUseCase.findByProviderAndToken(userFindRequest);
+        var createdUserId = signUpWithOAuthUseCase.signUpWithOAuth(signUpRequest);
+        return Optional.of(createdUserId);
     }
 }

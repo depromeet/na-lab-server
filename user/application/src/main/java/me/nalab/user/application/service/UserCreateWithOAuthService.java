@@ -20,7 +20,7 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
     private final IdGenerator idGenerator;
 
     @Override
-    public void createUser(CreateUserWithOAuthRequest request) {
+    public long createUser(CreateUserWithOAuthRequest request) {
         var provider = request.getProvider();
         var email = request.getEmail();
         Objects.requireNonNull(provider, "유저를 생성하기 위해서는 제공자 값은 필수입니다.");
@@ -41,6 +41,6 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
                 userId
         );
 
-        userCreateWithOAuthPort.createUserWithOAuth(user, userOAuthInfo);
+        return userCreateWithOAuthPort.createUserWithOAuth(user, userOAuthInfo);
     }
 }
