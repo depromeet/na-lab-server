@@ -1,8 +1,10 @@
 package me.nalab.auth.application.common.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class SignUpWithOAuthRequest {
 
     private final String providerName;

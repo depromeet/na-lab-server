@@ -9,8 +9,7 @@ import me.nalab.user.application.port.in.UserCreateWithOAuthUseCase;
 import me.nalab.user.application.port.in.UserFindByProviderAndTokenUseCase;
 import me.nalab.user.domain.user.Provider;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
+import org.springframework.util.Assert;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +22,8 @@ public class SignUpWithOAuthService implements SignUpWithOAuthUseCase {
     public void signUpWithOAuth(SignUpWithOAuthRequest request) {
         var providerName = request.getProviderName();
         var email = request.getEmail();
-        Objects.requireNonNull(providerName, "OAuth를 이용한 SignUp은 제공자의 이름 값은 필수입니다.");
-        Objects.requireNonNull(email, "OAuth를 이용한 SignUp은 이메일 값은 필수입니다.");
+        Assert.isTrue(providerName != null && !providerName.isBlank(), "OAuth를 이용한 SignIn은 제공자의 이름 값은 필수입니다.");
+        Assert.isTrue(email != null && !email.isBlank(), "OAuth를 이용한 SignIn은 이메일 값은 필수입니다.");
 
         var inRequest = new FindByProviderAndTokenRequest.In(providerName, email);
         var foundUser = userFindByProviderAndTokenUseCase.findByProviderAndToken(inRequest);
