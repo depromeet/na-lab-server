@@ -46,12 +46,7 @@ public class SignInWithOAuthService implements SignInWithOAuthUseCase {
         }
 
         // 회원가입이 되어있지 않다면, 회원 가입 후 다시 조회한다.
-        var signUpRequest = SignUpWithOAuthRequest.builder()
-                .providerName(providerName)
-                .email(email)
-                .username(request.getUsername())
-                .phoneNumber(request.getPhoneNumber())
-                .build();
+        var signUpRequest = new SignUpWithOAuthRequest(providerName, email, request.getUsername(), request.getPhoneNumber());
         signUpWithOAuthUseCase.signUpWithOAuth(signUpRequest);
         return userFindByProviderAndTokenUseCase.findByProviderAndToken(userFindRequest);
     }
