@@ -13,6 +13,7 @@ public class Payload {
 
 	public enum Key {
 		USER_ID,
+		TARGET_ID,
 		NICKNAME,
 	}
 }
