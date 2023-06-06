@@ -11,4 +11,5 @@ module luffy.auth.auth.application.main {
 	requires com.auth0.jwt;
 
 	requires luffy.user.application.main;
+	requires luffy.user.domain.main;
 }
