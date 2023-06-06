@@ -8,6 +8,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,32 +34,32 @@ class SignUpWithOAuthServiceTest {
     private UserCreateWithOAuthUseCase userCreateWithOAuthUseCase;
 
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("provider가 null이면 예외를 던진다")
-    void THROW_EXCEPTION_WHEN_PROVIDER_IS_NULL() {
+    void THROW_EXCEPTION_WHEN_PROVIDER_IS_NULL(String providerName) {
         // given
-        String providerName = null;
-        var request = new SignUpWithOAuthRequest(providerName, "test@test.com", "username", null);
+        var request = createRequest().providerName(providerName).build();
 
         // when
         var throwable = Assertions.catchThrowable(() -> signUpWithOAuthService.signUpWithOAuth(request));
 
         // then
-        Assertions.assertThat(throwable).isInstanceOf(NullPointerException.class);
+        Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("email가 null이면 예외를 던진다")
-    void THROW_EXCEPTION_WHEN_EMAIL_IS_NULL() {
+    void THROW_EXCEPTION_WHEN_EMAIL_IS_NULL(String email) {
         // given
-        String email = null;
-        var request = new SignUpWithOAuthRequest(Provider.KAKAO.name(), email, "username", null);
+        var request = createRequest().email(email).build();
 
         // when
         var throwable = Assertions.catchThrowable(() -> signUpWithOAuthService.signUpWithOAuth(request));
 
         // then
-        Assertions.assertThat(throwable).isInstanceOf(NullPointerException.class);
+        Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -66,7 +68,7 @@ class SignUpWithOAuthServiceTest {
         // given
         var provider = Provider.KAKAO;
         var email = "test@test.com";
-        var request = new SignUpWithOAuthRequest(provider.name(), email, "username", null);
+        var request = createRequest().providerName(provider.name()).email(email).build();
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.of(1L));
 
         // when
@@ -82,7 +84,7 @@ class SignUpWithOAuthServiceTest {
         // given
         var providerName = "not found provider name";
         var email = "test@test.com";
-        var request = new SignUpWithOAuthRequest(providerName, email, "username", null);
+        var request = createRequest().providerName(providerName).email(email).build();
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.empty());
 
         // when
@@ -98,7 +100,7 @@ class SignUpWithOAuthServiceTest {
         // given
         var provider = Provider.KAKAO;
         var email = "test@test.com";
-        var request = new SignUpWithOAuthRequest(provider.name(), email, "username", null);
+        var request = createRequest().providerName(provider.name()).email(email).build();
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.empty());
 
         // when
@@ -106,6 +108,14 @@ class SignUpWithOAuthServiceTest {
 
         // then
         Assertions.assertThat(throwable).isNull();
+    }
+
+    private SignUpWithOAuthRequest.SignUpWithOAuthRequestBuilder createRequest() {
+        return SignUpWithOAuthRequest.builder()
+                .providerName(Provider.KAKAO.name())
+                .email("test@test.com")
+                .username("username")
+                .phoneNumber(null);
     }
 
 }
