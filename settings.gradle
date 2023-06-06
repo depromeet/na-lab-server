@@ -13,6 +13,7 @@ include 'core'
 include 'core:data'
 
 include 'api'
+include 'api:api-mock'
 include 'api:acceptance-test'
 
 include 'support'
