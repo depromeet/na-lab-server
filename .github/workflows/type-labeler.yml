@@ -2,6 +2,7 @@ name: Type labeler
 
 on:
   pull_request:
+  issues:
 
 jobs:
   add_label:
@@ -15,7 +16,7 @@ jobs:
 
       - name: add ✨ feature label
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ startsWith(github.event.pull_request.title, '[feat]') }}
+        if: ${{ startsWith(github.event.pull_request.title, '[feat]') || startsWith(github.event.issues.title, '[feat]')}}
         with:
           labels: ✨ feature
 
