@@ -7,6 +7,7 @@ module luffy.user.application.main {
 	requires luffy.core.id.generator.id.core.main;
 
 	requires lombok;
+	requires java.validation;
 
 	requires spring.boot;
 	requires spring.boot.autoconfigure;
