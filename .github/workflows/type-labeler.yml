@@ -54,5 +54,5 @@ jobs:
         uses: actions-ecosystem/action-add-labels@v1
         if: ${{ startsWith(github.event.issues.title, '[docs]') || startsWith(github.event.pull_request.title, '[docs]') }}
         with:
-          labels: 📝 docs
+          labels: 📝 docs 
           
