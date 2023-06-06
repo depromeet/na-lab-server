@@ -39,8 +39,8 @@ include 'core:time'
 include 'core:secure'
 
 include 'user'
-include 'user:domain'
-include 'user:jpa-adapter'
-include 'user:application'
+include 'user:user-domain'
+include 'user:user-jpa-adapter'
+include 'user:user-application'
 include 'auth:auth-application'
 
