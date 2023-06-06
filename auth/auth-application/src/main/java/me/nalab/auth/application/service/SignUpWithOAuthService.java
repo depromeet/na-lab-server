@@ -19,7 +19,7 @@ public class SignUpWithOAuthService implements SignUpWithOAuthUseCase {
     private final UserCreateWithOAuthUseCase userCreateWithOAuthUseCase;
 
     @Override
-    public void signUpWithOAuth(SignUpWithOAuthRequest request) {
+    public long signUpWithOAuth(SignUpWithOAuthRequest request) {
         var providerName = request.getProviderName();
         var email = request.getEmail();
         Assert.isTrue(providerName != null && !providerName.isBlank(), "OAuth를 이용한 SignUp은 제공자의 이름 값은 필수입니다.");
@@ -29,7 +29,7 @@ public class SignUpWithOAuthService implements SignUpWithOAuthUseCase {
         var foundUser = userFindByProviderAndTokenUseCase.findByProviderAndToken(inRequest);
 
         if (foundUser.isPresent()) {
-            return;
+            return foundUser.get();
         }
 
         var provider = Provider.valueOf(providerName);
@@ -40,7 +40,7 @@ public class SignUpWithOAuthService implements SignUpWithOAuthUseCase {
                 request.getPhoneNumber()
         );
 
-        userCreateWithOAuthUseCase.createUser(createUserRequest);
+        return userCreateWithOAuthUseCase.createUser(createUserRequest);
     }
 
 }

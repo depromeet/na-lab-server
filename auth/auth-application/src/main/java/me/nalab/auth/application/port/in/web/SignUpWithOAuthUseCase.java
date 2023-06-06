@@ -10,6 +10,7 @@ public interface SignUpWithOAuthUseCase {
     /**
      * OAuth를 통해 회원가입을 시도합니다.
      * @param request OAuth 정보를 포함하는 dto
+     * @return 새로 생성된 유저의 식별자
      */
-    void signUpWithOAuth(SignUpWithOAuthRequest request);
+    long signUpWithOAuth(SignUpWithOAuthRequest request);
 }

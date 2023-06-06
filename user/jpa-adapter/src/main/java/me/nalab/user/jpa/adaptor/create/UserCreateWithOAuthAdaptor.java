@@ -17,11 +17,13 @@ public class UserCreateWithOAuthAdaptor implements UserCreateWithOAuthPort {
     private final UserOAuthInfoJpaRepository userOAuthInfoJpaRepository;
 
     @Override
-    public void createUserWithOAuth(User user, UserOAuthInfo userOAuthInfo) {
+    public long createUserWithOAuth(User user, UserOAuthInfo userOAuthInfo) {
         var userOAuthInfoEntity = UserOAuthInfoMapper.toEntity(userOAuthInfo, user);
         var userEntity = userOAuthInfoEntity.getUserEntity();
 
         userJpaRepository.save(userEntity);
         userOAuthInfoJpaRepository.save(userOAuthInfoEntity);
+
+        return userEntity.getId();
     }
 }

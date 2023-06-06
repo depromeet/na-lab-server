@@ -13,6 +13,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {UserCreateWithOAuthService.class})
 class UserCreateWithOAuthServiceTest {
@@ -69,8 +72,8 @@ class UserCreateWithOAuthServiceTest {
     }
 
     @Test
-    @DisplayName("정상적인 인자라면 유저가 생성된다")
-    void CREATE_USER_WHEN_VALID_INPUT() {
+    @DisplayName("정상적인 인자라면 생성된 유저의 식별자를 반환한다")
+    void RETURN_NEW_USER_ID_WHEN_VALID_INPUT() {
         // given
         var provider = Provider.KAKAO;
         var email = "test@test.com";
@@ -81,11 +84,13 @@ class UserCreateWithOAuthServiceTest {
                 username,
                 null
         );
+        long createdUserId = 1L;
+        when(userCreateWithOAuthPort.createUserWithOAuth(any(), any())).thenReturn(createdUserId);
 
         // when
-        var throwable = Assertions.catchThrowable(() -> userCreateWithOAuthService.createUser(request));
+        var userId = userCreateWithOAuthService.createUser(request);
 
         // then
-        Assertions.assertThat(throwable).isNull();
+        Assertions.assertThat(userId).isEqualTo(createdUserId);
     }
 }

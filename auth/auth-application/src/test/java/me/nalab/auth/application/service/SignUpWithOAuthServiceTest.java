@@ -95,19 +95,22 @@ class SignUpWithOAuthServiceTest {
     }
 
     @Test
-    @DisplayName("정상적인 인자라면 정상 통과한다")
-    void RETURN_VOID_WHEN_VALID_INPUT() {
+    @DisplayName("정상적인 인자라면 생성된 유저의 식별자를 반환한다")
+    void RETURN_NEW_USER_ID_WHEN_VALID_INPUT() {
         // given
         var provider = Provider.KAKAO;
         var email = "test@test.com";
         var request = createRequest().providerName(provider.name()).email(email).build();
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.empty());
 
+        long createdUserId = 1L;
+        when(userCreateWithOAuthUseCase.createUser(any())).thenReturn(createdUserId);
+
         // when
-        var throwable = Assertions.catchThrowable(() -> signUpWithOAuthService.signUpWithOAuth(request));
+        var userId = signUpWithOAuthService.signUpWithOAuth(request);
 
         // then
-        Assertions.assertThat(throwable).isNull();
+        Assertions.assertThat(userId).isEqualTo(createdUserId);
     }
 
     private SignUpWithOAuthRequest.SignUpWithOAuthRequestBuilder createRequest() {
