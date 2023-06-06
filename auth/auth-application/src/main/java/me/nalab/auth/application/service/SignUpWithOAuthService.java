@@ -29,7 +29,9 @@ public class SignUpWithOAuthService implements SignUpWithOAuthUseCase {
         var inRequest = new FindByProviderAndTokenRequest.In(providerName, email);
         var foundUser = userFindByProviderAndTokenUseCase.findByProviderAndToken(inRequest);
 
-        if (foundUser.isPresent()) return;
+        if (foundUser.isPresent()) {
+            return;
+        }
 
         var provider = Provider.valueOf(providerName);
         var createUserRequest = new CreateUserWithOAuthRequest(
