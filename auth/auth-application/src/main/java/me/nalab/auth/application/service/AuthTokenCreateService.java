@@ -11,6 +11,7 @@ import me.nalab.auth.application.common.dto.CreateAuthTokenRequest;
 import me.nalab.auth.application.common.dto.Payload;
 import me.nalab.auth.application.common.utils.JwtUtils;
 import me.nalab.auth.application.port.in.web.AuthTokenCreateUseCase;
+import org.springframework.util.Assert;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +23,8 @@ public class AuthTokenCreateService implements AuthTokenCreateUseCase {
 	public AuthToken create(CreateAuthTokenRequest request) {
 		var userId = request.getUserId();
 		var nickname = request.getNickname();
-		if (userId.isBlank() || nickname.isBlank()) {
-			throw new IllegalArgumentException();
-		}
+		Assert.isTrue(userId != null && !userId.isBlank(), "Authentication token 생성 시 유저 식별자는 필수입니다.");
+		Assert.isTrue(nickname != null && !nickname.isBlank(), "Authentication token 생성 시 유저의 별명은 필수입니다.");
 
 		Set<Payload> payload = new HashSet<>();
 		payload.add(new Payload(Payload.Key.USER_ID, userId));

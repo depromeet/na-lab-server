@@ -1,21 +1,20 @@
 package me.nalab.auth.application.service;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
+import me.nalab.auth.application.common.dto.CreateAuthTokenRequest;
+import me.nalab.auth.application.common.utils.JwtUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import me.nalab.auth.application.common.dto.CreateAuthTokenRequest;
-import me.nalab.auth.application.common.utils.JwtUtils;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AuthTokenCreateService.class})
@@ -28,7 +27,7 @@ class AuthTokenCreateServiceTest {
 	private JwtUtils jwtUtils;
 
 	@ParameterizedTest
-	@ValueSource(strings = {"", "\t", "\n"})
+	@NullAndEmptySource()
 	@DisplayName("유저식별자가 없거나 비어있다면 예외를 발생시킨다")
 	void THROW_EXCEPTION_WHEN_USER_ID_IS_BLANK(String userId) {
 		// given
@@ -43,7 +42,7 @@ class AuthTokenCreateServiceTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"", "\t", "\n"})
+	@NullAndEmptySource()
 	@DisplayName("닉네임가 없거나 비어있다면 예외를 발생시킨다")
 	void THROW_EXCEPTION_WHEN_NICKNAME_IS_BLANK(String nickname) {
 		// given
