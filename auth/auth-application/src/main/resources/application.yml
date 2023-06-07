@@ -4,7 +4,7 @@ spring:
     activate:
       on-profile: test
 jwt:
-  access-token-header:
+  access-token-header: "Authorization"
   issuer: "issuer"
   prefix: "prefix"
   secret: "secret"
