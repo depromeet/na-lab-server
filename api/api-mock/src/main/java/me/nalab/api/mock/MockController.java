@@ -280,7 +280,7 @@ public class MockController {
 			+ "}";
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/users/logined")
 	@ResponseStatus(HttpStatus.OK)
 	Object getLoginedUser() {
 		return "{\n"
