@@ -5,11 +5,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
-import me.nalab.auth.application.config.YamlPropertySourceFactory;
 
 @Getter
 @Component
-@PropertySource(value = "classpath:application.yml", factory = YamlPropertySourceFactory.class)
+@PropertySource("classpath:application.properties")
 public class JwtProperties {
 
 	private final String accessTokenHeader;
