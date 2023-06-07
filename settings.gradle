@@ -27,6 +27,7 @@ include 'survey:jpa-adaptor'
 
 include 'auth'
 include 'auth:mock'
+include 'auth:auth-application'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
@@ -42,5 +43,4 @@ include 'user'
 include 'user:user-domain'
 include 'user:user-jpa-adapter'
 include 'user:user-application'
-include 'auth:auth-application'
-
+include 'user:user-web-adaptor'
