@@ -5,6 +5,7 @@ dependencies {
     testImplementation project(':survey:domain')
     testImplementation project(':survey:jpa-adaptor')
     testImplementation project(':survey:web-adaptor')
+    testImplementation project(':auth:auth-application')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
