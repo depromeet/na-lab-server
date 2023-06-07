@@ -19,7 +19,6 @@ public class UserAcceptanceTestSupporter {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.get(API_VERSION + "/users")
 			.accept(MediaType.APPLICATION_JSON)
-			.contentType(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)
 		);
 	}
