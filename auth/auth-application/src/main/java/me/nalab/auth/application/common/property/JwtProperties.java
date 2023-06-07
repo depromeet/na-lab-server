@@ -17,11 +17,13 @@ public class JwtProperties {
 	private final String secret;
 	private final Long accessTokenExpirySeconds;
 
-	public JwtProperties(@Value("${jwt.access-token-header}") String accessTokenHeader,
-		@Value("${jwt.issuer}") String issuer,
-		@Value("${jwt.prefix}") String prefix,
-		@Value("${jwt.secret}") String secret,
-		@Value("${jwt.accessTokenExpirySeconds}") Long accessTokenExpirySeconds) {
+	public JwtProperties(
+		@Value("${jwt.access-token-header:Authorization}") String accessTokenHeader,
+		@Value("${jwt.issuer:issuer}") String issuer,
+		@Value("${jwt.prefix:prefix}") String prefix,
+		@Value("${jwt.secret:secret}") String secret,
+		@Value("${jwt.accessTokenExpirySeconds:3600}") Long accessTokenExpirySeconds
+) {
 		this.accessTokenHeader = accessTokenHeader;
 		this.issuer = issuer;
 		this.prefix = prefix;
