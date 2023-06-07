@@ -18,7 +18,7 @@ public class LoginedUserGetController {
 
 	private final LoginedUserGetByTokenUseCase loginedUserGetByTokenUseCase;
 
-	@GetMapping("/users")
+	@GetMapping("/users/logined")
 	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 		LoginedInfo loginedInfo = loginedUserGetByTokenUseCase.decryptToken(token);
 
