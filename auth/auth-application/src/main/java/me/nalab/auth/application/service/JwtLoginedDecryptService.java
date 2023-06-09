@@ -8,12 +8,13 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import me.nalab.auth.application.common.dto.Payload;
 import me.nalab.auth.application.common.utils.JwtUtils;
+import me.nalab.auth.application.port.in.web.TargetIdGetPort;
 import me.nalab.user.application.common.dto.LoginedInfo;
 import me.nalab.user.application.port.out.persistence.LoginedUserGetByTokenPort;
 
 @Service
 @RequiredArgsConstructor
-public class JwtLoginedDecryptService implements LoginedUserGetByTokenPort {
+public class JwtLoginedDecryptService implements LoginedUserGetByTokenPort, TargetIdGetPort {
 
 	private final JwtUtils jwtUtils;
 
@@ -28,4 +29,9 @@ public class JwtLoginedDecryptService implements LoginedUserGetByTokenPort {
 		return new LoginedInfo(nickName, targetId, userId);
 	}
 
+	@Override
+	public Long getTargetId(String encryptedToken) {
+		DecodedJWT decodedJWT = jwtUtils.verify(encryptedToken);
+		return Long.valueOf(decodedJWT.getClaim(Payload.Key.TARGET_ID.name()).asString());
+	}
 }
