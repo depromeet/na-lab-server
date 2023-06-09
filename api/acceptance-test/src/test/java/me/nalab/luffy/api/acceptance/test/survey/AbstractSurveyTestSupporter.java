@@ -1,7 +1,6 @@
 package me.nalab.luffy.api.acceptance.test.survey;
 
-import java.util.Set;
-
+import me.nalab.luffy.api.acceptance.test.DatabaseCleaner;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import me.nalab.luffy.api.acceptance.test.DatabaseCleaner;
+import java.util.Set;
 
 public abstract class AbstractSurveyTestSupporter {
 

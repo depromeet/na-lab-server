@@ -1,12 +1,14 @@
 dependencies {
     testImplementation project(':auth:mock')
     testImplementation project(':auth:auth-application')
+    testImplementation project(':auth:auth-web-adaptor')
     testImplementation project(':core:id-generator:id-generator-starter')
     testImplementation project(':core:data')
     testImplementation project(':survey:domain')
     testImplementation project(':survey:jpa-adaptor')
     testImplementation project(':survey:web-adaptor')
     testImplementation project(':user:user-domain')
+    testImplementation project(':user:user-application')
     testImplementation project(':user:user-jpa-adapter')
     testImplementation project(':user:user-web-adaptor')
 
