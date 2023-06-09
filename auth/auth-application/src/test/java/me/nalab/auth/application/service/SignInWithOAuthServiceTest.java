@@ -4,9 +4,11 @@ import me.nalab.auth.application.common.dto.AuthToken;
 import me.nalab.auth.application.common.dto.SignInWithOAuthRequest;
 import me.nalab.auth.application.port.in.web.AuthTokenCreateUseCase;
 import me.nalab.auth.application.port.in.web.SignUpWithOAuthUseCase;
+import me.nalab.survey.application.port.in.web.CreateTargetUseCase;
 import me.nalab.user.application.port.in.UserFindByProviderAndTokenUseCase;
 import me.nalab.user.domain.user.Provider;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,10 +35,18 @@ class SignInWithOAuthServiceTest {
     private UserFindByProviderAndTokenUseCase userFindByProviderAndTokenUseCase;
 
     @MockBean
+    private CreateTargetUseCase createTargetUseCase;
+
+    @MockBean
     private SignUpWithOAuthUseCase signUpWithOAuthUseCase;
 
     @MockBean
     private AuthTokenCreateUseCase authTokenCreateUseCase;
+
+    @BeforeEach
+    void mocking() {
+        when(createTargetUseCase.create(any())).thenReturn(1L);
+    }
 
     @ParameterizedTest
     @NullAndEmptySource
