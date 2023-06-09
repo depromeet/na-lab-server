@@ -6,6 +6,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.5' // springboot 2.7.11 dependency-version
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation project(':survey:application')
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'

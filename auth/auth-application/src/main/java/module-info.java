@@ -14,4 +14,5 @@ module luffy.auth.auth.application.main {
 
 	requires luffy.user.application.main;
 	requires luffy.user.domain.main;
+    requires luffy.survey.application.main;
 }
