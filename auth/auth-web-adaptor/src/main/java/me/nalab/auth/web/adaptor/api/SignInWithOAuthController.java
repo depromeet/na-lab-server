@@ -1,5 +1,6 @@
 package me.nalab.auth.web.adaptor.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import me.nalab.auth.application.common.dto.AuthToken;
@@ -41,7 +42,7 @@ public class SignInWithOAuthController {
 
     private SignInWithOAuthRequest createUseCaseRequest(String providerName, Request request) {
         return SignInWithOAuthRequest.builder()
-                .providerName(providerName)
+                .providerName(providerName.toUpperCase())
                 .email(request.email)
                 .username(request.nickname)
                 .build();
@@ -57,7 +58,9 @@ public class SignInWithOAuthController {
 
     @Data
     public static class Response {
+        @JsonProperty("token_type")
         private final String tokenType;
+        @JsonProperty("access_token")
         private final String accessToken;
     }
 

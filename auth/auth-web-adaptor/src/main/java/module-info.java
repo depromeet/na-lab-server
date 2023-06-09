@@ -1,4 +1,6 @@
 module luffy.auth.auth.web.adaptor.main {
+    exports me.nalab.auth.web.adaptor.api;
+
     requires luffy.auth.auth.application.main;
 
     requires lombok;
@@ -6,4 +8,6 @@ module luffy.auth.auth.web.adaptor.main {
 
     requires spring.web;
     requires spring.boot.starter.validation;
+
+    requires com.fasterxml.jackson.annotation;
 }
