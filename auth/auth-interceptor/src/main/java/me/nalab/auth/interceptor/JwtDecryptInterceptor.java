@@ -1,4 +1,4 @@
-package me.nalab.auth.web.adaptor.interceptor;
+package me.nalab.auth.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

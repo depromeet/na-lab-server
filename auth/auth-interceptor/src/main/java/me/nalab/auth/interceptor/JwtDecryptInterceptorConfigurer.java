@@ -1,4 +1,4 @@
-package me.nalab.auth.web.adaptor.interceptor;
+package me.nalab.auth.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

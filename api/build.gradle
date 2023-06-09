@@ -8,6 +8,7 @@ dependencies {
 
     implementation project(':auth:auth-application')
     implementation project(':auth:auth-web-adaptor')
+    implementation project(':auth:auth-interceptor')
 
     implementation project(':user:user-domain')
     implementation project(':user:user-application')
