@@ -6,9 +6,13 @@ dependencies {
     implementation project(':core:exception-handler')
     implementation project(':core:secure')
 
-    implementation project(':api:api-mock')
+    implementation project(':auth:auth-application')
+    implementation project(':auth:auth-web-adaptor')
 
-    //:TODO AUTH 관련 모듈 의존성 설정
+    implementation project(':user:user-domain')
+    implementation project(':user:user-application')
+    implementation project(':user:user-jpa-adapter')
+    implementation project(':user:user-web-adaptor')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

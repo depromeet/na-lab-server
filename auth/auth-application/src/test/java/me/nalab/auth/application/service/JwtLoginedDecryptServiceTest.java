@@ -66,4 +66,22 @@ class JwtLoginedDecryptServiceTest {
 		Assertions.assertEquals(response.getTargetId(), expectedTargetId);
 	}
 
+	@Test
+	@DisplayName("Target ID 반환 성공 테스트")
+	void DECRYPTE_TARGET_ID_SUCCESS() {
+		// given
+		String nickName = "hello";
+		long userId = 12345;
+		long targetId = 54321;
+		String requestToken = jwtUtils.createAccessToken(
+			Set.of(new Payload(Payload.Key.NICKNAME, nickName), new Payload(Payload.Key.USER_ID, userId + ""),
+				new Payload(Payload.Key.TARGET_ID, targetId + "")));
+
+		// when
+		Long result = jwtLoginedDecryptService.getTargetId(requestToken);
+
+		// then
+		Assertions.assertEquals(targetId, result);
+	}
+
 }

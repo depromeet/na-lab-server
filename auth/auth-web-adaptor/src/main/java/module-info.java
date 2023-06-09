@@ -10,4 +10,9 @@ module luffy.auth.auth.web.adaptor.main {
     requires spring.boot.starter.validation;
 
     requires com.fasterxml.jackson.annotation;
+	requires spring.webmvc;
+    requires spring.context;
+    requires org.apache.tomcat.embed.core;
+    requires spring.beans;
+
 }
