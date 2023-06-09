@@ -13,8 +13,8 @@ include 'core'
 include 'core:data'
 
 include 'api'
-include 'api:acceptance-test'
 include 'api:api-mock'
+include 'api:acceptance-test'
 
 include 'support'
 include 'support:jacoco'
@@ -27,6 +27,8 @@ include 'survey:jpa-adaptor'
 
 include 'auth'
 include 'auth:mock'
+include 'auth:auth-application'
+include 'auth:auth-web-adaptor'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
@@ -35,7 +37,11 @@ include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
 
 include 'core:exception-handler'
-
 include 'core:time'
 include 'core:secure'
 
+include 'user'
+include 'user:user-domain'
+include 'user:user-jpa-adapter'
+include 'user:user-application'
+include 'user:user-web-adaptor'

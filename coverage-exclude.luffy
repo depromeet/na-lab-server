@@ -1,4 +1,5 @@
 exclude me/nalab/api/NalabApplication
+exclude me/nalab/api/mock/MockController
 exclude me/nalab/core/data/survey/SurveyEntity
 exclude me/nalab/core/data/survey/ChoiceEntity
 exclude me/nalab/core/data/survey/ChoiceFormQuestionEntity
@@ -16,6 +17,7 @@ exclude me/nalab/core/data/feedback/ReplyEntity
 exclude me/nalab/core/data/feedback/ReviewerEntity
 exclude me/nalab/core/data/feedback/SelectEntity
 exclude me/nalab/core/data/feedback/ShortFormFeedbackEntity
+exclude me/nalab/core/idgenerator/tsid/engine/TsidEngine
 exclude me/nalab/survey/web/adaptor/createsurvey/SurveyCreateController
 exclude me/nalab/survey/web/adaptor/survey/find/SurveyFindController
 exclude me/nalab/survey/web/adaptor/findid/SurveyIdGetController
@@ -30,9 +32,14 @@ exclude me/nalab/survey/application/common/feedback/dto/ReviewerDto
 exclude me/nalab/survey/application/common/feedback/dto/ShortFormQuestionFeedbackDto
 exclude me/nalab/survey/application/common/feedback/mapper/FeedbackDtoMapper
 exclude me/nalab/survey/jpa/adaptor/common/mapper/FeedbackEntityMapper
+exclude me/nalab/survey/application/service/create/CreateTargetService
+exclude me/nalab/survey/jpa/adaptor/create/repository/CreateTargetAdaptor
+exclude me/nalab/survey/jpa/adaptor/
 exclude me/nalab/survey/web/adaptor/createfeedback/*
 exclude me/nalab/survey/web/adaptor/summaryreviewer/*
 exclude me/nalab/survey/web/adaptor/findfeedback/*
 exclude me/nalab/survey/web/adaptor/findspecific/*
-exclude me/nalab/core/idgenerator/tsid/engine/TsidEngine
-exclude me/nalab/api/mock/MockController
+exclude me/nalab/user/application/common/dto/*
+exclude me/nalab/user/jpa/adaptor/**/common/mapper
+exclude me/nalab/auth/application/common/**/*
+exclude me/nalab/user/web/adaptor/logined/*

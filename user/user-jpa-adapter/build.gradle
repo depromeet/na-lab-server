@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(':user:user-domain')
+    implementation project(':user:user-application')
+    implementation project(':core:data')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    testImplementation 'com.h2database:h2:2.1.214'
+}

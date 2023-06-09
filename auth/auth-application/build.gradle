@@ -1,0 +1,13 @@
+dependencies {
+    implementation project(":user:user-domain")
+    implementation project(":user:user-application")
+
+    implementation 'com.auth0:java-jwt:4.4.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.5' // springboot 2.7.11 dependency-version
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok'
+}
