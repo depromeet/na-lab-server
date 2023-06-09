@@ -73,10 +73,11 @@ class JwtLoginedDecryptServiceTest {
 		String nickName = "hello";
 		long userId = 12345;
 		long targetId = 54321;
-		String requestToken = jwtUtils.createAccessToken(
-			Set.of(new Payload(Payload.Key.NICKNAME, nickName), new Payload(Payload.Key.USER_ID, userId + ""),
-				new Payload(Payload.Key.TARGET_ID, targetId + "")));
-
+		String requestToken = jwtUtils.createAccessToken(Set.of(
+				new Payload(Payload.Key.NICKNAME, nickName), 
+				new Payload(Payload.Key.USER_ID, String.valueOf(userId)),
+				new Payload(Payload.Key.TARGET_ID, String.valueOf(targetId))
+		));
 		// when
 		Long result = jwtLoginedDecryptService.getTargetId(requestToken);
 
