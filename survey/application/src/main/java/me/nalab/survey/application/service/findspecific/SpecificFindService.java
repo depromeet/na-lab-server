@@ -13,6 +13,7 @@ import me.nalab.survey.application.exception.SurveyDoesNotHasTargetException;
 import me.nalab.survey.application.port.in.web.findspecific.SpecificFindUseCase;
 import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackFindPort;
 import me.nalab.survey.application.port.out.persistence.findspecific.SurveyFindPort;
+import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackUpdatePort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
@@ -23,12 +24,19 @@ public class SpecificFindService implements SpecificFindUseCase {
 	private final FeedbackFindPort feedbackFindPort;
 	private final SurveyFindPort surveyFindPort;
 
+	private final FeedbackUpdatePort feedbackUpdatePort;
+
 	@Override
 	public FeedbackDto findFeedbackByFeedbackId(Long feedbackId) {
 		Feedback feedback = feedbackFindPort.findFeedback(feedbackId).orElseThrow(() -> {
 			throw new FeedbackDoesNotExistException(feedbackId);
 		});
 		return FeedbackDtoMapper.toDto(feedback);
+	}
+
+	@Override
+	public void updateFeedbackIsReadByFeedbackId(Long feedbackId) {
+		feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId);
 	}
 
 	@Override
