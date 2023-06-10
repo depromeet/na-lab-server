@@ -43,6 +43,7 @@ public class SurveyFindResponseMapper {
 		return ChoiceFormQuestionResponse.builder()
 			.questionId(choiceFormQuestionDto.getId())
 			.type(choiceFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
+			.formType(choiceFormQuestionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(choiceFormQuestionDto.getTitle())
 			.order(choiceFormQuestionDto.getOrder())
 			.maxSelectionCount(choiceFormQuestionDto.getMaxSelectionCount())
@@ -61,6 +62,7 @@ public class SurveyFindResponseMapper {
 		return ShortFormQuestionResponse.builder()
 			.questionId(shortFormQuestionDto.getId())
 			.type(shortFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
+			.formType(shortFormQuestionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(shortFormQuestionDto.getTitle())
 			.order(shortFormQuestionDto.getOrder())
 			.build();
