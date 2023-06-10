@@ -42,6 +42,7 @@ public class SurveyAcceptanceValidator {
 			.andExpect(jsonPath("$.question[0].type").value("choice"))
 			.andExpect(jsonPath("$.question[0].title").value("당신의 포지션을 알려주세요."))
 			.andExpect(jsonPath("$.question[0].order").value(3))
+			.andExpect(jsonPath("$.question[0].form_type").isString())
 			.andExpect(jsonPath("$.question[0].choices[0].order").value(1))
 			.andExpect(jsonPath("$.question[0].choices[1].order").value(2))
 			.andExpect(jsonPath("$.question[0].choices[2].order").value(3))
@@ -52,6 +53,7 @@ public class SurveyAcceptanceValidator {
 			.andExpect(jsonPath("$.question[1].title").value("예진님의 성향은 어떤 것이 돋보이나요?"))
 			.andExpect(jsonPath("$.question[1].order").value(4))
 			.andExpect(jsonPath("$.question[1].choices[0].order").value(1))
+			.andExpect(jsonPath("$.question[1].form_type").isString())
 			.andExpect(jsonPath("$.question[1].choices[1].order").value(2))
 			.andExpect(jsonPath("$.question[1].choices[2].order").value(3))
 			.andExpect(jsonPath("$.question[1].choices[3].order").value(4))
@@ -61,10 +63,12 @@ public class SurveyAcceptanceValidator {
 			.andExpect(jsonPath("$.question[1].choices[7].order").value(8))
 
 			.andExpect(jsonPath("$.question[2].type").value("short"))
+			.andExpect(jsonPath("$.question[2].form_type").isString())
 			.andExpect(jsonPath("$.question[2].title").value("당신이 생각하는 예진님의 직무적 강점은 무엇인가요?"))
 			.andExpect(jsonPath("$.question[2].order").value(5))
 
 			.andExpect(jsonPath("$.question[3].type").value("short"))
+			.andExpect(jsonPath("$.question[3].form_type").isString())
 			.andExpect(jsonPath("$.question[3].title").value("당신이 생각하는 예진님의 직무적 약점은 무엇인가요?"))
 			.andExpect(jsonPath("$.question[3].order").value(6));
 	}

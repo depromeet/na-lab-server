@@ -25,6 +25,9 @@ public abstract class FormQuestionResponseable {
 	@JsonProperty("question_id")
 	private Long questionId;
 
+	@JsonProperty("form_type")
+	private String formType;
+
 	private String title;
 
 	private Integer order;

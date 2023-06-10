@@ -18,6 +18,9 @@ public abstract class FormQuestionResponseable {
 
 	private String type;
 
+	@JsonProperty("form_type")
+	private String formType;
+
 	private String title;
 
 	private Integer order;

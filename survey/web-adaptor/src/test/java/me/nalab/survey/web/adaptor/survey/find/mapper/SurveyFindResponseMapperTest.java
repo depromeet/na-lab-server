@@ -1,6 +1,7 @@
 package me.nalab.survey.web.adaptor.survey.find.mapper;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,15 +11,17 @@ import org.junit.jupiter.api.Test;
 
 import me.nalab.survey.application.common.survey.dto.ChoiceDto;
 import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.dto.TargetDto;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceFormQuestionResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.ChoiceResponse;
-import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.FormQuestionResponseable;
 import me.nalab.survey.web.adaptor.survey.find.response.ShortFormQuestionResponse;
+import me.nalab.survey.web.adaptor.survey.find.response.SurveyFindResponse;
 import me.nalab.survey.web.adaptor.survey.find.response.TargetResponse;
 
 class SurveyFindResponseMapperTest {
@@ -30,19 +33,23 @@ class SurveyFindResponseMapperTest {
 		SurveyDto surveyDto = SurveyDto.builder()
 			.id(1L)
 			.formQuestionDtoableList(Arrays.asList(ChoiceFormQuestionDto.builder()
-				.id(1L)
-				.questionDtoType(QuestionDtoType.CHOICE)
-				.title("Choice Question")
-				.order(1)
-				.maxSelectionCount(2)
-				.choiceDtoList(Arrays.asList(ChoiceDto.builder().id(1L).content("Choice 1").order(1).build(),
-					ChoiceDto.builder().id(2L).content("Choice 2").order(2).build()))
-				.build(), ShortFormQuestionDto.builder()
-				.id(2L)
-				.questionDtoType(QuestionDtoType.SHORT)
-				.title("Short Question")
-				.order(2)
-				.build()))
+					.id(1L)
+					.questionDtoType(QuestionDtoType.CHOICE)
+					.choiceFormQuestionDtoType(ChoiceFormQuestionDtoType.TENDENCY)
+					.title("Choice Question")
+					.order(1)
+					.maxSelectionCount(2)
+					.choiceDtoList(Arrays.asList(ChoiceDto.builder().id(1L).content("Choice 1").order(1).build(),
+						ChoiceDto.builder().id(2L).content("Choice 2").order(2).build()))
+					.build(),
+
+				ShortFormQuestionDto.builder()
+					.id(2L)
+					.questionDtoType(QuestionDtoType.SHORT)
+					.shortFormQuestionDtoType(ShortFormQuestionDtoType.CUSTOM)
+					.title("Short Question")
+					.order(2)
+					.build()))
 			.build();
 
 		SurveyFindResponse response = SurveyFindResponseMapper.toSurveyFindResponse(targetDto, surveyDto);
