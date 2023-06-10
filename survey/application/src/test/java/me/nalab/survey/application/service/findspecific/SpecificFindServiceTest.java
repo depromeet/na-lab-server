@@ -1,6 +1,7 @@
 package me.nalab.survey.application.service.findspecific;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -21,6 +22,7 @@ import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.exception.SurveyDoesNotHasTargetException;
 import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackFindPort;
 import me.nalab.survey.application.port.out.persistence.findspecific.SurveyFindPort;
+import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackUpdatePort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
@@ -34,10 +36,14 @@ class SpecificFindServiceTest {
 	@Mock
 	private SurveyFindPort surveyFindPort;
 
+	@Mock
+	private FeedbackUpdatePort feedbackUpdatePort;
+
+
 	@BeforeEach
 	void setUp() {
 		MockitoAnnotations.openMocks(this);
-		specificFindService = new SpecificFindService(feedbackFindPort, surveyFindPort);
+		specificFindService = new SpecificFindService(feedbackFindPort, surveyFindPort, feedbackUpdatePort);
 	}
 
 	@Test
@@ -106,5 +112,14 @@ class SpecificFindServiceTest {
 
 		assertThrows(SurveyDoesNotHasTargetException.class,
 			() -> specificFindService.findSurveyBySurveyId(surveyId));
+	}
+
+	@Test
+	void UPDATE_FEEDBACK_IS_READ_BY_FEEDBACK_ID() {
+		Long feedbackId = 1L;
+
+		specificFindService.updateFeedbackIsReadByFeedbackId(feedbackId);
+
+		verify(feedbackUpdatePort).updateFeedbackIsReadByFeedbackId(feedbackId);
 	}
 }
