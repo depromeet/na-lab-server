@@ -1,4 +1,5 @@
 dependencies {
+    implementation project(':api:api-mock')
 
     implementation project(':survey:web-adaptor')
     implementation project(':survey:jpa-adaptor')
