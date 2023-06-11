@@ -1,6 +1,5 @@
 package me.nalab.survey.web.adaptor.findspecific;
 
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,12 +41,14 @@ class SpecificFeedbackResponseMapper {
 		FeedbackDto feedbackDto) {
 		return surveyDto.getFormQuestionDtoableList().stream()
 			.map(i -> {
-				if (i instanceof ShortFormQuestionDto) {
-					return toShortFormFeedbackResponse((ShortFormQuestionDto)i, (ShortFormQuestionFeedbackDto)findFormQuestionFeedbackableByQuestionId(
-						feedbackDto.getFormQuestionFeedbackDtoableList(), i.getId()));
+				if(i instanceof ShortFormQuestionDto) {
+					return toShortFormFeedbackResponse((ShortFormQuestionDto)i,
+						(ShortFormQuestionFeedbackDto)findFormQuestionFeedbackableByQuestionId(
+							feedbackDto.getFormQuestionFeedbackDtoableList(), i.getId()));
 				}
-				return toChoiceFormFeedbackResponse((ChoiceFormQuestionDto)i, (ChoiceFormQuestionFeedbackDto)findFormQuestionFeedbackableByQuestionId(
-					feedbackDto.getFormQuestionFeedbackDtoableList(), i.getId()));
+				return toChoiceFormFeedbackResponse((ChoiceFormQuestionDto)i,
+					(ChoiceFormQuestionFeedbackDto)findFormQuestionFeedbackableByQuestionId(
+						feedbackDto.getFormQuestionFeedbackDtoableList(), i.getId()));
 			})
 			.collect(Collectors.toList());
 	}
@@ -57,16 +58,18 @@ class SpecificFeedbackResponseMapper {
 		Optional<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoable = formQuestionFeedbackDtoableList.stream()
 			.filter(it -> it.getQuestionId().equals(questionId))
 			.findAny();
-		if (formQuestionFeedbackDtoable.isEmpty()) {
+		if(formQuestionFeedbackDtoable.isEmpty()) {
 			throw new IllegalStateException();
 		}
 		return formQuestionFeedbackDtoable.get();
 	}
 
-	private static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto, ShortFormQuestionFeedbackDto feedbackDto) {
+	private static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto,
+		ShortFormQuestionFeedbackDto feedbackDto) {
 		return ShortFormFeedbackResponse.builder()
 			.questionId(questionDto.getId())
 			.type("short")
+			.formType(questionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())
 			.order(questionDto.getOrder())
 			.isRead(feedbackDto.isRead())
@@ -74,7 +77,8 @@ class SpecificFeedbackResponseMapper {
 			.build();
 	}
 
-	private static ChoiceFormFeedbackResponse toChoiceFormFeedbackResponse(ChoiceFormQuestionDto questionDto, ChoiceFormQuestionFeedbackDto feedbackDto) {
+	private static ChoiceFormFeedbackResponse toChoiceFormFeedbackResponse(ChoiceFormQuestionDto questionDto,
+		ChoiceFormQuestionFeedbackDto feedbackDto) {
 		List<ChoiceResponse> choices = questionDto.getChoiceDtoList().stream()
 			.filter(it -> feedbackDto.getSelectedChoiceIdSet().contains(it.getId()))
 			.map(it -> ChoiceResponse.builder()
@@ -87,12 +91,12 @@ class SpecificFeedbackResponseMapper {
 		return ChoiceFormFeedbackResponse.builder()
 			.questionId(questionDto.getId())
 			.type("choice")
+			.formType(questionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())
 			.order(questionDto.getOrder())
 			.isRead(feedbackDto.isRead())
 			.choices(choices)
 			.build();
 	}
-
 
 }

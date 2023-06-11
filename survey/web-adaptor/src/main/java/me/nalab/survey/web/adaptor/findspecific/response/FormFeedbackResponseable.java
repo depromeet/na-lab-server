@@ -13,6 +13,8 @@ public abstract class FormFeedbackResponseable {
 	private final long questionId;
 
 	private final String type;
+	@JsonProperty("form_type")
+	private final String formType;
 
 	private final String title;
 

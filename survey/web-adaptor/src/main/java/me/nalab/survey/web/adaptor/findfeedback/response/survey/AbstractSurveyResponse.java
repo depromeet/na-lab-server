@@ -15,6 +15,8 @@ public abstract class AbstractSurveyResponse {
 	private final Long questionId;
 	private final Integer order;
 	private final String type;
+	@JsonProperty("form_type")
+	private final String formType;
 	private final String title;
 
 }
