@@ -242,7 +242,6 @@ public class MockController {
 			+ "        \"other\": 1\n"
 			+ "    }\n"
 			+ "}";
-		""
 	}
 
 	@GetMapping("/surveys/{surveyId}")
