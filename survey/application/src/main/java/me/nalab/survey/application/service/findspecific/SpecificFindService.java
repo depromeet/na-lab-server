@@ -36,9 +36,9 @@ public class SpecificFindService implements SpecificFindUseCase {
 
 	@Override
 	public void updateFeedbackIsReadByFeedbackId(Long feedbackId) {
-		feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId).orElseThrow(() -> {
+		if (feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId).isEmpty()) {
 			throw new FeedbackDoesNotExistException(feedbackId);
-		});
+		}
 	}
 
 	@Override
