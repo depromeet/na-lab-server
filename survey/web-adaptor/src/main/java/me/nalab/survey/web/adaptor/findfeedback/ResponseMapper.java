@@ -46,6 +46,7 @@ final class ResponseMapper {
 			.questionId(choiceFormQuestionDto.getId())
 			.order(choiceFormQuestionDto.getOrder())
 			.type(choiceFormQuestionDto.getQuestionDtoType().name().toLowerCase())
+			.formType(choiceFormQuestionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(choiceFormQuestionDto.getTitle())
 			.choiceResponseList(toChoiceQuestionResponse(choiceFormQuestionDto.getChoiceDtoList()))
 			.choiceFeedbackResponseList(toChoiceFeedbackResponse(choiceFormQuestionDto.getId(), feedbackDto))
@@ -102,6 +103,7 @@ final class ResponseMapper {
 			.questionId(shortFormQuestionDto.getId())
 			.order(shortFormQuestionDto.getOrder())
 			.type(shortFormQuestionDto.getQuestionDtoType().name().toLowerCase())
+			.formType(shortFormQuestionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(shortFormQuestionDto.getTitle())
 			.shortFeedbackResponseList(toShortFeedbackResponse(shortFormQuestionDto.getId(), feedbackDtoList))
 			.build();
