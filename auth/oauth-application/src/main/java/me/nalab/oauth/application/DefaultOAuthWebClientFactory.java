@@ -18,7 +18,8 @@ public class DefaultOAuthWebClientFactory implements OAuthWebClientFactory {
         if (provider == Provider.KAKAO) {
             return kakaoOAuthWebClient;
         }
-        return null;
+
+        throw new IllegalArgumentException(provider.name() + "의 client가 존재하지 않습니다.");
     }
 
 }
