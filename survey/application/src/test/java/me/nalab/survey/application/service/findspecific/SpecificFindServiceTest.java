@@ -117,9 +117,20 @@ class SpecificFindServiceTest {
 	@Test
 	void UPDATE_FEEDBACK_IS_READ_BY_FEEDBACK_ID() {
 		Long feedbackId = 1L;
+		when(feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId)).thenReturn(Optional.of(feedbackId));
 
 		specificFindService.updateFeedbackIsReadByFeedbackId(feedbackId);
 
 		verify(feedbackUpdatePort).updateFeedbackIsReadByFeedbackId(feedbackId);
+	}
+
+	@Test
+	void UPDATE_FEEDBACK_IS_READ_BY_NON_EXISTING_FEEDBACK_ID() {
+		Long feedbackId = 1L;
+
+		when(feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId)).thenReturn(Optional.empty());
+
+		assertThrows(FeedbackDoesNotExistException.class,
+			() -> specificFindService.updateFeedbackIsReadByFeedbackId(feedbackId));
 	}
 }

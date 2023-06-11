@@ -13,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
 import me.nalab.core.data.feedback.FeedbackEntity;
-import me.nalab.survey.application.exception.FeedbackDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackUpdatePort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
@@ -41,10 +40,10 @@ class FeedbackUpdateAdaptorTest {
 		FeedbackEntity feedbackEntity = FeedbackEntityMapper.toEntity(feedback);
 		FeedbackEntity savedFeedbackEntity = testFeedbackFindJpaRepository.save(feedbackEntity);
 
-		feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(savedFeedbackEntity.getId());
-
+		Optional<Long> feedbackId = feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(savedFeedbackEntity.getId());
 		Optional<FeedbackEntity> resultFeedback = testFeedbackFindJpaRepository.findById(savedFeedbackEntity.getId());
 
+		assertTrue(feedbackId.isPresent());
 		assertTrue(resultFeedback.isPresent());
 		assertTrue(resultFeedback.get().isRead());
 	}
@@ -53,7 +52,8 @@ class FeedbackUpdateAdaptorTest {
 	void UPDATE_FEEDBACK_WITH_FAIL() {
 		Long nonExistentFeedbackId = 999L;
 
-		assertThrows(FeedbackDoesNotExistException.class,
-			() -> feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(nonExistentFeedbackId));
+		Optional<Long> feedbackId = feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(nonExistentFeedbackId);
+
+		assertTrue(feedbackId.isEmpty());
 	}
 }
