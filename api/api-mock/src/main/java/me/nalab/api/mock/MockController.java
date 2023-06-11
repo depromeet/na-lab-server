@@ -186,7 +186,7 @@ public class MockController {
 			+ "    \"feedback_id\": 5,\n"
 			+ "    \"created_at\": \"2023-01-24T12:00:00\",\n"
 			+ "    \"reviewer\": {\n"
-			+ "\t\t\t\t\"nickname\": \"A\",\n"
+			+ "        \"nickname\": \"A\",\n"
 			+ "        \"collaboration_experience\": true,\n"
 			+ "        \"position\": \"developer\"\n"
 			+ "    },\n"
@@ -194,7 +194,7 @@ public class MockController {
 			+ "        {\n"
 			+ "            \"question_id\": 1,\n"
 			+ "            \"type\": \"choice\",\n"
-			+ "\t\t\t\t\t\t\"form_type\": \"tendency\",\n"
+			+ "            \"form_type\": \"tendency\",\n"
 			+ "            \"title\": \"성향 예시\",\n"
 			+ "            \"order\": 4,\n"
 			+ "            \"is_read\": false,\n"
@@ -214,7 +214,7 @@ public class MockController {
 			+ "        {\n"
 			+ "            \"question_id\": 10,\n"
 			+ "            \"type\": \"short\",\n"
-			+ "\t\t\t\t\t\t\"form_type\": \"strength\",\n"
+			+ "            \"form_type\": \"strength\",\n"
 			+ "            \"title\": \"저는 UX, UI, GUI 중에 어떤 분야에 더 강점이 있나요?\",\n"
 			+ "            \"order\": 5,\n"
 			+ "            \"is_read\": false,\n"
@@ -242,6 +242,7 @@ public class MockController {
 			+ "        \"other\": 1\n"
 			+ "    }\n"
 			+ "}";
+		""
 	}
 
 	@GetMapping("/surveys/{surveyId}")
