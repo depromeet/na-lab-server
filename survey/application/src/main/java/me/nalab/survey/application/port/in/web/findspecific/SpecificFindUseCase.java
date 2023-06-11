@@ -17,6 +17,13 @@ public interface SpecificFindUseCase {
 	FeedbackDto findFeedbackByFeedbackId(Long feedbackId);
 
 	/**
+	 * feedbackId를 입력으로 받아, 해당 Feedback의 isRead를 true로 변경합니다.
+	 *
+	 * @param feedbackId Feedback의 id
+	 */
+	void updateFeedbackIsReadByFeedbackId(Long feedbackId);
+
+	/**
 	 * surveyId를 입력으로 받아, surveyId에 해당하는 SurveyDto를 반환합니다.
 	 *
 	 * @param surveyId survey의 id
