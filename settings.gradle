@@ -30,6 +30,7 @@ include 'auth:mock'
 include 'auth:auth-application'
 include 'auth:auth-web-adaptor'
 include 'auth:auth-interceptor'
+include 'auth:oauth-application'
 
 include 'core:id-generator'
 include 'core:id-generator:id-core'
