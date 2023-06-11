@@ -22,6 +22,7 @@ public class SpecificFeedbackController {
 	@GetMapping("/feedbacks/{feedback-id}")
 	public ResponseEntity<SpecificFeedbackResponse> getSpecificFeedback(@PathVariable("feedback-id") Long feedbackId) {
 		FeedbackDto feedbackDto = specificFindUseCase.findFeedbackByFeedbackId(feedbackId);
+		specificFindUseCase.updateFeedbackIsReadByFeedbackId(feedbackId);
 		SurveyDto surveyDto = specificFindUseCase.findSurveyBySurveyId(feedbackDto.getSurveyId());
 		SpecificFeedbackResponse specificFeedbackResponse = SpecificFeedbackResponseMapper.toSpecificFeedbackResponse(surveyDto, feedbackDto);
 		return ResponseEntity.ok(specificFeedbackResponse);

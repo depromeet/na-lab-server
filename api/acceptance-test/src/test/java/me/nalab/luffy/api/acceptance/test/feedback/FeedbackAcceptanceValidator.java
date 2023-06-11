@@ -38,6 +38,7 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].question_id").isNumber(),
 			jsonPath("$.question_feedback.[0].order").isNumber(),
 			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").isString(),
 			jsonPath("$.question_feedback.[0].title").isString(),
 
 			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
@@ -64,6 +65,7 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].question_id").isNumber(),
 			jsonPath("$.question_feedback.[0].order").isNumber(),
 			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").isString(),
 			jsonPath("$.question_feedback.[0].title").isString(),
 
 			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
@@ -115,6 +117,7 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question").isArray(),
 			jsonPath("$.question[0].question_id").isNumber(),
 			jsonPath("$.question[0].type").isString(),
+			jsonPath("$.question[0].form_type").isString(),
 			jsonPath("$.question[0].title").isString(),
 			jsonPath("$.question[0].order").isNumber(),
 			jsonPath("$.question[0].is_read").isBoolean()

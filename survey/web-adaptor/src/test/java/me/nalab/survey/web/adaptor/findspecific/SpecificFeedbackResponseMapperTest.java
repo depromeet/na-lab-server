@@ -1,6 +1,6 @@
 package me.nalab.survey.web.adaptor.findspecific;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -17,8 +17,10 @@ import me.nalab.survey.application.common.feedback.dto.ReviewerDto;
 import me.nalab.survey.application.common.feedback.dto.ShortFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.survey.dto.ChoiceDto;
 import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.web.adaptor.findspecific.response.ChoiceFormFeedbackResponse;
 import me.nalab.survey.web.adaptor.findspecific.response.ChoiceResponse;
@@ -48,20 +50,22 @@ class SpecificFeedbackResponseMapperTest {
 		return SurveyDto.builder()
 			.id(1L)
 			.formQuestionDtoableList(Arrays.asList(ChoiceFormQuestionDto.builder()
-				.id(3L)
-				.questionDtoType(QuestionDtoType.CHOICE)
-				.title("Choice Question")
-				.order(1)
-				.maxSelectionCount(2)
-				.choiceDtoList(Arrays.asList(ChoiceDto.builder().id(1L).content("Choice 1").order(1).build(),
-					ChoiceDto.builder().id(2L).content("Choice 2").order(2).build()))
-				.build(),
+					.id(3L)
+					.questionDtoType(QuestionDtoType.CHOICE)
+					.choiceFormQuestionDtoType(ChoiceFormQuestionDtoType.TENDENCY)
+					.title("Choice Question")
+					.order(1)
+					.maxSelectionCount(2)
+					.choiceDtoList(Arrays.asList(ChoiceDto.builder().id(1L).content("Choice 1").order(1).build(),
+						ChoiceDto.builder().id(2L).content("Choice 2").order(2).build()))
+					.build(),
 				ShortFormQuestionDto.builder()
-				.id(4L)
-				.questionDtoType(QuestionDtoType.SHORT)
-				.title("Short Question")
-				.order(2)
-				.build()))
+					.id(4L)
+					.questionDtoType(QuestionDtoType.SHORT)
+					.shortFormQuestionDtoType(ShortFormQuestionDtoType.STRENGTH)
+					.title("Short Question")
+					.order(2)
+					.build()))
 			.build();
 	}
 
@@ -107,6 +111,7 @@ class SpecificFeedbackResponseMapperTest {
 				ChoiceFormFeedbackResponse.builder()
 					.questionId(3L)
 					.type("choice")
+					.formType("tendency")
 					.title("Choice Question")
 					.order(1)
 					.isRead(true)
@@ -126,6 +131,7 @@ class SpecificFeedbackResponseMapperTest {
 				ShortFormFeedbackResponse.builder()
 					.questionId(4L)
 					.type("short")
+					.formType("strength")
 					.title("Short Question")
 					.order(2)
 					.isRead(true)
