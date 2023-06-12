@@ -17,6 +17,9 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		if(isPreflight(request)) {
+			return true;
+		}
 		if(!isExcludedURI(request)) {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
@@ -24,6 +27,10 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 			request.setAttribute("logined", targetId);
 		}
 		return true;
+	}
+
+	private boolean isPreflight(HttpServletRequest request) {
+		return request.getMethod().equals("OPTIONS");
 	}
 
 	private boolean isExcludedURI(HttpServletRequest httpServletRequest) {
