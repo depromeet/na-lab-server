@@ -23,8 +23,7 @@ public class FeedbackReviewersController {
 	@GetMapping("/reviewers")
 	public ResponseEntity<FeedbackReviewersResponse> getFeedbackReviewers(@RequestParam("survey-id") Long surveyId) {
 		List<FeedbackDto> feedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
-		FeedbackReviewersResponse feedbackReviewersResponse = FeedbackReviewersResponseMapper.toFeedbackReviewersResponse(
-			feedbacks);
+		FeedbackReviewersResponse feedbackReviewersResponse = FeedbackReviewersResponseMapper.toFeedbackReviewersResponse(feedbacks);
 		return ResponseEntity.ok(feedbackReviewersResponse);
 	}
 }

@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class FormQuestionResponseable {
 
 	@JsonProperty("question_id")
-	private String questionId;
+	private Long questionId;
 
 	private String type;
 

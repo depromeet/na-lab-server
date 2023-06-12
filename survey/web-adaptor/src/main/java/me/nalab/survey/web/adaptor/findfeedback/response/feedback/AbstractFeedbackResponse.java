@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class AbstractFeedbackResponse {
 
 	@JsonProperty("feedback_id")
-	private final String id;
+	private final Long id;
 	@JsonProperty("created_at")
 	private final LocalDateTime createdAt;
 	@JsonProperty("is_read")

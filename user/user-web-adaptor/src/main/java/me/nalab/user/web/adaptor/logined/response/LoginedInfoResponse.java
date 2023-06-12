@@ -8,7 +8,7 @@ import lombok.Data;
 public class LoginedInfoResponse {
 
 	@JsonProperty("target_id")
-	private final String targetId;
+	private final long targetId;
 	@JsonProperty("nickname")
 	private final String nickName;
 
