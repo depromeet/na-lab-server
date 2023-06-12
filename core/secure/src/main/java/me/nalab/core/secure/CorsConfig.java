@@ -16,7 +16,6 @@ class CorsConfig implements WebMvcConfigurer {
 			.allowedHeaders("*")
 			.allowCredentials(true)
 			.allowedMethods(ALLOWED_METHOD_NAMES)
-			.exposedHeaders(HttpHeaders.LOCATION)
 			.maxAge(3600);
 
 		registry.addMapping("/mock/**")
