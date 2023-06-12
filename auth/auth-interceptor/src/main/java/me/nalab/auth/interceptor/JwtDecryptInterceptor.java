@@ -23,7 +23,7 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 		if(!isExcludedURI(request)) {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
-			Long targetId = targetIdGetPort.getTargetId(token);
+			Long targetId = targetIdGetPort.getTargetId(token.split(" ")[1]);
 			request.setAttribute("logined", targetId);
 		}
 		return true;
