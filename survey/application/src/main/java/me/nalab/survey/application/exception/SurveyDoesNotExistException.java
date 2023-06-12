@@ -8,7 +8,7 @@ public class SurveyDoesNotExistException extends RuntimeException {
 	private final Long surveyId;
 
 	public SurveyDoesNotExistException(Long surveyId) {
-		super("Cannot find any surveyId \"" + surveyId);
+		super("Cannot found any survey form id \"" + surveyId);
 		this.surveyId = surveyId;
 	}
 
