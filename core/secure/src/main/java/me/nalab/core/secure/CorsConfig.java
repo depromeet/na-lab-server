@@ -12,8 +12,18 @@ class CorsConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
+		registry.addMapping("/v1/**")
 			.allowedOrigins("*")
+			.allowedHeaders("*")
+			.allowCredentials(true)
+			.allowedMethods(ALLOWED_METHOD_NAMES)
+			.exposedHeaders(HttpHeaders.LOCATION)
+			.maxAge(3600);
+
+		registry.addMapping("/mock/**")
+			.allowedOrigins("*")
+			.allowedHeaders("*")
+			.allowCredentials(true)
 			.allowedMethods(ALLOWED_METHOD_NAMES)
 			.exposedHeaders(HttpHeaders.LOCATION)
 			.maxAge(3600);
