@@ -149,7 +149,7 @@ class SurveyDomainTest extends AbstractSurveySources {
 			.createdAt(LocalDateTime.now())
 			.updatedAt(LocalDateTime.now())
 			.order(2)
-			.maxSelectionCount(1)
+			.maxSelectableCount(1)
 			.choiceList(
 				getDefaultChoiceList()
 			)

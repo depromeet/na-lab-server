@@ -60,7 +60,7 @@ public final class SurveyEntityMapper {
 			.order(choiceFormQuestion.getOrder())
 			.choiceFormQuestionType(getChoiceFormQuestionEntityType(choiceFormQuestion))
 			.choiceList(toChoiceEntityList(choiceFormQuestion.getChoiceList()))
-			.maxSelectionCount(choiceFormQuestion.getMaxSelectionCount())
+			.maxSelectionCount(choiceFormQuestion.getMaxSelectableCount())
 			.build();
 	}
 
@@ -138,7 +138,7 @@ public final class SurveyEntityMapper {
 			.questionType(QuestionType.CHOICE)
 			.title(choiceFormQuestionEntity.getTitle())
 			.order(choiceFormQuestionEntity.getOrder())
-			.maxSelectionCount(choiceFormQuestionEntity.getMaxSelectionCount())
+			.maxSelectableCount(choiceFormQuestionEntity.getMaxSelectionCount())
 			.createdAt(choiceFormQuestionEntity.getCreatedAt())
 			.updatedAt(choiceFormQuestionEntity.getUpdatedAt())
 			.choiceList(toChoiceList(choiceFormQuestionEntity.getChoiceList()))

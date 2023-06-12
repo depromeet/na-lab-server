@@ -55,7 +55,7 @@ class SpecificFeedbackResponseMapperTest {
 					.choiceFormQuestionDtoType(ChoiceFormQuestionDtoType.TENDENCY)
 					.title("Choice Question")
 					.order(1)
-					.maxSelectionCount(2)
+					.maxSelectableCount(2)
 					.choiceDtoList(Arrays.asList(ChoiceDto.builder().id(1L).content("Choice 1").order(1).build(),
 						ChoiceDto.builder().id(2L).content("Choice 2").order(2).build()))
 					.build(),

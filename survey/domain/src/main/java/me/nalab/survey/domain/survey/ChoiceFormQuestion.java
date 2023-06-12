@@ -19,14 +19,14 @@ import me.nalab.survey.domain.survey.valid.ChoiceFormQuestionValidator;
 public class ChoiceFormQuestion extends FormQuestionable {
 
 	private final List<Choice> choiceList;
-	private final Integer maxSelectionCount;
+	private final Integer maxSelectableCount;
 	private final ChoiceFormQuestionType choiceFormQuestionType;
 
 	ChoiceFormQuestion(ChoiceFormQuestionBuilder<?, ?> builder) {
 		super(builder);
 		this.choiceList = builder.choiceList;
 		withSortedChoiceList(this.choiceList);
-		this.maxSelectionCount = builder.maxSelectionCount;
+		this.maxSelectableCount = builder.maxSelectableCount;
 		this.choiceFormQuestionType = builder.choiceFormQuestionType;
 		ChoiceFormQuestionValidator.validSelf(this);
 	}
