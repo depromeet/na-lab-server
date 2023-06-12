@@ -14,14 +14,12 @@ class CorsConfig implements WebMvcConfigurer {
 		registry.addMapping("/v1/**")
 			.allowedOrigins("*")
 			.allowedHeaders("*")
-			.allowCredentials(true)
 			.allowedMethods(ALLOWED_METHOD_NAMES)
 			.maxAge(3600);
 
 		registry.addMapping("/mock/**")
 			.allowedOrigins("*")
 			.allowedHeaders("*")
-			.allowCredentials(true)
 			.allowedMethods(ALLOWED_METHOD_NAMES)
 			.maxAge(3600);
 	}
