@@ -2,7 +2,7 @@ package me.nalab.luffy.api.acceptance.test.feedback.reviewer.summary;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsReviewerSummarized;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -95,7 +95,7 @@ class ReviewerSummarizeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	}
 
 	private String saveTargetAndGetToken(String name) {
-		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
 		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)

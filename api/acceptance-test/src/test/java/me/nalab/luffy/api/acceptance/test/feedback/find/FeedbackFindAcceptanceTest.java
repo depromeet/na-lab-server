@@ -4,7 +4,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackNotFound;
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.getFeedbackCreateRequest;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
@@ -56,7 +56,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	@DisplayName("피드백 조회 성공 인수테스트")
 	void FIND_FEED_BACK_SUCCESS() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("hello world", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
 		String token = "mock token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
@@ -80,7 +80,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	@DisplayName("피드백 조회 성공 인수테스트 - 피드백이 없을때")
 	void FIND_FEED_BACK_SUCCESS_ANY_FEEDBACK() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("hello world", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
 		String token = "mock token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)

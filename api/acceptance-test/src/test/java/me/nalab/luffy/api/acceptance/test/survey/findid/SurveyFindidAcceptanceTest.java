@@ -1,8 +1,9 @@
 package me.nalab.luffy.api.acceptance.test.survey.findid;
 
-import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.*;
+import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyFound;
+import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsTargetDoesNotHasAnySurvey;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class SurveyFindidAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("로그인된 타겟의 survey id 조회 성공 테스트")
 	void GET_LOGINED_SURVEY_ID_SUCCESS() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
 		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
@@ -58,7 +59,7 @@ class SurveyFindidAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("로그인된 타겟의 survey id 조회 실패 테스트 - 생성된 survey가 없음")
 	void GET_LOGINED_SURVEY_ID_FAIL_NO_SURVEY() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
 		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)

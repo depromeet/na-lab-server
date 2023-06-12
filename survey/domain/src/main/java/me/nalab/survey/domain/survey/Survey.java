@@ -1,6 +1,6 @@
 package me.nalab.survey.domain.survey;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +27,11 @@ import me.nalab.survey.domain.survey.valid.SurveyValidator;
 public class Survey implements IdGeneratable {
 
 	private Long id;
-	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private final Instant updatedAt;
 	private final List<FormQuestionable> formQuestionableList;
 
-	Survey(Long id, LocalDateTime createdAt, LocalDateTime updatedAt,
+	Survey(Long id, Instant createdAt, Instant updatedAt,
 		List<FormQuestionable> formQuestionableList) {
 		this.id = id;
 		this.createdAt = createdAt;

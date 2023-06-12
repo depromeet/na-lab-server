@@ -1,6 +1,6 @@
 package me.nalab.core.data.common;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -18,14 +18,14 @@ import lombok.experimental.SuperBuilder;
 public abstract class TimeBaseEntity {
 
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP(6)", nullable = false, updatable = false)
-	protected LocalDateTime createdAt;
+	protected Instant createdAt;
 
 	@Column(name = "updated_at", columnDefinition = "TIMESTAMP(6)", nullable = false)
-	protected LocalDateTime updatedAt;
+	protected Instant updatedAt;
 
 	@PrePersist
- 	void prePersist() {
-		var now = LocalDateTime.now();
+	void prePersist() {
+		var now = Instant.now();
 
 		createdAt = createdAt != null ? createdAt : now;
 		updatedAt = updatedAt != null ? updatedAt : now;
@@ -33,7 +33,7 @@ public abstract class TimeBaseEntity {
 
 	@PreUpdate
 	void preUpdate() {
-		updatedAt = updatedAt != null ? updatedAt : LocalDateTime.now();
+		updatedAt = updatedAt != null ? updatedAt : Instant.now();
 	}
 
 }

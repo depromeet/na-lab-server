@@ -1,9 +1,11 @@
 dependencies {
     implementation project(':survey:domain')
     implementation project(':survey:application')
-    testImplementation project(':survey:application')
+    implementation project(':core:time')
 
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    testImplementation project(':survey:application')
 }

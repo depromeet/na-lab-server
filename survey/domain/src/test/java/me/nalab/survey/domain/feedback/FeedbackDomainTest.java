@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -162,9 +164,9 @@ class FeedbackDomainTest {
 	@DisplayName("feedback domain 정렬 테스트")
 	void FEEDBACK_DOMAIN_SORTING_SUCCESS() {
 		// given
-		LocalDateTime now = LocalDateTime.now();
-		LocalDateTime year1Ago = LocalDateTime.now().minusYears(1);
-		LocalDateTime year2Ago = LocalDateTime.now().minusYears(2);
+		Instant now = Instant.now();
+		Instant year1Ago = LocalDateTime.now().minusYears(1).toInstant(ZoneOffset.UTC);
+		Instant year2Ago = LocalDateTime.now().minusYears(2).toInstant(ZoneOffset.UTC);
 
 		List<Feedback> feedbackList = Arrays.asList(Feedback.builder().createdAt(year1Ago).updatedAt(year1Ago).build(),
 			Feedback.builder().createdAt(year2Ago).updatedAt(year2Ago).build(),
@@ -197,8 +199,8 @@ class FeedbackDomainTest {
 			.surveyId(survey.getId())
 			.reviewer(getReviewer(name, isCollaborated, position))
 			.formQuestionFeedbackableList(getFormQuestionFeedbackList(survey))
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.isRead(false)
 			.build();
 	}
@@ -214,8 +216,8 @@ class FeedbackDomainTest {
 			.surveyId(survey.getId())
 			.reviewer(getReviewer(name, isCollaborated, position))
 			.formQuestionFeedbackableList(List.of(choiceFormQuestionFeedback))
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.isRead(false)
 			.build();
 	}

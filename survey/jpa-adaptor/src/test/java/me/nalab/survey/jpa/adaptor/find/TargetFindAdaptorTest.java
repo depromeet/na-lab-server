@@ -3,7 +3,7 @@ package me.nalab.survey.jpa.adaptor.find;
 import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -47,8 +47,8 @@ class TargetFindAdaptorTest {
 		Long targetId = 1L;
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("sujin")
 			.build();
 

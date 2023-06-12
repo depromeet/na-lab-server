@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.nalab.core.time.TimeUtil;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
 import me.nalab.survey.application.port.in.web.LatestSurveyIdFindUseCase;
 import me.nalab.survey.web.adaptor.createsurvey.request.SurveyCreateRequest;
@@ -21,11 +22,12 @@ class SurveyCreateController {
 
 	private final CreateSurveyUseCase createSurveyUseCase;
 	private final LatestSurveyIdFindUseCase latestSurveyIdFindUseCase;
+	private final TimeUtil timeUtil;
 
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
 	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId, @RequestBody SurveyCreateRequest surveyCreateRequest) {
-		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
+		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, timeUtil.toInstant()));
 		Long latestSurveyId = latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId);
 		return new SurveyIdResponse(latestSurveyId);
 	}

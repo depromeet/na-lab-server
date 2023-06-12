@@ -1,5 +1,7 @@
 package me.nalab.survey.web.adaptor.findspecific;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ class SpecificFeedbackResponseMapper {
 	static SpecificFeedbackResponse toSpecificFeedbackResponse(SurveyDto surveyDto, FeedbackDto feedbackDto) {
 		return SpecificFeedbackResponse.builder()
 			.feedbackId(feedbackDto.getId())
-			.createdAt(feedbackDto.getCreatedAt())
+			.createdAt(ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
 			.reviewer(ReviewerResponse.builder()
 				.nickName(feedbackDto.getReviewerDto().getNickName())
 				.collaborationExperience(feedbackDto.getReviewerDto().isCollaborationExperience())

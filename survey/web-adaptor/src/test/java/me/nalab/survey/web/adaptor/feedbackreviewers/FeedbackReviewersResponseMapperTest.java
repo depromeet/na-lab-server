@@ -1,9 +1,9 @@
 package me.nalab.survey.web.adaptor.feedbackreviewers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 
@@ -62,8 +62,8 @@ class FeedbackReviewersResponseMapperTest {
 				.collaborationExperience(true)
 				.position("developer")
 				.build())
-			.createdAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
-			.updatedAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 	}
 }

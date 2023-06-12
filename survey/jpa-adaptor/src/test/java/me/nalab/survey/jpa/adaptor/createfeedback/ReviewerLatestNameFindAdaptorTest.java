@@ -3,7 +3,7 @@ package me.nalab.survey.jpa.adaptor.createfeedback;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,14 +94,14 @@ class ReviewerLatestNameFindAdaptorTest {
 	private TargetEntity getDefaultTargetEntity() {
 		return TargetEntity.builder()
 			.id(101L)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 	}
 
 	private String getLatestReviewerName(List<FeedbackEntity> feedbackEntityList) {
-		LocalDateTime latest = null;
+		Instant latest = null;
 		String latestName = null;
 		for(FeedbackEntity feedbackEntity : feedbackEntityList) {
 			if(latest == null || feedbackEntity.getCreatedAt().isAfter(latest)) {

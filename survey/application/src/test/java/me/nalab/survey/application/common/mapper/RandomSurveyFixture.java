@@ -1,6 +1,6 @@
 package me.nalab.survey.application.common.mapper;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +21,7 @@ class RandomSurveyFixture {
 	@Setter
 	private static Supplier<Long> randomIdGenerator;
 	@Setter
-	private static Supplier<LocalDateTime> randomDateTimeGenerator;
+	private static Supplier<Instant> randomDateTimeGenerator;
 	@Setter
 	private static Supplier<Integer> randomQuestionCountGenerator;
 	@Setter
@@ -37,9 +37,9 @@ class RandomSurveyFixture {
 		initGenerator();
 	}
 
-	static void initGenerator(){
+	static void initGenerator() {
 		randomIdGenerator = () -> 1L;
-		randomDateTimeGenerator = LocalDateTime::now;
+		randomDateTimeGenerator = Instant::now;
 		randomQuestionCountGenerator = () -> (new Random()).nextInt(10) + 1;
 		randomStringGenerator = () -> {
 			Random random = new Random();
@@ -49,8 +49,10 @@ class RandomSurveyFixture {
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 				.toString();
 		};
-		randomChoiceFormQuestionTypeGenerator = () -> ChoiceFormQuestionType.values()[(new Random()).nextInt(ChoiceFormQuestionType.values().length)];
-		randomShortFormQuestionTypeGenerator = () -> ShortFormQuestionType.values()[(new Random()).nextInt(ShortFormQuestionType.values().length)];
+		randomChoiceFormQuestionTypeGenerator = () -> ChoiceFormQuestionType.values()[(new Random()).nextInt(
+			ChoiceFormQuestionType.values().length)];
+		randomShortFormQuestionTypeGenerator = () -> ShortFormQuestionType.values()[(new Random()).nextInt(
+			ShortFormQuestionType.values().length)];
 		randomChoiceCountGenerator = () -> (new Random()).nextInt(100) + 1;
 	}
 
@@ -66,7 +68,7 @@ class RandomSurveyFixture {
 	private static List<FormQuestionable> getRandomFormQuestionableList() {
 		List<FormQuestionable> formQuestionableList = new ArrayList<>();
 		formQuestionableList.addAll(getRandomChoiceFormQuestionList(1));
-		formQuestionableList.addAll(getRandomShortFormQuestionList(formQuestionableList.size()+1));
+		formQuestionableList.addAll(getRandomShortFormQuestionList(formQuestionableList.size() + 1));
 		return formQuestionableList;
 	}
 

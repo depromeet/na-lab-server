@@ -3,7 +3,10 @@ package me.nalab.survey.jpa.adaptor.create;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -56,8 +59,8 @@ class LatestSurveyIdFindAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(1L)
 			.nickname("Hello")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 
 		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetEntity.getId(),
@@ -84,15 +87,15 @@ class LatestSurveyIdFindAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(1L)
 			.nickname("Hello")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 
-		RandomSurveyFixture.setRandomDateTimeGenerator(() -> LocalDateTime.now().minusDays(1));
+		RandomSurveyFixture.setRandomDateTimeGenerator(() -> LocalDateTime.now().minusYears(1).toInstant(ZoneOffset.UTC));
 		SurveyEntity pastSurvey = SurveyEntityMapper.toSurveyEntity(targetEntity.getId(),
 			RandomSurveyFixture.createRandomSurvey());
 
-		RandomSurveyFixture.setRandomDateTimeGenerator(LocalDateTime::now);
+		RandomSurveyFixture.setRandomDateTimeGenerator(Instant::now);
 		SurveyEntity latestSurvey = SurveyEntityMapper.toSurveyEntity(targetEntity.getId(),
 			RandomSurveyFixture.createRandomSurvey());
 

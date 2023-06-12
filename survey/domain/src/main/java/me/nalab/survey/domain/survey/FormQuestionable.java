@@ -1,6 +1,6 @@
 package me.nalab.survey.domain.survey;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.function.LongSupplier;
 
@@ -20,8 +20,8 @@ public abstract class FormQuestionable implements IdGeneratable, Comparable<Form
 
 	protected Long id;
 	protected final String title;
-	protected final LocalDateTime createdAt;
-	protected final LocalDateTime updatedAt;
+	protected final Instant createdAt;
+	protected final Instant updatedAt;
 	protected final Integer order;
 	protected final QuestionType questionType;
 

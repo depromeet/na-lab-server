@@ -1,6 +1,6 @@
 package me.nalab.survey.domain.survey;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +17,8 @@ class FormQuestionableTest {
 		choiceList1.add(Choice.builder().id(3L).content("content").order(3).build());
 		ChoiceFormQuestion question1 = ChoiceFormQuestion.builder()
 			.title("Question 1")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.order(1)
 			.questionType(QuestionType.CHOICE)
 			.choiceList(choiceList1)
@@ -29,8 +29,8 @@ class FormQuestionableTest {
 		choiceList2.add(Choice.builder().id(3L).content("content").order(3).build());
 		FormQuestionable question2 = ChoiceFormQuestion.builder()
 			.title("Question 2")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.order(2)
 			.questionType(QuestionType.CHOICE)
 			.choiceList(choiceList2)
@@ -38,8 +38,8 @@ class FormQuestionableTest {
 
 		FormQuestionable question3 = ShortFormQuestion.builder()
 			.title("Question 3")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.order(3)
 			.questionType(QuestionType.SHORT)
 			.build();

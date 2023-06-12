@@ -2,7 +2,7 @@ package me.nalab.luffy.api.acceptance.test.survey.find;
 
 import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyAndQuestionFound;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ class SurveyFindAcceptanceTest extends AbstractSurveyTestSupporter {
 	void SURVEY_FIND_SUCCESS_TEST() throws Exception {
 
 		String token = "luffy's-double-token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 

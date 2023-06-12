@@ -1,5 +1,7 @@
 package me.nalab.survey.web.adaptor.findfeedback;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -80,7 +82,8 @@ final class ResponseMapper {
 					ChoiceFeedbackResponse.builder()
 						.id(feedbackDto.getId())
 						.choiceIdSet(selectedChoiceIdSet)
-						.createdAt(feedbackDto.getCreatedAt())
+						.createdAt(ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul"))
+							.toLocalDateTime())
 						.read(feedbackDto.isRead())
 						.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 						.build()

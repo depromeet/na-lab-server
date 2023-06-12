@@ -3,7 +3,7 @@ package me.nalab.luffy.api.acceptance.test.feedback.findreviewers;
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsReviewersFound;
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsReviewersNotFound;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +64,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		String token = "token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 
@@ -84,7 +84,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		String token = "token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 

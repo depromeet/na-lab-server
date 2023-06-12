@@ -2,7 +2,7 @@ package me.nalab.luffy.api.acceptance.test.feedback.findsummary;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackSummaryFound;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +63,7 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		String token = "token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 		Long surveyId = createSurveyAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
@@ -81,7 +81,7 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		String token = "token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 

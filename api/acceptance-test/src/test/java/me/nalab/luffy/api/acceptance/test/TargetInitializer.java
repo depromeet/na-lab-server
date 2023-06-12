@@ -1,6 +1,6 @@
 package me.nalab.luffy.api.acceptance.test;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,7 +22,7 @@ public class TargetInitializer {
 	private IdGenerator idGenerator;
 
 	@Transactional
-	public Long saveTargetAndGetId(String name, LocalDateTime date) {
+	public Long saveTargetAndGetId(String name, Instant date) {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(idGenerator.generate())
 			.nickname(name)

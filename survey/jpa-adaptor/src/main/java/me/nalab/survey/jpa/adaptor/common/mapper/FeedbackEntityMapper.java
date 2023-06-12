@@ -1,6 +1,6 @@
 package me.nalab.survey.jpa.adaptor.common.mapper;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +83,7 @@ public final class FeedbackEntityMapper {
 			.build();
 	}
 
-	private static ReviewerEntity getReviewerEntity(Reviewer reviewer, LocalDateTime now) {
+	private static ReviewerEntity getReviewerEntity(Reviewer reviewer, Instant now) {
 		return ReviewerEntity.builder()
 			.id(reviewer.getId())
 			.nickName(reviewer.getNickName())

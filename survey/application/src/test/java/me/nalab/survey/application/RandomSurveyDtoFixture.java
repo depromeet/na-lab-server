@@ -1,6 +1,6 @@
 package me.nalab.survey.application;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class RandomSurveyDtoFixture {
 	@Setter
 	private static Supplier<Long> randomIdGenerator;
 	@Setter
-	private static Supplier<LocalDateTime> randomDateTimeGenerator;
+	private static Supplier<Instant> randomDateTimeGenerator;
 	@Setter
 	private static Supplier<Integer> randomQuestionCountGenerator;
 	@Setter
@@ -39,7 +39,7 @@ public class RandomSurveyDtoFixture {
 
 	public static void initGenerator() {
 		randomIdGenerator = () -> 1L;
-		randomDateTimeGenerator = LocalDateTime::now;
+		randomDateTimeGenerator = Instant::now;
 		randomQuestionCountGenerator = () -> (new Random()).nextInt(10) + 1;
 		randomStringGenerator = () -> {
 			Random random = new Random();
