@@ -6,6 +6,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -108,7 +109,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 			.getContentAsString();
 
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		return jsonObject.getLong("survey_id");
+		return Long.valueOf(jsonObject.getString("survey_id"));
 	}
 
 	private SurveyFindResponse findSurveyAndGetSurveyResponse(Long surveyId) throws Exception {
@@ -149,7 +150,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private ShortQuestionFeedbackRequest getShortQuestionFeedbackRequest(
 		ShortFormQuestionResponse shortFormQuestionResponse) {
 		return ShortQuestionFeedbackRequest.builder()
-			.questionId(shortFormQuestionResponse.getQuestionId())
+			.questionId(Long.valueOf(shortFormQuestionResponse.getQuestionId()))
 			.replyList(List.of("mocking", "words", "hello!"))
 			.type("short")
 			.build();
@@ -159,8 +160,11 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ChoiceFormQuestionResponse choiceFormQuestionResponse) {
 		return ChoiceQuestionFeedbackRequest.builder()
 			.type("choice")
-			.questionId(choiceFormQuestionResponse.getQuestionId())
-			.choiceList(List.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId()))
+			.questionId(Long.valueOf(choiceFormQuestionResponse.getQuestionId()))
+			.choiceList(Stream.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId())
+				.map(Long::valueOf)
+				.collect(
+					Collectors.toList()))
 			.build();
 	}
 

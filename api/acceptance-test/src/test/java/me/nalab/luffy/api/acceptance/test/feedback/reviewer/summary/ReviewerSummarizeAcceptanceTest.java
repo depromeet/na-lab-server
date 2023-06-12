@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -149,7 +150,7 @@ class ReviewerSummarizeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private ShortQuestionFeedbackRequest getShortQuestionFeedbackRequest(
 		ShortFormQuestionResponse shortFormQuestionResponse) {
 		return ShortQuestionFeedbackRequest.builder()
-			.questionId(shortFormQuestionResponse.getQuestionId())
+			.questionId(Long.valueOf(shortFormQuestionResponse.getQuestionId()))
 			.replyList(List.of("mocking", "words", "hello!"))
 			.type("short")
 			.build();
@@ -159,8 +160,11 @@ class ReviewerSummarizeAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ChoiceFormQuestionResponse choiceFormQuestionResponse) {
 		return ChoiceQuestionFeedbackRequest.builder()
 			.type("choice")
-			.questionId(choiceFormQuestionResponse.getQuestionId())
-			.choiceList(List.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId()))
+			.questionId(Long.valueOf(choiceFormQuestionResponse.getQuestionId()))
+			.choiceList(Stream.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId())
+				.map(Long::valueOf)
+				.collect(
+					Collectors.toList()))
 			.build();
 	}
 

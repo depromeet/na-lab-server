@@ -11,7 +11,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class TargetResponse {
 
-	private Long id;
+	private String id;
 
 	private String nickname;
 

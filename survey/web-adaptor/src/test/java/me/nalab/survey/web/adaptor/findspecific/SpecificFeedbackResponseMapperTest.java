@@ -103,13 +103,13 @@ class SpecificFeedbackResponseMapperTest {
 
 	private static SpecificFeedbackResponse getSpecificFeedbackResponse() {
 		return SpecificFeedbackResponse.builder()
-			.feedbackId(7L)
+			.feedbackId("7")
 			.createdAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
 			.reviewer(ReviewerResponse.builder()
 				.nickName("sujin").collaborationExperience(true).position("developer").build())
 			.question(List.of(
 				ChoiceFormFeedbackResponse.builder()
-					.questionId(3L)
+					.questionId("3")
 					.type("choice")
 					.formType("tendency")
 					.title("Choice Question")
@@ -117,19 +117,19 @@ class SpecificFeedbackResponseMapperTest {
 					.isRead(true)
 					.choices(List.of(
 						ChoiceResponse.builder()
-							.choiceId(1L)
+							.choiceId("1")
 							.content("Choice 1")
 							.order(1)
 							.build(),
 						ChoiceResponse.builder()
-							.choiceId(2L)
+							.choiceId("2")
 							.content("Choice 2")
 							.order(2)
 							.build()
 					))
 					.build(),
 				ShortFormFeedbackResponse.builder()
-					.questionId(4L)
+					.questionId("4")
 					.type("short")
 					.formType("strength")
 					.title("Short Question")
