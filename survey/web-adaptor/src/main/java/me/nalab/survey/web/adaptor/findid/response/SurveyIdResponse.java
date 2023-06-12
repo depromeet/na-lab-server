@@ -10,6 +10,6 @@ import lombok.Getter;
 public class SurveyIdResponse {
 
 	@JsonProperty("survey_id")
-	private final Long surveyId;
+	private final String surveyId;
 
 }

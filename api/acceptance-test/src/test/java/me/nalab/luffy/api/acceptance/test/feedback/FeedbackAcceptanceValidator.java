@@ -35,7 +35,7 @@ public final class FeedbackAcceptanceValidator {
 
 			jsonPath("$.question_feedback").isArray(),
 			jsonPath("$.question_feedback").isNotEmpty(),
-			jsonPath("$.question_feedback.[0].question_id").isNumber(),
+			jsonPath("$.question_feedback.[0].question_id").isString(),
 			jsonPath("$.question_feedback.[0].order").isNumber(),
 			jsonPath("$.question_feedback.[0].type").isString(),
 			jsonPath("$.question_feedback.[0].form_type").isString(),
@@ -43,11 +43,11 @@ public final class FeedbackAcceptanceValidator {
 
 			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
 			jsonPath("$.question_feedback.[0].feedbacks").isNotEmpty(),
-			jsonPath("$.question_feedback.[0].feedbacks.[0].feedback_id").isNumber(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].feedback_id").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].created_at").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].is_read").isBoolean(),
 
-			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id").isNumber(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.nickname").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.collaboration_experience").isBoolean(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.position").isString()
@@ -62,7 +62,7 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback").isArray(),
 			jsonPath("$.question_feedback").isNotEmpty(),
 
-			jsonPath("$.question_feedback.[0].question_id").isNumber(),
+			jsonPath("$.question_feedback.[0].question_id").isString(),
 			jsonPath("$.question_feedback.[0].order").isNumber(),
 			jsonPath("$.question_feedback.[0].type").isString(),
 			jsonPath("$.question_feedback.[0].form_type").isString(),
@@ -96,7 +96,7 @@ public final class FeedbackAcceptanceValidator {
 			status().isOk(),
 			content().contentType(MediaType.APPLICATION_JSON),
 			jsonPath("$.feedbacks").isArray(),
-			jsonPath("$.feedbacks[0].feedback_id").isNumber(),
+			jsonPath("$.feedbacks[0].feedback_id").isString(),
 			jsonPath("$.feedbacks[0].created_at").isString(),
 			jsonPath("$.feedbacks[0].reviewer.nickname").isString(),
 			jsonPath("$.feedbacks[0].reviewer.collaboration_experience").isBoolean(),
@@ -109,13 +109,13 @@ public final class FeedbackAcceptanceValidator {
 		resultActions.andExpectAll(
 			status().isOk(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.feedback_id").isNumber(),
+			jsonPath("$.feedback_id").isString(),
 			jsonPath("$.created_at").isString(),
 			jsonPath("$.reviewer.nickname").isString(),
 			jsonPath("$.reviewer.collaboration_experience").isBoolean(),
 			jsonPath("$.reviewer.position").isString(),
 			jsonPath("$.question").isArray(),
-			jsonPath("$.question[0].question_id").isNumber(),
+			jsonPath("$.question[0].question_id").isString(),
 			jsonPath("$.question[0].type").isString(),
 			jsonPath("$.question[0].form_type").isString(),
 			jsonPath("$.question[0].title").isString(),

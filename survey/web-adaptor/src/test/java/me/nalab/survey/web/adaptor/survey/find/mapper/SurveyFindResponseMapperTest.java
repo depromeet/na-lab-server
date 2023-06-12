@@ -53,11 +53,11 @@ class SurveyFindResponseMapperTest {
 			.build();
 
 		SurveyFindResponse response = SurveyFindResponseMapper.toSurveyFindResponse(targetDto, surveyDto);
-		assertEquals(surveyDto.getId(), response.getSurveyId());
+		assertEquals(String.valueOf(surveyDto.getId()), response.getSurveyId());
 
 		TargetResponse targetResponse = response.getTarget();
 		assertAll(
-			() -> assertEquals(targetDto.getId(), targetResponse.getId()),
+			() -> assertEquals(String.valueOf(targetDto.getId()), targetResponse.getId()),
 			() -> assertEquals(targetDto.getNickname(), targetResponse.getNickname())
 		);
 
@@ -67,7 +67,7 @@ class SurveyFindResponseMapperTest {
 		ChoiceFormQuestionDto choiceQuestionDto = (ChoiceFormQuestionDto)surveyDto.getFormQuestionDtoableList().get(0);
 		ChoiceFormQuestionResponse choiceQuestionResponse = (ChoiceFormQuestionResponse)questionList.get(0);
 		assertAll(
-			() -> assertEquals(choiceQuestionDto.getId(), choiceQuestionResponse.getQuestionId()),
+			() -> assertEquals(String.valueOf(choiceQuestionDto.getId()), choiceQuestionResponse.getQuestionId()),
 			() -> assertEquals(QuestionDtoType.CHOICE.toString().toLowerCase(), choiceQuestionResponse.getType()),
 			() -> assertEquals(choiceQuestionDto.getTitle(), choiceQuestionResponse.getTitle()),
 			() -> assertEquals(choiceQuestionDto.getOrder(), choiceQuestionResponse.getOrder()),
@@ -86,7 +86,7 @@ class SurveyFindResponseMapperTest {
 			ChoiceResponse choiceResponse = choiceList.get(i);
 
 			assertAll(
-				() -> assertEquals(choiceDto.getId(), choiceResponse.getChoiceId()),
+				() -> assertEquals(String.valueOf(choiceDto.getId()), choiceResponse.getChoiceId()),
 				() -> assertEquals(choiceDto.getContent(), choiceResponse.getContent()),
 				() -> assertEquals(choiceDto.getOrder(), choiceResponse.getOrder())
 			);
@@ -95,7 +95,7 @@ class SurveyFindResponseMapperTest {
 		ShortFormQuestionDto shortQuestionDto = (ShortFormQuestionDto)surveyDto.getFormQuestionDtoableList().get(1);
 		ShortFormQuestionResponse shortQuestionResponse = (ShortFormQuestionResponse)questionList.get(1);
 		assertAll(
-			() -> assertEquals(shortQuestionDto.getId(), shortQuestionResponse.getQuestionId()),
+			() -> assertEquals(String.valueOf(shortQuestionDto.getId()), shortQuestionResponse.getQuestionId()),
 			() -> assertEquals(QuestionDtoType.SHORT.toString().toLowerCase(), shortQuestionResponse.getType()),
 			() -> assertEquals(shortQuestionDto.getTitle(), shortQuestionResponse.getTitle()),
 			() -> assertEquals(shortQuestionDto.getOrder(), shortQuestionResponse.getOrder())

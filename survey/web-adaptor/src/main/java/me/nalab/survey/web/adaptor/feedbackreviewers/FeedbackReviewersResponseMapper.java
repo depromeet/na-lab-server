@@ -16,7 +16,7 @@ class FeedbackReviewersResponseMapper {
 	static FeedbackReviewersResponse toFeedbackReviewersResponse(List<FeedbackDto> feedbacks) {
 		List<FeedbackReviewer> feedbackReviewers = feedbacks.stream()
 			.map(it -> FeedbackReviewer.builder()
-				.feedbackId(it.getId())
+				.feedbackId(String.valueOf(it.getId()))
 				.createdAt(it.getCreatedAt())
 				.reviewer(ReviewerResponse.builder()
 					.nickName(it.getReviewerDto().getNickName())

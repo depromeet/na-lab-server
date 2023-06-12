@@ -26,7 +26,7 @@ public class ChoiceSurveyResponse extends AbstractSurveyResponse {
 	@ToString
 	public static final class QuestionResponse {
 		@JsonProperty("choice_id")
-		private final Long choiceId;
+		private final String choiceId;
 		private final Integer order;
 		private final String content;
 	}

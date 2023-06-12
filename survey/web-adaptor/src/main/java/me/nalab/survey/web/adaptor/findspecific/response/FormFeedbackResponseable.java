@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class FormFeedbackResponseable {
 
 	@JsonProperty("question_id")
-	private final long questionId;
+	private final String questionId;
 
 	private final String type;
 	@JsonProperty("form_type")
