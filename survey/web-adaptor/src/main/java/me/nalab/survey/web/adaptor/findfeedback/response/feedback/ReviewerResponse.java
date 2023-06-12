@@ -12,7 +12,7 @@ import lombok.ToString;
 public class ReviewerResponse {
 
 	@JsonProperty("reviewer_id")
-	private final Long id;
+	private final String id;
 	@JsonProperty("nickname")
 	private final String nickName;
 	@JsonProperty("collaboration_experience")
