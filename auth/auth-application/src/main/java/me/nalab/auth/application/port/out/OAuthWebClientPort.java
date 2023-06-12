@@ -2,6 +2,8 @@ package me.nalab.auth.application.port.out;
 
 import me.nalab.auth.application.common.dto.OAuthAccessTokenResponse;
 
+import java.net.URI;
+
 /**
  * OAuth 접근을 위한 Web Client Port
  */
@@ -14,4 +16,10 @@ public interface OAuthWebClientPort {
      */
     OAuthAccessTokenResponse getAccessToken(String authToken);
 
+    /**
+     * 인증을 위한 url을 가져옵니다
+     *
+     * @return 인증을 위한 redirect url
+     */
+    URI getAuthorizationUrl(String redirectUrl);
 }

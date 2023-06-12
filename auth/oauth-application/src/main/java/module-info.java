@@ -8,5 +8,6 @@ module luffy.auth.oauth.application.main {
     requires spring.beans;
     requires spring.web;
     requires spring.webflux;
+    requires spring.core;
 
 }

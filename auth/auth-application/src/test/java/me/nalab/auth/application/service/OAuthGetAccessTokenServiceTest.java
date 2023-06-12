@@ -1,9 +1,9 @@
 package me.nalab.auth.application.service;
 
+import me.nalab.auth.application.WebClientFactory;
 import me.nalab.auth.application.common.dto.OAuthAccessTokenRequest;
 import me.nalab.auth.application.common.dto.OAuthAccessTokenResponse;
 import me.nalab.auth.application.port.out.OAuthWebClientFactory;
-import me.nalab.auth.application.port.out.OAuthWebClientPort;
 import me.nalab.user.domain.user.Provider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -74,7 +74,7 @@ class OAuthGetAccessTokenServiceTest {
         var request = new OAuthAccessTokenRequest(provider, "token");
 
         var expectedResponse = new OAuthAccessTokenResponse("access", "tokenType", null);
-        var fakeWebClient = getFakeWebClient(expectedResponse);
+        var fakeWebClient = WebClientFactory.createFakeWebClient(expectedResponse);
         when(oauthWebClientFactory.getClient(provider)).thenReturn(fakeWebClient);
 
 
@@ -86,14 +86,4 @@ class OAuthGetAccessTokenServiceTest {
         Assertions.assertThat(response.getToken()).isNotBlank();
         Assertions.assertThat(response.getTokenType()).isNotBlank();
     }
-
-    private OAuthWebClientPort getFakeWebClient(OAuthAccessTokenResponse accessTokenResponse) {
-        return new OAuthWebClientPort() {
-            @Override
-            public OAuthAccessTokenResponse getAccessToken(String authToken) {
-                return accessTokenResponse;
-            }
-        };
-    }
-
 }
