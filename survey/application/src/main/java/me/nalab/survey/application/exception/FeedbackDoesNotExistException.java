@@ -8,7 +8,7 @@ public class FeedbackDoesNotExistException extends RuntimeException {
 	private final Long feedbackId;
 
 	public FeedbackDoesNotExistException(Long feedbackId) {
-		super("Cannot find any feedbackId \"" + feedbackId);
+		super("Cannot found any feedback id \"" + feedbackId);
 		this.feedbackId = feedbackId;
 	}
 
