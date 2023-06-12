@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class AbstractSurveyResponse {
 
 	@JsonProperty("question_id")
-	private final String questionId;
+	private final Long questionId;
 	private final Integer order;
 	private final String type;
 	@JsonProperty("form_type")

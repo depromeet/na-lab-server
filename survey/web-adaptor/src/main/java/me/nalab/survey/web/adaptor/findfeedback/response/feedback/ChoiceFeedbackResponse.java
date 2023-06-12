@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 public class ChoiceFeedbackResponse extends AbstractFeedbackResponse {
 
 	@JsonProperty("choice_id")
-	private final Set<String> choiceIdSet;
+	private final Set<Long> choiceIdSet;
 
 }

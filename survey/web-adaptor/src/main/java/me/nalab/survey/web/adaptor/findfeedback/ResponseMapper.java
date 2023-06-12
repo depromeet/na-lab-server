@@ -43,7 +43,7 @@ final class ResponseMapper {
 	private static AbstractSurveyResponse toChoiceSurveyResponse(ChoiceFormQuestionDto choiceFormQuestionDto,
 		List<FeedbackDto> feedbackDto) {
 		return ChoiceSurveyResponse.builder()
-			.questionId(String.valueOf(choiceFormQuestionDto.getId()))
+			.questionId(choiceFormQuestionDto.getId())
 			.order(choiceFormQuestionDto.getOrder())
 			.type(choiceFormQuestionDto.getQuestionDtoType().name().toLowerCase())
 			.formType(choiceFormQuestionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
@@ -56,7 +56,7 @@ final class ResponseMapper {
 	private static List<ChoiceSurveyResponse.QuestionResponse> toChoiceQuestionResponse(List<ChoiceDto> choiceDtoList) {
 		return choiceDtoList.stream().map(
 			c -> ChoiceSurveyResponse.QuestionResponse.builder()
-				.choiceId(String.valueOf(c.getId()))
+				.choiceId(c.getId())
 				.order(c.getOrder())
 				.content(c.getContent())
 				.build()).collect(Collectors.toList()
@@ -75,14 +75,10 @@ final class ResponseMapper {
 		feedbackDto.getFormQuestionFeedbackDtoableList().stream()
 			.filter(q -> q.getQuestionId().equals(questionId))
 			.forEach(cq -> {
-				Set<String> selectedChoiceIdSet = ((ChoiceFormQuestionFeedbackDto)cq).getSelectedChoiceIdSet()
-					.stream()
-					.map(String::valueOf)
-					.collect(
-						Collectors.toSet());
+				Set<Long> selectedChoiceIdSet = ((ChoiceFormQuestionFeedbackDto)cq).getSelectedChoiceIdSet();
 				choiceFeedbackResponseList.add(
 					ChoiceFeedbackResponse.builder()
-						.id(String.valueOf(feedbackDto.getId()))
+						.id(feedbackDto.getId())
 						.choiceIdSet(selectedChoiceIdSet)
 						.createdAt(feedbackDto.getCreatedAt())
 						.read(feedbackDto.isRead())
@@ -94,7 +90,7 @@ final class ResponseMapper {
 
 	private static ReviewerResponse toReviewerResponse(ReviewerDto reviewerDto) {
 		return ReviewerResponse.builder()
-			.id(String.valueOf(reviewerDto.getId()))
+			.id(reviewerDto.getId())
 			.nickName(reviewerDto.getNickName())
 			.collaborationExperience(reviewerDto.isCollaborationExperience())
 			.position(reviewerDto.getPosition())
@@ -104,7 +100,7 @@ final class ResponseMapper {
 	private static AbstractSurveyResponse toShortSurveyResponse(ShortFormQuestionDto shortFormQuestionDto,
 		List<FeedbackDto> feedbackDtoList) {
 		return ShortSurveyResponse.builder()
-			.questionId(String.valueOf(shortFormQuestionDto.getId()))
+			.questionId(shortFormQuestionDto.getId())
 			.order(shortFormQuestionDto.getOrder())
 			.type(shortFormQuestionDto.getQuestionDtoType().name().toLowerCase())
 			.formType(shortFormQuestionDto.getShortFormQuestionDtoType().name().toLowerCase())

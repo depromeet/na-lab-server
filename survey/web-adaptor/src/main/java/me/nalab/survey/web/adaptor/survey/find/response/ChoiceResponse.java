@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ChoiceResponse {
 
 	@JsonProperty("choice_id")
-	private String choiceId;
+	private Long choiceId;
 
 	private String content;
 

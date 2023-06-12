@@ -12,6 +12,6 @@ import lombok.ToString;
 public class SurveyIdResponse {
 
 	@JsonProperty("survey_id")
-	private final String surveyId;
+	private final Long surveyId;
 
 }

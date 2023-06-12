@@ -20,7 +20,7 @@ import lombok.ToString;
 public class SurveyFindResponse {
 
 	@JsonProperty("survey_id")
-	private String surveyId;
+	private Long surveyId;
 
 	private TargetResponse target;
 

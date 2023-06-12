@@ -26,7 +26,7 @@ class SpecificFeedbackResponseMapper {
 
 	static SpecificFeedbackResponse toSpecificFeedbackResponse(SurveyDto surveyDto, FeedbackDto feedbackDto) {
 		return SpecificFeedbackResponse.builder()
-			.feedbackId(String.valueOf(feedbackDto.getId()))
+			.feedbackId(feedbackDto.getId())
 			.createdAt(feedbackDto.getCreatedAt())
 			.reviewer(ReviewerResponse.builder()
 				.nickName(feedbackDto.getReviewerDto().getNickName())
@@ -67,7 +67,7 @@ class SpecificFeedbackResponseMapper {
 	private static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto,
 		ShortFormQuestionFeedbackDto feedbackDto) {
 		return ShortFormFeedbackResponse.builder()
-			.questionId(String.valueOf(questionDto.getId()))
+			.questionId(questionDto.getId())
 			.type("short")
 			.formType(questionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())
@@ -82,14 +82,14 @@ class SpecificFeedbackResponseMapper {
 		List<ChoiceResponse> choices = questionDto.getChoiceDtoList().stream()
 			.filter(it -> feedbackDto.getSelectedChoiceIdSet().contains(it.getId()))
 			.map(it -> ChoiceResponse.builder()
-				.choiceId(String.valueOf(it.getId()))
+				.choiceId(it.getId())
 				.content(it.getContent())
 				.order(it.getOrder())
 				.build())
 			.collect(Collectors.toList());
 
 		return ChoiceFormFeedbackResponse.builder()
-			.questionId(String.valueOf(questionDto.getId()))
+			.questionId(questionDto.getId())
 			.type("choice")
 			.formType(questionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())

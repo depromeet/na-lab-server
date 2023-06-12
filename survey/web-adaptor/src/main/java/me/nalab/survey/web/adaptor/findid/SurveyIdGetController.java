@@ -22,7 +22,7 @@ public class SurveyIdGetController {
 	@ResponseStatus(HttpStatus.OK)
 	SurveyIdResponse getSurveyId(@RequestAttribute("logined") Long loginId) {
 		Long surveyId = surveyIdGetUseCase.getSurveyIdByTargetId(loginId);
-		return new SurveyIdResponse(String.valueOf(surveyId));
+		return new SurveyIdResponse(surveyId);
 	}
 
 }

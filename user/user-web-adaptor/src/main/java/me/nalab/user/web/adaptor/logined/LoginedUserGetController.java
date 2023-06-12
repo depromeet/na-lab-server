@@ -22,7 +22,7 @@ public class LoginedUserGetController {
 	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 		LoginedInfo loginedInfo = loginedUserGetByTokenUseCase.decryptToken(token);
 
-		return new LoginedInfoResponse(String.valueOf(loginedInfo.getTargetId()), loginedInfo.getNickName());
+		return new LoginedInfoResponse(loginedInfo.getTargetId(), loginedInfo.getNickName());
 	}
 
 }

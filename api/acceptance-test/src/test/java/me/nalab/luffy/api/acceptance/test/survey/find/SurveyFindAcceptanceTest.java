@@ -48,9 +48,9 @@ class SurveyFindAcceptanceTest extends AbstractSurveyTestSupporter {
 			.getContentAsString();
 
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		String surveyId = jsonObject.getString("survey_id");
+		Long surveyId = jsonObject.getLong("survey_id");
 
-		ResultActions resultActions = findSurvey(Long.valueOf(surveyId));
+		ResultActions resultActions = findSurvey(surveyId);
 
 		assertIsSurveyAndQuestionFound(resultActions);
 	}

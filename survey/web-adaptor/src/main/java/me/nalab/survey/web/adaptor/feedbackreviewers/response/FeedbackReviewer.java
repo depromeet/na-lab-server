@@ -17,7 +17,7 @@ import lombok.ToString;
 public class FeedbackReviewer {
 
 	@JsonProperty("feedback_id")
-	private String feedbackId;
+	private Long feedbackId;
 
 	@JsonProperty("created_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")

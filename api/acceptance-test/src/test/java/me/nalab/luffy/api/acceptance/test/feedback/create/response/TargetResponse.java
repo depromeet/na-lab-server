@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class TargetResponse {
 
-	private String id;
+	private Long id;
 
 	private String nickname;
 
