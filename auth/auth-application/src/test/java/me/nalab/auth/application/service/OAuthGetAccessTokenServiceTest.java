@@ -51,6 +51,7 @@ class OAuthGetAccessTokenServiceTest {
         // then
         Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
     }
+    
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("요청 객체의 authToken이 null 또는 empty라면 예외를 던진다")
