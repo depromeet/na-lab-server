@@ -1,7 +1,6 @@
 package me.nalab.core.secure;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,10 +11,18 @@ class CorsConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
+		registry.addMapping("/v1/**")
 			.allowedOrigins("*")
+			.allowedHeaders("*")
+			.allowCredentials(true)
 			.allowedMethods(ALLOWED_METHOD_NAMES)
-			.exposedHeaders(HttpHeaders.LOCATION)
+			.maxAge(3600);
+
+		registry.addMapping("/mock/**")
+			.allowedOrigins("*")
+			.allowedHeaders("*")
+			.allowCredentials(true)
+			.allowedMethods(ALLOWED_METHOD_NAMES)
 			.maxAge(3600);
 	}
 }
