@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DefaultOAuthWebClientFactory implements OAuthWebClientFactory {
 
-    private KakaoOAuthWebClient kakaoOAuthWebClient;
+    private final KakaoOAuthWebClient kakaoOAuthWebClient;
 
     @Override
     public OAuthWebClientPort getClient(Provider provider) {

@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * authorized 권한 획득 후 SignIn 요청이 들어오는 api
+ * @see me.nalab.auth.application.service.AuthorizeWithOauthService
+ */
 @RestController
 @RequestMapping("/v1/oauth")
 @RequiredArgsConstructor
@@ -23,7 +27,6 @@ public class SignInWithOAuthController {
     private final SignInWithOAuthUseCase signInWithOauthUseCase;
 
     private static final String TOKEN_TYPE = "bearer";
-
 
     @PostMapping("/{oauth-provider}")
     public Response signInWithOAuth(
