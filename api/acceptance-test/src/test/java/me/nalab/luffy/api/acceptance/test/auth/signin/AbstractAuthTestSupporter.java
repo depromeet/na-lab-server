@@ -23,4 +23,11 @@ public abstract class AbstractAuthTestSupporter {
 				.content(content);
 		return mockMvc.perform(mockMvcRequest);
 	}
+
+	protected ResultActions getAuthorizeByOAuthProvider(String oauthProvider) throws Exception {
+		var path = "/v1/auth/oauth/" + oauthProvider;
+		var mockMvcRequest = MockMvcRequestBuilders.get(path).accept(MediaType.ALL);
+
+		return mockMvc.perform(mockMvcRequest);
+	}
 }

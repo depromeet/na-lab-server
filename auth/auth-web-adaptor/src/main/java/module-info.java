@@ -2,6 +2,7 @@ module luffy.auth.auth.web.adaptor.main {
     exports me.nalab.auth.web.adaptor.api;
 
     requires luffy.auth.auth.application.main;
+    requires luffy.auth.oauth.application.main;
 
     requires lombok;
     requires java.validation;
