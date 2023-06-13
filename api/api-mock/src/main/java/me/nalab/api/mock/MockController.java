@@ -237,9 +237,9 @@ public class MockController {
 			+ "    },\n"
 			+ "    \"position\": {\n"
 			+ "        \"developer\": 2,\n"
-			+ "        \"product-manager\": 3,\n"
-			+ "        \"programmer\": 2,\n"
-			+ "        \"other\": 1\n"
+			+ "        \"pm\": 3,\n"
+			+ "        \"designer\": 2,\n"
+			+ "        \"others\": 1\n"
 			+ "    }\n"
 			+ "}";
 	}

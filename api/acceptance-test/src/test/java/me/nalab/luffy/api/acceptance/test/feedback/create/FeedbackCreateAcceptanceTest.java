@@ -98,8 +98,8 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 		List<FeedbackCreateRequest> feedbackCreateRequestList = List.of(
 			getFeedbackCreateRequest(surveyFindResponse, true, "developer"),
 			getFeedbackCreateRequest(surveyFindResponse, false, "designer"),
-			getFeedbackCreateRequest(surveyFindResponse, false, "other"),
-			getFeedbackCreateRequest(surveyFindResponse, true, "product-manager")
+			getFeedbackCreateRequest(surveyFindResponse, false, "others"),
+			getFeedbackCreateRequest(surveyFindResponse, true, "pm")
 		);
 
 		// when

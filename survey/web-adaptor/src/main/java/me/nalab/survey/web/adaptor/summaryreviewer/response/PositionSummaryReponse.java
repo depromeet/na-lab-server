@@ -14,9 +14,9 @@ import lombok.ToString;
 public class PositionSummaryReponse {
 
 	private final int designer;
-	@JsonProperty("product-manager")
+	@JsonProperty("pm")
 	private final int productManager;
-	private final int programmer;
-	private final int other;
+	private final int developer;
+	private final int others;
 
 }
