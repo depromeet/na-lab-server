@@ -13,8 +13,8 @@ import me.nalab.auth.application.port.in.web.OAuthGetAccessTokenUseCase;
 import me.nalab.auth.application.port.in.web.OAuthGetResourceUseCase;
 import me.nalab.auth.application.port.in.web.SignInWithOAuthUseCase;
 import me.nalab.auth.web.adaptor.exception.UserOAuthRejectException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +34,7 @@ public class SignInWithOAuthController {
 
     private static final String TOKEN_TYPE = "bearer";
 
-    @PostMapping("/{oauth-provider}")
+    @GetMapping("/{oauth-provider}")
     public Response signInWithOAuth(
             @PathVariable("oauth-provider") String providerName,
             @RequestParam(value = "code", required = false) String code,
