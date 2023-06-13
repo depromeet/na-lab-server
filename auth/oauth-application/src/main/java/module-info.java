@@ -6,6 +6,8 @@ module luffy.auth.oauth.application.main {
 
     requires lombok;
 
+    requires com.fasterxml.jackson.annotation;
+
     requires spring.context;
     requires spring.beans;
     requires spring.web;

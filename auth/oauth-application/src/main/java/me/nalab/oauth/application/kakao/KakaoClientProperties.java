@@ -19,6 +19,7 @@ public class KakaoClientProperties {
     private final String secret;
     private final String grantType;
     private final String scope;
+    private final String resourceUrl;
 
     public KakaoClientProperties(
             @Value("${oauth.kakao.base-url:https://kauth.kakao.com}") String baseUrl,
@@ -28,7 +29,9 @@ public class KakaoClientProperties {
             @Value("${oauth.kakao.client-id:clientId}") String clientId,
             @Value("${oauth.kakao.secret:secret}") String secret,
             @Value("${oauth.kakao.grant-type:authorization_code}") String grantType,
-            @Value("${oauth.kakao.scope:profile_nickname,account_email}") String scope) {
+            @Value("${oauth.kakao.scope:profile_nickname,account_email}") String scope,
+            @Value("${oauth.kakao.resource-url:https://kapi.kakao.com/v2/user/me}") String resourceUrl
+    ) {
         this.baseUrl = baseUrl;
         this.authorizePath = authorizePath;
         this.accessTokenPath = accessTokenPath;
@@ -37,6 +40,7 @@ public class KakaoClientProperties {
         this.secret = secret;
         this.grantType = grantType;
         this.scope = scope;
+        this.resourceUrl = resourceUrl;
     }
 
     public String getAccessUrl() {
