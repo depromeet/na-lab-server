@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 public class ChoiceFormQuestionDto extends FormQuestionDtoable {
 
 	private final List<ChoiceDto> choiceDtoList;
-	private final Integer maxSelectionCount;
+	private final Integer maxSelectableCount;
 	private final ChoiceFormQuestionDtoType choiceFormQuestionDtoType;
 
 }

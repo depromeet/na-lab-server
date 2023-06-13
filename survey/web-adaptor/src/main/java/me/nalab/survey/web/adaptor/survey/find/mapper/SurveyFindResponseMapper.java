@@ -46,7 +46,7 @@ public class SurveyFindResponseMapper {
 			.formType(choiceFormQuestionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(choiceFormQuestionDto.getTitle())
 			.order(choiceFormQuestionDto.getOrder())
-			.maxSelectionCount(choiceFormQuestionDto.getMaxSelectionCount())
+			.maxSelectableCount(choiceFormQuestionDto.getMaxSelectableCount())
 			.choices(choiceFormQuestionDto.getChoiceDtoList()
 				.stream()
 				.map(it -> ChoiceResponse.builder()

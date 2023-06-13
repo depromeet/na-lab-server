@@ -79,7 +79,7 @@ public class RandomFeedbackDtoFixture {
 	private static ChoiceFormQuestionFeedbackDto getRandomChoiceFormQuestionFeedbackDto(
 		ChoiceFormQuestion choiceFormQuestion) {
 		Set<Long> selectedIdSet = new HashSet<>();
-		for(int i = 0; i < choiceFormQuestion.getMaxSelectionCount(); i++) {
+		for(int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
 			selectedIdSet.add(choiceFormQuestion.getChoiceList().get(i).getId());
 		}
 		return ChoiceFormQuestionFeedbackDto.builder()

@@ -26,7 +26,7 @@ public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 	private List<ChoiceEntity> choiceList;
 
 	@Column(name = "max_selection_count")
-	private Integer maxSelectionCount;
+	private Integer maxSelectableCount;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "choice_question_type")
@@ -34,7 +34,7 @@ public class ChoiceFormQuestionEntity extends FormQuestionEntity {
 
 	ChoiceFormQuestionEntity(ChoiceFormQuestionEntityBuilder<?, ?> choiceFormQuestionEntityBuilder) {
 		super(choiceFormQuestionEntityBuilder);
-		this.maxSelectionCount = choiceFormQuestionEntityBuilder.maxSelectionCount;
+		this.maxSelectableCount = choiceFormQuestionEntityBuilder.maxSelectableCount;
 		this.choiceFormQuestionType = choiceFormQuestionEntityBuilder.choiceFormQuestionType;
 		this.choiceList = choiceFormQuestionEntityBuilder.choiceList;
 		cascadeChoiceFormQuestion();

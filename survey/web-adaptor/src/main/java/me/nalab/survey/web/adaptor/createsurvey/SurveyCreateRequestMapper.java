@@ -59,7 +59,7 @@ final class SurveyCreateRequestMapper {
 			.order(choiceFormQuestionRequest.getOrder())
 			.createdAt(now)
 			.updatedAt(now)
-			.maxSelectionCount(choiceFormQuestionRequest.getMaxSelectableCount())
+			.maxSelectableCount(choiceFormQuestionRequest.getMaxSelectableCount())
 			.choiceFormQuestionDtoType(getChoiceFormQuestionDtoType(choiceFormQuestionRequest))
 			.choiceDtoList(toChoiceDtoList(choiceFormQuestionRequest.getChoiceRequestList()))
 			.build();
