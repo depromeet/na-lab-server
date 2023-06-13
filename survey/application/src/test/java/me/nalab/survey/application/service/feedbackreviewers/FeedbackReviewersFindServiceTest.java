@@ -16,7 +16,9 @@ import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
+import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.feedbackreviewers.FeedbacksFindPort;
+import me.nalab.survey.application.port.out.persistence.feedbackreviewers.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
@@ -25,23 +27,25 @@ class FeedbackReviewersFindServiceTest {
 	@Mock
 	private FeedbacksFindPort feedbacksFindPort;
 
+	@Mock
+	private SurveyExistCheckPort surveyExistCheckPort;
+
 	private FeedbackReviewersFindService feedbackReviewersFindService;
 
 	@BeforeEach
 	void setup() {
 		MockitoAnnotations.openMocks(this);
-		feedbackReviewersFindService = new FeedbackReviewersFindService(feedbacksFindPort);
+		feedbackReviewersFindService = new FeedbackReviewersFindService(feedbacksFindPort, surveyExistCheckPort);
 	}
 
 	@Test
 	void FEEDBACKREVIEWERS_FIND_WITH_NO_FEEDBACK() {
 
 		Long surveyId = 1L;
+		when(surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)).thenReturn(false);
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(List.of());
 
-		List<FeedbackDto> resultFeedbackDtos = feedbackReviewersFindService.findAllFeedback(surveyId);
-
-		assertEquals(0, resultFeedbackDtos.size());
+		assertThrows(SurveyDoesNotExistException.class, () -> feedbackReviewersFindService.findAllFeedback(surveyId));
 	}
 
 	@Test
@@ -58,6 +62,7 @@ class FeedbackReviewersFindServiceTest {
 			FeedbackDtoMapper.toDto(feedback2)
 		);
 
+		when(surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)).thenReturn(true);
 		when(feedbacksFindPort.findAllFeedback(surveyId)).thenReturn(feedbacks);
 
 		List<FeedbackDto> resultFeedbacks = feedbackReviewersFindService.findAllFeedback(surveyId);
