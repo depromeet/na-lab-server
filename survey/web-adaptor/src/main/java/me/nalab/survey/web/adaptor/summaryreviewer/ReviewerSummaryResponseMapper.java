@@ -24,9 +24,9 @@ final class ReviewerSummaryResponseMapper {
 
 		return PositionSummaryReponse.builder()
 			.designer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("designer", 0))
-			.productManager(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("product-manager", 0))
-			.programmer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("programmer", 0))
-			.other(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("other", 0))
+			.productManager(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("pm", 0))
+			.developer(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("developer", 0))
+			.others(reviewerSummaryDto.getPosition().getPositionReplyMap().getOrDefault("others", 0))
 			.build();
 	}
 

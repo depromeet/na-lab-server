@@ -22,9 +22,9 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.collaboration_experience.yes").isNumber(),
 			jsonPath("$.collaboration_experience.no").isNumber(),
 			jsonPath("$.position.designer").isNumber(),
-			jsonPath("$.position.product-manager").isNumber(),
-			jsonPath("$.position.programmer").isNumber(),
-			jsonPath("$.position.other").isNumber()
+			jsonPath("$.position.pm").isNumber(),
+			jsonPath("$.position.developer").isNumber(),
+			jsonPath("$.position.others").isNumber()
 		);
 	}
 
