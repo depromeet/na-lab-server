@@ -5,9 +5,11 @@ import me.nalab.auth.application.port.in.AuthorizeWithOauthUseCase;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-@Controller("/v1/auth")
+@Controller
+@RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 public class AuthorizeWithOAuthProviderController {
 

@@ -1,7 +1,7 @@
 module luffy.auth.auth.application.main {
 	exports me.nalab.auth.application.common.dto;
 	exports me.nalab.auth.application.port.in.web;
-    exports me.nalab.auth.application.port.in;
+	exports me.nalab.auth.application.port.in;
 	exports me.nalab.auth.application.port.out;
 
 	requires lombok;

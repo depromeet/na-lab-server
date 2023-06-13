@@ -17,7 +17,10 @@ public class AuthorizeWithOauthService implements AuthorizeWithOauthUseCase {
 
     private final String baseUrl;
 
-    public AuthorizeWithOauthService(OAuthWebClientFactory oAuthWebClientFactory, @Value("${luffy.base-url:nalab.me}") String baseUrl) {
+    public AuthorizeWithOauthService(
+            OAuthWebClientFactory oAuthWebClientFactory,
+            @Value("${luffy.base-url:https://api.nalab.me}") String baseUrl
+    ) {
         this.oAuthWebClientFactory = oAuthWebClientFactory;
         this.baseUrl = baseUrl;
     }
@@ -29,6 +32,7 @@ public class AuthorizeWithOauthService implements AuthorizeWithOauthUseCase {
         var provider = Provider.valueOf(providerName.toUpperCase());
         var oauthWebClient = oAuthWebClientFactory.getClient(provider);
 
-        return oauthWebClient.getAuthorizationUrl(baseUrl + "/v1/oauth/" + provider.name());
+        var redirectUrl = baseUrl + "/v1/oauth/" + provider.name();
+        return oauthWebClient.getAuthorizationUrl(redirectUrl);
     }
 }

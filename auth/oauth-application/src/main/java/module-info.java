@@ -1,4 +1,6 @@
 module luffy.auth.oauth.application.main {
+    exports me.nalab.oauth.application;
+
     requires luffy.auth.auth.application.main;
     requires luffy.user.domain.main;
 
