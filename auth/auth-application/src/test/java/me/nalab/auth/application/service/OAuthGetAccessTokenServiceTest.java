@@ -57,7 +57,7 @@ class OAuthGetAccessTokenServiceTest {
     @DisplayName("요청 객체의 authToken이 null 또는 empty라면 예외를 던진다")
     void THROW_EXCEPTION_WHEN_AUTH_TOKEN_IS_NULL_OR_EMPTY(String authToken) {
         // given
-        var request = new OAuthAccessTokenRequest(Provider.KAKAO, authToken);
+        var request = new OAuthAccessTokenRequest(Provider.KAKAO.name(), authToken);
 
         // when
         var throwable = Assertions.catchThrowable(() -> oauthGetAccessTokenService.get(request));
@@ -71,10 +71,10 @@ class OAuthGetAccessTokenServiceTest {
     void RETURN_ACCESS_TOKEN_RESPONSE_WHEN_VALID_INPUT() {
         // given
         var provider = Provider.KAKAO;
-        var request = new OAuthAccessTokenRequest(provider, "token");
+        var request = new OAuthAccessTokenRequest(provider.name(), "token");
 
         var expectedResponse = new OAuthAccessTokenResponse("access", "tokenType", null);
-        var fakeWebClient = WebClientFactory.createFakeWebClient(expectedResponse);
+        var fakeWebClient = WebClientFactory.createFakeWebClient(expectedResponse, null);
         when(oauthWebClientFactory.getClient(provider)).thenReturn(fakeWebClient);
 
 

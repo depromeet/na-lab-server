@@ -44,7 +44,7 @@ class AuthorizeWithOauthServiceTest {
     void RETURN_REDIRECT_URI_WHEN_VALID_INPUT() {
         // given
         var provider = Provider.KAKAO;
-        var fakeWebClient = WebClientFactory.createFakeWebClient(null);
+        var fakeWebClient = WebClientFactory.createFakeWebClient(null, null);
         when(oauthWebClientFactory.getClient(provider)).thenReturn(fakeWebClient);
 
         // when
