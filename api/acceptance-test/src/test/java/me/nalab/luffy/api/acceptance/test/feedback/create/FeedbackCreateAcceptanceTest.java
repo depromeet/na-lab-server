@@ -1,6 +1,7 @@
 package me.nalab.luffy.api.acceptance.test.feedback.create;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackCreated;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
@@ -169,7 +170,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private ShortQuestionFeedbackRequest getShortQuestionFeedbackRequest(
 		ShortFormQuestionResponse shortFormQuestionResponse) {
 		return ShortQuestionFeedbackRequest.builder()
-			.questionId(Long.valueOf(shortFormQuestionResponse.getQuestionId()))
+			.questionId(shortFormQuestionResponse.getQuestionId())
 			.replyList(List.of("mocking", "words", "hello!"))
 			.type("short")
 			.build();
@@ -179,11 +180,8 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ChoiceFormQuestionResponse choiceFormQuestionResponse) {
 		return ChoiceQuestionFeedbackRequest.builder()
 			.type("choice")
-			.questionId(Long.valueOf(choiceFormQuestionResponse.getQuestionId()))
-			.choiceList(Stream.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId())
-				.map(Long::valueOf)
-				.collect(
-					Collectors.toList()))
+			.questionId(choiceFormQuestionResponse.getQuestionId())
+			.choiceList(List.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId()))
 			.build();
 	}
 

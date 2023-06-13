@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class AbstractQuestionFeedbackRequest {
 
 	@JsonProperty("question_id")
-	protected Long questionId;
+	protected String questionId;
 	protected String type;
 
 }

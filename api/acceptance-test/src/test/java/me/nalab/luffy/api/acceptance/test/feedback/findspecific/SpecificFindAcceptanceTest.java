@@ -139,7 +139,7 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private static ShortQuestionFeedbackRequest getShortQuestionFeedbackRequest(
 		ShortFormQuestionResponse shortFormQuestionResponse) {
 		return ShortQuestionFeedbackRequest.builder()
-			.questionId(Long.valueOf(shortFormQuestionResponse.getQuestionId()))
+			.questionId(shortFormQuestionResponse.getQuestionId())
 			.replyList(List.of("mocking", "words", "hello!"))
 			.type("short")
 			.build();
@@ -149,11 +149,8 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ChoiceFormQuestionResponse choiceFormQuestionResponse) {
 		return ChoiceQuestionFeedbackRequest.builder()
 			.type("choice")
-			.questionId(Long.valueOf(choiceFormQuestionResponse.getQuestionId()))
-			.choiceList(Stream.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId())
-				.map(Long::valueOf)
-				.collect(
-					Collectors.toList()))
+			.questionId(choiceFormQuestionResponse.getQuestionId())
+			.choiceList(List.of(choiceFormQuestionResponse.getChoices().get(0).getChoiceId()))
 			.build();
 	}
 
