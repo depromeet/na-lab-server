@@ -14,6 +14,6 @@ import lombok.ToString;
 public class ChoiceQuestionFeedbackRequest extends AbstractQuestionFeedbackRequest {
 
 	@JsonProperty("choies")
-	private Set<Long> choiceSet;
+	private Set<String> choiceSet;
 
 }
