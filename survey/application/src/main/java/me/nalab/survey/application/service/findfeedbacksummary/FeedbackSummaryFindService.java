@@ -20,17 +20,17 @@ public class FeedbackSummaryFindService implements FeedbackSummaryFindUseCase {
 
 	@Override
 	public long getTotalFeedbackCount(Long surveyId) {
-		checkIfSurveyExist(surveyId);
+		throwIfSurveyDoesNotExist(surveyId);
 		return totalFeedbackCountPort.getTotalFeedbackCountBySurveyId(surveyId);
 	}
 
 	@Override
 	public long getUpdatedFeedbackCount(Long surveyId) {
-		checkIfSurveyExist(surveyId);
+		throwIfSurveyDoesNotExist(surveyId);
 		return updatedFeedbackCountPort.getUpdatedFeedbackCountBySurveyId(surveyId);
 	}
 
-	private void checkIfSurveyExist(Long surveyId) {
+	private void throwIfSurveyDoesNotExist(Long surveyId) {
 		if(!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
 			throw new SurveyDoesNotExistException(surveyId);
 		}
