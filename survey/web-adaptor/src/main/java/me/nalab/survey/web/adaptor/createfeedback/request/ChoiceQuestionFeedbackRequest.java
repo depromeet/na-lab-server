@@ -13,7 +13,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class ChoiceQuestionFeedbackRequest extends AbstractQuestionFeedbackRequest {
 
-	@JsonProperty("choies")
+	@JsonProperty("choices")
 	private Set<String> choiceSet;
 
 }
