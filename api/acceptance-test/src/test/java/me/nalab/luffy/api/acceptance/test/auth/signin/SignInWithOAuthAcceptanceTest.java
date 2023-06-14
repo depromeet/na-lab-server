@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.nalab.auth.web.adaptor.api.SignInWithOAuthController;
+import me.nalab.luffy.api.acceptance.test.TargetInitializer;
 import me.nalab.luffy.api.acceptance.test.UserInitializer;
 import me.nalab.user.domain.user.Provider;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,9 @@ class SignInWithOAuthAcceptanceTest extends AbstractAuthTestSupporter {
 
 	@Autowired
 	private UserInitializer userInitializer;
+
+	@Autowired
+	private TargetInitializer targetInitializer;
 
 	private static final ObjectMapper OBJECT_MAPPER;
 
@@ -73,7 +77,9 @@ class SignInWithOAuthAcceptanceTest extends AbstractAuthTestSupporter {
 		var oauthProvider = provider.name();
 		var apiRequest = new SignInWithOAuthController.Request(nickname, email);
 
-		userInitializer.saveUserWithOAuth(provider, nickname, email, LocalDateTime.now());
+		LocalDateTime now = LocalDateTime.now();
+		userInitializer.saveUserWithOAuth(provider, nickname, email, now);
+		targetInitializer.saveTargetAndGetId(nickname, now);
 
 		// when
 		ResultActions resultActions = postSignInWithOAuth(oauthProvider, OBJECT_MAPPER.writeValueAsString(apiRequest));
