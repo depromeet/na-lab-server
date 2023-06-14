@@ -34,7 +34,7 @@ public class SignInWithOAuthService implements SignInWithOAuthUseCase {
 
         var foundUser = findUserIdAndSignUpIfNeeded(request, providerName, email);
         var userId = foundUser.orElseThrow(IllegalAccessError::new);
-        var targetId = targetFindByUsernameUseCase.findTargetByUsername(request.getUsername()).orElseThrow();
+        var targetId = targetFindByUsernameUseCase.findTargetByUsername(request.getUsername()).orElseThrow().getId();
 
         var authTokenCreateRequest = new CreateAuthTokenRequest(userId.toString(), request.getUsername(), String.valueOf(targetId));
 
