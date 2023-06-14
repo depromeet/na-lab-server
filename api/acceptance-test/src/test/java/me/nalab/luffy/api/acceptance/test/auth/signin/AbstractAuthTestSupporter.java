@@ -15,8 +15,17 @@ public abstract class AbstractAuthTestSupporter {
 		this.mockMvc = mockMvc;
 	}
 
-	protected ResultActions postSignInWithOAuth(String oauthProvider, String code, String error, String errorDescription) throws Exception {
+	protected ResultActions postSignInWithOAuthV1(String oauthProvider, String content) throws Exception {
 		var path = "/v1/oauth/" + oauthProvider;
+		var mockMvcRequest = MockMvcRequestBuilders.post(path)
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(content);
+		return mockMvc.perform(mockMvcRequest);
+	}
+
+	protected ResultActions postSignInWithOAuth(String oauthProvider, String code, String error, String errorDescription) throws Exception {
+		var path = "/v2/oauth/" + oauthProvider;
 		var mockMvcRequest = MockMvcRequestBuilders.get(path)
 				.queryParam("code", code)
 				.queryParam("error", error)
