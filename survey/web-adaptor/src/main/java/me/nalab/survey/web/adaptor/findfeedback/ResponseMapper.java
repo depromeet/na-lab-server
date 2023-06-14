@@ -125,7 +125,11 @@ final class ResponseMapper {
 		feedbackDto.getFormQuestionFeedbackDtoableList().stream().filter(q -> q.getQuestionId().equals(questionId))
 			.forEach(sq -> shortFeedbackResponseList.add(
 				ShortFeedbackResponse.builder()
+					.id(String.valueOf(feedbackDto.getId()))
 					.replyList(((ShortFormQuestionFeedbackDto)sq).getReplyList())
+					.createdAt(feedbackDto.getCreatedAt())
+					.read(feedbackDto.isRead())
+					.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 					.build()
 			));
 	}
