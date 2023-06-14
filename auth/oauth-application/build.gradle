@@ -1,0 +1,14 @@
+dependencies {
+    implementation project(':user:user-domain')
+    implementation project(':auth:auth-application')
+    testImplementation project(':auth:auth-application')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'io.netty:netty-resolver-dns-native-macos:4.1.85.Final:osx-aarch_64'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+
+}
