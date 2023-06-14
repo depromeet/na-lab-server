@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':auth:auth-application')
+    implementation project(':auth:oauth-application')
     testImplementation project(':auth:auth-application')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
