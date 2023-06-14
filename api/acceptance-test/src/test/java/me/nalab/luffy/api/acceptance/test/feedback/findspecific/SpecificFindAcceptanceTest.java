@@ -5,6 +5,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -70,7 +71,7 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 		Long surveyId = createSurveyAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
 		SurveyFindResponse surveyFindResponse = getSurveyFindResponse(surveyId);
 
-		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "programmer");
+		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
 
 		Long feedbackId = findFeedbackAndGetRandomFeedbackId(token, surveyId);
@@ -87,8 +88,8 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 			.getResponse()
 			.getContentAsString();
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		return jsonObject.getJSONArray("question_feedback").getJSONObject(0).getJSONArray("feedbacks")
-			.getJSONObject(0).getLong("feedback_id");
+		return Long.valueOf(jsonObject.getJSONArray("question_feedback").getJSONObject(0).getJSONArray("feedbacks")
+			.getJSONObject(0).getString("feedback_id"));
 	}
 
 	private Long createSurveyAndGetSurveyId(String token, String content) throws Exception {
@@ -98,7 +99,7 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 			.getContentAsString();
 
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		return jsonObject.getLong("survey_id");
+		return Long.valueOf(jsonObject.getString("survey_id"));
 	}
 
 	private SurveyFindResponse getSurveyFindResponse(Long surveyId) throws Exception {

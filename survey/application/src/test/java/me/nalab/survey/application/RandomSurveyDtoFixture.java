@@ -87,7 +87,7 @@ public class RandomSurveyDtoFixture {
 					.updatedAt(randomDateTimeGenerator.get())
 					.choiceFormQuestionDtoType(randomChoiceFormQuestionDtoTypeGenerator.get())
 					.choiceDtoList(choiceDtoList)
-					.maxSelectionCount(choiceDtoList.size())
+					.maxSelectableCount(choiceDtoList.size())
 					.order(startOrder + randomChoiceFormQuestionList.size())
 					.build()
 			);

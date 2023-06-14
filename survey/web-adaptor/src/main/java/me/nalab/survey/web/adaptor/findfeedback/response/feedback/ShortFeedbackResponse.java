@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @ToString
 @SuperBuilder
-public class ShortFeedbackResponse {
+public class ShortFeedbackResponse extends AbstractFeedbackResponse{
 
 	@JsonProperty("reply")
 	List<String> replyList;

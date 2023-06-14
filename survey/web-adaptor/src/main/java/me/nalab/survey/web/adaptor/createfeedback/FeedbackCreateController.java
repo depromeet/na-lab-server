@@ -70,15 +70,16 @@ public class FeedbackCreateController {
 	private ChoiceFormQuestionFeedbackDto toChoiceFormQuestionFeedbackDto(
 		ChoiceQuestionFeedbackRequest choiceQuestionFeedbackRequest) {
 		return ChoiceFormQuestionFeedbackDto.builder()
-			.questionId(choiceQuestionFeedbackRequest.getQuestionId())
-			.selectedChoiceIdSet(choiceQuestionFeedbackRequest.getChoiceSet())
+			.questionId(Long.valueOf(choiceQuestionFeedbackRequest.getQuestionId()))
+			.selectedChoiceIdSet(choiceQuestionFeedbackRequest.getChoiceSet().stream().map(Long::valueOf).collect(
+				Collectors.toSet()))
 			.build();
 	}
 
 	private ShortFormQuestionFeedbackDto toShortFormQuestionFeedbackDto(
 		ShortQuestionFeedbackRequest shortQuestionFeedbackRequest) {
 		return ShortFormQuestionFeedbackDto.builder()
-			.questionId(shortQuestionFeedbackRequest.getQuestionId())
+			.questionId(Long.valueOf(shortQuestionFeedbackRequest.getQuestionId()))
 			.replyList(shortQuestionFeedbackRequest.getReplyList())
 			.build();
 	}

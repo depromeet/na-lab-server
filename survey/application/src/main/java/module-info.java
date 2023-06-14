@@ -31,6 +31,7 @@ module luffy.survey.application.main {
 
 	requires lombok;
 
+	requires spring.core;
 	requires spring.boot;
 	requires spring.boot.autoconfigure;
 	requires spring.context;

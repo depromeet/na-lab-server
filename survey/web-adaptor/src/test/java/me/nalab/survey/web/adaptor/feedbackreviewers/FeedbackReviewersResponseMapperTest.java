@@ -29,7 +29,7 @@ class FeedbackReviewersResponseMapperTest {
 
 		assertAll(
 			() -> assertThat(response.getFeedbacks()).hasSize(1),
-			() -> assertThat(feedbackReviewer.getFeedbackId()).isEqualTo(1L),
+			() -> assertThat(feedbackReviewer.getFeedbackId()).isEqualTo("1"),
 			() -> assertThat(feedbackReviewer.getIsRead()).isTrue(),
 			() -> assertThat(feedbackReviewer.getReviewer().getNickName()).isEqualTo("sujin"),
 			() -> assertThat(feedbackReviewer.getReviewer().getCollaborationExperience()).isTrue(),

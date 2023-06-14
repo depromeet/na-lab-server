@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.user.application.common.dto.LoginedInfo;
+import me.nalab.user.application.exception.InvalidTokenException;
 import me.nalab.user.application.port.in.LoginedUserGetByTokenUseCase;
 import me.nalab.user.application.port.out.persistence.LoginedUserGetByTokenPort;
 
@@ -31,9 +32,9 @@ class LoginedUserGetByTokenServiceTest {
 	void GET_LOGINED_INFO_BY_TOKEN_SUCCESS() {
 		// given
 		LoginedInfo expected = new LoginedInfo("hello", 12345L, 54321L);
-		String token = "token";
+		String token = "hello token";
 
-		Mockito.when(loginedUserGetByTokenPort.decryptToken(token)).thenReturn(expected);
+		Mockito.when(loginedUserGetByTokenPort.decryptToken(token.split(" ")[1])).thenReturn(expected);
 
 		// when
 		LoginedInfo result = loginedUserGetByTokenUseCase.decryptToken(token);
@@ -44,12 +45,25 @@ class LoginedUserGetByTokenServiceTest {
 
 	@ParameterizedTest
 	@NullSource
-	void NULL_PARAMETER_TEST(String token){
+	void NULL_PARAMETER_TEST(String token) {
 		// when
 		Throwable result = Assertions.catchThrowable(() -> loginedUserGetByTokenUseCase.decryptToken(token));
 
 		// then
 		Assertions.assertThat(result).isInstanceOf(NullPointerException.class);
+	}
+
+	@Test
+	@DisplayName("Invalid token signature 테스트")
+	void DECRYPT_INVALID_TOKEN() {
+		// given
+		String token = "invalid";
+
+		// when
+		Throwable result = Assertions.catchThrowable(() -> loginedUserGetByTokenUseCase.decryptToken(token));
+
+		// then
+		Assertions.assertThat(result).isInstanceOf(InvalidTokenException.class);
 	}
 
 }

@@ -1,8 +1,9 @@
 package me.nalab.survey.application.port.out.persistence.target.find;
 
-import java.util.Optional;
-
 import me.nalab.survey.domain.target.Target;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface TargetFindPort {
 
@@ -21,4 +22,11 @@ public interface TargetFindPort {
 	 * @return Optional 만약, 어떠한 surveyId도 없을 경우, Optional.empty() 를 반환해야 합니다.
 	 */
 	Optional<Long> findTargetIdBySurveyId(Long surveyId);
+
+	/**
+	 * 유저 이름으로 모든 target을 조회합니다
+	 * @param username 유저 이름
+	 * @return 유저 이름으로 생성된 모든 target
+	 */
+	List<Target> findAllByUsername(String username);
 }

@@ -1,9 +1,5 @@
 package me.nalab.survey.jpa.adaptor.find;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Repository;
-
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.data.survey.SurveyEntity;
 import me.nalab.core.data.target.TargetEntity;
@@ -12,6 +8,12 @@ import me.nalab.survey.domain.target.Target;
 import me.nalab.survey.jpa.adaptor.common.mapper.TargetEntityMapper;
 import me.nalab.survey.jpa.adaptor.find.repository.SurveyFindRepository;
 import me.nalab.survey.jpa.adaptor.find.repository.TargetFindRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -37,5 +39,15 @@ public class TargetFindAdaptor implements TargetFindPort {
 			return Optional.empty();
 		}
 		return Optional.of(surveyEntity.get().getTargetId());
+	}
+
+	@Override
+	public List<Target> findAllByUsername(String username) {
+		var allTargetEntity = targetFindRepository.findAllByNicknameOrderByCreatedAt(username);
+		if (allTargetEntity.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		return allTargetEntity.stream().map(TargetEntityMapper::toTarget).collect(Collectors.toList());
 	}
 }

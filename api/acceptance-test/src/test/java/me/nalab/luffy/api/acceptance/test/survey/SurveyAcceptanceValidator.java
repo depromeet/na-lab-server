@@ -13,7 +13,7 @@ public class SurveyAcceptanceValidator {
 		resultActions.andExpectAll(
 			status().isCreated(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.survey_id").isNumber()
+			jsonPath("$.survey_id").isString()
 		);
 	}
 
@@ -21,7 +21,7 @@ public class SurveyAcceptanceValidator {
 		resultActions.andExpectAll(
 			status().isOk(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.survey_id").isNumber()
+			jsonPath("$.survey_id").isString()
 		);
 	}
 

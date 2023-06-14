@@ -29,7 +29,7 @@ public class ChoiceFormQuestionFeedback extends FormQuestionFeedbackable {
 	}
 
 	private boolean isSelectCountDoesNotOverflow(ChoiceFormQuestion choiceFormQuestion) {
-		return choiceFormQuestion.getMaxSelectionCount() >= selectedChoiceIdSet.size();
+		return choiceFormQuestion.getMaxSelectableCount() >= selectedChoiceIdSet.size();
 	}
 
 	private boolean isSelectedIdMissMatched(ChoiceFormQuestion choiceFormQuestion) {

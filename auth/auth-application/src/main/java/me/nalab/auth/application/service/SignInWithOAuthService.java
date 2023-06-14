@@ -8,8 +8,7 @@ import me.nalab.auth.application.common.dto.SignUpWithOAuthRequest;
 import me.nalab.auth.application.port.in.web.AuthTokenCreateUseCase;
 import me.nalab.auth.application.port.in.web.SignInWithOAuthUseCase;
 import me.nalab.auth.application.port.in.web.SignUpWithOAuthUseCase;
-import me.nalab.survey.application.common.target.dto.CreateTargetRequest;
-import me.nalab.survey.application.port.in.web.CreateTargetUseCase;
+import me.nalab.survey.application.port.in.web.target.find.TargetFindByUsernameUseCase;
 import me.nalab.user.application.common.dto.FindByProviderAndTokenRequest;
 import me.nalab.user.application.port.in.UserFindByProviderAndTokenUseCase;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ import java.util.Optional;
 public class SignInWithOAuthService implements SignInWithOAuthUseCase {
 
     private final UserFindByProviderAndTokenUseCase userFindByProviderAndTokenUseCase;
-    private final CreateTargetUseCase createTargetUseCase;
+    private final TargetFindByUsernameUseCase targetFindByUsernameUseCase;
     private final SignUpWithOAuthUseCase signUpWithOAuthUseCase;
     private final AuthTokenCreateUseCase authTokenCreateUseCase;
 
@@ -35,9 +34,7 @@ public class SignInWithOAuthService implements SignInWithOAuthUseCase {
 
         var foundUser = findUserIdAndSignUpIfNeeded(request, providerName, email);
         var userId = foundUser.orElseThrow(IllegalAccessError::new);
-
-        var createTargetRequest = new CreateTargetRequest(request.getUsername());
-        var targetId = createTargetUseCase.create(createTargetRequest);
+        var targetId = targetFindByUsernameUseCase.findTargetByUsername(request.getUsername()).orElseThrow().getId();
 
         var authTokenCreateRequest = new CreateAuthTokenRequest(userId.toString(), request.getUsername(), String.valueOf(targetId));
 
