@@ -4,7 +4,9 @@ import me.nalab.auth.application.common.dto.AuthToken;
 import me.nalab.auth.application.common.dto.SignInWithOAuthRequest;
 import me.nalab.auth.application.port.in.web.AuthTokenCreateUseCase;
 import me.nalab.auth.application.port.in.web.SignUpWithOAuthUseCase;
+import me.nalab.survey.application.common.survey.dto.TargetDto;
 import me.nalab.survey.application.port.in.web.CreateTargetUseCase;
+import me.nalab.survey.application.port.in.web.target.find.TargetFindByUsernameUseCase;
 import me.nalab.user.application.port.in.UserFindByProviderAndTokenUseCase;
 import me.nalab.user.domain.user.Provider;
 import org.assertj.core.api.Assertions;
@@ -28,6 +30,7 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(classes = {SignInWithOAuthService.class})
 class SignInWithOAuthServiceTest {
 
+    public static final String USERNAME = "username";
     @Autowired
     private SignInWithOAuthService signInWithOAuthService;
 
@@ -36,6 +39,9 @@ class SignInWithOAuthServiceTest {
 
     @MockBean
     private CreateTargetUseCase createTargetUseCase;
+
+    @MockBean
+    private TargetFindByUsernameUseCase targetFindByUsernameUseCase;
 
     @MockBean
     private SignUpWithOAuthUseCase signUpWithOAuthUseCase;
@@ -81,6 +87,11 @@ class SignInWithOAuthServiceTest {
     void RETURN_AUTH_TOKEN_WHEN_VALID_INPUT() {
         // given
         var expectedToken = new AuthToken("token");
+        var targetDto = TargetDto.builder()
+                .id(1L)
+                .nickname(USERNAME)
+                .build();
+        when(targetFindByUsernameUseCase.findTargetByUsername(any())).thenReturn(Optional.of(targetDto));
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.of(1L));
         when(authTokenCreateUseCase.create(any())).thenReturn(expectedToken);
         var request = createRequest().build();
@@ -97,6 +108,11 @@ class SignInWithOAuthServiceTest {
     void RETURN_AUTH_TOKEN_WHEN_VALID_INPUT_AND_NOT_SIGN_UP() {
         // given
         var expectedToken = new AuthToken("token");
+        var targetDto = TargetDto.builder()
+                .id(1L)
+                .nickname(USERNAME)
+                .build();
+        when(targetFindByUsernameUseCase.findTargetByUsername(any())).thenReturn(Optional.of(targetDto));
         when(userFindByProviderAndTokenUseCase.findByProviderAndToken(any())).thenReturn(Optional.empty());
         when(signUpWithOAuthUseCase.signUpWithOAuth(any())).thenReturn(1L);
         when(authTokenCreateUseCase.create(any())).thenReturn(expectedToken);
@@ -114,7 +130,7 @@ class SignInWithOAuthServiceTest {
     private SignInWithOAuthRequest.SignInWithOAuthRequestBuilder createRequest() {
         return SignInWithOAuthRequest.builder()
                 .providerName(Provider.KAKAO.name())
-                .username("username")
+                .username(USERNAME)
                 .email("test@test.com")
                 .phoneNumber(null);
     }
