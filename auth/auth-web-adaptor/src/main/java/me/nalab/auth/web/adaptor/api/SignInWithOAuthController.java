@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @see me.nalab.auth.application.service.AuthorizeWithOauthService
  */
 @RestController
-@RequestMapping("/v1/oauth")
+@RequestMapping("/v2/oauth")
 @RequiredArgsConstructor
 public class SignInWithOAuthController {
 
