@@ -11,6 +11,10 @@ rootProject.name = 'luffy'
 
 include 'core'
 include 'core:data'
+include 'core:exception-handler'
+include 'core:time'
+include 'core:secure'
+include 'core:authorization'
 
 include 'api'
 include 'api:api-mock'
@@ -36,15 +40,12 @@ include 'core:id-generator:tsid'
 include 'core:id-generator:mock-id-generator'
 include 'core:id-generator:id-generator-starter'
 
-include 'core:exception-handler'
-include 'core:time'
-include 'core:secure'
-
 include 'user'
 include 'user:user-domain'
 include 'user:user-jpa-adapter'
 include 'user:user-application'
 include 'user:user-web-adaptor'
 include 'auth:auth-interceptor'
-findProject(':auth:auth-interceptor')?.name = 'auth-interceptor'
+include 'core:authorization:authorization-core'
+findProject(':core:authorization:authorization-core')?.name = 'authorization-core'
 
