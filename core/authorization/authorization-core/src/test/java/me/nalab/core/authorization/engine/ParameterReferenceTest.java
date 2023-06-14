@@ -1,6 +1,7 @@
 package me.nalab.core.authorization.engine;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ class ParameterReferenceTest {
 
 	@Test
 	@DisplayName("wrapping과 unwrapping에 같은 type의 parameter가 들어오면 성공한다.")
-	void PARAMETER_REFERENCE_SUCCESS(){
+	void PARAMETER_REFERENCE_SUCCESS() {
 		// given
 		String parameter = "hello";
 		ParameterReference parameterReference = ParameterReference.createInstance(parameter);
