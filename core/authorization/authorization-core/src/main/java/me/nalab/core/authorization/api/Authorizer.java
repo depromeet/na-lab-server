@@ -1,5 +1,7 @@
 package me.nalab.core.authorization.api;
 
+import me.nalab.core.authorization.spi.ParameterExtractor;
+import me.nalab.core.authorization.spi.Validator;
 import me.nalab.core.authorization.spi.ValidatorFactory;
 
 /**
@@ -17,6 +19,7 @@ public interface Authorizer {
 	 * @param <T> 권한 허가로 기대되는 값의 type
 	 * @param <S> 실제로 갖고있는 값의 type
 	 */
-	<T, S> void authorization(T expected, S target, ValidatorFactory<?, ?> validatorFactory);
+	<T, S> void authorization(T expected, S target,
+		ValidatorFactory<? extends ParameterExtractor, ? extends Validator> validatorFactory);
 
 }

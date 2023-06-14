@@ -10,7 +10,9 @@ public class DefaultAuthorizerEngine implements Authorizer {
 	DefaultAuthorizerEngine() {
 	}
 
-	public <T, S> void authorization(T expected, S target, ValidatorFactory<?, ?> validatorFactory) {
+	public <T, S> void authorization(T expected, S target,
+		ValidatorFactory<? extends ParameterExtractor, ? extends Validator> validatorFactory) {
+
 		validParameter(expected, target, validatorFactory);
 		Validator validator = validatorFactory.validator();
 		ParameterExtractor parameterExtractor = validatorFactory.parameterExtractor();
@@ -22,7 +24,9 @@ public class DefaultAuthorizerEngine implements Authorizer {
 		}
 	}
 
-	private <T, S> void validParameter(T expected, S target, ValidatorFactory<?, ?> validatorFactory) {
+	private <T, S> void validParameter(T expected, S target,
+		ValidatorFactory<? extends ParameterExtractor, ? extends Validator> validatorFactory) {
+
 		if(expected == null) {
 			throw CannotAuthorizationException.EXPECTED_NULL;
 		}
