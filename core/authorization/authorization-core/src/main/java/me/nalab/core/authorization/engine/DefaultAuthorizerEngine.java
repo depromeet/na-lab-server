@@ -7,7 +7,7 @@ import me.nalab.core.authorization.spi.ValidatorFactory;
 
 public class DefaultAuthorizerEngine implements Authorizer {
 
-	DefaultAuthorizerEngine() {
+	public DefaultAuthorizerEngine() {
 	}
 
 	public <T, S> void authorization(T expected, S target,
