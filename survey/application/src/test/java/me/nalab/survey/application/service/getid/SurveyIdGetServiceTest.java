@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +36,8 @@ class SurveyIdGetServiceTest {
 	@DisplayName("SurveyId List 조회 성공 테스트")
 	void GET_SURVEY_ID_LIST_SUCCESS() {
 		// given
-		List<Long> expectedSurveyIdList = List.of(1L);
+		List<Long> expectedSurveyIdList = new ArrayList<>();
+		expectedSurveyIdList.add(1L);
 
 		// when
 		when(surveyIdFindPort.findAllSurveyIdByTargetId(anyLong())).thenReturn(expectedSurveyIdList);
