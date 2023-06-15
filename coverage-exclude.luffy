@@ -44,3 +44,4 @@ exclude me/nalab/user/jpa/adaptor/**/common/mapper
 exclude me/nalab/auth/application/common/**/*
 exclude me/nalab/user/web/adaptor/logined/*
 exclude me/nalab/auth/interceptor/*
+exclude me/nalab/core/authorization/spring/Configurer
