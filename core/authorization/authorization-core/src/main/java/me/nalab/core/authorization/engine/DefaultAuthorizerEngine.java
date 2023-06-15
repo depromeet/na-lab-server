@@ -5,10 +5,7 @@ import me.nalab.core.authorization.spi.ParameterExtractor;
 import me.nalab.core.authorization.spi.Validator;
 import me.nalab.core.authorization.spi.ValidatorFactory;
 
-public class DefaultAuthorizerEngine implements Authorizer {
-
-	public DefaultAuthorizerEngine() {
-	}
+public final class DefaultAuthorizerEngine implements Authorizer {
 
 	public <T, S> void authorization(T expected, S target,
 		ValidatorFactory<? extends ParameterExtractor, ? extends Validator> validatorFactory) {
