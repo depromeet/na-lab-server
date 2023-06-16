@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import me.nalab.core.authorization.api.ParameterReference;
+import me.nalab.core.authorization.api.WrongReferenceTypeException;
+
 class ParameterReferenceTest {
 
 	@Test
