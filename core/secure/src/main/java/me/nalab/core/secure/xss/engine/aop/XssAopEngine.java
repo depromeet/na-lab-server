@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Aspect;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.secure.xss.engine.XssEngine;
-import me.nalab.core.secure.xss.exception.UnknownXssFilterName;
+import me.nalab.core.secure.xss.exception.UnknownXssFilterException;
 import me.nalab.core.secure.xss.meta.Xss;
 import me.nalab.core.secure.xss.spi.XssFilter;
 
@@ -64,7 +64,7 @@ public class XssAopEngine implements XssEngine<Object, ProceedingJoinPoint> {
 				return xssFilter.doFilter(object, parameter.getType());
 			}
 		}
-		throw new UnknownXssFilterName(xssFilterName);
+		throw new UnknownXssFilterException(xssFilterName);
 	}
 
 	private String getXssAnnotationValue(Parameter parameter) {

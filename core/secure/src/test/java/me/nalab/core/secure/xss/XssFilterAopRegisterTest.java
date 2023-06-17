@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.core.secure.xss.config.XssConfig;
 import me.nalab.core.secure.xss.engine.aop.XssAopEngine;
-import me.nalab.core.secure.xss.exception.UnknownXssFilterName;
+import me.nalab.core.secure.xss.exception.UnknownXssFilterException;
 
 /*
     등록된 XssFilter가 XssFilterAop에 잘 주입되는지,
@@ -96,7 +96,7 @@ class XssFilterAopRegisterTest {
 		XssFilterTarget xssFilterTarget = aspectJProxyFactory.getProxy();
 
 		// when & then
-		assertThrows(UnknownXssFilterName.class, () -> xssFilterTarget.filterWrongXssAnnotation(""));
+		assertThrows(UnknownXssFilterException.class, () -> xssFilterTarget.filterWrongXssAnnotation(""));
 	}
 
 }
