@@ -23,6 +23,7 @@ public class SurveyIdValidator implements Validator {
 		Long resultTargetId = targetIdFindPort.findTargetIdBySurveyId(requestSurveyId).orElseThrow(() -> {
 			throw new SurveyDoesNotExistException(requestSurveyId);
 		});
+		System.out.println("expected : " + expectedTargetId + " result : " + resultTargetId);
 		return expectedTargetId.equals(resultTargetId);
 	}
 

@@ -10,9 +10,9 @@ import me.nalab.core.data.target.TargetEntity;
 
 public interface TargetIdFindJpaRepository extends JpaRepository<TargetEntity, Long> {
 
-	@Query("select t.id from TargetEntity as t join SurveyEntity as s on s.id = :surveyId")
+	@Query("select t.id from TargetEntity as t join SurveyEntity as s on s.id = :surveyId and s.targetId = t.id")
 	Optional<Long> findTargetIdBySurveyId(@Param("surveyId") Long surveyId);
 
-	@Query("select t.id from TargetEntity as t join SurveyEntity as s on s.id = (select f.surveyId from FeedbackEntity as f where f.id = :feedbackId)")
+	@Query("select t.id from TargetEntity as t join SurveyEntity as s on s.id = (select f.surveyId from FeedbackEntity as f where f.id = :feedbackId) and s.targetId = t.id")
 	Optional<Long> findTargetIdByFeedbackId(@Param("feedbackId") Long feedbackId);
 }
