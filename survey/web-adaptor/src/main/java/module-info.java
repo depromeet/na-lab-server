@@ -2,6 +2,7 @@ module luffy.survey.web.adaptor.main {
 
 	requires luffy.survey.application.main;
 	requires luffy.survey.domain.main;
+	requires luffy.core.authorization.authorization.aop.main;
 
 	requires lombok;
 
