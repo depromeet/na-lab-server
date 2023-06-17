@@ -1,5 +1,6 @@
 package me.nalab.luffy.api.acceptance.test.survey.create;
 
+import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyCreateIsFailed;
 import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyCreated;
 
 import java.time.LocalDateTime;
@@ -60,7 +61,7 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	}
 
 	@Test
-	@DisplayName("새로우 Survey 생성 성공 테스트 - 커스텀 질문 포함")
+	@DisplayName("새로운 Survey 생성 성공 테스트 - 커스텀 질문 포함")
 	void CREATE_NEW_SURVEY_SUCCESS_SUCCESS_CUSTOM() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
@@ -75,6 +76,25 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 
 		// then
 		assertIsSurveyCreated(resultActions);
+	}
+
+	@Test
+	@DisplayName("새로운 Survey 생성 시 Valid에 걸리면 예외가 발생한다")
+	void CREATE_NEW_SURVEY_WITH_FAIL() throws Exception {
+		// given
+		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
+		String token = "luffy's-double-token";
+		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
+			.expectedToken(token)
+			.expectedId(targetId)
+			.build());
+
+		// when
+		ResultActions resultActions = createSurvey(token, RequestSample.FAILED_JSON);
+
+		// then
+		assertIsSurveyCreateIsFailed(resultActions);
+
 	}
 
 }

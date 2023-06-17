@@ -28,7 +28,7 @@ public abstract class FormQuestionRequestable {
 	protected String title;
 
 	@Min(value = 1, message = "질문지의 order 는 1보다 작아지면 안됩니다.")
-	@Max(value = 25, message = "질문지의 order 는 25보다 커지면 안됩니다.  ")
+	@Max(value = 24, message = "질문지의 order 는 24보다 커지면 안됩니다.")
 	protected Integer order;
 
 	public abstract QuestionDtoType getQuestionFormType();
