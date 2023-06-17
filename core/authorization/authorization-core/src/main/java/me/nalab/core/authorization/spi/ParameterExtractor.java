@@ -1,6 +1,6 @@
 package me.nalab.core.authorization.spi;
 
-import me.nalab.core.authorization.engine.ParameterReference;
+import me.nalab.core.authorization.api.ParameterReference;
 
 /**
  * 요청받은 인자를 권한 인증에 필요한 ParameterReference 로 Wrapping 하는 SPI 입니다.

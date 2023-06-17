@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.catchException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import me.nalab.core.authorization.engine.ParameterReference;
+import me.nalab.core.authorization.api.ParameterReference;
 import me.nalab.core.authorization.validator.LongValidorFactory;
 import me.nalab.core.authorization.validator.StringValidatorFactory;
 

@@ -24,11 +24,14 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.common.feedback.mapper;
 	exports me.nalab.survey.application.port.out.persistence.findspecific;
 	exports me.nalab.survey.application.port.in.web.findspecific;
-    exports me.nalab.survey.application.common.target.dto;
 	exports me.nalab.survey.application.port.out.persistence.authorization;
+	exports me.nalab.survey.application.common.target.dto;
+	exports me.nalab.survey.application.port.in.authorization;
 
-    requires luffy.survey.domain.main;
+
+	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;
+	requires luffy.core.authorization.authorization.core.main;
 
 	requires lombok;
 

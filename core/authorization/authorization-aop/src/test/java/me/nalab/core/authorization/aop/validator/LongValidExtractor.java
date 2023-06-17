@@ -1,6 +1,6 @@
 package me.nalab.core.authorization.aop.validator;
 
-import me.nalab.core.authorization.engine.ParameterReference;
+import me.nalab.core.authorization.api.ParameterReference;
 import me.nalab.core.authorization.spi.ParameterExtractor;
 
 public class LongValidExtractor implements ParameterExtractor {
