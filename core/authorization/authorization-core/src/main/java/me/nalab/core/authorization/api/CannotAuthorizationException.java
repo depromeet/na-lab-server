@@ -1,17 +1,17 @@
-package me.nalab.core.authorization.engine;
+package me.nalab.core.authorization.api;
 
 import me.nalab.core.authorization.spi.ValidatorFactory;
 
 public class CannotAuthorizationException extends RuntimeException {
 
-	static final CannotAuthorizationException EXPECTED_NULL
+	public static final CannotAuthorizationException EXPECTED_NULL
 		= new CannotAuthorizationException("Cannot authorization cause expected \"NULL\"");
-	static final CannotAuthorizationException TARGET_NULL
+	public static final CannotAuthorizationException TARGET_NULL
 		= new CannotAuthorizationException("Cannot authorization cause target \"NULL\"");
-	static final CannotAuthorizationException VALIDATOR_NULL
+	public static final CannotAuthorizationException VALIDATOR_NULL
 		= new CannotAuthorizationException("Cannot authorization cause validatorFactory \"NULL\"");
 
-	<T, S> CannotAuthorizationException(T expected, S target, ValidatorFactory<?, ?> validatorFactory) {
+	public <T, S> CannotAuthorizationException(T expected, S target, ValidatorFactory<?, ?> validatorFactory) {
 		super(
 			"Cannot authorization cause expected \"" + expected + "\" target \"" + target
 				+ "\" validator factory \"" + validatorFactory.getClass() + "\"");

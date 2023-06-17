@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.core.authorization.aop.util.ValidatorFactoryStorage;
 import me.nalab.core.authorization.aop.validator.LongValidorFactory;
-import me.nalab.core.authorization.engine.CannotAuthorizationException;
+import me.nalab.core.authorization.api.CannotAuthorizationException;
 import me.nalab.core.authorization.spring.Configurer;
 
 @ExtendWith(SpringExtension.class)
