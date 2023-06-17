@@ -1,6 +1,7 @@
 package me.nalab.survey.application.service.authorization;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.authorization.spi.Validator;
@@ -14,6 +15,7 @@ public class FeedbackIdValidator implements Validator {
 	private final TargetIdFindPort targetIdFindPort;
 
 	@Override
+	@Transactional(readOnly = true)
 	public <T, S> boolean valid(T expected, S result) {
 		validType(expected, result);
 		Long expectedTargetId = (Long)expected;
