@@ -7,5 +7,7 @@ module luffy.core.authorization.authorization.aop.main {
 	requires spring.context;
 	requires lombok;
 	requires luffy.core.authorization.authorization.core.main;
+	requires spring.web;
+	requires com.fasterxml.jackson.annotation;
 
 }
