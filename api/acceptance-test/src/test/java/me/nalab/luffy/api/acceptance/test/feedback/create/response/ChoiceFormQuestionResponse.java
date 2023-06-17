@@ -17,8 +17,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class ChoiceFormQuestionResponse extends FormQuestionResponseable {
 
-	@JsonProperty("max_selection_count")
-	private Integer maxSelectionCount;
+	@JsonProperty("max_selectable_count")
+	private Integer maxSelectableCount;
 
 	private List<ChoiceResponse> choices;
 }

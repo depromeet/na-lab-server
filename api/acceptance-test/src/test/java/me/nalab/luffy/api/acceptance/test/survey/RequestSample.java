@@ -40,7 +40,7 @@ public final class RequestSample {
 							.choiceRequestList(
 								List.of(
 									ChoiceRequest.builder()
-										.content("programmer")
+										.content("developer")
 										.order(1)
 										.build(),
 									ChoiceRequest.builder()
@@ -48,11 +48,11 @@ public final class RequestSample {
 										.order(2)
 										.build(),
 									ChoiceRequest.builder()
-										.content("product-manager")
+										.content("pm")
 										.order(3)
 										.build(),
 									ChoiceRequest.builder()
-										.content("other")
+										.content("others")
 										.order(4)
 										.build()
 								)
@@ -137,7 +137,7 @@ public final class RequestSample {
 							.choiceRequestList(
 								List.of(
 									ChoiceRequest.builder()
-										.content("programmer")
+										.content("developer")
 										.order(1)
 										.build(),
 									ChoiceRequest.builder()
@@ -145,11 +145,11 @@ public final class RequestSample {
 										.order(2)
 										.build(),
 									ChoiceRequest.builder()
-										.content("product-manager")
+										.content("pm")
 										.order(3)
 										.build(),
 									ChoiceRequest.builder()
-										.content("other")
+										.content("others")
 										.order(4)
 										.build()
 								)

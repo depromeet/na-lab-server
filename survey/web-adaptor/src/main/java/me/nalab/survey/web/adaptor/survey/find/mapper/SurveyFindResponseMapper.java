@@ -22,8 +22,8 @@ public class SurveyFindResponseMapper {
 
 	public static SurveyFindResponse toSurveyFindResponse(TargetDto targetDto, SurveyDto surveyDto) {
 		return SurveyFindResponse.builder()
-			.surveyId(surveyDto.getId())
-			.target(TargetResponse.builder().id(targetDto.getId()).nickname(targetDto.getNickname()).build())
+			.surveyId(String.valueOf(surveyDto.getId()))
+			.target(TargetResponse.builder().id(String.valueOf(targetDto.getId())).nickname(targetDto.getNickname()).build())
 			.questionCount(surveyDto.getFormQuestionDtoableList().size())
 			.question(surveyDto.getFormQuestionDtoableList()
 				.stream()
@@ -41,16 +41,16 @@ public class SurveyFindResponseMapper {
 
 	public static ChoiceFormQuestionResponse toChoiceFormQuestionResponse(ChoiceFormQuestionDto choiceFormQuestionDto) {
 		return ChoiceFormQuestionResponse.builder()
-			.questionId(choiceFormQuestionDto.getId())
+			.questionId(String.valueOf(choiceFormQuestionDto.getId()))
 			.type(choiceFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
 			.formType(choiceFormQuestionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(choiceFormQuestionDto.getTitle())
 			.order(choiceFormQuestionDto.getOrder())
-			.maxSelectionCount(choiceFormQuestionDto.getMaxSelectionCount())
+			.maxSelectableCount(choiceFormQuestionDto.getMaxSelectableCount())
 			.choices(choiceFormQuestionDto.getChoiceDtoList()
 				.stream()
 				.map(it -> ChoiceResponse.builder()
-					.choiceId(it.getId())
+					.choiceId(String.valueOf(it.getId()))
 					.content(it.getContent())
 					.order(it.getOrder())
 					.build())
@@ -60,7 +60,7 @@ public class SurveyFindResponseMapper {
 
 	public static ShortFormQuestionResponse toShortFormQuestionResponse(ShortFormQuestionDto shortFormQuestionDto) {
 		return ShortFormQuestionResponse.builder()
-			.questionId(shortFormQuestionDto.getId())
+			.questionId(String.valueOf(shortFormQuestionDto.getId()))
 			.type(shortFormQuestionDto.getQuestionDtoType().toString().toLowerCase())
 			.formType(shortFormQuestionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(shortFormQuestionDto.getTitle())

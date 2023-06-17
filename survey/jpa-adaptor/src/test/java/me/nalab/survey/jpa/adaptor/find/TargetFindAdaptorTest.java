@@ -1,13 +1,12 @@
 package me.nalab.survey.jpa.adaptor.find;
 
-import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-
-import javax.persistence.EntityManager;
-
+import me.nalab.core.data.survey.SurveyEntity;
+import me.nalab.core.data.target.TargetEntity;
+import me.nalab.survey.domain.survey.Survey;
+import me.nalab.survey.domain.target.Target;
+import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,11 +15,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
-import me.nalab.core.data.survey.SurveyEntity;
-import me.nalab.core.data.target.TargetEntity;
-import me.nalab.survey.domain.survey.Survey;
-import me.nalab.survey.domain.target.Target;
-import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
+import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.stream.LongStream;
+
+import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -86,6 +88,69 @@ class TargetFindAdaptorTest {
 
 		assertTrue(result.isPresent());
 		assertEquals(targetId, result.get());
+	}
+
+	@Test
+	@DisplayName("저장된 값 없을 때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_EMPTY_RESULT() {
+		// given
+		var username = "username";
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).isEmpty();
+	}
+
+	@Test
+	@DisplayName("저장된 값 1개 일때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_ONE_RESULT() {
+		// given
+		var username = "username";
+		var expectedId = 1L;
+		var targetEntity = TargetEntity.builder()
+				.id(expectedId)
+				.nickname(username)
+				.createdAt(LocalDateTime.now())
+				.updatedAt(LocalDateTime.now())
+				.build();
+		entityManager.persist(targetEntity);
+		entityManager.flush();
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).isNotEmpty();
+		var foundTarget = result.get(0);
+		Assertions.assertThat(foundTarget.getId()).isEqualTo(expectedId);
+		Assertions.assertThat(foundTarget.getNickname()).isEqualTo(username);
+	}
+
+	@Test
+	@DisplayName("저장된 값 2개 이상 일때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_MORE_RESULT() {
+		// given
+		var username = "username";
+		var expectedSize = 10;
+		LongStream.range(0, expectedSize).forEach( id -> {
+			var targetEntity = TargetEntity.builder()
+					.id(id)
+					.nickname(username)
+					.createdAt(LocalDateTime.now())
+					.updatedAt(LocalDateTime.now())
+					.build();
+
+			entityManager.persist(targetEntity);
+		});
+		entityManager.flush();
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).hasSize(expectedSize);
 	}
 
 	@Test

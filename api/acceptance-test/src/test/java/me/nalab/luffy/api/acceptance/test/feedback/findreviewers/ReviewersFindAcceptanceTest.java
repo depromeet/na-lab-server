@@ -6,6 +6,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -91,7 +92,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 		Long surveyId = createSurveyAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
 		SurveyFindResponse surveyFindResponse = findSurveyAndGetSurveyResponse(surveyId);
 
-		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "programmer");
+		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
 
 		// when
@@ -108,7 +109,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 			.getContentAsString();
 
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		return jsonObject.getLong("survey_id");
+		return Long.valueOf(jsonObject.getString("survey_id"));
 	}
 
 	private SurveyFindResponse findSurveyAndGetSurveyResponse(Long surveyId) throws Exception {

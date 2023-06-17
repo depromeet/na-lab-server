@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class ChoiceQuestionFeedbackRequest extends AbstractQuestionFeedbackRequest {
 
-	@JsonProperty("choies")
-	private List<Long> choiceList;
+	@JsonProperty("choices")
+	private List<String> choiceList;
 
 }

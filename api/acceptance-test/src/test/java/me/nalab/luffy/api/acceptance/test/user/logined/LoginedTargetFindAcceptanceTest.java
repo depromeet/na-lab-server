@@ -48,10 +48,10 @@ class LoginedTargetFindAcceptanceTest extends UserAcceptanceTestSupporter {
 		String token = jwtUtils.createAccessToken(Set.of(new Payload(Payload.Key.NICKNAME, nickname),
 			new Payload(Payload.Key.USER_ID, 12345 + ""), new Payload(Payload.Key.TARGET_ID, targetId + "")));
 		applicationEventPublisher.publishEvent(
-			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
+			MockUserRegisterEvent.builder().expectedToken("bearer " + token).expectedId(targetId).build());
 
 		// when
-		ResultActions resultActions = getLoginedUser(token);
+		ResultActions resultActions = getLoginedUser("bearer " + token);
 
 		// then
 		assertIsLogined(resultActions, targetId, nickname);

@@ -24,9 +24,10 @@ class SurveyCreateController {
 
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
-	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId, @RequestBody SurveyCreateRequest surveyCreateRequest) {
+	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
+		@RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
-		Long latestSurveyId = latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId);
+		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
 		return new SurveyIdResponse(latestSurveyId);
 	}
 
