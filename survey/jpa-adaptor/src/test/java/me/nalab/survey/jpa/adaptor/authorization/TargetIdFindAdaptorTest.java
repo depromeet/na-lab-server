@@ -74,6 +74,7 @@ class TargetIdFindAdaptorTest {
 
 		// then
 		assertThat(result).isPresent();
+		assertThat(result).contains(targetId);
 	}
 
 	@Test
@@ -129,6 +130,41 @@ class TargetIdFindAdaptorTest {
 
 		// then
 		resultList.forEach(r -> assertThat(r).isPresent());
+		resultList.forEach(r -> assertThat(r).contains(targetId));
+	}
+
+	@Test
+	@DisplayName("target이 여러명 있을때, 조회된 원하는 타겟만 반환한다.")
+	void FIND_ONT_TARGET_WHEN_HAVE_MULTIPLE_TARGET() {
+		// given
+		Long targetId = 101L;
+		TargetEntity targetEntity1 = TargetEntity.builder()
+			.id(targetId)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.nickname("test target1")
+			.build();
+		Survey survey = RandomSurveyFixture.createRandomSurvey();
+
+		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId, survey);
+
+		TargetEntity targetEntity2 = TargetEntity.builder()
+			.id(102L)
+			.createdAt(LocalDateTime.now())
+			.updatedAt(LocalDateTime.now())
+			.nickname("test target2")
+			.build();
+
+		testTargetJpaRepository.saveAndFlush(targetEntity1);
+		testTargetJpaRepository.saveAndFlush(targetEntity2);
+		testSurveyJpaRepository.saveAndFlush(surveyEntity);
+
+		// when
+		Optional<Long> result = targetIdFindPort.findTargetIdBySurveyId(survey.getId());
+
+		// then
+		assertThat(result).isPresent();
+		assertThat(result).contains(targetId);
 	}
 
 }

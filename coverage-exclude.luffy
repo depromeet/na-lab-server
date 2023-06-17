@@ -45,4 +45,3 @@ exclude me/nalab/auth/application/common/**/*
 exclude me/nalab/user/web/adaptor/logined/*
 exclude me/nalab/auth/interceptor/*
 exclude me/nalab/core/authorization/spring/Configurer
-exclude me/nalab/survey/application/port/in/authorization/SurveyAuthorization
