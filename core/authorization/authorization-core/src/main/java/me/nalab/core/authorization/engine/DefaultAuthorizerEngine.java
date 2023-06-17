@@ -1,6 +1,7 @@
 package me.nalab.core.authorization.engine;
 
 import me.nalab.core.authorization.api.Authorizer;
+import me.nalab.core.authorization.api.ParameterReference;
 import me.nalab.core.authorization.spi.ParameterExtractor;
 import me.nalab.core.authorization.spi.Validator;
 import me.nalab.core.authorization.spi.ValidatorFactory;

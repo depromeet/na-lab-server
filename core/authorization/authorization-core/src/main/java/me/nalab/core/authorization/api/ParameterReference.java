@@ -1,4 +1,4 @@
-package me.nalab.core.authorization.engine;
+package me.nalab.core.authorization.api;
 
 public class ParameterReference {
 
