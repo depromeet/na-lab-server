@@ -1,5 +1,7 @@
 package me.nalab.survey.web.adaptor.createsurvey;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -25,7 +27,7 @@ class SurveyCreateController {
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
 	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
-		@RequestBody SurveyCreateRequest surveyCreateRequest) {
+		@Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
 		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
 		return new SurveyIdResponse(latestSurveyId);
