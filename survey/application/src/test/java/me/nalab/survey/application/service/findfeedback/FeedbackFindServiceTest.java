@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,20 +24,27 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import me.nalab.survey.application.RandomFeedbackDtoFixture;
 import me.nalab.survey.application.RandomSurveyDtoFixture;
+import me.nalab.survey.application.TestIdGenerator;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.findfeedback.FeedbackFindUseCase;
 import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackUpdatePort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
+import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
 import me.nalab.survey.domain.survey.Survey;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = FeedbackFindService.class)
+@ContextConfiguration(classes = {FeedbackFindService.class, TestIdGenerator.class})
 class FeedbackFindServiceTest {
+
+	@Autowired
+	private TestIdGenerator testIdGenerator;
 
 	@Autowired
 	private FeedbackFindUseCase feedbackFindUseCase;
@@ -46,6 +54,9 @@ class FeedbackFindServiceTest {
 
 	@MockBean(name = "findfeedback.SurveyExistCheckAdaptor")
 	private SurveyExistCheckPort surveyExistCheckPort;
+
+	@MockBean(name = "findfeedback.FeedbackUpdateAdaptor")
+	private FeedbackUpdatePort feedbackUpdatePort;
 
 	@ParameterizedTest
 	@MethodSource("feedbackFindSources")
@@ -75,6 +86,34 @@ class FeedbackFindServiceTest {
 		// then
 		assertThrows(SurveyDoesNotExistException.class, () -> feedbackFindUseCase.findAllFeedbackDtoBySurveyId(1L));
 	}
+
+	@Test
+	@DisplayName("Feedback 읽음 처리 성공 테스트 - Feedback이 존재할 때")
+	void FEEDBACK_READ_UPDATE_WITH_SUCCESS() {
+		// given
+		RandomSurveyDtoFixture.setRandomIdGenerator(() -> testIdGenerator.generate());
+		Survey survey = SurveyDtoMapper.toSurvey(RandomSurveyDtoFixture.createRandomSurveyDto());
+		FeedbackDto feedbackDto1 = RandomFeedbackDtoFixture.getRandomFeedbackDtoBySurvey(survey);
+		FeedbackDto feedbackDto2 = RandomFeedbackDtoFixture.getRandomFeedbackDtoBySurvey(survey);
+		Feedback feedback1 = FeedbackDtoMapper.toDomain(survey, feedbackDto1);
+		Feedback feedback2 = FeedbackDtoMapper.toDomain(survey, feedbackDto2);
+
+		when(feedbackFindPort.findAllFeedbackBySurveyId(survey.getId()))
+			.thenReturn(List.of(feedback1, feedback2));
+
+		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(survey.getId());
+
+		boolean allMatch1 = feedback1.getFormQuestionFeedbackableList()
+			.stream()
+			.allMatch(FormQuestionFeedbackable::isRead);
+		Assertions.assertTrue(allMatch1);
+
+		boolean allMatch2 = feedback2.getFormQuestionFeedbackableList()
+			.stream()
+			.allMatch(FormQuestionFeedbackable::isRead);
+		Assertions.assertTrue(allMatch2);
+	}
+
 
 	private void assertIsSorted(List<FeedbackDto> result) {
 		FeedbackDto before = null;

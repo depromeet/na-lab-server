@@ -22,10 +22,14 @@ public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFe
 	private Long id;
 	private Long surveyId;
 	private final List<FormQuestionFeedbackable> formQuestionFeedbackableList;
-	private final boolean isRead;
+	private boolean isRead;
 	private final Reviewer reviewer;
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
+
+	public void setRead(boolean read) {
+		isRead = read;
+	}
 
 	@Override
 	public void withId(LongSupplier idSupplier) {

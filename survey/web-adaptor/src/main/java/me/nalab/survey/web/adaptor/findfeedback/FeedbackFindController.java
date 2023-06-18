@@ -33,6 +33,7 @@ public class FeedbackFindController {
 	public QuestionFeedbackResponse findFeedback(@Auth @RequestParam("survey-id") Long surveyId) {
 		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
 		List<FeedbackDto> feedbackDto = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(surveyId);
+		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(surveyId);
 		return ResponseMapper.toQuestionFeedbackResponse(surveyDto, feedbackDto);
 	}
 
