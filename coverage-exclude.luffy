@@ -44,5 +44,10 @@ exclude me/nalab/user/jpa/adaptor/**/common/mapper
 exclude me/nalab/user/web/adaptor/logined/*
 exclude me/nalab/auth/application/common/**/*
 exclude me/nalab/auth/interceptor/*
+exclude me/nalab/core/authorization/spring/Configurer
 exclude me/nalab/auth/web/adaptor/**/*
 exclude me/nalab/oauth/application/**/*
+exclude me/nalab/core/authorization/aop/advice/*
+exclude me/nalab/core/secure/cors/CorsConfig
+exclude me/nalab/core/secure/xss/config/XssConfig
+exclude me/nalab/core/secure/xss/json/JsonXssFilterException

@@ -30,7 +30,7 @@ import me.nalab.survey.jpa.adaptor.common.mapper.FeedbackEntityMapper;
 @EntityScan("me.nalab.core.data")
 @ContextConfiguration(classes = FeedbackUpdateAdaptor.class)
 @TestPropertySource("classpath:h2.properties")
-public class FeedbackUpdateAdaptorTest {
+class FeedbackUpdateAdaptorTest {
 
 	@Autowired
 	private EntityManager entityManager;
