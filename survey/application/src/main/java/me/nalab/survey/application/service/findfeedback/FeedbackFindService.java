@@ -49,13 +49,15 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 	public void updateFormFeedbackEntityIsReadBySurveyId(Long surveyId) {
 		List<Feedback> feedbacks = feedbackFindPort.findAllFeedbackBySurveyId(surveyId);
 
-		if (feedbacks.isEmpty()) return;
+		if (feedbacks.isEmpty()) {
+			return;
+		}
 
-		List<List<FormQuestionFeedbackable>> listList = feedbacks.stream()
+		List<List<FormQuestionFeedbackable>> formQuestionFeedbackList = feedbacks.stream()
 			.map(Feedback::getFormQuestionFeedbackableList)
 			.collect(Collectors.toList());
 
-		listList.stream()
+		formQuestionFeedbackList.stream()
 			.flatMap(List::stream)
 			.forEach(formQuestionFeedbackable -> formQuestionFeedbackable.setRead(true));
 
