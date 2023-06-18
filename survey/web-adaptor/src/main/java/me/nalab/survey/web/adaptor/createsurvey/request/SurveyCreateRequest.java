@@ -18,11 +18,11 @@ import lombok.ToString;
 public class SurveyCreateRequest {
 
 	@JsonProperty("question_count")
-	@Min(value = 4, message = "설문지의 질문 갯수는 최소 4개입니다.")
+	@Min(value = 2, message = "설문지의 질문 갯수는 최소 2개입니다.")
 	@Max(value = 24, message = "설문지의 질문 갯수는 최대 24개입니다.")
 	private Integer questionCount;
 
-	@Size(min = 4, max = 24, message = "설문지의 설문 갯수는 4에서 24사이가 되어야 합니다.")
+	@Size(min = 2, max = 24, message = "설문지의 설문 갯수는 2에서 24사이가 되어야 합니다.")
 	@JsonProperty("question")
 	private List<FormQuestionRequestable> formQuestionRequestableList;
 
