@@ -1,5 +1,6 @@
 package me.nalab.survey.web.adaptor.createsurvey.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,6 +20,7 @@ public class ShortFormQuestionRequest extends FormQuestionRequestable {
 	private String shortFormQuestionType;
 
 	@Override
+	@JsonIgnore
 	public QuestionDtoType getQuestionFormType() {
 		return QuestionDtoType.SHORT;
 	}

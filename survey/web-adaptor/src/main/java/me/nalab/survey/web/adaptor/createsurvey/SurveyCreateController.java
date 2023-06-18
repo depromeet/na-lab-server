@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.nalab.core.secure.xss.meta.Xss;
+import me.nalab.core.secure.xss.meta.XssFiltering;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
 import me.nalab.survey.application.port.in.web.LatestSurveyIdFindUseCase;
 import me.nalab.survey.web.adaptor.createsurvey.request.SurveyCreateRequest;
@@ -24,10 +26,11 @@ class SurveyCreateController {
 	private final CreateSurveyUseCase createSurveyUseCase;
 	private final LatestSurveyIdFindUseCase latestSurveyIdFindUseCase;
 
+	@XssFiltering
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
-	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
-		@Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
+	public SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
+		@Xss("json") @Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
 		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
 		return new SurveyIdResponse(latestSurveyId);

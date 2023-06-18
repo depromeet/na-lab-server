@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.EqualsAndHashCode;
@@ -33,6 +34,7 @@ public class ChoiceFormQuestionRequest extends FormQuestionRequestable {
 	private List<ChoiceRequest> choiceRequestList;
 
 	@Override
+	@JsonIgnore
 	public QuestionDtoType getQuestionFormType() {
 		return QuestionDtoType.CHOICE;
 	}

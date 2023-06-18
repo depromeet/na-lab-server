@@ -1,4 +1,4 @@
-package me.nalab.core.secure;
+package me.nalab.core.secure.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
