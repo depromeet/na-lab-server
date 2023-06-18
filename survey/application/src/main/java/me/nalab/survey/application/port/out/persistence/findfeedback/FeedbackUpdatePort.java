@@ -1,5 +1,7 @@
 package me.nalab.survey.application.port.out.persistence.findfeedback;
 
+import java.util.List;
+
 import me.nalab.survey.domain.feedback.Feedback;
 
 /**
@@ -8,9 +10,10 @@ import me.nalab.survey.domain.feedback.Feedback;
 public interface FeedbackUpdatePort {
 
 	/**
-	 * Feedback domain을 인자로 받아, 업데이트합니다.
+	 * FeedbackList를 domain 인자로 받아, 업데이트합니다.
 	 *
-	 * @param feedback 생성할 feedback domain
+	 * @param List<Feedback> 업데이트할 feedback List
 	 */
-	void updateFeedback(Feedback feedback);
+	void updateFeedback(List<Feedback> feedbackList);
 }
+

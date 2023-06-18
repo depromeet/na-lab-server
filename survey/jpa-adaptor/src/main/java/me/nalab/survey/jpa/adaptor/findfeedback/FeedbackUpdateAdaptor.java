@@ -1,5 +1,9 @@
 package me.nalab.survey.jpa.adaptor.findfeedback;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -22,8 +26,12 @@ public class FeedbackUpdateAdaptor implements FeedbackUpdatePort {
 	}
 
 	@Override
-	public void updateFeedback(Feedback feedback) {
-		FeedbackEntity feedbackEntity = FeedbackEntityMapper.toEntity(feedback);
-		feedbackUpdateRepository.save(feedbackEntity);
+	public void updateFeedback(List<Feedback> feedbackList) {
+
+		List<FeedbackEntity> feedbackEntityList = feedbackList.stream()
+			.map(FeedbackEntityMapper::toEntity)
+			.collect(Collectors.toList());
+
+		feedbackUpdateRepository.saveAll(feedbackEntityList);
 	}
 }

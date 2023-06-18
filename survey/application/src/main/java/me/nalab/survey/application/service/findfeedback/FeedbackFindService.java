@@ -16,7 +16,6 @@ import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFin
 import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackUpdatePort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
-import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
 
 @Service
 public class FeedbackFindService implements FeedbackFindUseCase {
@@ -53,17 +52,11 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 			return;
 		}
 
-		List<List<FormQuestionFeedbackable>> formQuestionFeedbackList = feedbacks.stream()
-			.map(Feedback::getFormQuestionFeedbackableList)
-			.collect(Collectors.toList());
-
-		formQuestionFeedbackList.stream()
-			.flatMap(List::stream)
+		feedbacks.stream()
+			.flatMap(feedback -> feedback.getFormQuestionFeedbackableList().stream())
 			.forEach(formQuestionFeedbackable -> formQuestionFeedbackable.setRead(true));
 
-		for (Feedback feedback : feedbacks) {
-			feedbackUpdatePort.updateFeedback(feedback);
-		}
+		feedbackUpdatePort.updateFeedback(feedbacks);
 	}
 
 	private void throwIfSurveyDoesNotExist(Long surveyId) {

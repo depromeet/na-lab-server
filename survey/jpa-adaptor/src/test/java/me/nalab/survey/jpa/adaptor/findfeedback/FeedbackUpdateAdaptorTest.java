@@ -1,6 +1,12 @@
 package me.nalab.survey.jpa.adaptor.findfeedback;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,21 +33,46 @@ import me.nalab.survey.jpa.adaptor.common.mapper.FeedbackEntityMapper;
 public class FeedbackUpdateAdaptorTest {
 
 	@Autowired
+	private EntityManager entityManager;
+
+	@Autowired
 	private FeedbackUpdatePort feedbackUpdatePort;
 
 	@Autowired
 	private TestFeedbackUpdateJpaRepository testFeedbackUpdateJpaRepository;
 
 	@Test
-	@DisplayName("Feedback 저장 테스트")
-	void SAVE_FEEDBACK_SUCCESS_TEST() {
+	@DisplayName("Feedback 업데이트 테스트")
+	void UPDATE_FEEDBACK_SUCCESS_TEST() {
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
-		Feedback feedback = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
+		Feedback feedback1 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
+		Feedback feedback2 = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
+		testFeedbackUpdateJpaRepository.saveAndFlush(FeedbackEntityMapper.toEntity(feedback1));
+		testFeedbackUpdateJpaRepository.saveAndFlush(FeedbackEntityMapper.toEntity(feedback2));
+		entityManager.clear();
 
-		feedbackUpdatePort.updateFeedback(feedback);
-		FeedbackEntity feedbackEntity = testFeedbackUpdateJpaRepository.findAll().get(0);
+		List<FeedbackEntity> feedbackEntityList = testFeedbackUpdateJpaRepository.findAll();
 
-		assertEquals(feedback, FeedbackEntityMapper.toDomain(feedbackEntity));
+		feedbackEntityList.stream()
+			.flatMap(feedback -> feedback.getFormFeedbackEntityList().stream())
+			.forEach(formQuestionFeedbackable -> formQuestionFeedbackable.setRead(true));
 
+		List<Feedback> feedbackList = feedbackEntityList.stream()
+			.map(FeedbackEntityMapper::toDomain)
+			.collect(Collectors.toList());
+
+		feedbackUpdatePort.updateFeedback(feedbackList);
+		entityManager.flush();
+		entityManager.clear();
+
+		List<FeedbackEntity> feedbackEntities = testFeedbackUpdateJpaRepository.findAll();
+
+		feedbackEntities
+			.forEach(r -> assertAll(
+				r.getFormFeedbackEntityList().stream()
+					.map(FormFeedbackEntity -> () -> {
+						assertTrue(FormFeedbackEntity.isRead());
+					})
+			));
 	}
 }

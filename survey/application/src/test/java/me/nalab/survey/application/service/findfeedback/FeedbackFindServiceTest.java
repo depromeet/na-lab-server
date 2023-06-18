@@ -3,10 +3,7 @@ package me.nalab.survey.application.service.findfeedback;
 import static me.nalab.survey.application.RandomFeedbackDtoFixture.getRandomFeedbackDtoBySurvey;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -105,8 +102,6 @@ class FeedbackFindServiceTest {
 			.thenReturn(List.of(feedback1, feedback2));
 
 		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(survey.getId());
-
-		verify(feedbackUpdatePort, times(2)).updateFeedback(any());
 
 		boolean allMatch1 = feedback1.getFormQuestionFeedbackableList()
 			.stream()
