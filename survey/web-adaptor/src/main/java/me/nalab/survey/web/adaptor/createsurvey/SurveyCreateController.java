@@ -29,7 +29,7 @@ class SurveyCreateController {
 	@XssFiltering
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
-	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
+	public SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
 		@Xss("json") @Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest));
 		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
