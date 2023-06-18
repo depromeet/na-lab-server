@@ -1,4 +1,6 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    implementation 'org.apache.commons:commons-text:1.10.0' // License Apache 2.0
 }
