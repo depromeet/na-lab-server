@@ -17,6 +17,10 @@ public class SurveyAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsSurveyCreateIsFailed(ResultActions resultActions) throws Exception {
+		resultActions.andExpect(status().isBadRequest());
+	}
+
 	public static void assertIsSurveyFound(ResultActions resultActions) throws Exception {
 		resultActions.andExpectAll(
 			status().isOk(),

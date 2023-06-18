@@ -3,8 +3,9 @@ package me.nalab.survey.web.adaptor.createfeedback;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class FeedbackCreateController {
 	@PostMapping("/feedbacks")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createFeedback(@RequestParam("survey-id") Long surveyId,
-		@Xss("json") @Validated @RequestBody FeedbackCreateRequest feedbackCreateRequest) {
+		@Xss("json") @Valid @RequestBody FeedbackCreateRequest feedbackCreateRequest) {
 		feedbackCreateUseCase.createFeedback(surveyId, toFeedbackDto(feedbackCreateRequest));
 	}
 

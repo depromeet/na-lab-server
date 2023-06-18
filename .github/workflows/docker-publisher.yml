@@ -49,6 +49,7 @@ jobs:
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             KAKAO_CLIENT_ID=${{ secrets.KAKAO_CIENT_ID }}
+            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           tags: | 
             samillmu/luffy:latest
             ${{ steps.meta.outputs.tags }}

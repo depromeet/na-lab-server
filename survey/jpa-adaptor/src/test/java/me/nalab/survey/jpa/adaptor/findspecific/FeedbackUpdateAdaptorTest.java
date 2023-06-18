@@ -2,8 +2,6 @@ package me.nalab.survey.jpa.adaptor.findspecific;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -33,27 +31,15 @@ class FeedbackUpdateAdaptorTest {
 	@Autowired
 	private TestFeedbackFindJpaRepository testFeedbackFindJpaRepository;
 
+
 	@Test
 	void UPDATE_FEEDBACK_WITH_SUCCESS() {
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
 		Feedback feedback = RandomFeedbackFixture.getRandomFeedbackBySurvey(survey);
-		FeedbackEntity feedbackEntity = FeedbackEntityMapper.toEntity(feedback);
-		FeedbackEntity savedFeedbackEntity = testFeedbackFindJpaRepository.save(feedbackEntity);
 
-		Optional<Long> feedbackId = feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(savedFeedbackEntity.getId());
-		Optional<FeedbackEntity> resultFeedback = testFeedbackFindJpaRepository.findById(savedFeedbackEntity.getId());
+		feedbackUpdatePort.updateFeedback(feedback);
+		FeedbackEntity feedbackEntity = testFeedbackFindJpaRepository.findAll().get(0);
 
-		assertTrue(feedbackId.isPresent());
-		assertTrue(resultFeedback.isPresent());
-		assertTrue(resultFeedback.get().isRead());
-	}
-
-	@Test
-	void UPDATE_FEEDBACK_WITH_FAIL() {
-		Long nonExistentFeedbackId = 999L;
-
-		Optional<Long> feedbackId = feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(nonExistentFeedbackId);
-
-		assertTrue(feedbackId.isEmpty());
+		assertEquals(feedback, FeedbackEntityMapper.toDomain(feedbackEntity));
 	}
 }
