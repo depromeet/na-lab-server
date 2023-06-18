@@ -48,3 +48,5 @@ exclude me/nalab/core/authorization/spring/Configurer
 exclude me/nalab/auth/web/adaptor/**/*
 exclude me/nalab/oauth/application/**/*
 exclude me/nalab/core/authorization/aop/advice/*
+exclude me/nalab/core/secure/cors/CorsConfig
+exclude me/nalab/core/secure/xss/config/XssConfig
