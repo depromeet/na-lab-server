@@ -13,6 +13,7 @@ import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.findfeedback.FeedbackFindUseCase;
 import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackUpdatePort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
@@ -23,11 +24,15 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 	private final SurveyExistCheckPort surveyExistCheckPort;
 	private final FeedbackFindPort feedbackFindPort;
 
+	private final FeedbackUpdatePort feedbackUpdatePort;
+
 	public FeedbackFindService(
 		@Qualifier("findfeedback.SurveyExistCheckAdaptor") SurveyExistCheckPort surveyExistCheckPort,
-		FeedbackFindPort feedbackFindPort) {
+		FeedbackFindPort feedbackFindPort,
+		@Qualifier("findfeedback.FeedbackUpdateAdaptor") FeedbackUpdatePort feedbackUpdatePort) {
 		this.surveyExistCheckPort = surveyExistCheckPort;
 		this.feedbackFindPort = feedbackFindPort;
+		this.feedbackUpdatePort = feedbackUpdatePort;
 	}
 
 	@Transactional
@@ -53,6 +58,10 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 		listList.stream()
 			.flatMap(List::stream)
 			.forEach(formQuestionFeedbackable -> formQuestionFeedbackable.setRead(true));
+
+		for (Feedback feedback : feedbacks) {
+			feedbackUpdatePort.updateFeedback(feedback);
+		}
 	}
 
 	private void throwIfSurveyDoesNotExist(Long surveyId) {

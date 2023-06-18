@@ -3,7 +3,10 @@ package me.nalab.survey.application.service.findfeedback;
 import static me.nalab.survey.application.RandomFeedbackDtoFixture.getRandomFeedbackDtoBySurvey;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -33,6 +36,7 @@ import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.findfeedback.FeedbackFindUseCase;
 import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackUpdatePort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
@@ -53,6 +57,9 @@ class FeedbackFindServiceTest {
 
 	@MockBean(name = "findfeedback.SurveyExistCheckAdaptor")
 	private SurveyExistCheckPort surveyExistCheckPort;
+
+	@MockBean(name = "findfeedback.FeedbackUpdateAdaptor")
+	private FeedbackUpdatePort feedbackUpdatePort;
 
 	@ParameterizedTest
 	@MethodSource("feedbackFindSources")
@@ -98,6 +105,8 @@ class FeedbackFindServiceTest {
 			.thenReturn(List.of(feedback1, feedback2));
 
 		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(survey.getId());
+
+		verify(feedbackUpdatePort, times(2)).updateFeedback(any());
 
 		boolean allMatch1 = feedback1.getFormQuestionFeedbackableList()
 			.stream()
