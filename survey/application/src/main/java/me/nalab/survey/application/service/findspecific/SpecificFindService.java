@@ -1,6 +1,7 @@
 package me.nalab.survey.application.service.findspecific;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
@@ -34,11 +35,14 @@ public class SpecificFindService implements SpecificFindUseCase {
 		return FeedbackDtoMapper.toDto(feedback);
 	}
 
+	@Transactional
 	@Override
 	public void updateFeedbackIsReadByFeedbackId(Long feedbackId) {
-		if (feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId).isEmpty()) {
+		Feedback feedback = feedbackFindPort.findFeedback(feedbackId).orElseThrow(() -> {
 			throw new FeedbackDoesNotExistException(feedbackId);
-		}
+		});
+		feedback.setRead(true);
+		feedbackUpdatePort.updateFeedback(feedback);
 	}
 
 	@Override
