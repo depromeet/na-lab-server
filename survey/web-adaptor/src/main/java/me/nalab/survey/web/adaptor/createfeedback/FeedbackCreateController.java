@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.nalab.core.secure.xss.meta.Xss;
+import me.nalab.core.secure.xss.meta.XssFiltering;
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FormQuestionFeedbackDtoable;
@@ -32,10 +34,11 @@ public class FeedbackCreateController {
 
 	private final FeedbackCreateUseCase feedbackCreateUseCase;
 
+	@XssFiltering
 	@PostMapping("/feedbacks")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createFeedback(@RequestParam("survey-id") Long surveyId,
-		@Validated @RequestBody FeedbackCreateRequest feedbackCreateRequest) {
+		@Xss("json") @Validated @RequestBody FeedbackCreateRequest feedbackCreateRequest) {
 		feedbackCreateUseCase.createFeedback(surveyId, toFeedbackDto(feedbackCreateRequest));
 	}
 

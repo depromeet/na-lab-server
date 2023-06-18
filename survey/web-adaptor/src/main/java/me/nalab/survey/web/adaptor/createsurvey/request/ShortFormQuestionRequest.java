@@ -1,5 +1,6 @@
 package me.nalab.survey.web.adaptor.createsurvey.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ public class ShortFormQuestionRequest extends FormQuestionRequestable {
 	private String shortFormQuestionType;
 
 	@Override
+	@JsonIgnore
 	public QuestionDtoType getQuestionFormType() {
 		return QuestionDtoType.SHORT;
 	}
