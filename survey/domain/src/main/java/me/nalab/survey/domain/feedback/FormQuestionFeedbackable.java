@@ -20,6 +20,10 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 	private Long questionId;
 	private boolean isRead;
 
+	public void setRead(boolean read) {
+		isRead = read;
+	}
+
 	@Override
 	public void withId(LongSupplier idSupplier) {
 		if(this.id != null) {
