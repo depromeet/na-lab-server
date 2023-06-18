@@ -17,4 +17,10 @@ public interface FeedbackFindUseCase {
 	 */
 	List<FeedbackDto> findAllFeedbackDtoBySurveyId(Long surveyId);
 
+	/**
+	 * surveyId에 해당하는 모든 Feedback의 FormFeedbackEntity들의 isRead를 true로 변경합니다.
+	 *
+	 * @param surveyId Survey의 id
+	 */
+	void updateFormFeedbackEntityIsReadBySurveyId(Long surveyId);
 }
