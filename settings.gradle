@@ -22,6 +22,7 @@ include 'api:acceptance-test'
 
 include 'support'
 include 'support:jacoco'
+include 'support:logging'
 
 include 'survey'
 include 'survey:domain'
@@ -49,4 +50,3 @@ include 'user:user-domain'
 include 'user:user-jpa-adapter'
 include 'user:user-application'
 include 'user:user-web-adaptor'
-include 'auth:auth-interceptor'
