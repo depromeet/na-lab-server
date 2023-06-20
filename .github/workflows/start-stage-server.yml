@@ -1,0 +1,24 @@
+name: Start stage server
+
+on:
+  workflow_run:
+    workflows:
+      - "Docker stage image publisher"
+    types:
+      - completed
+
+jobs:
+  server_start:
+    name: start stage server
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_STAGE_HOST }}
+          username: ${{ secrets.SSH_STAGE_USER }}
+          key: ${{ secrets.SSH_STAGE_KEY }}
+          script: |
+            docker pull samillmu/luffy:latest-stage
+            docker ps -aq | xargs docker stop | xargs docker rm
+            docker run -d -p 8080:8080 samillmu/luffy:latest-stage
