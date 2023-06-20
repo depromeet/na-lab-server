@@ -1,15 +1,15 @@
-name: Start api server
+name: Start release server
 
 on:
   workflow_run:
     workflows:
-      - "Docker image publisher"
+      - "Docker release image publisher"
     types:
       - completed
       
 jobs:
   server_start:
-    name: start server
+    name: start release server
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands using password
