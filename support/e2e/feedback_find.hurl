@@ -176,7 +176,7 @@ jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].created_at" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].is_read" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id" exists
-jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.nickname" exists
+jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.nickname" matches "^[A-Z].*"
 jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.collaboration_experience" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.position" matches "designer|product-manager|developer|other"
 
