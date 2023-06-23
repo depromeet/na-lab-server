@@ -24,8 +24,8 @@ jobs:
       - name: build nalab-server-docker-image
         run: docker build --tag luffy:e2e --build-arg DB_URL=jdbc:mysql://database:3306/luffy --build-arg DB_USERNAME=root --build-arg DB_PASSWORD=0000 --build-arg JWT_SECRET=fore2e .
       - name: run nalab-server
-        run: docker run --name nalab-server --network e2e-net -p 8080:8080 -d luffy:e2e
+        run: docker run --name nalab-server --network e2e-net -d luffy:e2e
       - name: build hurl image
-        run: docker build --tag hurl support/e2e/
+        run: docker build --tag hurl:e2e support/e2e/
       - name: e2e test
-        run: docker run --network e2e-net hurl
+        run: docker run --network e2e-net hurl:e2e
