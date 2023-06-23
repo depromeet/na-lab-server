@@ -10,8 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permission:
-      contents: read
     steps:
       - name: checkout
         uses: actions/checkout@v3
