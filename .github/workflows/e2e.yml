@@ -2,10 +2,10 @@ name: e2e test
 
 on:
   pull_request:
-#    branches:
-#      - main
-#      - stage
-#      - release
+    branches:
+      - main
+      - stage
+      - release
 
 jobs:
   build:
