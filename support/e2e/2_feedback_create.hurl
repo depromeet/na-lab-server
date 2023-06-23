@@ -1,4 +1,4 @@
-POST http://nalab-server:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
+POST http://127.0.0.1:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
 {
     "nickname": "devxb",
     "email": "hello@12345"
@@ -17,7 +17,7 @@ auth_token: jsonpath "$.access_token"
 
 ##########
 
-POST http://nalab-server:8080/v1/surveys # 발급받은 토큰으로 survey를 생성한다.
+POST http://127.0.0.1:8080/v1/surveys # 발급받은 토큰으로 survey를 생성한다.
 Authorization: {{ token_type }} {{ auth_token }}
 {
     "question_count": 2,
@@ -63,7 +63,7 @@ survey_id: jsonpath "$.survey_id"
 
 ##########
 
-GET http://nalab-server:8080/v1/surveys/{{ survey_id }} # 생성된 survey를 조회하고, feedback을 남기기 위해 id를 저장한다.
+GET http://127.0.0.1:8080/v1/surveys/{{ survey_id }} # 생성된 survey를 조회하고, feedback을 남기기 위해 id를 저장한다.
 
 HTTP 200
 [Asserts]
@@ -76,7 +76,7 @@ strength_question_id: jsonpath "$.question.[1].question_id"
 
 ##########
 
-POST http://nalab-server:8080/v1/feedbacks # 생성된 survey에 feedback을 남긴다.
+POST http://127.0.0.1:8080/v1/feedbacks # 생성된 survey에 feedback을 남긴다.
 
 [QueryStringParams]
 survey-id: {{ survey_id }}
