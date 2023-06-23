@@ -1,0 +1,33 @@
+name: e2e test
+
+on:
+  pull_request:
+#    branches:
+#      - main
+#      - stage
+#      - release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permission:
+      contents: read
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: docker setup
+        uses: docker-practice/actions-setup-docker@master
+      - name: run dbms
+        run: |
+          docker run -it --name database --network e2e-net -e MYSQL_ROOT_PASSWORD=0000 -e MYSQL_DATABASE=luffy -d mysql:8.0.33
+      - name: build nalab-server
+        run: ./gradlew clean build
+      - name: run nalab-server
+        run: |
+          docker build --tag luffy:e2e --build-arg DB_URL=jdbc:mysql://database:3306/luffy --build-arg DB_USERNAME=root --build-arg DB_PASSWORD=0000 --build-arg JWT_SECRET=fore2e .
+          docker run --name nalab-server --network e2e-net -p 8080:8080 -d luffy:e2e
+      - name: e2e test
+        run: |
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/3.0.1/hurl_3.0.1_amd64.deb
+          sudo dpkg -i hurl_3.0.1_amd64.deb
+          hurl --very-verbose --test ./support/e2e/*.hurl
