@@ -204,3 +204,110 @@ jsonpath "$.question[0].form_type" matches "tendency|strength|custom"
 jsonpath "$.question[0].title" exists
 jsonpath "$.question[0].order" exists
 jsonpath "$.question[0].is_read" exists
+
+##########
+
+POST http://localhost:8080/v1/feedbacks # 추가 feedback 생성
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+
+{
+    "reviewer": {
+        "collaboration_experience": false,
+        "position": "designer"
+    },
+    "question_feedback": [
+        {
+            "question_id": {{ choice_tendency_question_id }},
+            "type": "choice",
+            "choices": [
+                {{ choice_tendency_choice_id }}
+            ]
+        },
+        {
+            "question_id": {{ short_strength_question_id }},
+            "type": "short",
+            "reply": [
+                "예진이는 개발 관련 지식을 조금 더 공부해봐도\n좋을 것 같아!",
+                "안녕"
+            ]
+        },
+        {
+            "question_id": {{ choice_custom_question_id }},
+            "type": "choice",
+            "choices": [
+                {{ choice_custom_choice_id }}
+            ]
+        },
+        {
+            "question_id": {{ short_custom_question_id }},
+            "type": "short",
+            "reply": [
+                "예진이는 개발 관련 지식을 조금 더 공부해봐도\n좋을 것 같아!",
+                "안녕"
+            ]
+        }
+    ]
+}
+
+HTTP 201
+[Asserts]
+
+##########
+
+GET http://localhost:8080/v1/reviewers # 질문폼의 모든 리뷰어 목록 조회
+Authorization: {{ token_type }} {{ access_token }}
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.feedbacks" count == 2
+jsonpath "$.feedbacks[0].created_at" exists
+jsonpath "$.feedbacks[0].is_read" exists
+jsonpath "$.feedbacks[0].reviewer.nickname" matches "^[A-Z].*"
+jsonpath "$.feedbacks[0].reviewer.collaboration_experience" exists
+jsonpath "$.feedbacks[0].reviewer.position" matches "designer|product-manager|developer|other"
+jsonpath "$.feedbacks[1].created_at" exists
+jsonpath "$.feedbacks[1].is_read" exists
+jsonpath "$.feedbacks[1].reviewer.nickname" matches "^[A-Z].*"
+jsonpath "$.feedbacks[1].reviewer.collaboration_experience" exists
+jsonpath "$.feedbacks[1].reviewer.position" matches "designer|product-manager|developer|other"
+
+##########
+
+GET http://localhost:8080/v1/reviewers/summary # 질문폼의 모든 리뷰어 목록 조회
+Authorization: {{ token_type }} {{ access_token }}
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.collaboration_experience.yes" == 1
+jsonpath "$.collaboration_experience.no" == 1
+jsonpath "$.position.developer" == 1
+jsonpath "$.position.designer" == 1
+jsonpath "$.position.pm" == 0
+jsonpath "$.position.others" == 0
+
+##########
+
+GET http://localhost:8080/v1/feedbacks/summary # 질문폼의 전체 피드백 수와 읽지 않은 피드백의 수 조회
+Authorization: {{ token_type }} {{ access_token }}
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.all_feedback_count" == 2
+jsonpath "$.new_feedback_count" == 1
