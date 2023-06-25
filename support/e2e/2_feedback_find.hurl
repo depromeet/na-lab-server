@@ -1,4 +1,4 @@
-POST http://localhost:8080/v1/oauth/default # 로그인
+POST http://nalab-server:8080/v1/oauth/default # 로그인
 {
     "nickname" : "luffy",
     "email" : "test@gmail.com"
@@ -17,7 +17,7 @@ access_token: jsonpath "$.access_token"
 
 ##########
 
-POST http://localhost:8080/v1/surveys # survey 생성 [객관식-tendency, 주관식-strength, 객관식-custom, 주관식-custom]
+POST http://nalab-server:8080/v1/surveys # survey 생성 [객관식-tendency, 주관식-strength, 객관식-custom, 주관식-custom]
 Authorization: {{ token_type }} {{ access_token }}
 {
     "question_count": 4,
@@ -90,7 +90,7 @@ survey_id: jsonpath "$.survey_id"
 
 ##########
 
-GET http://localhost:8080/v1/surveys/{{ survey_id }} # feedback을 생성하기 위한 survey 조회 및 id값들 저장
+GET http://nalab-server:8080/v1/surveys/{{ survey_id }} # feedback을 생성하기 위한 survey 조회 및 id값들 저장
 
 HTTP 200
 [Asserts]
@@ -106,7 +106,7 @@ short_custom_question_id: jsonpath "$.question.[3].question_id"
 
 ##########
 
-POST http://localhost:8080/v1/feedbacks # feedback 생성
+POST http://nalab-server:8080/v1/feedbacks # feedback 생성
 
 [QueryStringParams]
 survey-id: {{ survey_id }}
@@ -155,7 +155,7 @@ HTTP 201
 
 ##########
 
-GET http://localhost:8080/v1/feedbacks # 질문 폼의 모든 피드백 조회 및 개별 피드백 조회를 위한 feedback_id 저장
+GET http://nalab-server:8080/v1/feedbacks # 질문 폼의 모든 피드백 조회 및 개별 피드백 조회를 위한 feedback_id 저장
 Authorization: {{ token_type }} {{ access_token }}
 
 [QueryStringParams]
@@ -185,7 +185,7 @@ feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id"
 
 ##########
 
-GET http://localhost:8080/v1/feedbacks/{{ feedback_id }} # 개별 피드백 응답 조회
+GET http://nalab-server:8080/v1/feedbacks/{{ feedback_id }} # 개별 피드백 응답 조회
 Authorization: {{ token_type }} {{ access_token }}
 
 HTTP 200
@@ -207,7 +207,7 @@ jsonpath "$.question[0].is_read" exists
 
 ##########
 
-POST http://localhost:8080/v1/feedbacks # 추가 feedback 생성
+POST http://nalab-server:8080/v1/feedbacks # 추가 feedback 생성
 
 [QueryStringParams]
 survey-id: {{ survey_id }}
@@ -256,7 +256,7 @@ HTTP 201
 
 ##########
 
-GET http://localhost:8080/v1/reviewers # 질문폼의 모든 리뷰어 목록 조회
+GET http://nalab-server:8080/v1/reviewers # 질문폼의 모든 리뷰어 목록 조회
 Authorization: {{ token_type }} {{ access_token }}
 
 [QueryStringParams]
@@ -280,7 +280,7 @@ jsonpath "$.feedbacks[1].reviewer.position" matches "designer|product-manager|de
 
 ##########
 
-GET http://localhost:8080/v1/reviewers/summary # 질문폼의 모든 리뷰어 목록 조회
+GET http://nalab-server:8080/v1/reviewers/summary # 질문폼의 모든 리뷰어 목록 조회
 Authorization: {{ token_type }} {{ access_token }}
 
 [QueryStringParams]
@@ -299,7 +299,7 @@ jsonpath "$.position.others" == 0
 
 ##########
 
-GET http://localhost:8080/v1/feedbacks/summary # 질문폼의 전체 피드백 수와 읽지 않은 피드백의 수 조회
+GET http://nalab-server:8080/v1/feedbacks/summary # 질문폼의 전체 피드백 수와 읽지 않은 피드백의 수 조회
 Authorization: {{ token_type }} {{ access_token }}
 
 [QueryStringParams]
