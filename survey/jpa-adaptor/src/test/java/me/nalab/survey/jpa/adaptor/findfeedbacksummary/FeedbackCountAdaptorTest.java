@@ -1,8 +1,8 @@
 package me.nalab.survey.jpa.adaptor.findfeedbacksummary;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -97,24 +97,24 @@ class FeedbackCountAdaptorTest {
 			.collaborationExperience(true)
 			.position("developer")
 			.nickName("su jin")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		ReviewerEntity reviewerEntity2 = ReviewerEntity.builder()
 			.id(2L)
 			.collaborationExperience(true)
 			.position("developer")
 			.nickName("jun young")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		FeedbackEntity feedbackEntity1 = FeedbackEntity.builder()
 			.id(1L)
 			.surveyId(surveyId)
 			.isRead(true)
 			.reviewer(reviewerEntity1)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.formFeedbackEntityList(List.of())
 			.build();
 		FeedbackEntity feedbackEntity2 = FeedbackEntity.builder()
@@ -122,8 +122,8 @@ class FeedbackCountAdaptorTest {
 			.surveyId(surveyId)
 			.isRead(true)
 			.reviewer(reviewerEntity2)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.formFeedbackEntityList(List.of())
 			.build();
 
@@ -141,32 +141,32 @@ class FeedbackCountAdaptorTest {
 			.collaborationExperience(true)
 			.position("developer")
 			.nickName("su jin")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		ReviewerEntity reviewerEntity2 = ReviewerEntity.builder()
 			.id(2L)
 			.collaborationExperience(true)
 			.position("developer")
 			.nickName("jun young")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		ReviewerEntity reviewerEntity3 = ReviewerEntity.builder()
 			.id(3L)
 			.collaborationExperience(true)
 			.position("developer")
 			.nickName("do jin")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		FeedbackEntity feedbackEntity1 = FeedbackEntity.builder()
 			.id(1L)
 			.surveyId(surveyId)
 			.isRead(true)
 			.reviewer(reviewerEntity1)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.formFeedbackEntityList(List.of())
 			.build();
 		FeedbackEntity feedbackEntity2 = FeedbackEntity.builder()
@@ -174,8 +174,8 @@ class FeedbackCountAdaptorTest {
 			.surveyId(surveyId)
 			.isRead(true)
 			.reviewer(reviewerEntity2)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.formFeedbackEntityList(List.of())
 			.build();
 		FeedbackEntity feedbackEntity3 = FeedbackEntity.builder()
@@ -183,8 +183,8 @@ class FeedbackCountAdaptorTest {
 			.surveyId(surveyId)
 			.isRead(false)
 			.reviewer(reviewerEntity3)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.formFeedbackEntityList(List.of())
 			.build();
 

@@ -1,6 +1,6 @@
 package me.nalab.survey.application.common.feedback.dto;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class FeedbackDto {
 	private final List<FormQuestionFeedbackDtoable> formQuestionFeedbackDtoableList;
 	private final boolean isRead;
 	private final ReviewerDto reviewerDto;
-	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private final Instant updatedAt;
 
 }

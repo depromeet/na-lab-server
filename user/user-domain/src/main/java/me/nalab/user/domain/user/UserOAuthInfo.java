@@ -1,6 +1,6 @@
 package me.nalab.user.domain.user;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +18,8 @@ public class UserOAuthInfo {
 	private final String email;
 	private final String username;
 	private final String phoneNumber;
-	private final LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private Instant updatedAt;
 	private final Long userId;
 
 	/**

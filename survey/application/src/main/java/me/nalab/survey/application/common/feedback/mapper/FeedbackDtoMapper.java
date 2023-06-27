@@ -1,6 +1,5 @@
 package me.nalab.survey.application.common.feedback.mapper;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,13 +22,12 @@ public final class FeedbackDtoMapper {
 	}
 
 	public static Feedback toDomain(Survey survey, FeedbackDto feedbackDto) {
-		LocalDateTime now = LocalDateTime.now();
 		return Feedback.builder()
 			.surveyId(survey.getId())
 			.reviewer(getReviewer(feedbackDto.getReviewerDto()))
 			.formQuestionFeedbackableList(getFormQuestionFeedbackList(feedbackDto))
-			.createdAt(now)
-			.updatedAt(now)
+			.createdAt(feedbackDto.getCreatedAt())
+			.updatedAt(feedbackDto.getUpdatedAt())
 			.isRead(feedbackDto.isRead())
 			.build();
 	}

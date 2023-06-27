@@ -1,10 +1,15 @@
 package me.nalab.survey.jpa.adaptor.find;
 
-import me.nalab.core.data.survey.SurveyEntity;
-import me.nalab.core.data.target.TargetEntity;
-import me.nalab.survey.domain.survey.Survey;
-import me.nalab.survey.domain.target.Target;
-import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
+import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.Instant;
+import java.util.Optional;
+import java.util.stream.LongStream;
+
+import javax.persistence.EntityManager;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +20,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
-import javax.persistence.EntityManager;
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.stream.LongStream;
-
-import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import me.nalab.core.data.survey.SurveyEntity;
+import me.nalab.core.data.target.TargetEntity;
+import me.nalab.survey.domain.survey.Survey;
+import me.nalab.survey.domain.target.Target;
+import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -49,8 +51,8 @@ class TargetFindAdaptorTest {
 		Long targetId = 1L;
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("sujin")
 			.build();
 
@@ -110,11 +112,11 @@ class TargetFindAdaptorTest {
 		var username = "username";
 		var expectedId = 1L;
 		var targetEntity = TargetEntity.builder()
-				.id(expectedId)
-				.nickname(username)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.build();
+			.id(expectedId)
+			.nickname(username)
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
+			.build();
 		entityManager.persist(targetEntity);
 		entityManager.flush();
 
@@ -134,13 +136,13 @@ class TargetFindAdaptorTest {
 		// given
 		var username = "username";
 		var expectedSize = 10;
-		LongStream.range(0, expectedSize).forEach( id -> {
+		LongStream.range(0, expectedSize).forEach(id -> {
 			var targetEntity = TargetEntity.builder()
-					.id(id)
-					.nickname(username)
-					.createdAt(LocalDateTime.now())
-					.updatedAt(LocalDateTime.now())
-					.build();
+				.id(id)
+				.nickname(username)
+				.createdAt(Instant.now())
+				.updatedAt(Instant.now())
+				.build();
 
 			entityManager.persist(targetEntity);
 		});

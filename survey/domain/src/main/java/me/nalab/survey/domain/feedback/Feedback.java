@@ -1,6 +1,6 @@
 package me.nalab.survey.domain.feedback;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.function.LongSupplier;
 
@@ -24,8 +24,8 @@ public class Feedback implements IdGeneratable, FeedbackValidable<FormQuestionFe
 	private final List<FormQuestionFeedbackable> formQuestionFeedbackableList;
 	private boolean isRead;
 	private final Reviewer reviewer;
-	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private final Instant updatedAt;
 
 	public void setRead(boolean read) {
 		isRead = read;

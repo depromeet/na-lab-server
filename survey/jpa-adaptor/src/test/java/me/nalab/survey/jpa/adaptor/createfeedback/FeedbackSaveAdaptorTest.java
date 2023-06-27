@@ -2,7 +2,7 @@ package me.nalab.survey.jpa.adaptor.createfeedback;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,8 +66,8 @@ class FeedbackSaveAdaptorTest {
 	private TargetEntity getDefaultTargetEntity() {
 		return TargetEntity.builder()
 			.id(101L)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 	}

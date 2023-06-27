@@ -1,6 +1,7 @@
 dependencies {
     implementation project(':survey:domain')
     implementation project(':survey:application')
+    implementation project(':core:time')
 
     implementation project(':core:secure')
     implementation project(':core:authorization:authorization-aop')

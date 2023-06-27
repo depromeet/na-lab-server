@@ -3,7 +3,7 @@ package me.nalab.survey.jpa.adaptor.findid;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -54,8 +54,8 @@ class SurveyIdFindAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
 			.nickname("james")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId,
 			RandomSurveyFixture.createRandomSurvey());
@@ -81,8 +81,8 @@ class SurveyIdFindAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
 			.nickname("james")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 		List<SurveyEntity> surveyEntityList = new ArrayList<>();
 		for(int i = 0; i < 5; i++) {
@@ -110,8 +110,8 @@ class SurveyIdFindAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
 			.nickname("james")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 
 		testTargetJpaRepository.save(targetEntity);

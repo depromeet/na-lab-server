@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.time.Instant;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class SurveyCreateRequestMapperTest {
 		SurveyCreateRequest surveyCreateRequest = objectMapper.readValue(TestJson.json, SurveyCreateRequest.class);
 
 		// when
-		SurveyDto surveyDto = SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest);
+		SurveyDto surveyDto = SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, Instant.now());
 
 		// then
 		assertRequestEqualDto(surveyCreateRequest, surveyDto);

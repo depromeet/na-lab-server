@@ -2,7 +2,7 @@ package me.nalab.survey.jpa.adaptor.feedbackreviewers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,8 @@ class SurveyExistCheckAdaptorTest {
 		// given
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(1L)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("target")
 			.build();
 		Survey survey = RandomSurveyFixture.createRandomSurvey();

@@ -2,7 +2,9 @@ package me.nalab.survey.web.adaptor.findspecific;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -34,9 +36,10 @@ class SpecificFeedbackResponseMapperTest {
 	@DisplayName("개별 응답 조회 mapper test")
 	void SPECIFIC_FEEDBACK_RESPONSE_MAPPER_TEST() {
 		// given
+		Instant expectedTime = Instant.now();
 		SurveyDto surveyDto = getSurveyDto();
-		FeedbackDto feedbackDto = getFeedbackDto();
-		SpecificFeedbackResponse expectedSpecificFeedbackResponse = getSpecificFeedbackResponse();
+		FeedbackDto feedbackDto = getFeedbackDto(expectedTime);
+		SpecificFeedbackResponse expectedSpecificFeedbackResponse = getSpecificFeedbackResponse(expectedTime);
 
 		// when
 		SpecificFeedbackResponse resultSpecificFeedbackResponse = SpecificFeedbackResponseMapper.toSpecificFeedbackResponse(
@@ -69,7 +72,7 @@ class SpecificFeedbackResponseMapperTest {
 			.build();
 	}
 
-	private static FeedbackDto getFeedbackDto() {
+	private static FeedbackDto getFeedbackDto(Instant now) {
 		Set<Long> choiceIdSet = new HashSet<>();
 		choiceIdSet.add(1L);
 		choiceIdSet.add(2L);
@@ -96,15 +99,15 @@ class SpecificFeedbackResponseMapperTest {
 				.collaborationExperience(true)
 				.position("developer")
 				.build())
-			.createdAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
-			.updatedAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
+			.createdAt(now)
+			.updatedAt(now)
 			.build();
 	}
 
-	private static SpecificFeedbackResponse getSpecificFeedbackResponse() {
+	private static SpecificFeedbackResponse getSpecificFeedbackResponse(Instant now) {
 		return SpecificFeedbackResponse.builder()
+			.createdAt(ZonedDateTime.ofInstant(now, ZoneId.of("Asia/Seoul")).toLocalDateTime())
 			.feedbackId("7")
-			.createdAt(LocalDateTime.of(2023, 5, 26, 6, 46, 0))
 			.reviewer(ReviewerResponse.builder()
 				.nickName("sujin").collaborationExperience(true).position("developer").build())
 			.question(List.of(

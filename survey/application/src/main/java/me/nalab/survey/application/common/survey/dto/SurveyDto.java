@@ -1,6 +1,6 @@
 package me.nalab.survey.application.common.survey.dto;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import lombok.Builder;
@@ -16,8 +16,8 @@ public class SurveyDto {
 
 	private final Long id;
 	private final Long targetId;
-	private final LocalDateTime createdAt;
-	private final LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private final Instant updatedAt;
 	private final List<FormQuestionDtoable> formQuestionDtoableList;
 
 }

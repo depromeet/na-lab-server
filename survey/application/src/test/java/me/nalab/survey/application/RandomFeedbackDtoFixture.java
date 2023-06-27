@@ -1,5 +1,7 @@
 package me.nalab.survey.application;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -54,8 +56,8 @@ public class RandomFeedbackDtoFixture {
 			.isRead(RANDOM_BOOLEAN_SUPPLIER.getAsBoolean())
 			.reviewerDto(getRandomReviewerDto())
 			.formQuestionFeedbackDtoableList(getRandomQuestionFeedbackDtoListBySurvey(survey))
-			.createdAt(survey.getCreatedAt().plusDays(1))
-			.updatedAt(survey.getUpdatedAt().plusDays(1))
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 	}
 

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Builder
 @Getter
@@ -15,6 +15,6 @@ public class User {
 	private final long id;
 	private final String nickname;
 	private final String email;
-	private final LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private final Instant createdAt;
+	private Instant updatedAt;
 }

@@ -1,6 +1,6 @@
 package me.nalab.survey.web.adaptor.createsurvey;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,8 +25,7 @@ final class SurveyCreateRequestMapper {
 		throw new UnsupportedOperationException("Cannot invoke constructor \"SurveyCreateRequestMapper()\"");
 	}
 
-	static SurveyDto toSurveyDto(SurveyCreateRequest surveyCreateRequest) {
-		LocalDateTime now = LocalDateTime.now();
+	static SurveyDto toSurveyDto(SurveyCreateRequest surveyCreateRequest, Instant now) {
 		return SurveyDto.builder()
 			.createdAt(now)
 			.updatedAt(now)
@@ -36,14 +35,14 @@ final class SurveyCreateRequestMapper {
 			.build();
 	}
 
-	private static List<FormQuestionDtoable> toFormQuestionDtoableList(LocalDateTime now,
+	private static List<FormQuestionDtoable> toFormQuestionDtoableList(Instant now,
 		List<FormQuestionRequestable> formQuestionRequestableList) {
 		return formQuestionRequestableList.stream()
 			.map(fqr -> toFormQuestionDtoable(now, fqr))
 			.collect(Collectors.toList());
 	}
 
-	private static FormQuestionDtoable toFormQuestionDtoable(LocalDateTime now,
+	private static FormQuestionDtoable toFormQuestionDtoable(Instant now,
 		FormQuestionRequestable formQuestionRequestable) {
 		if(formQuestionRequestable.getQuestionFormType() == QuestionDtoType.CHOICE) {
 			return toChoiceFormQuestionDto(now, (ChoiceFormQuestionRequest)formQuestionRequestable);
@@ -51,7 +50,7 @@ final class SurveyCreateRequestMapper {
 		return toShortFormQuestionDto(now, (ShortFormQuestionRequest)formQuestionRequestable);
 	}
 
-	private static ChoiceFormQuestionDto toChoiceFormQuestionDto(LocalDateTime now,
+	private static ChoiceFormQuestionDto toChoiceFormQuestionDto(Instant now,
 		ChoiceFormQuestionRequest choiceFormQuestionRequest) {
 		return ChoiceFormQuestionDto.builder()
 			.title(choiceFormQuestionRequest.getTitle())
@@ -87,7 +86,7 @@ final class SurveyCreateRequestMapper {
 			.build();
 	}
 
-	private static ShortFormQuestionDto toShortFormQuestionDto(LocalDateTime now,
+	private static ShortFormQuestionDto toShortFormQuestionDto(Instant now,
 		ShortFormQuestionRequest shortFormQuestionRequest) {
 		return ShortFormQuestionDto.builder()
 			.title(shortFormQuestionRequest.getTitle())
@@ -99,7 +98,8 @@ final class SurveyCreateRequestMapper {
 			.build();
 	}
 
-	private static ShortFormQuestionDtoType getShortFormQuestionDtoType(ShortFormQuestionRequest shortFormQuestionRequest){
+	private static ShortFormQuestionDtoType getShortFormQuestionDtoType(
+		ShortFormQuestionRequest shortFormQuestionRequest) {
 		return Stream.of(ShortFormQuestionDtoType.values())
 			.filter(sft -> sft.name().equalsIgnoreCase(shortFormQuestionRequest.getShortFormQuestionType()))
 			.findAny()

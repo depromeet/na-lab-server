@@ -3,7 +3,7 @@ package me.nalab.survey.jpa.adaptor.create;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.EntityManager;
 
@@ -41,8 +41,8 @@ class TargetExistCheckAdaptorTest {
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(1L)
 			.nickname("Hello")
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.build();
 
 		testTargetJpaRepository.saveAndFlush(targetEntity);

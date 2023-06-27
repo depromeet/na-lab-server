@@ -1,6 +1,8 @@
 package me.nalab.luffy.api.acceptance.test.user.logined;
 
-import java.time.LocalDateTime;
+import static me.nalab.luffy.api.acceptance.test.user.UserAcceptanceValidator.assertIsLogined;
+
+import java.time.Instant;
 import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +22,6 @@ import me.nalab.auth.application.common.utils.JwtUtils;
 import me.nalab.auth.mock.api.MockUserRegisterEvent;
 import me.nalab.luffy.api.acceptance.test.TargetInitializer;
 import me.nalab.luffy.api.acceptance.test.user.UserAcceptanceTestSupporter;
-import static me.nalab.luffy.api.acceptance.test.user.UserAcceptanceValidator.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -41,10 +42,10 @@ class LoginedTargetFindAcceptanceTest extends UserAcceptanceTestSupporter {
 
 	@Test
 	@DisplayName("로그인된 유저 정보 조회 성공 테스트")
-	void GET_LOGINED_USER_SUCCESS() throws Exception{
+	void GET_LOGINED_USER_SUCCESS() throws Exception {
 		// given
 		String nickname = "devxb";
-		Long targetId = targetInitializer.saveTargetAndGetId(nickname, LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId(nickname, Instant.now());
 		String token = jwtUtils.createAccessToken(Set.of(new Payload(Payload.Key.NICKNAME, nickname),
 			new Payload(Payload.Key.USER_ID, 12345 + ""), new Payload(Payload.Key.TARGET_ID, targetId + "")));
 		applicationEventPublisher.publishEvent(

@@ -2,7 +2,7 @@ package me.nalab.survey.jpa.adaptor.authorization;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,8 +59,8 @@ class TargetIdFindAdaptorTest {
 		Long targetId = 101L;
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
@@ -84,8 +84,8 @@ class TargetIdFindAdaptorTest {
 		Long targetId = 101L;
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 
@@ -105,8 +105,8 @@ class TargetIdFindAdaptorTest {
 		Long targetId = 101L;
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
@@ -140,8 +140,8 @@ class TargetIdFindAdaptorTest {
 		Long targetId = 101L;
 		TargetEntity targetEntity1 = TargetEntity.builder()
 			.id(targetId)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target1")
 			.build();
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
@@ -150,8 +150,8 @@ class TargetIdFindAdaptorTest {
 
 		TargetEntity targetEntity2 = TargetEntity.builder()
 			.id(102L)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target2")
 			.build();
 

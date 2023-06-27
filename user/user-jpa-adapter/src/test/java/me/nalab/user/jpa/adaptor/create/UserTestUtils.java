@@ -4,11 +4,11 @@ import me.nalab.core.data.user.UserEntity;
 import me.nalab.user.domain.user.User;
 import org.assertj.core.api.Assertions;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class UserTestUtils {
 
-	public static User createUserDomain(long id, String nickname, String email, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	public static User createUserDomain(long id, String nickname, String email, Instant createdAt, Instant updatedAt) {
 		return User.builder()
 			.id(id)
 			.nickname(nickname)
@@ -18,7 +18,7 @@ public class UserTestUtils {
 			.build();
 	}
 
-	public static UserEntity createUserEntity(long id, String nickname, String email, LocalDateTime createdAt, LocalDateTime updatedAt) {
+	public static UserEntity createUserEntity(long id, String nickname, String email, Instant createdAt, Instant updatedAt) {
 		return UserEntity.builder()
 			.id(id)
 			.nickname(nickname)

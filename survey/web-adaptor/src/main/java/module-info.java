@@ -17,5 +17,6 @@ module luffy.survey.web.adaptor.main {
 	requires spring.context;
 	requires spring.boot.starter;
 	requires spring.boot.starter.web;
+	requires luffy.core.time.main;
 
 }

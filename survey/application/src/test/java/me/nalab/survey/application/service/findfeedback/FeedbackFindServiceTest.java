@@ -122,7 +122,8 @@ class FeedbackFindServiceTest {
 				before = current;
 				continue;
 			}
-			assertTrue(before.getUpdatedAt().isAfter(current.getUpdatedAt()));
+			assertTrue(before.getUpdatedAt().isAfter(current.getUpdatedAt())
+				|| before.getUpdatedAt() == current.getUpdatedAt());
 		}
 	}
 

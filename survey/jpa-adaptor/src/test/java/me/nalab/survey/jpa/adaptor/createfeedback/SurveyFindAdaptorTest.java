@@ -3,7 +3,7 @@ package me.nalab.survey.jpa.adaptor.createfeedback;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -73,8 +73,8 @@ class SurveyFindAdaptorTest {
 	private TargetEntity getDefaultTargetEntity() {
 		return TargetEntity.builder()
 			.id(101L)
-			.createdAt(LocalDateTime.now())
-			.updatedAt(LocalDateTime.now())
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
 			.nickname("test target")
 			.build();
 	}

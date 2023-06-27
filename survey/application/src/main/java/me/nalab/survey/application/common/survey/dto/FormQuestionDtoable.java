@@ -1,6 +1,6 @@
 package me.nalab.survey.application.common.survey.dto;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,8 +15,8 @@ public abstract class FormQuestionDtoable {
 
 	protected final Long id;
 	protected final String title;
-	protected final LocalDateTime createdAt;
-	protected final LocalDateTime updatedAt;
+	protected final Instant createdAt;
+	protected final Instant updatedAt;
 	protected final Integer order;
 	protected final QuestionDtoType questionDtoType;
 

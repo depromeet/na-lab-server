@@ -1,5 +1,6 @@
 package me.nalab.survey.jpa.adaptor;
 
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -68,8 +69,8 @@ public class RandomFeedbackFixture {
 			.isRead(randomBooleanGenerator.getAsBoolean())
 			.reviewer(getRandomReviewer())
 			.formQuestionFeedbackableList(getRandomQuestionFeedbackListBySurvey(survey))
-			.createdAt(survey.getCreatedAt().plusDays(1))
-			.updatedAt(survey.getUpdatedAt().plusDays(1))
+			.createdAt(survey.getCreatedAt().plus(1, ChronoUnit.DAYS))
+			.updatedAt(survey.getUpdatedAt().plus(1, ChronoUnit.DAYS))
 			.build();
 	}
 
