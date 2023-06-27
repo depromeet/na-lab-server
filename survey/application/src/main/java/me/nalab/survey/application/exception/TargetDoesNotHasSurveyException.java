@@ -8,7 +8,7 @@ public class TargetDoesNotHasSurveyException extends RuntimeException {
 	private final Long targetId;
 
 	public TargetDoesNotHasSurveyException(Long targetId) {
-		super("Cannot find any surveyId from target \"" + targetId + "\"");
+		super("Cannot found any survey form from target \"" + targetId + "\"");
 		this.targetId = targetId;
 	}
 

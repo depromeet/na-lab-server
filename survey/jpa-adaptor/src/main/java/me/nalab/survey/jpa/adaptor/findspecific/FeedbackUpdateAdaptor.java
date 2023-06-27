@@ -1,26 +1,30 @@
 package me.nalab.survey.jpa.adaptor.findspecific;
 
-import java.util.Optional;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import lombok.RequiredArgsConstructor;
 import me.nalab.core.data.feedback.FeedbackEntity;
 import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackUpdatePort;
-import me.nalab.survey.jpa.adaptor.findspecific.repository.FeedbackFindJpaRepository;
+import me.nalab.survey.domain.feedback.Feedback;
+import me.nalab.survey.jpa.adaptor.common.mapper.FeedbackEntityMapper;
+import me.nalab.survey.jpa.adaptor.findspecific.repository.FeedbackUpdateJpaRepository;
 
 @Repository("findspecific.FeedbackUpdateAdaptor")
-@RequiredArgsConstructor
 public class FeedbackUpdateAdaptor implements FeedbackUpdatePort {
 
-	private final FeedbackFindJpaRepository feedbackFindJpaRepository;
-	@Override
-	public Optional<Long> updateFeedbackIsReadByFeedbackId(Long feedbackId) {
-		Optional<FeedbackEntity> optionalFeedbackEntity = feedbackFindJpaRepository.findById(feedbackId);
-		if (optionalFeedbackEntity.isEmpty()) return Optional.empty();
+	private final FeedbackUpdateJpaRepository feedbackUpdateJpaRepository;
 
-		FeedbackEntity feedbackEntity = optionalFeedbackEntity.get();
-		feedbackEntity.setRead(true);
-		return Optional.of(feedbackEntity.getId());
+	@Autowired
+	FeedbackUpdateAdaptor(
+		@Qualifier("findspecific.FeedbackUpdateJpaRepository") FeedbackUpdateJpaRepository feedbackUpdateJpaRepository) {
+		this.feedbackUpdateJpaRepository = feedbackUpdateJpaRepository;
+	}
+
+
+	@Override
+	public void updateFeedback(Feedback feedback) {
+		FeedbackEntity feedbackEntity = FeedbackEntityMapper.toEntity(feedback);
+		feedbackUpdateJpaRepository.save(feedbackEntity);
 	}
 }

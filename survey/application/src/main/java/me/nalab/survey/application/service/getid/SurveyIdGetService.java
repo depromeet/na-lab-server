@@ -1,5 +1,6 @@
 package me.nalab.survey.application.service.getid;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,10 +24,8 @@ public class SurveyIdGetService implements SurveyIdGetUseCase {
 		if(surveyIdList == null || surveyIdList.isEmpty()) {
 			throw new TargetDoesNotHasSurveyException(targetId);
 		}
-		if(surveyIdList.size() > 1) {
-			throw new IllegalStateException("Survey created more than 1");
-		}
-		return surveyIdList.get(0);
+		Collections.sort(surveyIdList);
+		return surveyIdList.get(surveyIdList.size() - 1);
 	}
 
 }

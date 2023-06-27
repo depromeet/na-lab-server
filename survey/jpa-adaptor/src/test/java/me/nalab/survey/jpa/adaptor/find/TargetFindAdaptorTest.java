@@ -1,13 +1,17 @@
 package me.nalab.survey.jpa.adaptor.find;
 
 import static me.nalab.survey.jpa.adaptor.RandomSurveyFixture.createRandomSurvey;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.stream.LongStream;
 
 import javax.persistence.EntityManager;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -86,6 +90,69 @@ class TargetFindAdaptorTest {
 
 		assertTrue(result.isPresent());
 		assertEquals(targetId, result.get());
+	}
+
+	@Test
+	@DisplayName("저장된 값 없을 때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_EMPTY_RESULT() {
+		// given
+		var username = "username";
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).isEmpty();
+	}
+
+	@Test
+	@DisplayName("저장된 값 1개 일때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_ONE_RESULT() {
+		// given
+		var username = "username";
+		var expectedId = 1L;
+		var targetEntity = TargetEntity.builder()
+			.id(expectedId)
+			.nickname(username)
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
+			.build();
+		entityManager.persist(targetEntity);
+		entityManager.flush();
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).isNotEmpty();
+		var foundTarget = result.get(0);
+		Assertions.assertThat(foundTarget.getId()).isEqualTo(expectedId);
+		Assertions.assertThat(foundTarget.getNickname()).isEqualTo(username);
+	}
+
+	@Test
+	@DisplayName("저장된 값 2개 이상 일때 조회 테스트")
+	void FIND_TARGET_BY_USERNAME_TEST_MORE_RESULT() {
+		// given
+		var username = "username";
+		var expectedSize = 10;
+		LongStream.range(0, expectedSize).forEach(id -> {
+			var targetEntity = TargetEntity.builder()
+				.id(id)
+				.nickname(username)
+				.createdAt(Instant.now())
+				.updatedAt(Instant.now())
+				.build();
+
+			entityManager.persist(targetEntity);
+		});
+		entityManager.flush();
+
+		// when
+		var result = targetFindAdaptor.findAllByUsername(username);
+
+		// then
+		Assertions.assertThat(result).hasSize(expectedSize);
 	}
 
 	@Test

@@ -8,11 +8,16 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.survey.application.RandomFeedbackDtoFixture;
 import me.nalab.survey.application.RandomSurveyDtoFixture;
+import me.nalab.survey.application.TestIdGenerator;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
@@ -26,9 +31,14 @@ import me.nalab.survey.application.port.out.persistence.findspecific.FeedbackUpd
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {TestIdGenerator.class})
 class SpecificFindServiceTest {
 
 	private SpecificFindService specificFindService;
+
+	@Autowired
+	private TestIdGenerator testIdGenerator;
 
 	@Mock
 	private FeedbackFindPort feedbackFindPort;
@@ -116,19 +126,22 @@ class SpecificFindServiceTest {
 
 	@Test
 	void UPDATE_FEEDBACK_IS_READ_BY_FEEDBACK_ID() {
-		Long feedbackId = 1L;
-		when(feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId)).thenReturn(Optional.of(feedbackId));
 
-		specificFindService.updateFeedbackIsReadByFeedbackId(feedbackId);
+		RandomSurveyDtoFixture.setRandomIdGenerator(() -> testIdGenerator.generate());
+		Survey survey = SurveyDtoMapper.toSurvey(RandomSurveyDtoFixture.createRandomSurveyDto());
+		FeedbackDto feedbackDto = RandomFeedbackDtoFixture.getRandomFeedbackDtoBySurvey(survey);
+		Feedback feedback = FeedbackDtoMapper.toDomain(survey, feedbackDto);
 
-		verify(feedbackUpdatePort).updateFeedbackIsReadByFeedbackId(feedbackId);
+		when(feedbackFindPort.findFeedback(feedback.getId())).thenReturn(Optional.of(feedback));
+		specificFindService.updateFeedbackIsReadByFeedbackId(feedback.getId());
+
+		verify(feedbackUpdatePort).updateFeedback(feedback);
+		assertTrue(feedback.isRead());
 	}
 
 	@Test
 	void UPDATE_FEEDBACK_IS_READ_BY_NON_EXISTING_FEEDBACK_ID() {
 		Long feedbackId = 1L;
-
-		when(feedbackUpdatePort.updateFeedbackIsReadByFeedbackId(feedbackId)).thenReturn(Optional.empty());
 
 		assertThrows(FeedbackDoesNotExistException.class,
 			() -> specificFindService.updateFeedbackIsReadByFeedbackId(feedbackId));

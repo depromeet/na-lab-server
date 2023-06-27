@@ -1,5 +1,7 @@
 package me.nalab.survey.web.adaptor.createsurvey;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.nalab.core.secure.xss.meta.Xss;
+import me.nalab.core.secure.xss.meta.XssFiltering;
 import me.nalab.core.time.TimeUtil;
 import me.nalab.survey.application.port.in.web.CreateSurveyUseCase;
 import me.nalab.survey.application.port.in.web.LatestSurveyIdFindUseCase;
@@ -24,11 +28,14 @@ class SurveyCreateController {
 	private final LatestSurveyIdFindUseCase latestSurveyIdFindUseCase;
 	private final TimeUtil timeUtil;
 
+	@XssFiltering
 	@PostMapping("/surveys")
 	@ResponseStatus(HttpStatus.CREATED)
-	SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId, @RequestBody SurveyCreateRequest surveyCreateRequest) {
-		createSurveyUseCase.createSurvey(loginId, SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, timeUtil.toInstant()));
-		Long latestSurveyId = latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId);
+	public SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
+		@Xss("json") @Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
+		createSurveyUseCase.createSurvey(loginId,
+			SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, timeUtil.toInstant()));
+		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
 		return new SurveyIdResponse(latestSurveyId);
 	}
 

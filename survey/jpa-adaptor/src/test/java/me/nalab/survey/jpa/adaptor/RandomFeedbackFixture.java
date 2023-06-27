@@ -96,7 +96,7 @@ public class RandomFeedbackFixture {
 	private static ChoiceFormQuestionFeedback getRandomChoiceFormQuestionFeedback(
 		ChoiceFormQuestion choiceFormQuestion) {
 		Set<Long> selectedIdSet = new HashSet<>();
-		for(int i = 0; i < choiceFormQuestion.getMaxSelectionCount(); i++) {
+		for(int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
 			selectedIdSet.add(choiceFormQuestion.getChoiceList().get(i).getId());
 		}
 		return ChoiceFormQuestionFeedback.builder()

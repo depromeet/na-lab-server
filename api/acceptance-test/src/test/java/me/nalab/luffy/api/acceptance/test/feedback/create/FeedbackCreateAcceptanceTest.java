@@ -1,12 +1,14 @@
 package me.nalab.luffy.api.acceptance.test.feedback.create;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackCreated;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -97,8 +99,8 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 		List<FeedbackCreateRequest> feedbackCreateRequestList = List.of(
 			getFeedbackCreateRequest(surveyFindResponse, true, "developer"),
 			getFeedbackCreateRequest(surveyFindResponse, false, "designer"),
-			getFeedbackCreateRequest(surveyFindResponse, false, "other"),
-			getFeedbackCreateRequest(surveyFindResponse, true, "product-manager")
+			getFeedbackCreateRequest(surveyFindResponse, false, "others"),
+			getFeedbackCreateRequest(surveyFindResponse, true, "pm")
 		);
 
 		// when

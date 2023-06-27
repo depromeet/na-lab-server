@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import me.nalab.core.authorization.aop.meta.Auth;
+import me.nalab.core.authorization.aop.meta.Authorization;
 import me.nalab.survey.application.port.in.web.summaryreviewer.ReviewerSummarizeUseCase;
+import me.nalab.survey.application.service.authorization.SurveyIdValidatorFactory;
 import me.nalab.survey.web.adaptor.summaryreviewer.response.ReviewerSummaryResponse;
 
 @RestController
@@ -18,9 +21,10 @@ public class ReveiwerSummaryController {
 
 	private final ReviewerSummarizeUseCase reviewerSummarizeUseCase;
 
+	@Authorization(factory = SurveyIdValidatorFactory.class)
 	@GetMapping("/reviewers/summary")
 	@ResponseStatus(HttpStatus.OK)
-	public ReviewerSummaryResponse getReviewerSummary(@RequestParam("survey-id") Long surveyId) {
+	public ReviewerSummaryResponse getReviewerSummary(@Auth @RequestParam("survey-id") Long surveyId) {
 
 		ReviewerSummarizeUseCase.ReviewerSummaryDto reviewerSummaryDto = reviewerSummarizeUseCase
 			.summarizeReviewerBySurveyId(surveyId);

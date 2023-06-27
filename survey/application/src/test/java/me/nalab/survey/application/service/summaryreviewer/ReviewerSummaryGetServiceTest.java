@@ -54,7 +54,7 @@ class ReviewerSummaryGetServiceTest {
 			Arguments.of( // expected
 				ReviewerSummaryDto.builder()
 					.position(ReviewerSummaryDto.Position.builder()
-						.positionReplyMap(Map.of("developer", 2, "designer", 1, "product-manager", 1))
+						.positionReplyMap(Map.of("developer", 2, "designer", 1, "pm", 1))
 						.build())
 					.collaborationExperience(ReviewerSummaryDto.CollaborationExperience.builder()
 						.yes(3)
@@ -63,7 +63,7 @@ class ReviewerSummaryGetServiceTest {
 					).build(),
 				List.of( // response
 					getReviewer("developer", true),
-					getReviewer("product-manager", false),
+					getReviewer("pm", false),
 					getReviewer("designer", true),
 					getReviewer("developer", true)
 				)

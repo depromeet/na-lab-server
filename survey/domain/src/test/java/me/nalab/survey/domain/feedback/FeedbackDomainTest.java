@@ -50,7 +50,7 @@ class FeedbackDomainTest {
 		Survey survey = RandomSurveyFixture.createRandomSurvey();
 		List<Feedback> feedbackList = List.of(
 			getFeedback(survey, "hello", true, "designer"),
-			getFeedback(survey, "world", false, "product-manager"),
+			getFeedback(survey, "world", false, "pm"),
 			getFeedback(survey, "hello", false, "developer")
 		);
 

@@ -5,6 +5,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -105,7 +106,7 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 			.getContentAsString();
 
 		JSONObject jsonObject = new JSONObject(stringResponse);
-		return jsonObject.getLong("survey_id");
+		return Long.valueOf(jsonObject.getString("survey_id"));
 	}
 
 	private SurveyFindResponse getSurveyFindResponse(Long surveyId) throws Exception {

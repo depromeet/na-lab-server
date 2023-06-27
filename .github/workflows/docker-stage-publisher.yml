@@ -1,9 +1,9 @@
-name: Docker image publisher
+name: Docker stage image publisher
 
 on:
   push:
     branches:
-      - release
+      - stage
 
 jobs:
   docker:
@@ -44,9 +44,11 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: |
-            DB_URL=${{ secrets.DB_URL }} 
-            DB_USERNAME=${{ secrets.DB_USERNAME }} 
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          tags: | 
-            samillmu/luffy:latest
-            ${{ steps.meta.outputs.tags }}
+            DB_URL=${{ secrets.DB_STAGE_URL }} 
+            DB_USERNAME=${{ secrets.DB_STAGE_USERNAME }} 
+            DB_PASSWORD=${{ secrets.DB_STAGE_PASSWORD }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            KAKAO_CLIENT_ID=${{ secrets.KAKAO_CIENT_ID }}
+            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          tags: |
+            samillmu/luffy:latest-stage

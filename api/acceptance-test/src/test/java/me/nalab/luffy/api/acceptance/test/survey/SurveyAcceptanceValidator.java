@@ -13,15 +13,19 @@ public class SurveyAcceptanceValidator {
 		resultActions.andExpectAll(
 			status().isCreated(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.survey_id").isNumber()
+			jsonPath("$.survey_id").isString()
 		);
+	}
+
+	public static void assertIsSurveyCreateIsFailed(ResultActions resultActions) throws Exception {
+		resultActions.andExpect(status().isBadRequest());
 	}
 
 	public static void assertIsSurveyFound(ResultActions resultActions) throws Exception {
 		resultActions.andExpectAll(
 			status().isOk(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.survey_id").isNumber()
+			jsonPath("$.survey_id").isString()
 		);
 	}
 

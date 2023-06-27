@@ -1,5 +1,6 @@
 package me.nalab.survey.web.adaptor.findspecific;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -28,8 +29,8 @@ class SpecificFeedbackResponseMapper {
 
 	static SpecificFeedbackResponse toSpecificFeedbackResponse(SurveyDto surveyDto, FeedbackDto feedbackDto) {
 		return SpecificFeedbackResponse.builder()
-			.feedbackId(feedbackDto.getId())
 			.createdAt(ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
+			.feedbackId(String.valueOf(feedbackDto.getId()))
 			.reviewer(ReviewerResponse.builder()
 				.nickName(feedbackDto.getReviewerDto().getNickName())
 				.collaborationExperience(feedbackDto.getReviewerDto().isCollaborationExperience())
@@ -69,7 +70,7 @@ class SpecificFeedbackResponseMapper {
 	private static ShortFormFeedbackResponse toShortFormFeedbackResponse(ShortFormQuestionDto questionDto,
 		ShortFormQuestionFeedbackDto feedbackDto) {
 		return ShortFormFeedbackResponse.builder()
-			.questionId(questionDto.getId())
+			.questionId(String.valueOf(questionDto.getId()))
 			.type("short")
 			.formType(questionDto.getShortFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())
@@ -84,14 +85,14 @@ class SpecificFeedbackResponseMapper {
 		List<ChoiceResponse> choices = questionDto.getChoiceDtoList().stream()
 			.filter(it -> feedbackDto.getSelectedChoiceIdSet().contains(it.getId()))
 			.map(it -> ChoiceResponse.builder()
-				.choiceId(it.getId())
+				.choiceId(String.valueOf(it.getId()))
 				.content(it.getContent())
 				.order(it.getOrder())
 				.build())
 			.collect(Collectors.toList());
 
 		return ChoiceFormFeedbackResponse.builder()
-			.questionId(questionDto.getId())
+			.questionId(String.valueOf(questionDto.getId()))
 			.type("choice")
 			.formType(questionDto.getChoiceFormQuestionDtoType().name().toLowerCase())
 			.title(questionDto.getTitle())

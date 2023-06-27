@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.findfeedback.FeedbackFindUseCase;
 import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackUpdatePort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.domain.feedback.Feedback;
 
@@ -21,13 +23,18 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 	private final SurveyExistCheckPort surveyExistCheckPort;
 	private final FeedbackFindPort feedbackFindPort;
 
+	private final FeedbackUpdatePort feedbackUpdatePort;
+
 	public FeedbackFindService(
 		@Qualifier("findfeedback.SurveyExistCheckAdaptor") SurveyExistCheckPort surveyExistCheckPort,
-		FeedbackFindPort feedbackFindPort) {
+		FeedbackFindPort feedbackFindPort,
+		@Qualifier("findfeedback.FeedbackUpdateAdaptor") FeedbackUpdatePort feedbackUpdatePort) {
 		this.surveyExistCheckPort = surveyExistCheckPort;
 		this.feedbackFindPort = feedbackFindPort;
+		this.feedbackUpdatePort = feedbackUpdatePort;
 	}
 
+	@Transactional
 	@Override
 	public List<FeedbackDto> findAllFeedbackDtoBySurveyId(Long surveyId) {
 		throwIfSurveyDoesNotExist(surveyId);
@@ -36,8 +43,24 @@ public class FeedbackFindService implements FeedbackFindUseCase {
 		return feedbackList.stream().map(FeedbackDtoMapper::toDto).collect(Collectors.toList());
 	}
 
+	@Transactional
+	@Override
+	public void updateFormFeedbackEntityIsReadBySurveyId(Long surveyId) {
+		List<Feedback> feedbacks = feedbackFindPort.findAllFeedbackBySurveyId(surveyId);
+
+		if (feedbacks.isEmpty()) {
+			return;
+		}
+
+		feedbacks.stream()
+			.flatMap(feedback -> feedback.getFormQuestionFeedbackableList().stream())
+			.forEach(formQuestionFeedbackable -> formQuestionFeedbackable.setRead(true));
+
+		feedbackUpdatePort.updateFeedback(feedbacks);
+	}
+
 	private void throwIfSurveyDoesNotExist(Long surveyId) {
-		if(surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
+		if (surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
 			return;
 		}
 		throw new SurveyDoesNotExistException(surveyId);

@@ -19,8 +19,8 @@ class FeedbackReviewersResponseMapper {
 	static FeedbackReviewersResponse toFeedbackReviewersResponse(List<FeedbackDto> feedbacks) {
 		List<FeedbackReviewer> feedbackReviewers = feedbacks.stream()
 			.map(it -> FeedbackReviewer.builder()
-				.feedbackId(it.getId())
 				.createdAt(ZonedDateTime.ofInstant(it.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
+				.feedbackId(String.valueOf(it.getId()))
 				.reviewer(ReviewerResponse.builder()
 					.nickName(it.getReviewerDto().getNickName())
 					.collaborationExperience(it.getReviewerDto().isCollaborationExperience())

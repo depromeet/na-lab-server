@@ -146,7 +146,7 @@ public abstract class AbstractSurveySources {
 			.order(order)
 			.questionType(QuestionType.CHOICE)
 			.choiceFormQuestionType(ChoiceFormQuestionType.CUSTOM)
-			.maxSelectionCount(choiceList.size())
+			.maxSelectableCount(choiceList.size())
 			.choiceList(choiceList)
 			.build();
 	}

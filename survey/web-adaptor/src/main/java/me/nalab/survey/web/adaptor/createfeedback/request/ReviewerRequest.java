@@ -16,7 +16,7 @@ public class ReviewerRequest {
 	@JsonProperty("collaboration_experience")
 	private boolean collaborationExperience;
 
-	@Pattern(regexp = "^(designer|product-manager|programmer|other)$")
+	@Pattern(regexp = "^(designer|pm|developer|others)$", message = "position은 designer, pm, developer, others 중 하나이어야 합니다.")
 	private String position;
 
 }

@@ -65,7 +65,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
 		SurveyFindResponse surveyFindResponse = getSurveyFindResponse(surveyId);
-		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "programmer");
+		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
 
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
 
