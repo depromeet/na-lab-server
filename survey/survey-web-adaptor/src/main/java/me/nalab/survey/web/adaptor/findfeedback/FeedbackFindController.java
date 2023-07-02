@@ -32,7 +32,7 @@ public class FeedbackFindController {
 	public QuestionFeedbackResponse findFeedback(@Auth @RequestParam("survey-id") Long surveyId,
 		@RequestParam(value = "form-type", required = false) String formType) {
 		if(formType == null) {
-			return findFeedback(String.valueOf(surveyId));
+			return findFeedback(surveyId);
 		}
 		// TODO: form-type에 해당하는 feedback 조회 기능 구현
 		throw new IllegalStateException("FormType method is not yet implemented form-type \"" + formType + "\"");
@@ -40,11 +40,11 @@ public class FeedbackFindController {
 
 	@Authorization(factory = SurveyIdValidatorFactory.class)
 	@GetMapping("/v2/surveys/{survey-id}/feedbacks")
-	public QuestionFeedbackResponse findFeedback(@Auth @PathVariable("survey-id") String surveyId) {
-		Long convertedSurveyId = Long.valueOf(surveyId);
-		SurveyDto surveyDto = surveyFindUseCase.findSurvey(convertedSurveyId);
-		List<FeedbackDto> feedbackDto = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(convertedSurveyId);
-		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(convertedSurveyId);
+	@ResponseStatus(HttpStatus.OK)
+	public QuestionFeedbackResponse findFeedback(@Auth @PathVariable("survey-id") Long surveyId) {
+		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
+		List<FeedbackDto> feedbackDto = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(surveyId);
+		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(surveyId);
 		return ResponseMapper.toQuestionFeedbackResponse(surveyDto, feedbackDto);
 	}
 
