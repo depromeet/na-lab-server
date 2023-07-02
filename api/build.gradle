@@ -1,8 +1,8 @@
 dependencies {
     implementation project(':api:api-mock')
 
-    implementation project(':survey:web-adaptor')
-    implementation project(':survey:jpa-adaptor')
+    implementation project(':survey:survey-web-adaptor')
+    implementation project(':survey:survey-jpa-adaptor')
 
     implementation project(':core:exception-handler')
     implementation project(':core:secure')
