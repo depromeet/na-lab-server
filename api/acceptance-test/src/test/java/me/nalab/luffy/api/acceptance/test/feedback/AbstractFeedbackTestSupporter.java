@@ -62,7 +62,7 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 
 	protected ResultActions findFeedback(String token, Long surveyId) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.get("/v2/surveys/" + surveyId + "/feedbacks")
+			.get(String.format("/v2/surveys/%d/feedbacks", surveyId))
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)
