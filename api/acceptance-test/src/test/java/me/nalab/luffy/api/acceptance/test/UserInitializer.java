@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Component
 public class UserInitializer {
@@ -22,7 +22,7 @@ public class UserInitializer {
 	private IdGenerator idGenerator;
 
 	@Transactional
-	public void saveUserWithOAuth(Provider provider, String name, String email, LocalDateTime date) {
+	public void saveUserWithOAuth(Provider provider, String name, String email, Instant date) {
 		var userEntity = UserEntity.builder()
 			.id(idGenerator.generate())
 			.nickname(name)

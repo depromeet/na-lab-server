@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 class UserObjectMapperTest {
 
@@ -20,7 +20,7 @@ class UserObjectMapperTest {
 	void USER_DOMAIN_TO_ENTITY_SUCCESS() {
 		// given
 		var id = 1L;
-		var createdAt = LocalDateTime.now();
+		var createdAt = Instant.now();
 		var userDomain = UserTestUtils.createUserDomain(id, VALID_NICKNAME, VALID_EMAIL, createdAt, null);
 
 		// when
@@ -35,7 +35,7 @@ class UserObjectMapperTest {
 	void USER_DOMAIN_TO_ENTITY_SUCCESS_WITH_NULL_PROVIDER() {
 		// given
 		var id = 1L;
-		var createdAt = LocalDateTime.now();
+		var createdAt = Instant.now();
 		var userDomain = UserTestUtils.createUserDomain(id, null, null, createdAt, null);
 
 		// when
@@ -73,7 +73,7 @@ class UserObjectMapperTest {
 	void USER_ENTITY_TO_DOMAIN_SUCCESS_WITH_PROVIDER_NULL() {
 		// given
 		var id = 1L;
-		var createdAt = LocalDateTime.now();
+		var createdAt = Instant.now();
 		var entity = UserTestUtils.createUserEntity(id, null, null, createdAt, null);
 
 		// when
@@ -96,7 +96,7 @@ class UserObjectMapperTest {
 
 	private UserEntity createUserEntity() {
 		var id = 1L;
-		var createdAt = LocalDateTime.now();
+		var createdAt = Instant.now();
 
 		return UserTestUtils.createUserEntity(id, VALID_NICKNAME, VALID_EMAIL, createdAt, null);
 	}

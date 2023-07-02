@@ -1,6 +1,7 @@
 package me.nalab.user.jpa.adaptor.create;
 
-import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
+import java.time.Instant;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
-import java.time.LocalDateTime;
+import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -33,7 +34,7 @@ class UserCreateAdaptorTest {
 		var id = 1L;
 		var nickname = "nickname";
 		var email = "test@test.com";
-		var user = UserTestUtils.createUserDomain(id, nickname, email, LocalDateTime.now(), null);
+		var user = UserTestUtils.createUserDomain(id, nickname, email, Instant.now(), null);
 
 		// when
 		userCreateAdaptor.createUser(user);

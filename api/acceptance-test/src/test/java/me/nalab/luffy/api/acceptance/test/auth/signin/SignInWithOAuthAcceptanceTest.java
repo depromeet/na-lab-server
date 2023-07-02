@@ -24,7 +24,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -99,7 +99,7 @@ class SignInWithOAuthAcceptanceTest extends AbstractAuthTestSupporter {
 		var oauthProvider = provider.name();
 		var code = "accessCode";
 
-		var now = LocalDateTime.now();
+		var now = Instant.now();
 		userInitializer.saveUserWithOAuth(provider, DEFAULT_NAME, DEFAULT_EMAIL, now);
 		targetInitializer.saveTargetAndGetId(DEFAULT_NAME, now);
 

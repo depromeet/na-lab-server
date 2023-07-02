@@ -19,6 +19,6 @@ jobs:
           username: ${{ secrets.SSH_STAGE_USER }}
           key: ${{ secrets.SSH_STAGE_KEY }}
           script: |
-            docker pull samillmu/luffy:latest-stage
-            docker ps -aq | xargs docker stop | xargs docker rm
-            docker run -d -p 8080:8080 samillmu/luffy:latest-stage
+            sudo docker pull samillmu/luffy:latest-stage
+            sudo docker ps -aq | xargs docker stop | xargs docker rm
+            sudo docker run -d -p 8080:8080 samillmu/luffy:latest-stage

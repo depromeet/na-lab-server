@@ -1,9 +1,7 @@
 package me.nalab.user.jpa.adaptor.create;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-import me.nalab.core.data.user.UserOAuthInfoEntity;
-import me.nalab.user.jpa.adaptor.create.repository.UserOAuthInfoJpaRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,9 +13,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
+import me.nalab.core.data.user.UserOAuthInfoEntity;
 import me.nalab.user.application.common.dto.FindByProviderAndTokenRequest;
 import me.nalab.user.domain.user.Provider;
 import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
+import me.nalab.user.jpa.adaptor.create.repository.UserOAuthInfoJpaRepository;
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -25,7 +25,6 @@ import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
 @ContextConfiguration(classes = UserFindByProviderAndTokenAdaptor.class)
 @TestPropertySource("classpath:h2.properties")
 class UserFindByProviderAndTokenAdaptorTest {
-
 
 	@Autowired
 	private UserFindByProviderAndTokenAdaptor userFindByProviderAndTokenAdaptor;
@@ -59,7 +58,7 @@ class UserFindByProviderAndTokenAdaptorTest {
 		var token = "token";
 		var request = new FindByProviderAndTokenRequest.Out(provider, token);
 		var nickname = "nickname";
-		var userEntity = UserTestUtils.createUserEntity(1L, nickname, "email", LocalDateTime.now(), LocalDateTime.now());
+		var userEntity = UserTestUtils.createUserEntity(1L, nickname, "email", Instant.now(), Instant.now());
 		userJpaRepository.save(userEntity);
 		var oauthInfoEntity = new UserOAuthInfoEntity(1L, provider.name(), token, nickname, null, userEntity);
 		userOAuthInfoJpaRepository.saveAndFlush(oauthInfoEntity);
@@ -69,5 +68,6 @@ class UserFindByProviderAndTokenAdaptorTest {
 
 		// then
 		Assertions.assertThat(result).isPresent();
-	}}
+	}
+}
 
