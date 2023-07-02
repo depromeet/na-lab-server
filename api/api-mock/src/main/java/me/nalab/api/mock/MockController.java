@@ -298,7 +298,7 @@ public class MockController {
 	@ResponseStatus(HttpStatus.OK)
 	Object getFeedbackBySurveyIdAndFormType(@RequestParam("survey-id") Long surveyId,
 		@RequestParam(value = "form-type", required = false) String formType) {
-		if(formType == null) {
+		if(formType == null || formType.isBlank()) {
 			return "{\n"
 				+ "    \"question_feedback\": [\n"
 				+ "        {\n"

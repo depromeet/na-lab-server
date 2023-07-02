@@ -31,7 +31,7 @@ public class FeedbackFindController {
 	@ResponseStatus(HttpStatus.OK)
 	public QuestionFeedbackResponse findFeedback(@Auth @RequestParam("survey-id") Long surveyId,
 		@RequestParam(value = "form-type", required = false) String formType) {
-		if(formType == null) {
+		if(formType == null || formType.isBlank()) {
 			return findFeedback(surveyId);
 		}
 		// TODO: form-type에 해당하는 feedback 조회 기능 구현
