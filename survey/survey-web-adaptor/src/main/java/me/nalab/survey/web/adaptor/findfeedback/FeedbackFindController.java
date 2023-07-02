@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,16 +21,26 @@ import me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackRespons
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
 public class FeedbackFindController {
 
 	private final SurveyFindUseCase surveyFindUseCase;
 	private final FeedbackFindUseCase feedbackFindUseCase;
 
 	@Authorization(factory = SurveyIdValidatorFactory.class)
-	@GetMapping("/feedbacks")
+	@GetMapping("/v1/feedbacks")
 	@ResponseStatus(HttpStatus.OK)
-	public QuestionFeedbackResponse findFeedback(@Auth @RequestParam("survey-id") Long surveyId) {
+	public QuestionFeedbackResponse findFeedback(@Auth @RequestParam("survey-id") Long surveyId,
+		@RequestParam(value = "form-type", required = false) String formType) {
+		if(formType == null) {
+			return findFeedback(surveyId);
+		}
+		// TODO: form-type에 해당하는 feedback 조회 기능 구현
+		throw new IllegalStateException("FormType method is not yet implemented form-type \"" + formType + "\"");
+	}
+
+	@Authorization(factory = SurveyIdValidatorFactory.class)
+	@GetMapping("/v2/surveys/{survey-id}/feedbacks")
+	public QuestionFeedbackResponse findFeedback(@Auth @PathVariable("survey-id") Long surveyId) {
 		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
 		List<FeedbackDto> feedbackDto = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(surveyId);
 		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(surveyId);
