@@ -37,4 +37,6 @@ public abstract class FormFeedbackEntity {
 	@JoinColumn(name = "feedback_id", nullable = false)
 	protected FeedbackEntity feedbackEntity;
 
+	@Column(name = "is_bookmarked", nullable = false)
+	protected boolean isBookmarked;
 }
