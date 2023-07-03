@@ -21,7 +21,7 @@ public abstract class AbstractTargetSources extends AbstractSurveySources {
 	protected static Stream<Arguments> targetCreateSuccessSources() {
 		return Stream.of(
 			of(
-				targetFunction(10L, "mike"),
+				targetFunction(10L, "mike", "designer"),
 				surveyFunction(1L, Instant.now(), Instant.now()),
 				(Supplier<List<FormQuestionable>>)() -> {
 					List<Choice> choiceList = new ArrayList<>();
@@ -42,10 +42,11 @@ public abstract class AbstractTargetSources extends AbstractSurveySources {
 	}
 
 	static Function<List<Survey>, Target> targetFunction(Long id,
-		String nickname) {
+		String nickname, String position) {
 		return T -> Target.builder()
 			.id(id)
 			.nickname(nickname)
+			.position(position)
 			.surveyList(T)
 			.build();
 	}

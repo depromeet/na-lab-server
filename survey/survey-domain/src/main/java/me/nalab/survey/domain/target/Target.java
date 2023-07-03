@@ -20,6 +20,7 @@ public class Target implements IdGeneratable {
 	private Long id;
 	private final List<Survey> surveyList;
 	private final String nickname;
+	private final String position;
 
 	@Override
 	public void withId(LongSupplier idSupplier) {
