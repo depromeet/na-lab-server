@@ -19,6 +19,7 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 	private Long id;
 	private Long questionId;
 	private boolean isRead;
+	private Bookmark bookmark;
 
 	public void setRead(boolean read) {
 		isRead = read;

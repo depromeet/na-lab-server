@@ -268,8 +268,8 @@ class FeedbackDomainTest {
 
 	private Bookmark getBookmark(boolean isBookmarked, Instant bookmarkedAt) {
 		return Bookmark.builder()
-			.isBookmarked(true)
-			.bookmaredAt(bookmarkedAt)
+			.isBookmarked(isBookmarked)
+			.bookmarkedAt(bookmarkedAt)
 			.build();
 	}
 
