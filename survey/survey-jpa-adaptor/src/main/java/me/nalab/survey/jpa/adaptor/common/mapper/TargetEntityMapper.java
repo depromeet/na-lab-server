@@ -13,6 +13,7 @@ public class TargetEntityMapper {
 		return TargetEntity.builder()
 			.id(target.getId())
 			.nickname(target.getNickname())
+			.position(target.getPosition())
 			.build();
 	}
 
@@ -20,6 +21,7 @@ public class TargetEntityMapper {
 		return Target.builder()
 			.id(targetEntity.getId())
 			.nickname(targetEntity.getNickname())
+			.position(targetEntity.getPosition())
 			.build();
 	}
 }
