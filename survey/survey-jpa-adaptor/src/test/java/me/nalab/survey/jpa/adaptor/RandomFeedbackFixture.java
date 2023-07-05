@@ -1,5 +1,6 @@
 package me.nalab.survey.jpa.adaptor;
 
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import lombok.Setter;
+import me.nalab.survey.domain.feedback.Bookmark;
 import me.nalab.survey.domain.feedback.ChoiceFormQuestionFeedback;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
@@ -86,7 +88,7 @@ public class RandomFeedbackFixture {
 	private static List<FormQuestionFeedbackable> getRandomQuestionFeedbackListBySurvey(Survey survey) {
 		List<FormQuestionable> formQuestionableList = survey.getFormQuestionableList();
 		return formQuestionableList.stream().map(q -> {
-			if(q.getQuestionType() == QuestionType.CHOICE) {
+			if (q.getQuestionType() == QuestionType.CHOICE) {
 				return getRandomChoiceFormQuestionFeedback((ChoiceFormQuestion)q);
 			}
 			return getRandomShortFormQuestionFeedback((ShortFormQuestion)q);
@@ -96,13 +98,17 @@ public class RandomFeedbackFixture {
 	private static ChoiceFormQuestionFeedback getRandomChoiceFormQuestionFeedback(
 		ChoiceFormQuestion choiceFormQuestion) {
 		Set<Long> selectedIdSet = new HashSet<>();
-		for(int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
+		for (int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
 			selectedIdSet.add(choiceFormQuestion.getChoiceList().get(i).getId());
 		}
 		return ChoiceFormQuestionFeedback.builder()
 			.id(choiceFormQuestion.getId())
 			.questionId(choiceFormQuestion.getId())
 			.isRead(randomBooleanGenerator.getAsBoolean())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(false)
+				.bookmarkedAt(Instant.now())
+				.build())
 			.selectedChoiceIdSet(selectedIdSet)
 			.build();
 	}
@@ -113,6 +119,10 @@ public class RandomFeedbackFixture {
 			.id(shortFormQuestion.getId())
 			.questionId(shortFormQuestion.getId())
 			.isRead(randomBooleanGenerator.getAsBoolean())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(false)
+				.bookmarkedAt(Instant.now())
+				.build())
 			.replyList(List.of(randomStringGenerator.get()))
 			.build();
 	}
