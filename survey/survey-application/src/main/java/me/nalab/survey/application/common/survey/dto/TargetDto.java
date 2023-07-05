@@ -13,5 +13,6 @@ public class TargetDto {
 
 	private final Long id;
 	private final String nickname;
+	private final String position;
 
 }

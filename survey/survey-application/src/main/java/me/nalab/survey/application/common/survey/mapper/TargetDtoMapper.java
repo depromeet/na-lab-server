@@ -20,6 +20,7 @@ public class TargetDtoMapper {
 		return TargetDto.builder()
 			.id(target.getId())
 			.nickname(target.getNickname())
+			.position(target.getPosition())
 			.build();
 	}
 }

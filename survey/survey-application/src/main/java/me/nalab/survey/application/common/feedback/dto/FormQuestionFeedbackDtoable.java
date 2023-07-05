@@ -14,5 +14,6 @@ public abstract class FormQuestionFeedbackDtoable {
 	private Long id;
 	private Long questionId;
 	private boolean isRead;
+	private BookmarkDto bookmarkDto;
 
 }
