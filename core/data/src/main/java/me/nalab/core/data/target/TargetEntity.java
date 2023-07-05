@@ -28,4 +28,7 @@ public class TargetEntity extends TimeBaseEntity {
 	@Column(name = "target_name", nullable = false)
 	private String nickname;
 
+	@Column(name = "position")
+	private String position;
+
 }
