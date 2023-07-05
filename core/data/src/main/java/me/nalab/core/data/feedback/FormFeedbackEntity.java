@@ -42,6 +42,6 @@ public abstract class FormFeedbackEntity {
 	@Column(name = "is_bookmarked", nullable = false)
 	protected boolean isBookmarked;
 
-	@Column(name = "bookmarked_at", columnDefinition = "TIMESTAMP(6)")
+	@Column(name = "bookmarked_at", columnDefinition = "TIMESTAMP(6)", nullable = false)
 	protected Instant bookmarkedAt;
 }
