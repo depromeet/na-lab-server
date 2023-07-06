@@ -1,5 +1,6 @@
 package me.nalab.survey.web.adaptor.createfeedback;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.secure.xss.meta.Xss;
 import me.nalab.core.secure.xss.meta.XssFiltering;
+import me.nalab.survey.application.common.feedback.dto.BookmarkDto;
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FormQuestionFeedbackDtoable;
@@ -63,7 +65,7 @@ public class FeedbackCreateController {
 		List<AbstractQuestionFeedbackRequest> abstractQuestionFeedbackRequestList) {
 		return abstractQuestionFeedbackRequestList.stream()
 			.map(r -> {
-				if(r instanceof ChoiceQuestionFeedbackRequest) {
+				if (r instanceof ChoiceQuestionFeedbackRequest) {
 					return toChoiceFormQuestionFeedbackDto((ChoiceQuestionFeedbackRequest)r);
 				}
 				return toShortFormQuestionFeedbackDto((ShortQuestionFeedbackRequest)r);
@@ -75,6 +77,11 @@ public class FeedbackCreateController {
 		ChoiceQuestionFeedbackRequest choiceQuestionFeedbackRequest) {
 		return ChoiceFormQuestionFeedbackDto.builder()
 			.questionId(Long.valueOf(choiceQuestionFeedbackRequest.getQuestionId()))
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(false)
+				// TODO
+				.bookmarkedAt(Instant.now())
+				.build())
 			.selectedChoiceIdSet(choiceQuestionFeedbackRequest.getChoiceSet().stream().map(Long::valueOf).collect(
 				Collectors.toSet()))
 			.build();
@@ -84,6 +91,11 @@ public class FeedbackCreateController {
 		ShortQuestionFeedbackRequest shortQuestionFeedbackRequest) {
 		return ShortFormQuestionFeedbackDto.builder()
 			.questionId(Long.valueOf(shortQuestionFeedbackRequest.getQuestionId()))
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(false)
+				// TODO
+				.bookmarkedAt(Instant.now())
+				.build())
 			.replyList(shortQuestionFeedbackRequest.getReplyList())
 			.build();
 	}

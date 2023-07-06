@@ -3,11 +3,13 @@ package me.nalab.survey.application.common.feedback.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import me.nalab.survey.application.common.feedback.dto.BookmarkDto;
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FormQuestionFeedbackDtoable;
 import me.nalab.survey.application.common.feedback.dto.ReviewerDto;
 import me.nalab.survey.application.common.feedback.dto.ShortFormQuestionFeedbackDto;
+import me.nalab.survey.domain.feedback.Bookmark;
 import me.nalab.survey.domain.feedback.ChoiceFormQuestionFeedback;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
@@ -41,7 +43,7 @@ public final class FeedbackDtoMapper {
 
 	private static List<FormQuestionFeedbackable> getFormQuestionFeedbackList(FeedbackDto feedbackDto) {
 		return feedbackDto.getFormQuestionFeedbackDtoableList().stream().map(q -> {
-			if(q instanceof ShortFormQuestionFeedbackDto) {
+			if (q instanceof ShortFormQuestionFeedbackDto) {
 				return getShortFormQuestionFeedback((ShortFormQuestionFeedbackDto)q);
 			}
 			return getChoiceFormQuestionFeedback((ChoiceFormQuestionFeedbackDto)q);
@@ -52,6 +54,10 @@ public final class FeedbackDtoMapper {
 		ShortFormQuestionFeedbackDto shortFormQuestionFeedbackDto) {
 		return ShortFormQuestionFeedback.builder()
 			.questionId(shortFormQuestionFeedbackDto.getQuestionId())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(shortFormQuestionFeedbackDto.getBookmarkDto().isBookmarked())
+				.bookmarkedAt(shortFormQuestionFeedbackDto.getBookmarkDto().getBookmarkedAt())
+				.build())
 			.isRead(shortFormQuestionFeedbackDto.isRead())
 			.replyList(shortFormQuestionFeedbackDto.getReplyList())
 			.build();
@@ -61,6 +67,10 @@ public final class FeedbackDtoMapper {
 		ChoiceFormQuestionFeedbackDto choiceFormQuestionFeedbackDto) {
 		return ChoiceFormQuestionFeedback.builder()
 			.questionId(choiceFormQuestionFeedbackDto.getQuestionId())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(choiceFormQuestionFeedbackDto.getBookmarkDto().isBookmarked())
+				.bookmarkedAt(choiceFormQuestionFeedbackDto.getBookmarkDto().getBookmarkedAt())
+				.build())
 			.isRead(choiceFormQuestionFeedbackDto.isRead())
 			.selectedChoiceIdSet(choiceFormQuestionFeedbackDto.getSelectedChoiceIdSet())
 			.build();
@@ -89,7 +99,7 @@ public final class FeedbackDtoMapper {
 
 	private static List<FormQuestionFeedbackDtoable> getFormQuestionFeedbackDtoList(Feedback feedback) {
 		return feedback.getFormQuestionFeedbackableList().stream().map(q -> {
-			if(q instanceof ShortFormQuestionFeedback) {
+			if (q instanceof ShortFormQuestionFeedback) {
 				return getShortFormQuestionFeedbackDto((ShortFormQuestionFeedback)q);
 			}
 			return getChoiceFormQuestionFeedbackDto((ChoiceFormQuestionFeedback)q);
@@ -102,6 +112,10 @@ public final class FeedbackDtoMapper {
 			.id(shortFormQuestionFeedback.getId())
 			.questionId(shortFormQuestionFeedback.getQuestionId())
 			.isRead(shortFormQuestionFeedback.isRead())
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(shortFormQuestionFeedback.getBookmark().isBookmarked())
+				.bookmarkedAt(shortFormQuestionFeedback.getBookmark().getBookmarkedAt())
+				.build())
 			.replyList(shortFormQuestionFeedback.getReplyList())
 			.build();
 	}
@@ -112,6 +126,10 @@ public final class FeedbackDtoMapper {
 			.id(choiceFormQuestionFeedback.getId())
 			.questionId(choiceFormQuestionFeedback.getQuestionId())
 			.isRead(choiceFormQuestionFeedback.isRead())
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(choiceFormQuestionFeedback.getBookmark().isBookmarked())
+				.bookmarkedAt(choiceFormQuestionFeedback.getBookmark().getBookmarkedAt())
+				.build())
 			.selectedChoiceIdSet(choiceFormQuestionFeedback.getSelectedChoiceIdSet())
 			.build();
 	}

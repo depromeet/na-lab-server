@@ -1,7 +1,6 @@
 package me.nalab.survey.application;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import lombok.Setter;
+import me.nalab.survey.application.common.feedback.dto.BookmarkDto;
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FormQuestionFeedbackDtoable;
@@ -71,7 +71,7 @@ public class RandomFeedbackDtoFixture {
 	private static List<FormQuestionFeedbackDtoable> getRandomQuestionFeedbackDtoListBySurvey(Survey survey) {
 		List<FormQuestionable> formQuestionableList = survey.getFormQuestionableList();
 		return formQuestionableList.stream().map(q -> {
-			if(q.getQuestionType() == QuestionType.CHOICE) {
+			if (q.getQuestionType() == QuestionType.CHOICE) {
 				return getRandomChoiceFormQuestionFeedbackDto((ChoiceFormQuestion)q);
 			}
 			return getRandomShortFormQuestionFeedbackDto((ShortFormQuestion)q);
@@ -81,11 +81,15 @@ public class RandomFeedbackDtoFixture {
 	private static ChoiceFormQuestionFeedbackDto getRandomChoiceFormQuestionFeedbackDto(
 		ChoiceFormQuestion choiceFormQuestion) {
 		Set<Long> selectedIdSet = new HashSet<>();
-		for(int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
+		for (int i = 0; i < choiceFormQuestion.getMaxSelectableCount(); i++) {
 			selectedIdSet.add(choiceFormQuestion.getChoiceList().get(i).getId());
 		}
 		return ChoiceFormQuestionFeedbackDto.builder()
 			.questionId(choiceFormQuestion.getId())
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(false)
+				.bookmarkedAt(Instant.now())
+				.build())
 			.isRead(RANDOM_BOOLEAN_SUPPLIER.getAsBoolean())
 			.selectedChoiceIdSet(selectedIdSet)
 			.build();
@@ -95,6 +99,10 @@ public class RandomFeedbackDtoFixture {
 		ShortFormQuestion shortFormQuestion) {
 		return ShortFormQuestionFeedbackDto.builder()
 			.questionId(shortFormQuestion.getId())
+			.bookmarkDto(BookmarkDto.builder()
+				.isBookmarked(false)
+				.bookmarkedAt(Instant.now())
+				.build())
 			.isRead(RANDOM_BOOLEAN_SUPPLIER.getAsBoolean())
 			.replyList(List.of(RANDOM_STRING_SUPPLIER.get()))
 			.build();

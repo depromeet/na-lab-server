@@ -1,6 +1,6 @@
 package me.nalab.survey.jpa.adaptor.authorization;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.time.Instant;
 import java.util.List;
