@@ -124,4 +124,12 @@ public final class FeedbackAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsBookmarkedFeedbackEmpty(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.question_feedback").isEmpty()
+		);
+	}
+
 }
