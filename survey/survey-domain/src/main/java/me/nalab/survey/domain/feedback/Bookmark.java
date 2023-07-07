@@ -3,13 +3,11 @@ package me.nalab.survey.domain.feedback;
 import java.time.Instant;
 
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Builder
 @Getter
-@EqualsAndHashCode
 @ToString
 public class Bookmark {
 
@@ -18,6 +16,23 @@ public class Bookmark {
 
 	public void replaceIsBookmarked() {
 		this.isBookmarked = !isBookmarked;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Bookmark bookmark = (Bookmark)o;
+
+		return isBookmarked == bookmark.isBookmarked;
+	}
+
+	@Override
+	public int hashCode() {
+		return Boolean.hashCode(isBookmarked);
 	}
 
 }
