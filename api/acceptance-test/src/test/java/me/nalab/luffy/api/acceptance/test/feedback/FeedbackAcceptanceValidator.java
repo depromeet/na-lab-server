@@ -1,8 +1,6 @@
 package me.nalab.luffy.api.acceptance.test.feedback;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -44,6 +42,7 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
 			jsonPath("$.question_feedback.[0].feedbacks").isNotEmpty(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].feedback_id").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].form_question_feedback_id").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].created_at").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].is_read").isBoolean(),
 
