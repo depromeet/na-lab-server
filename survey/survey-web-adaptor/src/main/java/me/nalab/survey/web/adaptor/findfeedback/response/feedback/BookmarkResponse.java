@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @Builder
 @ToString
-@EqaulsAndHashCode
+@EqualsAndHashCode
 public class BookmarkResponse {
 
 	@JsonProperty("is_bookmarked")
