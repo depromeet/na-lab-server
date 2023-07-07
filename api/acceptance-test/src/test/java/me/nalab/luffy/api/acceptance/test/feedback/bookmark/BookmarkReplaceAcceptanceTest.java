@@ -37,7 +37,7 @@ import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
 @ComponentScan("me.nalab")
 @EnableJpaRepositories(basePackages = {"me.nalab"})
 @EntityScan(basePackages = {"me.nalab"})
-public class BookmarkReplaceAcceptanceTest extends AbstractFeedbackTestSupporter {
+class BookmarkReplaceAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;
