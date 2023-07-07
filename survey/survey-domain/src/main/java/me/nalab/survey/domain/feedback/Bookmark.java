@@ -13,7 +13,11 @@ import lombok.ToString;
 @ToString
 public class Bookmark {
 
-	private final boolean isBookmarked;
+	private boolean isBookmarked;
 	private final Instant bookmarkedAt;
+
+	public void replaceIsBookmarked() {
+		this.isBookmarked = !isBookmarked;
+	}
 
 }
