@@ -11,6 +11,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
+@EqaulsAndHashCode
 public class BookmarkResponse {
 
 	@JsonProperty("is_bookmarked")
