@@ -170,6 +170,7 @@ jsonpath "$.question_feedback.[0].form_type" matches "tendency|strength|custom"
 jsonpath "$.question_feedback.[0].title" exists
 jsonpath "$.question_feedback.[0].feedbacks" count == 1
 jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id" exists
+jsonpath "$.question_feedback.[0].feedbacks.[0].form_question_feedback_id" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].created_at" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].is_read" exists
 jsonpath "$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id" exists
