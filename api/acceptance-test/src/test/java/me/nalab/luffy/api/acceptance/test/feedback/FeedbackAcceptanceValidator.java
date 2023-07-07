@@ -126,4 +126,8 @@ public final class FeedbackAcceptanceValidator {
 		);
 	}
 
+	public static void assertIsBookmarkReplaced(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(status().isOk());
+	}
+
 }
