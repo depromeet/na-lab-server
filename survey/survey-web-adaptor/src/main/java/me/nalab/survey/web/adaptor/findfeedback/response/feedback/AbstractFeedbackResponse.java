@@ -23,5 +23,7 @@ public abstract class AbstractFeedbackResponse {
 	private final boolean read;
 	@JsonProperty("reviewer")
 	private final ReviewerResponse reviewerResponse;
+	@JsonProperty("bookmark")
+	private final BookmarkResponse bookmarkResponse;
 
 }
