@@ -34,7 +34,7 @@ final class ResponseMapper {
 		return QuestionFeedbackResponse.builder()
 			.abstractSurveyResponse(surveyDto.getFormQuestionDtoableList().stream().map(
 				f -> {
-					if(f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
+					if (f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
 						return toChoiceSurveyResponse((ChoiceFormQuestionDto)f, feedbackDtoList);
 					}
 					return toShortSurveyResponse((ShortFormQuestionDto)f, feedbackDtoList);
@@ -85,10 +85,11 @@ final class ResponseMapper {
 				choiceFeedbackResponseList.add(
 					ChoiceFeedbackResponse.builder()
 						.id(String.valueOf(feedbackDto.getId()))
+						.formQuestionFeedbackId(String.valueOf(cq.getId()))
 						.choiceIdSet(selectedChoiceIdSet)
 						.createdAt(ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul"))
 							.toLocalDateTime())
-						.read(feedbackDto.isRead())
+						.read(cq.isRead())
 						.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 						.build()
 				);
@@ -129,10 +130,11 @@ final class ResponseMapper {
 			.forEach(sq -> shortFeedbackResponseList.add(
 				ShortFeedbackResponse.builder()
 					.id(String.valueOf(feedbackDto.getId()))
+					.formQuestionFeedbackId(String.valueOf(sq.getId()))
 					.replyList(((ShortFormQuestionFeedbackDto)sq).getReplyList())
 					.createdAt(
 						ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
-					.read(feedbackDto.isRead())
+					.read(sq.isRead())
 					.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 					.build()
 			));
