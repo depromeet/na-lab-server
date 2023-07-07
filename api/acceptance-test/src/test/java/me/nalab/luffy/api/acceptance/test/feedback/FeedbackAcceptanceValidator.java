@@ -45,6 +45,9 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].feedbacks.[0].form_question_feedback_id").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].created_at").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].is_read").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark.is_bookmarked").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark.bookmarked_at").isString(),
 
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id").isString(),
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.nickname").isString(),
