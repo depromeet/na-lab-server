@@ -13,7 +13,7 @@ import me.nalab.survey.domain.survey.spi.QuestionFeedbackValidable;
 @SuperBuilder
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "bookmark")
 public abstract class FormQuestionFeedbackable implements IdGeneratable, QuestionFeedbackValidable {
 
 	private Long id;
@@ -25,9 +25,13 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 		isRead = read;
 	}
 
+	public void replaceBookmark() {
+		bookmark.replaceIsBookmarked();
+	}
+
 	@Override
 	public void withId(LongSupplier idSupplier) {
-		if(this.id != null) {
+		if (this.id != null) {
 			throw new IdAlreadyGeneratedException(this);
 		}
 		id = idSupplier.getAsLong();
