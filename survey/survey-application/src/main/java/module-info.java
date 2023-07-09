@@ -27,7 +27,7 @@ module luffy.survey.application.main {
 	exports me.nalab.survey.application.port.out.persistence.authorization;
 	exports me.nalab.survey.application.common.target.dto;
 	exports me.nalab.survey.application.service.authorization;
-
+	exports me.nalab.survey.application.port.out.persistence.bookmark;
 
 	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;

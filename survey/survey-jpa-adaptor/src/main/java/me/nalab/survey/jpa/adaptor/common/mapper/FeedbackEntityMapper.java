@@ -52,6 +52,13 @@ public final class FeedbackEntityMapper {
 		}).collect(Collectors.toList());
 	}
 
+	public static FormQuestionFeedbackable toFormQuestionFeedbackable(FormFeedbackEntity feedbackEntity) {
+		if (feedbackEntity instanceof ShortFormFeedbackEntity) {
+			return getShortFormQuestionFeedback((ShortFormFeedbackEntity)feedbackEntity);
+		}
+		return getChoiceFormQuestionFeedback((ChoiceFormFeedbackEntity)feedbackEntity);
+	}
+
 	private static ShortFormQuestionFeedback getShortFormQuestionFeedback(
 		ShortFormFeedbackEntity shortFormFeedbackEntity) {
 		return ShortFormQuestionFeedback.builder()
@@ -101,6 +108,13 @@ public final class FeedbackEntityMapper {
 			.createdAt(now)
 			.updatedAt(now)
 			.build();
+	}
+
+	public static FormFeedbackEntity toFormFeedbackEntity(FormQuestionFeedbackable formQuestionFeedbackable) {
+		if (formQuestionFeedbackable instanceof ShortFormQuestionFeedback) {
+			return getShortFormFeedbackEntity((ShortFormQuestionFeedback)formQuestionFeedbackable);
+		}
+		return getChoiceFormFeedbackEntity((ChoiceFormQuestionFeedback)formQuestionFeedbackable);
 	}
 
 	private static List<FormFeedbackEntity> getFormFeedbackEntityList(Feedback feedback) {
