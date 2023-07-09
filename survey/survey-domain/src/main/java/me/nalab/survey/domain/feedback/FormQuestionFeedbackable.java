@@ -37,4 +37,8 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 	public Long getFormQuestionId() {
 		return questionId;
 	}
+
+	public boolean isBookmarked() {
+		return bookmark.isBookmarked();
+	}
 }

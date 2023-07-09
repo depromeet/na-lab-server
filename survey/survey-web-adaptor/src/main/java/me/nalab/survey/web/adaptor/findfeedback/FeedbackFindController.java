@@ -2,6 +2,7 @@ package me.nalab.survey.web.adaptor.findfeedback;
 
 import java.util.List;
 
+import me.nalab.survey.application.port.in.web.findfeedback.BookmarkedFeedbackFindUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class FeedbackFindController {
 
 	private final SurveyFindUseCase surveyFindUseCase;
 	private final FeedbackFindUseCase feedbackFindUseCase;
+	private final BookmarkedFeedbackFindUseCase bookmarkedFeedbackFindUseCase;
 
 	@Authorization(factory = SurveyIdValidatorFactory.class)
 	@GetMapping("/v1/feedbacks")
@@ -45,6 +47,14 @@ public class FeedbackFindController {
 		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
 		List<FeedbackDto> feedbackDto = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(surveyId);
 		feedbackFindUseCase.updateFormFeedbackEntityIsReadBySurveyId(surveyId);
+		return ResponseMapper.toQuestionFeedbackResponse(surveyDto, feedbackDto);
+	}
+
+	@GetMapping("/v1/feedbacks/bookmarks")
+	@ResponseStatus(HttpStatus.OK)
+	public QuestionFeedbackResponse findAllBookmarked(@RequestParam("survey-id") Long surveyId) {
+		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
+		List<FeedbackDto> feedbackDto = bookmarkedFeedbackFindUseCase.findAllBySurveyId(surveyId);
 		return ResponseMapper.toQuestionFeedbackResponse(surveyDto, feedbackDto);
 	}
 
