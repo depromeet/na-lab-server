@@ -25,6 +25,11 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 		isRead = read;
 	}
 
+	public void switchBookmark() {
+		this.getBookmark().replaceIsBookmarked();
+		this.getBookmark().updateBookmarkedAt();
+	}
+
 	@Override
 	public void withId(LongSupplier idSupplier) {
 		if (this.id != null) {

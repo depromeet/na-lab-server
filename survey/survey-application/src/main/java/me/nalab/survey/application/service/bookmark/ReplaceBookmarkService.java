@@ -8,7 +8,6 @@ import me.nalab.survey.application.exception.FormQuestionFeedbackNotExistExcepti
 import me.nalab.survey.application.port.in.web.bookmark.BookmarkReplaceUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.FormQuestionFeedbackFindPort;
 import me.nalab.survey.application.port.out.persistence.bookmark.FormQuestionFeedbackUpdatePort;
-import me.nalab.survey.domain.feedback.Bookmark;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
 
 @Service
@@ -24,8 +23,7 @@ public class ReplaceBookmarkService implements BookmarkReplaceUseCase {
 		FormQuestionFeedbackable formQuestionFeedback = formQuestionFeedbackFindPort.findFormQuestionFeedbackById(
 				formQuestionFeedbackId)
 			.orElseThrow(() -> new FormQuestionFeedbackNotExistException(formQuestionFeedbackId));
-		Bookmark bookmark = formQuestionFeedback.getBookmark();
-		bookmark.replaceIsBookmarked();
+		formQuestionFeedback.switchBookmark();
 		formQuestionFeedbackUpdatePort.updateFormQuestionFeedback(formQuestionFeedback);
 	}
 }

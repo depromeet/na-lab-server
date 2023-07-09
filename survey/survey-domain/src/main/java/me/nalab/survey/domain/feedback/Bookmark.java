@@ -14,10 +14,14 @@ import lombok.ToString;
 public class Bookmark {
 
 	private boolean isBookmarked;
-	private final Instant bookmarkedAt;
+	private Instant bookmarkedAt;
 
 	public void replaceIsBookmarked() {
 		this.isBookmarked = !isBookmarked;
+	}
+
+	public void updateBookmarkedAt() {
+		this.bookmarkedAt = Instant.now();
 	}
 
 }
