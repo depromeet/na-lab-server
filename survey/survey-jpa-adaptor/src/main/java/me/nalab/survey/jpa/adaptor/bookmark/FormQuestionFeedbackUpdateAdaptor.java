@@ -18,7 +18,8 @@ public class FormQuestionFeedbackUpdateAdaptor implements FormQuestionFeedbackUp
 	@Override
 	public void updateFormQuestionFeedback(FormQuestionFeedbackable formQuestionFeedbackable) {
 		FormFeedbackEntity formFeedbackEntity = FeedbackEntityMapper.toFormFeedbackEntity(formQuestionFeedbackable);
-		formQuestionFeedbackUpdateRepository.save(formFeedbackEntity);
+		formFeedbackEntity.setBookmarked(formQuestionFeedbackable.getBookmark().isBookmarked());
+		formFeedbackEntity.setBookmarkedAt(formQuestionFeedbackable.getBookmark().getBookmarkedAt());
 	}
 
 }
