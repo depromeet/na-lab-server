@@ -8,21 +8,30 @@ import java.util.Optional;
 public interface TargetIdFindPort {
 
 	/**
-	 * surveyId를 인자로 받아, 해당 surveyId를 소유하고있는 target의 Id를 반환합니다.
-	 * 만약, target의 Id를 찾을 수 없다면, Optional.empty() 를 반환합니다.
+	 * surveyId 를 인자로 받아, 해당 surveyId를 소유하고있는 target 의 Id를 반환합니다.
+	 * 만약, target 의 Id를 찾을 수 없다면, Optional.empty() 를 반환합니다.
 	 *
-	 * @param surveyId survey의 id
-	 * @return 있다면, surveyId를 소유하고있는 target의 Id
+	 * @param surveyId survey 의 id
+	 * @return 있다면, surveyId를 소유하고있는 target 의 Id
 	 */
 	Optional<Long> findTargetIdBySurveyId(Long surveyId);
 
 	/**
-	 * feedbackId를 인자로 받아, 해당 surveyId를 소유하고있는 feedback의 Id를 반환합니다.
+	 * feedbackId를 인자로 받아, 해당 surveyId를 소유하고있는 target 의 Id를 반환합니다.
 	 * 만약, feedback의 Id를 찾을 수 없다면, Optional.empty() 를 반환합니다.
 	 *
-	 * @param feedbackId feedback의 id
-	 * @return 있다면, feedbackId를 소유하고있는 target의 Id
+	 * @param feedbackId feedback 의 id
+	 * @return 있다면, feedbackId 를 소유하고있는 target 의 Id
 	 */
 	Optional<Long> findTargetIdByFeedbackId(Long feedbackId);
+
+	/**
+	 * formQuestionFeedbackId 를 인자로 받아, 해당 surveyId를 소유하고있는 target 의 id를 반환합니다.
+	 * 만약, formQuestionFeedbackId 를 찾을 수 없다면, Optional.empty() 를 반환합니다.
+	 *
+	 * @param formQuestionFeedbackId formQuestionFeedback 의 id
+	 * @return formQuestionFeedbackId를 소유하고있는 target 의 id
+	 */
+	Optional<Long> findTargetIdByFormQuestionFeedbackId(Long formQuestionFeedbackId);
 
 }

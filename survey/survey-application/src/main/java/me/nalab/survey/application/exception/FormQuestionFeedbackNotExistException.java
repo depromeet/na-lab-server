@@ -8,7 +8,7 @@ public class FormQuestionFeedbackNotExistException extends RuntimeException {
 	private final Long formQuestionFeedbackId;
 
 	public FormQuestionFeedbackNotExistException(Long formQuestionFeedbackId) {
-		super("Cannot found any formQuestionFeedback id \"" + formQuestionFeedbackId);
+		super("Cannot found any formQuestionFeedback id \"" + formQuestionFeedbackId + "\"");
 		this.formQuestionFeedbackId = formQuestionFeedbackId;
 	}
 
