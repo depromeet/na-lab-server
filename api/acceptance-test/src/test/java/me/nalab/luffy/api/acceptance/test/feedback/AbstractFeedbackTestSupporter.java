@@ -86,6 +86,16 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 		);
 	}
 
+	protected ResultActions replaceBookmark(String token, String form_question_feedback_id) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.patch("/v1/feedbacks/bookmarks")
+			.queryParam("form-question-feedback-id", form_question_feedback_id)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;

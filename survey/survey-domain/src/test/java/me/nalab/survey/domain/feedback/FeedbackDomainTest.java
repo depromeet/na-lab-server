@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.function.LongSupplier;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -180,6 +181,23 @@ class FeedbackDomainTest {
 
 		// then
 		assertIsSorted(feedbackList);
+	}
+
+	@Test
+	@DisplayName("formQuestionFeedback의 bookmarked상태가 true일때, replaceBookmark가 호출되면, 상태가 변경된다.")
+	void replaceBookmark_change_bookmark_status() {
+		// given
+		FormQuestionFeedbackable formQuestionFeedbackable = ShortFormQuestionFeedback.builder()
+			.bookmark(Bookmark.builder()
+					.bookmarkedAt(Instant.now())
+					.build())
+			.build();
+
+		// when
+		formQuestionFeedbackable.replaceBookmark();
+
+		// then
+		Assertions.assertTrue(formQuestionFeedbackable.getBookmark().isBookmarked());
 	}
 
 	private void assertIsSorted(List<Feedback> feedbackList) {
