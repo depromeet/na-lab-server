@@ -4,6 +4,7 @@ import java.util.function.LongSupplier;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import me.nalab.survey.domain.exception.IdAlreadyGeneratedException;
@@ -18,12 +19,9 @@ public abstract class FormQuestionFeedbackable implements IdGeneratable, Questio
 
 	private Long id;
 	private Long questionId;
+	@Setter
 	private boolean isRead;
 	private Bookmark bookmark;
-
-	public void setRead(boolean read) {
-		isRead = read;
-	}
 
 	public void replaceBookmark() {
 		bookmark.replaceIsBookmarked();
