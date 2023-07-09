@@ -24,4 +24,8 @@ public class TargetIdFindAdaptor implements TargetIdFindPort {
 		return targetIdFindJpaRepository.findTargetIdByFeedbackId(feedbackId);
 	}
 
+	@Override
+	public Optional<Long> findTargetIdByFormQuestionFeedbackId(Long formQuestionFeedbackId) {
+		return targetIdFindJpaRepository.findTargetIdByFormQuestionFeedbackId(formQuestionFeedbackId);
+	}
 }
