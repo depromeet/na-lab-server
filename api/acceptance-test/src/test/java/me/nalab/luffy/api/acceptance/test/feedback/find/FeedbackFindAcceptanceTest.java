@@ -1,8 +1,7 @@
 package me.nalab.luffy.api.acceptance.test.feedback.find;
 
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackFound;
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsFeedbackNotFound;
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.getFeedbackCreateRequest;
+import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.*;
+import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.*;
 
 import java.time.Instant;
 import java.util.Map;

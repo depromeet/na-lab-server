@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import me.nalab.survey.application.common.feedback.dto.BookmarkDto;
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.dto.ReviewerDto;
@@ -17,6 +18,7 @@ import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
 import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
 import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackResponse;
+import me.nalab.survey.web.adaptor.findfeedback.response.feedback.BookmarkResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ChoiceFeedbackResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ReviewerResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ShortFeedbackResponse;
@@ -34,7 +36,7 @@ final class ResponseMapper {
 		return QuestionFeedbackResponse.builder()
 			.abstractSurveyResponse(surveyDto.getFormQuestionDtoableList().stream().map(
 				f -> {
-					if(f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
+					if (f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
 						return toChoiceSurveyResponse((ChoiceFormQuestionDto)f, feedbackDtoList);
 					}
 					return toShortSurveyResponse((ShortFormQuestionDto)f, feedbackDtoList);
@@ -85,10 +87,12 @@ final class ResponseMapper {
 				choiceFeedbackResponseList.add(
 					ChoiceFeedbackResponse.builder()
 						.id(String.valueOf(feedbackDto.getId()))
+						.formQuestionFeedbackId(String.valueOf(cq.getId()))
 						.choiceIdSet(selectedChoiceIdSet)
 						.createdAt(ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul"))
 							.toLocalDateTime())
-						.read(feedbackDto.isRead())
+						.read(cq.isRead())
+						.bookmarkResponse(toBookmarkResponse(cq.getBookmarkDto()))
 						.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 						.build()
 				);
@@ -129,13 +133,23 @@ final class ResponseMapper {
 			.forEach(sq -> shortFeedbackResponseList.add(
 				ShortFeedbackResponse.builder()
 					.id(String.valueOf(feedbackDto.getId()))
+					.formQuestionFeedbackId(String.valueOf(sq.getId()))
 					.replyList(((ShortFormQuestionFeedbackDto)sq).getReplyList())
 					.createdAt(
 						ZonedDateTime.ofInstant(feedbackDto.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
-					.read(feedbackDto.isRead())
+					.read(sq.isRead())
+					.bookmarkResponse(toBookmarkResponse(sq.getBookmarkDto()))
 					.reviewerResponse(toReviewerResponse(feedbackDto.getReviewerDto()))
 					.build()
 			));
+	}
+
+	private static BookmarkResponse toBookmarkResponse(BookmarkDto bookmarkDto) {
+		return BookmarkResponse.builder()
+			.isBookmarked(bookmarkDto.isBookmarked())
+			.bookmarkedAt(
+				ZonedDateTime.ofInstant(bookmarkDto.getBookmarkedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
+			.build();
 	}
 
 }
