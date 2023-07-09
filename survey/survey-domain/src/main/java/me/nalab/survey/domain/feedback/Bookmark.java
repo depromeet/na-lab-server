@@ -18,9 +18,6 @@ public class Bookmark {
 
 	public void replaceIsBookmarked() {
 		this.isBookmarked = !isBookmarked;
-	}
-
-	public void updateBookmarkedAt() {
 		this.bookmarkedAt = Instant.now();
 	}
 

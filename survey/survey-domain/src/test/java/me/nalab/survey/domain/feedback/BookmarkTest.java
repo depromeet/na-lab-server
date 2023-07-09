@@ -12,23 +12,19 @@ class BookmarkTest {
 	void bookmark_replacedIsBookmarked_test() {
 
 		boolean initialIsBookmarked = false;
-		Bookmark bookmark = Bookmark.builder().isBookmarked(initialIsBookmarked).bookmarkedAt(Instant.now()).build();
+		Instant initialBookmarkedAt = Instant.now();
 
+		Bookmark bookmark = Bookmark.builder()
+			.isBookmarked(initialIsBookmarked)
+			.bookmarkedAt(initialBookmarkedAt)
+			.build();
 		bookmark.replaceIsBookmarked();
 
 		boolean updatedIsBookmarked = bookmark.isBookmarked();
-		assertEquals(updatedIsBookmarked, !initialIsBookmarked);
-	}
-
-	@Test
-	void bookmark_updateBookmarkedAt_test() {
-
-		Instant initialBookmarkedAt = Instant.now();
-		Bookmark bookmark = Bookmark.builder().isBookmarked(false).bookmarkedAt(initialBookmarkedAt).build();
-
-		bookmark.updateBookmarkedAt();
-
 		Instant updatedBookmarkedAt = bookmark.getBookmarkedAt();
-		assertNotEquals(initialBookmarkedAt, updatedBookmarkedAt);
+
+		assertEquals(updatedIsBookmarked, !initialIsBookmarked);
+		assertNotEquals(updatedBookmarkedAt, initialBookmarkedAt);
 	}
+
 }

@@ -23,7 +23,7 @@ public class ReplaceBookmarkService implements BookmarkReplaceUseCase {
 		FormQuestionFeedbackable formQuestionFeedback = formQuestionFeedbackFindPort.findFormQuestionFeedbackById(
 				formQuestionFeedbackId)
 			.orElseThrow(() -> new FormQuestionFeedbackNotExistException(formQuestionFeedbackId));
-		formQuestionFeedback.switchBookmark();
+		formQuestionFeedback.replaceBookmark();
 		formQuestionFeedbackUpdatePort.updateFormQuestionFeedback(formQuestionFeedback);
 	}
 }
