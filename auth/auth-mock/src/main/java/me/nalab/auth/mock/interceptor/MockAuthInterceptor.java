@@ -10,6 +10,10 @@ import me.nalab.auth.mock.api.MockUserRegisterEvent;
 
 public class MockAuthInterceptor implements HandlerInterceptor {
 
+	private static final String[][] EXCLUDED_URI_LIST = new String[][] {
+			{"POST", "/v1/feedbacks"},
+			{"GET", "/v1/feedbacks/bookmarks"},
+	};
 	private String expectedToken = null;
 	private Long expectedId = null;
 
@@ -24,8 +28,16 @@ public class MockAuthInterceptor implements HandlerInterceptor {
 	}
 
 	private boolean isExcludedURI(HttpServletRequest httpServletRequest) {
-		return httpServletRequest.getMethod().equals("POST") && httpServletRequest.getRequestURI()
-			.contains("/v1/feedbacks");
+		String httpMethod = httpServletRequest.getMethod();
+		String requestURI = httpServletRequest.getRequestURI();
+
+		for (String[] excludedURI: EXCLUDED_URI_LIST) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].contains(requestURI)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void throwIfCannotValidToken(String token) {
