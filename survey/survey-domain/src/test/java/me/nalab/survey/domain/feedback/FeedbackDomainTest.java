@@ -209,6 +209,7 @@ class FeedbackDomainTest {
 		String position) {
 		ChoiceFormQuestionFeedback choiceFormQuestionFeedback = ChoiceFormQuestionFeedback.builder()
 			.questionId(1L)
+			.bookmark(getBookmark(false, Instant.now()))
 			.isRead(false)
 			.selectedChoiceIdSet(Set.of(-1L, -2L, -3L))
 			.build();
@@ -244,6 +245,7 @@ class FeedbackDomainTest {
 	private ShortFormQuestionFeedback getShortFormQuestionFeedback(ShortFormQuestion shortFormQuestion) {
 		return ShortFormQuestionFeedback.builder()
 			.questionId(shortFormQuestion.getId())
+			.bookmark(getBookmark(true, Instant.now()))
 			.isRead(false)
 			.replyList(List.of("hello world", "na lab"))
 			.build();
@@ -252,6 +254,7 @@ class FeedbackDomainTest {
 	private ChoiceFormQuestionFeedback getChoiceFormQuestionFeedback(ChoiceFormQuestion choiceFormQuestion) {
 		return ChoiceFormQuestionFeedback.builder()
 			.questionId(choiceFormQuestion.getId())
+			.bookmark(getBookmark(true, Instant.now()))
 			.isRead(false)
 			.selectedChoiceIdSet(getChoiceIdSet(choiceFormQuestion))
 			.build();
@@ -261,6 +264,13 @@ class FeedbackDomainTest {
 		return choiceFormQuestion.getChoiceList().stream()
 			.map(Choice::getId)
 			.collect(Collectors.toSet());
+	}
+
+	private Bookmark getBookmark(boolean isBookmarked, Instant bookmarkedAt) {
+		return Bookmark.builder()
+			.isBookmarked(isBookmarked)
+			.bookmarkedAt(bookmarkedAt)
+			.build();
 	}
 
 }

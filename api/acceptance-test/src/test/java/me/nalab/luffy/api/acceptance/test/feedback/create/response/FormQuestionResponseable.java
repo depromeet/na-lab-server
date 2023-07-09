@@ -31,5 +31,4 @@ public abstract class FormQuestionResponseable {
 	private String title;
 
 	private Integer order;
-
 }

@@ -9,6 +9,7 @@ import me.nalab.core.data.feedback.FeedbackEntity;
 import me.nalab.core.data.feedback.FormFeedbackEntity;
 import me.nalab.core.data.feedback.ReviewerEntity;
 import me.nalab.core.data.feedback.ShortFormFeedbackEntity;
+import me.nalab.survey.domain.feedback.Bookmark;
 import me.nalab.survey.domain.feedback.ChoiceFormQuestionFeedback;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
@@ -44,7 +45,7 @@ public final class FeedbackEntityMapper {
 
 	private static List<FormQuestionFeedbackable> getFormQuestionFeedbackList(FeedbackEntity feedbackEntity) {
 		return feedbackEntity.getFormFeedbackEntityList().stream().map(q -> {
-			if(q instanceof ShortFormFeedbackEntity) {
+			if (q instanceof ShortFormFeedbackEntity) {
 				return getShortFormQuestionFeedback((ShortFormFeedbackEntity)q);
 			}
 			return getChoiceFormQuestionFeedback((ChoiceFormFeedbackEntity)q);
@@ -57,6 +58,10 @@ public final class FeedbackEntityMapper {
 			.id(shortFormFeedbackEntity.getId())
 			.questionId(shortFormFeedbackEntity.getQuestionId())
 			.isRead(shortFormFeedbackEntity.isRead())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(shortFormFeedbackEntity.isBookmarked())
+				.bookmarkedAt(shortFormFeedbackEntity.getBookmarkedAt())
+				.build())
 			.replyList(shortFormFeedbackEntity.getReplyList())
 			.build();
 	}
@@ -67,6 +72,10 @@ public final class FeedbackEntityMapper {
 			.id(choiceFormFeedbackEntity.getId())
 			.questionId(choiceFormFeedbackEntity.getQuestionId())
 			.isRead(choiceFormFeedbackEntity.isRead())
+			.bookmark(Bookmark.builder()
+				.isBookmarked(choiceFormFeedbackEntity.isBookmarked())
+				.bookmarkedAt(choiceFormFeedbackEntity.getBookmarkedAt())
+				.build())
 			.selectedChoiceIdSet(choiceFormFeedbackEntity.getSelectSet())
 			.build();
 	}
@@ -97,7 +106,7 @@ public final class FeedbackEntityMapper {
 	private static List<FormFeedbackEntity> getFormFeedbackEntityList(Feedback feedback) {
 		return feedback.getFormQuestionFeedbackableList().stream()
 			.map(f -> {
-				if(f instanceof ShortFormQuestionFeedback) {
+				if (f instanceof ShortFormQuestionFeedback) {
 					return getShortFormFeedbackEntity((ShortFormQuestionFeedback)f);
 				}
 				return getChoiceFormFeedbackEntity((ChoiceFormQuestionFeedback)f);
@@ -110,6 +119,8 @@ public final class FeedbackEntityMapper {
 			.id(shortFormQuestionFeedback.getId())
 			.questionId(shortFormQuestionFeedback.getQuestionId())
 			.isRead(shortFormQuestionFeedback.isRead())
+			.isBookmarked(shortFormQuestionFeedback.getBookmark().isBookmarked())
+			.bookmarkedAt(shortFormQuestionFeedback.getBookmark().getBookmarkedAt())
 			.replyList(shortFormQuestionFeedback.getReplyList())
 			.build();
 	}
@@ -120,6 +131,8 @@ public final class FeedbackEntityMapper {
 			.id(choiceFormQuestionFeedback.getId())
 			.questionId(choiceFormQuestionFeedback.getQuestionId())
 			.isRead(choiceFormQuestionFeedback.isRead())
+			.isBookmarked(choiceFormQuestionFeedback.getBookmark().isBookmarked())
+			.bookmarkedAt(choiceFormQuestionFeedback.getBookmark().getBookmarkedAt())
 			.selectSet(choiceFormQuestionFeedback.getSelectedChoiceIdSet())
 			.build();
 	}

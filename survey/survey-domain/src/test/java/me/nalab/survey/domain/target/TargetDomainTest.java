@@ -61,6 +61,7 @@ class TargetDomainTest extends AbstractTargetSources {
 		LongSupplier longSupplier = () -> 119L;
 		Target target = Target.builder()
 			.nickname("xb")
+			.position("designer")
 			.build();
 
 		// when
@@ -77,6 +78,7 @@ class TargetDomainTest extends AbstractTargetSources {
 		LongSupplier longSupplier = () -> 119L;
 		Target target = Target.builder()
 			.nickname("xb")
+			.position("developer")
 			.build();
 
 		// when
