@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -44,4 +46,16 @@ public abstract class FormFeedbackEntity {
 
 	@Column(name = "bookmarked_at", columnDefinition = "TIMESTAMP(6)", nullable = false)
 	protected Instant bookmarkedAt;
+
+	@PrePersist
+	void prePersist() {
+		Instant now = Instant.now();
+		bookmarkedAt = bookmarkedAt != null ? bookmarkedAt : now;
+	}
+
+	@PreUpdate
+	void preUpdate() {
+		Instant now = Instant.now();
+		bookmarkedAt = now;
+	}
 }

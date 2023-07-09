@@ -9,11 +9,16 @@ import lombok.ToString;
 
 @Builder
 @Getter
-@EqualsAndHashCode
 @ToString
+@EqualsAndHashCode
 public class Bookmark {
 
-	private final boolean isBookmarked;
-	private final Instant bookmarkedAt;
+	private boolean isBookmarked;
+	private Instant bookmarkedAt;
+
+	public void replaceIsBookmarked() {
+		this.isBookmarked = !isBookmarked;
+		this.bookmarkedAt = Instant.now();
+	}
 
 }
