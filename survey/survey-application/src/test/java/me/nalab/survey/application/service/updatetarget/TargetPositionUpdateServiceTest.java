@@ -57,11 +57,12 @@ class TargetPositionUpdateServiceTest {
 			.id(targetId)
 			.nickname("sujin")
 			.build();
+		String position = target.getPosition();
 
 		when(targetFindPort.findTarget(targetId)).thenReturn(Optional.empty());
 
 		assertThrows(TargetDoesNotExistException.class,
-			() -> targetPositionUpdateService.updateTargetPosition(targetId, target.getPosition())
+			() -> targetPositionUpdateService.updateTargetPosition(targetId, position)
 		);
 
 	}
