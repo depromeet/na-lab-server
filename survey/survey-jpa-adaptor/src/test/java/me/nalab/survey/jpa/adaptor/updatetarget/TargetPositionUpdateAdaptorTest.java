@@ -54,11 +54,34 @@ class TargetPositionUpdateAdaptorTest {
 
 		String updatePosition = "developer";
 		target.setPosition(updatePosition);
-		targetPositionUpdateAdaptor.updateTargetPosition(target);
-
+		boolean updatedResult = targetPositionUpdateAdaptor.updateTargetPosition(target);
 		Optional<TargetEntity> resultTargetEntity = testTargetPositionUpdateRepository.findById(targetId);
+
+		assertTrue(updatedResult);
 		assertTrue(resultTargetEntity.isPresent());
 		assertEquals(updatePosition, resultTargetEntity.get().getPosition());
+
+	}
+
+	@Test
+	@DisplayName("타겟 position 수정 실패 테스트")
+	void UPDATE_TARGET_POSITION_FAIL() {
+
+		Long targetId = 1L;
+		TargetEntity targetEntity = TargetEntity.builder()
+			.id(targetId)
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
+			.nickname("sujin")
+			.position("designer")
+			.build();
+		Target target = TargetEntityMapper.toTarget(targetEntity);
+
+		String updatePosition = "developer";
+		target.setPosition(updatePosition);
+		boolean updatedResult = targetPositionUpdateAdaptor.updateTargetPosition(target);
+
+		assertFalse(updatedResult);
 
 	}
 
