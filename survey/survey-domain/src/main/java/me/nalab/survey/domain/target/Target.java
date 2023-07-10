@@ -20,14 +20,17 @@ public class Target implements IdGeneratable {
 	private Long id;
 	private final List<Survey> surveyList;
 	private final String nickname;
-	private final String position;
+	private String position;
 
 	@Override
 	public void withId(LongSupplier idSupplier) {
-		if(id != null) {
+		if (id != null) {
 			throw new IdAlreadyGeneratedException(this);
 		}
 		id = idSupplier.getAsLong();
 	}
 
+	public void setPosition(String position) {
+		this.position = position;
+	}
 }
