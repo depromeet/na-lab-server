@@ -10,17 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import me.nalab.survey.application.TestIdGenerator;
 import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import me.nalab.survey.application.port.out.persistence.target.update.TargetFindPort;
 import me.nalab.survey.application.port.out.persistence.target.update.TargetPositionUpdatePort;
 import me.nalab.survey.domain.target.Target;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {TestIdGenerator.class})
 class TargetPositionUpdateServiceTest {
 
 	private TargetPositionUpdateService targetPositionUpdateService;
