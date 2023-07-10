@@ -23,11 +23,13 @@ public class TargetPositionUpdateAdaptor implements TargetPositionUpdatePort {
 	}
 
 	@Override
-	public void updateTargetPosition(Target target) {
+	public boolean updateTargetPosition(Target target) {
 		Optional<TargetEntity> targetEntity = targetPositionUpdateRepository.findById(target.getId());
-		if (targetEntity.isEmpty())
-			return;
+		if (targetEntity.isEmpty()) {
+			return false;
+		}
 		targetEntity.get().setPosition(target.getPosition());
+		return true;
 	}
 
 }
