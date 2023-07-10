@@ -11,9 +11,8 @@ public interface TargetPositionUpdatePort {
 
 	/**
 	 * 이 메서드는 target의 position을 업데이트 합니다
-	 * @param targetId 업데이트할 target의 id
 	 * @param target 업데이트할 target
 	 */
-	void updateTargetPosition(Long targetId, Target target);
+	void updateTargetPosition(Target target);
 
 }
