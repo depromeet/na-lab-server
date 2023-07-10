@@ -24,7 +24,11 @@ public class TargetPositionUpdateService implements TargetPositionUpdateUseCase 
 			() -> new TargetDoesNotExistException(targetId)
 		);
 		target.setPosition(position);
-		targetPositionUpdatePort.updateTargetPosition(target);
+
+		boolean updatedResult = targetPositionUpdatePort.updateTargetPosition(target);
+		if (!updatedResult) {
+			throw new TargetDoesNotExistException(target.getId());
+		}
 	}
 
 }
