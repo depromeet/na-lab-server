@@ -10,9 +10,11 @@ import me.nalab.survey.domain.target.Target;
 public interface TargetPositionUpdatePort {
 
 	/**
+	 *
 	 * 이 메서드는 target의 position을 업데이트 합니다
 	 * @param target 업데이트할 target
+	 * @return
 	 */
-	void updateTargetPosition(Target target);
+	boolean updateTargetPosition(Target target);
 
 }
