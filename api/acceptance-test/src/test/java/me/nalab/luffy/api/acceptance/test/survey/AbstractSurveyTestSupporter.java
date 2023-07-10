@@ -1,6 +1,7 @@
 package me.nalab.luffy.api.acceptance.test.survey;
 
-import me.nalab.luffy.api.acceptance.test.DatabaseCleaner;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -9,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Set;
+import me.nalab.luffy.api.acceptance.test.DatabaseCleaner;
 
 public abstract class AbstractSurveyTestSupporter {
 
@@ -39,6 +40,14 @@ public abstract class AbstractSurveyTestSupporter {
 	protected ResultActions findSurvey(Long survey_Id) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.get(API_VERSION + "/surveys" + "/" + survey_Id)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+		);
+	}
+
+	protected ResultActions findTargetBySurveyId(Long survey_Id) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get(API_VERSION + "/users?survey-id=" + survey_Id)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 		);
