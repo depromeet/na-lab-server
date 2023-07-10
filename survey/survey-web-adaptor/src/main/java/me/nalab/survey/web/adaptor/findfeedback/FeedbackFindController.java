@@ -55,7 +55,7 @@ public class FeedbackFindController {
 	public QuestionFeedbackResponse findAllBookmarked(@RequestParam("survey-id") Long surveyId) {
 		SurveyDto surveyDto = surveyFindUseCase.findSurvey(surveyId);
 		List<FeedbackDto> feedbackDto = bookmarkedFeedbackFindUseCase.findAllBySurveyId(surveyId);
-		return ResponseMapper.toQuestionFeedbackResponse(surveyDto, feedbackDto);
+		return ResponseMapper.toBookmarkedQuestionFeedbackResponse(surveyDto, feedbackDto);
 	}
 
 }

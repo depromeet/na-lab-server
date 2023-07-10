@@ -23,9 +23,10 @@ public class BookmarkedFeedbackFindService implements BookmarkedFeedbackFindUseC
 		List<Feedback> allFeedbacks = feedbackFindPort.findAllFeedbackBySurveyId(surveyId);
 
 		return allFeedbacks.stream()
-						   .filter(fb -> fb.getAllQuestionFeedbackValidable()
-										   .stream()
-										   .anyMatch(FormQuestionFeedbackable::isBookmarked))
+						   .filter(fb -> {
+							   List<FormQuestionFeedbackable> allQuestionFeedbackValidable = fb.getAllQuestionFeedbackValidable();
+							   return !allQuestionFeedbackValidable.isEmpty() && allQuestionFeedbackValidable.stream().anyMatch(FormQuestionFeedbackable::isBookmarked);
+						   })
 						   .map(FeedbackDtoMapper::toDtoWithBookmarkedForm)
 						   .collect(Collectors.toList());
 	}

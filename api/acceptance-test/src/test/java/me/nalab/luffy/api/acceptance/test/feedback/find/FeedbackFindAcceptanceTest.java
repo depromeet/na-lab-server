@@ -10,8 +10,7 @@ import me.nalab.luffy.api.acceptance.test.feedback.AbstractFeedbackTestSupporter
 import me.nalab.luffy.api.acceptance.test.feedback.create.request.FeedbackCreateRequest;
 import me.nalab.luffy.api.acceptance.test.feedback.create.response.SurveyFindResponse;
 import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
-import me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackResponse;
-import me.nalab.survey.web.adaptor.findfeedback.response.survey.ShortSurveyResponse;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,38 +128,30 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	}
 
 	private Long setUpSurveyAndFeedbackAndBookmark() throws Exception {
+		// 유저 생성
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
 		String token = "mock token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 																	.expectedId(targetId)
 																	.expectedToken(token)
 																	.build());
-
+		// 서베이 생성
 		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
 		SurveyFindResponse surveyFindResponse = getSurveyFindResponse(surveyId);
 		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
+		// 피드백 생성
 		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
 
+		// 피드백 조회
 		String stringResponse = findFeedback(token, surveyId).andReturn()
 															 .getResponse()
 															 .getContentAsString();
-		QuestionFeedbackResponse response = OBJECT_MAPPER.readValue(stringResponse, QuestionFeedbackResponse.class);
-		String feedbackId = response.getAbstractSurveyResponse()
-				.stream()
-				.filter(abstractSurveyResponse -> {
-					if (abstractSurveyResponse instanceof ShortSurveyResponse) {
-						ShortSurveyResponse shortSurveyResponse = (ShortSurveyResponse) abstractSurveyResponse;
-						return !shortSurveyResponse.getShortFeedbackResponseList().isEmpty();
-					}
-					return false;
-				})
-				.map(abstractSurveyResponse -> {
-					ShortSurveyResponse shortSurveyResponse = (ShortSurveyResponse) abstractSurveyResponse;
-					return shortSurveyResponse.getShortFeedbackResponseList().get(0).getId();
-				})
-				.findFirst()
-				.orElseThrow();
-		//FIXME 피드백 id로 피드백 북마크하기
+		JSONObject jsonObject = new JSONObject(stringResponse);
+		String feedbackId = jsonObject.getJSONArray("question_feedback").getJSONObject(2).getJSONArray("feedbacks")
+						 .getJSONObject(0).getString("form_question_feedback_id");
+		// 북마크 처리
+		replaceBookmark(token, feedbackId);
+
 		return surveyId;
 	}
 
