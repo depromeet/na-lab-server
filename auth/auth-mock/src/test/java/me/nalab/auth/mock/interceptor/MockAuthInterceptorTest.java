@@ -1,8 +1,7 @@
 package me.nalab.auth.mock.interceptor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.params.provider.Arguments.of;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.stream.Stream;
 
@@ -64,7 +63,7 @@ class MockAuthInterceptorTest extends AbstractMockAuthTest {
 	static Stream<Arguments> successSources() {
 		return Stream.of(
 			of(HttpMethod.POST, "/v1/surveys", "token1", 1L)
-			, of(HttpMethod.GET, "/v1/users", "token2", 2L)
+			, of(HttpMethod.POST, "/v1/surveys", "token1", 2L)
 			, of(HttpMethod.GET, "/v1/surveys-id", "token3", 3L)
 			, of(HttpMethod.GET, "/v1/questions?survey-id=4", "token4", 4L)
 			, of(HttpMethod.GET, "/v1/feedbacks?survey-id=5", "token5", 5L)
