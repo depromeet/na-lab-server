@@ -11,7 +11,9 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 
 	private static final String[][] EXCLUDED_URI_LIST = new String[][] {
 		{"POST", "/v1/feedbacks"},
-		{"GET", "/v1/feedbacks/bookmarks"},
+		{"GET", "/v1/feedbacks/bookmarks"}
+	};
+	private static final String[][] EXCLUDED_URI_WITH_QUERY_STRING_LIST = new String[][] {
 		{"GET", "/v1/users"}
 	};
 	private final TargetIdGetPort targetIdGetPort;
@@ -41,9 +43,17 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 	private boolean isExcludedURI(HttpServletRequest httpServletRequest) {
 		String httpMethod = httpServletRequest.getMethod();
 		String requestURI = httpServletRequest.getRequestURI();
+		String queryString = httpServletRequest.getQueryString();
 
 		for (String[] excludedURI : EXCLUDED_URI_LIST) {
 			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)) {
+				return true;
+			}
+		}
+
+		for (String[] excludedURI : EXCLUDED_URI_WITH_QUERY_STRING_LIST) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)
+				&& queryString.length() > 0) {
 				return true;
 			}
 		}
