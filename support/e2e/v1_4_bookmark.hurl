@@ -124,7 +124,7 @@ feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id"
 
 ##########
 
-PATCH /v1/feedbacks/bookmarks # 북마크를 진행한다.
+PATCH http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크를 진행한다.
 Authorization: {{ token_type }} {{ auth_token }}
 
 [QueryStringParams]
@@ -132,7 +132,7 @@ form-question-feedback-id: {{form_question_feedback_id}}
 
 ##########
 
-GET /v1/feedbacks/bookmarks # 북마크된 피드백을 조회하면, 북마크된 피드백이 1개 조회된다.
+GET http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크된 피드백을 조회하면, 북마크된 피드백이 1개 조회된다.
 
 [QueryStringParams]
 survey-id: {{survey_id}}
@@ -145,7 +145,8 @@ jsonpath "$.question_feedback" count == 1
 jsonpath "$.question_feedback.[0].feedbacks.[0].bookmark.is_bookmarked" == true
 
 ##########
-PATCH /v1/feedbacks/bookmarks # 북마크를 취소한다.
+
+PATCH http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크를 취소한다.
 Authorization: {{ token_type }} {{ auth_token }}
 
 [QueryStringParams]
@@ -153,7 +154,7 @@ form-question-feedback-id: {{form_question_feedback_id}}
 
 ##########
 
-GET /v1/feedbacks/bookmarks # 북마크된 피드백을 조회하면, 북마크된 피드백이 0개 조회된다.
+GET http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크된 피드백을 조회하면, 북마크된 피드백이 0개 조회된다.
 
 [QueryStringParams]
 survey-id: {{survey_id}}
