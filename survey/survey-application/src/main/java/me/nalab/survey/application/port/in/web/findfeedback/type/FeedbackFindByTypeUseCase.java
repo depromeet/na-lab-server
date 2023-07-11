@@ -27,6 +27,12 @@ public interface FeedbackFindByTypeUseCase {
 	 */
 	List<FeedbackDto> findFeedbackBySurveyId(Long surveyId);
 
+	/**
+	 *
+	 * @param surveyDto survey의 DTO type
+	 * @param formType
+	 * @return 질문 폼의 질문 중 formType에 해당하는 FormQuestionDtoable을 List의 형태로 반환합니다.
+	 */
 	List<FormQuestionDtoable> formQuestionMatchingWithType(SurveyDto surveyDto, String formType);
 
 }
