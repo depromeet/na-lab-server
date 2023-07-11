@@ -26,7 +26,7 @@ public class TargetFindBySurveyIdService implements TargetFindBySurveyIdUseCase 
 		Long targetId = targetIdFindPort.findTargetIdBySurveyId(surveyId).orElseThrow(() -> {
 			throw new SurveyDoesNotHasTargetException(surveyId);
 		});
-		Target target = targetFindPort.findTarget(targetId).orElseThrow(() -> {
+		Target target = targetFindPort.findTargetById(targetId).orElseThrow(() -> {
 			throw new TargetDoesNotExistException(targetId);
 		});
 		return TargetDtoMapper.toTargetDto(target);

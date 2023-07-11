@@ -48,7 +48,7 @@ class TargetFindBySurveyIdServiceTest {
 			.build();
 
 		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
-		when(targetFindPort.findTarget(targetId)).thenReturn(Optional.of(target));
+		when(targetFindPort.findTargetById(targetId)).thenReturn(Optional.of(target));
 		TargetDto targetDto = targetFindBySurveyIdService.findTargetBySurveyId(surveyId);
 
 		assertEquals(TargetDtoMapper.toTarget(targetDto), target);
@@ -65,7 +65,7 @@ class TargetFindBySurveyIdServiceTest {
 			.build();
 
 		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.empty());
-		when(targetFindPort.findTarget(targetId)).thenReturn(Optional.of(target));
+		when(targetFindPort.findTargetById(targetId)).thenReturn(Optional.of(target));
 
 		assertThrows(SurveyDoesNotHasTargetException.class,
 			() -> targetFindBySurveyIdService.findTargetBySurveyId(surveyId));
@@ -83,7 +83,7 @@ class TargetFindBySurveyIdServiceTest {
 			.build();
 
 		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
-		when(targetFindPort.findTarget(targetId)).thenReturn(Optional.empty());
+		when(targetFindPort.findTargetById(targetId)).thenReturn(Optional.empty());
 
 		assertThrows(TargetDoesNotExistException.class,
 			() -> targetFindBySurveyIdService.findTargetBySurveyId(surveyId));
