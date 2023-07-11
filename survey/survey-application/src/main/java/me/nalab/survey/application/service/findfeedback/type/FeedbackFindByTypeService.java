@@ -1,6 +1,8 @@
 package me.nalab.survey.application.service.findfeedback.type;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -9,33 +11,40 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.feedback.mapper.FeedbackDtoMapper;
+import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
 import me.nalab.survey.application.common.survey.dto.FormQuestionDtoable;
+import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
+import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
-import me.nalab.survey.application.exception.SurveyDoesNotHasFormTypeException;
+import me.nalab.survey.application.exception.SurveyDoesNotExistException;
+import me.nalab.survey.application.exception.SurveyDoesNotHasTargetException;
 import me.nalab.survey.application.port.in.web.findfeedback.type.FeedbackFindByTypeUseCase;
 import me.nalab.survey.application.port.out.persistence.findfeedback.type.FeedbackFindPort;
-import me.nalab.survey.application.port.out.persistence.findfeedback.type.FormQuestionFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.type.SurveyFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.type.TargetIdFindPort;
 import me.nalab.survey.domain.feedback.Feedback;
-import me.nalab.survey.domain.survey.FormQuestionable;
+import me.nalab.survey.domain.survey.Survey;
 
 @Service
 @RequiredArgsConstructor
 public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 
-	private final FormQuestionFindPort formQuestionFindPort;
+	private final SurveyFindPort surveyFindPort;
 	private final FeedbackFindPort feedbackFindPort;
+	private final TargetIdFindPort targetIdFindPort;
 
 	@Transactional
 	@Override
-	public List<FormQuestionDtoable> findFormQuestionBySurveyIdAndType(Long surveyId, String formType) {
-		List<FormQuestionable> formQuestionableList = formQuestionFindPort.findFormQuestionableBySurveyIdAndType(
-			surveyId, formType);
-		if (formQuestionableList.isEmpty()) {
-			throw new SurveyDoesNotHasFormTypeException(surveyId, formType);
+	public SurveyDto findSurvey(Long surveyId) {
+		Optional<Survey> survey = surveyFindPort.findSurveyById(surveyId);
+		if (survey.isEmpty()) {
+			throw new SurveyDoesNotExistException(surveyId);
 		}
-		return formQuestionableList.stream()
-			.map(SurveyDtoMapper::getFormQuestionDtoable)
-			.collect(Collectors.toList());
+		Optional<Long> targetId = targetIdFindPort.findTargetIdBySurveyId(surveyId);
+		if (targetId.isEmpty()) {
+			throw new SurveyDoesNotHasTargetException(surveyId);
+		}
+		return SurveyDtoMapper.toSurveyDto(targetId.get(), survey.get());
 	}
 
 	@Transactional
@@ -45,6 +54,30 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 		return feedbackList.stream()
 			.map(FeedbackDtoMapper::toDto)
 			.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<FormQuestionDtoable> formQuestionMatchingWithType(SurveyDto surveyDto, String formType) {
+		List<FormQuestionDtoable> formQuestionDtoableList = new ArrayList<>();
+		surveyDto.getFormQuestionDtoableList()
+			.forEach(q ->
+				validateFormType(formType, formQuestionDtoableList, q)
+			);
+		return formQuestionDtoableList;
+	}
+
+	private static void validateFormType(String formType, List<FormQuestionDtoable> formQuestionDtoableList,
+		FormQuestionDtoable q) {
+		if (q instanceof ChoiceFormQuestionDto && ((ChoiceFormQuestionDto)q).getChoiceFormQuestionDtoType()
+			.toString()
+			.toLowerCase()
+			.equals(formType)
+			|| q instanceof ShortFormQuestionDto && ((ShortFormQuestionDto)q).getShortFormQuestionDtoType()
+			.toString()
+			.toLowerCase()
+			.equals(formType)) {
+			formQuestionDtoableList.add(q);
+		}
 	}
 
 }
