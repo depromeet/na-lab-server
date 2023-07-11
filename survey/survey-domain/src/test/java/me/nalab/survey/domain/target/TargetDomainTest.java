@@ -1,9 +1,6 @@
 package me.nalab.survey.domain.target;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -86,6 +83,22 @@ class TargetDomainTest extends AbstractTargetSources {
 
 		// then
 		assertThrows(IdAlreadyGeneratedException.class, () -> target.withId(longSupplier));
+	}
+
+	@Test
+	@DisplayName("Target position 수정 테스트")
+	void TARGET_POSITION_UPDATE_TEST() {
+
+		Target target = Target.builder()
+			.nickname("target")
+			.position("designer")
+			.build();
+		String newPosition = "developer";
+
+		target.setPosition(newPosition);
+
+		assertEquals(newPosition, target.getPosition());
+
 	}
 
 }
