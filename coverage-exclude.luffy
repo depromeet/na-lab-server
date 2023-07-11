@@ -52,5 +52,6 @@ exclude me/nalab/core/secure/cors/CorsConfig
 exclude me/nalab/core/secure/xss/config/XssConfig
 exclude me/nalab/core/secure/xss/json/JsonXssFilterException
 exclude me/nalab/survey/web/adaptor/bookmark/BookmarkReplaceController
+exclude me/nalab/survey/web/adaptor/updatetarget/*
 exclude me/nalab/survey/web/adaptor/findtarget/*
 exclude me/nalab/auth/mock/interceptor/*
