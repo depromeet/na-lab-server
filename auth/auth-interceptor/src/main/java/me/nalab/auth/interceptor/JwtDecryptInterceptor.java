@@ -9,6 +9,13 @@ import me.nalab.auth.application.port.in.web.TargetIdGetPort;
 
 public class JwtDecryptInterceptor implements HandlerInterceptor {
 
+	private static final String[][] EXCLUDED_URI_LIST = new String[][] {
+		{"POST", "/v1/feedbacks"},
+		{"GET", "/v1/feedbacks/bookmarks"}
+	};
+	private static final String[][] EXCLUDED_URI_WITH_QUERY_STRING_LIST = new String[][] {
+		{"GET", "/v1/users"}
+	};
 	private final TargetIdGetPort targetIdGetPort;
 
 	JwtDecryptInterceptor(TargetIdGetPort targetIdGetPort) {
@@ -17,10 +24,10 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		if(isPreflight(request)) {
+		if (isPreflight(request)) {
 			return true;
 		}
-		if(!isExcludedURI(request)) {
+		if (!isExcludedURI(request)) {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
 			Long targetId = targetIdGetPort.getTargetId(token.split(" ")[1]);
@@ -34,12 +41,28 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 	}
 
 	private boolean isExcludedURI(HttpServletRequest httpServletRequest) {
-		return httpServletRequest.getMethod().equals("POST") && httpServletRequest.getRequestURI()
-			.contains("/v1/feedbacks");
+		String httpMethod = httpServletRequest.getMethod();
+		String requestURI = httpServletRequest.getRequestURI();
+		String queryString = httpServletRequest.getQueryString();
+
+		for (String[] excludedURI : EXCLUDED_URI_LIST) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)) {
+				return true;
+			}
+		}
+
+		for (String[] excludedURI : EXCLUDED_URI_WITH_QUERY_STRING_LIST) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)
+				&& queryString.length() > 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void throwIfCannotValidToken(String token) {
-		if(token == null) {
+		if (token == null) {
 			throw new CannotValidMockTokenException();
 		}
 	}
