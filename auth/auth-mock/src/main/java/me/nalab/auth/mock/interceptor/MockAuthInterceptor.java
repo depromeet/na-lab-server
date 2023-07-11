@@ -10,12 +10,17 @@ import me.nalab.auth.mock.api.MockUserRegisterEvent;
 
 public class MockAuthInterceptor implements HandlerInterceptor {
 
+	private static final String[][] EXCLUDED_URI_LIST = new String[][] {
+		{"POST", "/v1/feedbacks"},
+		{"GET", "/v1/feedbacks/bookmarks"},
+		{"GET", "/v1/users"}
+	};
 	private String expectedToken = null;
 	private Long expectedId = null;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		if(!isExcludedURI(request)) {
+		if (!isExcludedURI(request)) {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
 			request.setAttribute("logined", expectedId);
@@ -24,12 +29,20 @@ public class MockAuthInterceptor implements HandlerInterceptor {
 	}
 
 	private boolean isExcludedURI(HttpServletRequest httpServletRequest) {
-		return httpServletRequest.getMethod().equals("POST") && httpServletRequest.getRequestURI()
-			.contains("/v1/feedbacks");
+		String httpMethod = httpServletRequest.getMethod();
+		String requestURI = httpServletRequest.getRequestURI();
+
+		for (String[] excludedURI : EXCLUDED_URI_LIST) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void throwIfCannotValidToken(String token) {
-		if(expectedToken == null || expectedId == null || !expectedToken.equals(token)) {
+		if (expectedToken == null || expectedId == null || !expectedToken.equals(token)) {
 			throw new CannotValidMockTokenException();
 		}
 	}
