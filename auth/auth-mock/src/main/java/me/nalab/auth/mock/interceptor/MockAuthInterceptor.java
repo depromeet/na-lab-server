@@ -32,7 +32,7 @@ public class MockAuthInterceptor implements HandlerInterceptor {
 		String requestURI = httpServletRequest.getRequestURI();
 
 		for (String[] excludedURI: EXCLUDED_URI_LIST) {
-			if (excludedURI[0].equals(httpMethod) && excludedURI[1].contains(requestURI)) {
+			if (excludedURI[0].equals(httpMethod) && excludedURI[1].equals(requestURI)) {
 				return true;
 			}
 		}
