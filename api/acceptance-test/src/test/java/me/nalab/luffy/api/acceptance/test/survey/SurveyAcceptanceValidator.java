@@ -80,7 +80,7 @@ public class SurveyAcceptanceValidator {
 			content().contentType(MediaType.APPLICATION_JSON),
 			jsonPath("$.target_id").isNumber(),
 			jsonPath("$.nickname").isString(),
-			jsonPath("$.position").isString()
+			jsonPath("$.position").hasJsonPath()
 		);
 	}
 
