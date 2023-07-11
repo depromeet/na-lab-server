@@ -1,7 +1,7 @@
 package me.nalab.survey.application.service.findfeedback.type;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,20 +33,18 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 		if (formQuestionableList.isEmpty()) {
 			throw new SurveyDoesNotHasFormTypeException(surveyId, formType);
 		}
-		List<FormQuestionDtoable> formQuestionDtoableList = new ArrayList<>();
-		formQuestionableList
-			.forEach(q -> formQuestionDtoableList.add(SurveyDtoMapper.getFormQuestionDtoable(q)));
-		return formQuestionDtoableList;
+		return formQuestionableList.stream()
+			.map(SurveyDtoMapper::getFormQuestionDtoable)
+			.collect(Collectors.toList());
 	}
 
 	@Transactional
 	@Override
 	public List<FeedbackDto> findFeedbackBySurveyId(Long surveyId) {
 		List<Feedback> feedbackList = feedbackFindPort.findFeedbackBySurveyId(surveyId);
-		List<FeedbackDto> feedbackDtoList = new ArrayList<>();
-		feedbackList
-			.forEach(q -> feedbackDtoList.add(FeedbackDtoMapper.toDto(q)));
-		return feedbackDtoList;
+		return feedbackList.stream()
+			.map(FeedbackDtoMapper::toDto)
+			.collect(Collectors.toList());
 	}
 
 }
