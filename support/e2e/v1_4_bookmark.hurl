@@ -120,7 +120,7 @@ HTTP 200
 header "Content-type" == "application/json"
 
 [Captures]
-feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id"
+form_question_feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].form_question_feedback_id"
 
 ##########
 
