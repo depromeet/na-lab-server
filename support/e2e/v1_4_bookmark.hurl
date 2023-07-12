@@ -110,7 +110,7 @@ HTTP 201
 ##########
 
 GET http://nalab-server:8080/v1/feedbacks # 북마크를 위해 feedback id 저장
-Authorization: {{ token_type }} {{ access_token }}
+Authorization: {{ token_type }} {{ auth_token }}
 
 [QueryStringParams]
 survey-id: {{ survey_id }}
