@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -86,15 +88,15 @@ class FeedbackFindByTypeServiceTest {
 
 	}
 
-	@Test
-	@DisplayName("formType에 맞는 FormQuestionDtoable 찾기 - formType 이 tendency 일 때")
-	void FIND_ALL_FORMQUESTIONDTOABLE_WITH_FORM_TYPE_TENDENCY() {
+	@ParameterizedTest
+	@ValueSource(strings = {"tendency", "strength", "custom"})
+	@DisplayName("formType에 맞는 FormQuestionDtoable 찾기")
+	void FIND_ALL_FORMQUESTIONDTOABLE_WITH_FORM_TYPE(String formType) {
 
 		SurveyDto surveyDto = createRandomSurveyDto();
 		Survey survey = SurveyDtoMapper.toSurvey(surveyDto);
 		Long surveyId = surveyDto.getId();
 		Long targetId = surveyDto.getTargetId();
-		String formType = "tendency";
 		AtomicInteger expectectedCount = new AtomicInteger(0);
 
 		survey.getFormQuestionableList()
@@ -116,79 +118,7 @@ class FeedbackFindByTypeServiceTest {
 		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
 
 		List<FormQuestionDtoable> formQuestionDtoableList = feedbackFindByTypeService.formQuestionMatchingWithType(
-			surveyDto.getId(), "tendency");
-
-		assertEquals(expectectedCount.get(), formQuestionDtoableList.size());
-
-	}
-
-	@Test
-	@DisplayName("formType에 맞는 FormQuestionDtoable 찾기 - formType 이 custom 일 때")
-	void FIND_ALL_FORMQUESTIONDTOABLE_WITH_FORM_TYPE_CUSTOM() {
-
-		SurveyDto surveyDto = createRandomSurveyDto();
-		Survey survey = SurveyDtoMapper.toSurvey(surveyDto);
-		Long surveyId = surveyDto.getId();
-		Long targetId = surveyDto.getTargetId();
-		String formType = "custom";
-		AtomicInteger expectectedCount = new AtomicInteger(0);
-
-		survey.getFormQuestionableList()
-			.forEach(q -> {
-				if (q instanceof ChoiceFormQuestion && ((ChoiceFormQuestion)q).getChoiceFormQuestionType()
-					.toString()
-					.toLowerCase()
-					.equals(
-						formType))
-					expectectedCount.addAndGet(1);
-				if (q instanceof ShortFormQuestion && ((ShortFormQuestion)q).getShortFormQuestionType()
-					.toString()
-					.toLowerCase()
-					.equals(
-						formType))
-					expectectedCount.getAndIncrement();
-			});
-		when(surveyFindPort.findSurveyById(surveyId)).thenReturn(Optional.of(survey));
-		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
-
-		List<FormQuestionDtoable> formQuestionDtoableList = feedbackFindByTypeService.formQuestionMatchingWithType(
-			surveyDto.getId(), "custom");
-
-		assertEquals(expectectedCount.get(), formQuestionDtoableList.size());
-
-	}
-
-	@Test
-	@DisplayName("formType에 맞는 FormQuestionDtoable 찾기 - formType 이 strength 일 때")
-	void FIND_ALL_FORMQUESTIONDTOABLE_WITH_FORM_TYPE_STRENGTH() {
-
-		SurveyDto surveyDto = createRandomSurveyDto();
-		Survey survey = SurveyDtoMapper.toSurvey(surveyDto);
-		Long surveyId = surveyDto.getId();
-		Long targetId = surveyDto.getTargetId();
-		String formType = "strength";
-		AtomicInteger expectectedCount = new AtomicInteger(0);
-
-		survey.getFormQuestionableList()
-			.forEach(q -> {
-				if (q instanceof ChoiceFormQuestion && ((ChoiceFormQuestion)q).getChoiceFormQuestionType()
-					.toString()
-					.toLowerCase()
-					.equals(
-						formType))
-					expectectedCount.addAndGet(1);
-				if (q instanceof ShortFormQuestion && ((ShortFormQuestion)q).getShortFormQuestionType()
-					.toString()
-					.toLowerCase()
-					.equals(
-						formType))
-					expectectedCount.getAndIncrement();
-			});
-		when(surveyFindPort.findSurveyById(surveyId)).thenReturn(Optional.of(survey));
-		when(targetIdFindPort.findTargetIdBySurveyId(surveyId)).thenReturn(Optional.of(targetId));
-
-		List<FormQuestionDtoable> formQuestionDtoableList = feedbackFindByTypeService.formQuestionMatchingWithType(
-			surveyDto.getId(), "strength");
+			surveyDto.getId(), formType);
 
 		assertEquals(expectectedCount.get(), formQuestionDtoableList.size());
 
