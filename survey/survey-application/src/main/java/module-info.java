@@ -34,6 +34,7 @@ module luffy.survey.application.main {
 
 	exports me.nalab.survey.application.port.out.persistence.findtarget;
 	exports me.nalab.survey.application.port.in.web.findtarget;
+	exports me.nalab.survey.application.port.in.web.findfeedback.type;
 
 	requires luffy.survey.domain.main;
 	requires luffy.core.id.generator.id.generator.starter.main;
