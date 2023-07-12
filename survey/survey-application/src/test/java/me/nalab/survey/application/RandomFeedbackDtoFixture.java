@@ -61,7 +61,7 @@ public class RandomFeedbackDtoFixture {
 			.build();
 	}
 
-	private static ReviewerDto getRandomReviewerDto() {
+	public static ReviewerDto getRandomReviewerDto() {
 		return ReviewerDto.builder()
 			.collaborationExperience(RANDOM_BOOLEAN_SUPPLIER.getAsBoolean())
 			.position(RANDOM_STRING_SUPPLIER.get())
