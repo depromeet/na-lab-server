@@ -98,12 +98,17 @@ public final class FeedbackDtoMapper {
 	}
 
 	private static List<FormQuestionFeedbackDtoable> getFormQuestionFeedbackDtoList(Feedback feedback) {
-		return feedback.getFormQuestionFeedbackableList().stream().map(q -> {
-			if (q instanceof ShortFormQuestionFeedback) {
-				return getShortFormQuestionFeedbackDto((ShortFormQuestionFeedback)q);
-			}
-			return getChoiceFormQuestionFeedbackDto((ChoiceFormQuestionFeedback)q);
-		}).collect(Collectors.toList());
+		return feedback.getFormQuestionFeedbackableList()
+					   .stream()
+					   .map(FeedbackDtoMapper::getFormQuestionFeedbackDtoable)
+					   .collect(Collectors.toList());
+	}
+
+	private static FormQuestionFeedbackDtoable getFormQuestionFeedbackDtoable(FormQuestionFeedbackable q) {
+		if (q instanceof ShortFormQuestionFeedback) {
+			return getShortFormQuestionFeedbackDto((ShortFormQuestionFeedback) q);
+		}
+		return getChoiceFormQuestionFeedbackDto((ChoiceFormQuestionFeedback) q);
 	}
 
 	private static ShortFormQuestionFeedbackDto getShortFormQuestionFeedbackDto(
@@ -132,6 +137,26 @@ public final class FeedbackDtoMapper {
 				.build())
 			.selectedChoiceIdSet(choiceFormQuestionFeedback.getSelectedChoiceIdSet())
 			.build();
+	}
+
+	public static FeedbackDto toDtoWithBookmarkedForm(Feedback feedback) {
+		return FeedbackDto.builder()
+						  .id(feedback.getId())
+						  .surveyId(feedback.getSurveyId())
+						  .reviewerDto(getReviewerDto(feedback.getReviewer()))
+						  .formQuestionFeedbackDtoableList(getBookmakredFormQuestionFeedbackDtoList(feedback))
+						  .createdAt(feedback.getCreatedAt())
+						  .updatedAt(feedback.getUpdatedAt())
+						  .isRead(feedback.isRead())
+						  .build();
+	}
+
+	private static List<FormQuestionFeedbackDtoable> getBookmakredFormQuestionFeedbackDtoList(Feedback feedback) {
+		return feedback.getFormQuestionFeedbackableList()
+					   .stream()
+					   .filter(FormQuestionFeedbackable::isBookmarked)
+					   .map(FeedbackDtoMapper::getFormQuestionFeedbackDtoable)
+					   .collect(Collectors.toList());
 	}
 
 }

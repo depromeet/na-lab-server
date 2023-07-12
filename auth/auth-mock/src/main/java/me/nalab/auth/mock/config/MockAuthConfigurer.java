@@ -21,7 +21,6 @@ public class MockAuthConfigurer implements WebMvcConfigurer {
 		"/v1/reviewers*",
 		"/v1/reviewers/summary*",
 		"/v2/surveys/*/feedbacks",
-		"/v1/feedbacks/bookmarks",
 	};
 
 	@Override

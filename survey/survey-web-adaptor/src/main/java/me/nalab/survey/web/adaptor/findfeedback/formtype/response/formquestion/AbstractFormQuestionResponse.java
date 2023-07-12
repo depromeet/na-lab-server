@@ -1,0 +1,26 @@
+package me.nalab.survey.web.adaptor.findfeedback.formtype.response.formquestion;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@ToString
+@SuperBuilder
+public abstract class AbstractFormQuestionResponse {
+
+	@JsonProperty("question_id")
+	private final String questionId;
+
+	private final Integer order;
+
+	private final String type;
+
+	@JsonProperty("form_type")
+	private final String formType;
+
+	private final String title;
+
+}

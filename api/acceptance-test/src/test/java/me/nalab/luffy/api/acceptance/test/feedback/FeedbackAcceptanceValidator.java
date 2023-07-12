@@ -55,7 +55,6 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.position").isString()
 		);
 	}
-
 	public static void assertIsFeedbackNotFound(ResultActions resultActions) throws Exception {
 		resultActions.andExpectAll(
 			status().isOk(),
@@ -73,6 +72,46 @@ public final class FeedbackAcceptanceValidator {
 			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
 			jsonPath("$.question_feedback.[0].feedbacks").isEmpty()
 		);
+	}
+
+	public static void assertIsBookmarkedFeedbackFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString(),
+
+			jsonPath("$.question_feedback.[0].feedbacks").isArray(),
+			jsonPath("$.question_feedback.[0].feedbacks").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].feedback_id").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].form_question_feedback_id").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].created_at").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].is_read").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark").isNotEmpty(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark.is_bookmarked").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].bookmark.bookmarked_at").isString(),
+
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.reviewer_id").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.nickname").isString(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.collaboration_experience").isBoolean(),
+			jsonPath("$.question_feedback.[0].feedbacks.[0].reviewer.position").isString()
+		);
+	}
+
+	public static void assertIsBookmarkedFeedbackNotFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+				status().isOk(),
+				content().contentType(MediaType.APPLICATION_JSON),
+
+				jsonPath("$.question_feedback").isArray(),
+				jsonPath("$.question_feedback").isEmpty()
+								  );
 	}
 
 	public static void assertIsFeedbackSummaryFound(ResultActions resultActions) throws Exception {
@@ -128,6 +167,55 @@ public final class FeedbackAcceptanceValidator {
 
 	public static void assertIsBookmarkReplaced(ResultActions resultActions) throws Exception {
 		resultActions.andExpectAll(status().isOk());
+	}
+
+	public static void assertIsFeedbackFoundByTendency(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").value("tendency"),
+			jsonPath("$.question_feedback.[0].title").isString(),
+			jsonPath("$.question_feedback.[0].choices").isArray()
+		);
+	}
+
+	public static void assertIsFeedbackFoundByCustom(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").value("custom"),
+			jsonPath("$.question_feedback.[0].title").isString()
+		);
+	}
+
+	public static void assertIsFeedbackFoundByFormTypeWithNoFeedback(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString()
+		);
 	}
 
 }

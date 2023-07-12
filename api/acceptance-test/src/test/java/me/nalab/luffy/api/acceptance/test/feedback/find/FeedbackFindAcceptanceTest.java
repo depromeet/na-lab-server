@@ -1,11 +1,16 @@
 package me.nalab.luffy.api.acceptance.test.feedback.find;
 
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.*;
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.*;
-
-import java.time.Instant;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import me.nalab.auth.mock.api.MockUserRegisterEvent;
+import me.nalab.luffy.api.acceptance.test.TargetInitializer;
+import me.nalab.luffy.api.acceptance.test.feedback.AbstractFeedbackTestSupporter;
+import me.nalab.luffy.api.acceptance.test.feedback.create.request.FeedbackCreateRequest;
+import me.nalab.luffy.api.acceptance.test.feedback.create.response.SurveyFindResponse;
+import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +23,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.Instant;
+import java.util.Map;
 
-import me.nalab.auth.mock.api.MockUserRegisterEvent;
-import me.nalab.luffy.api.acceptance.test.TargetInitializer;
-import me.nalab.luffy.api.acceptance.test.feedback.AbstractFeedbackTestSupporter;
-import me.nalab.luffy.api.acceptance.test.feedback.create.request.FeedbackCreateRequest;
-import me.nalab.luffy.api.acceptance.test.feedback.create.response.SurveyFindResponse;
-import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
+import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.*;
+import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.getFeedbackCreateRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -93,6 +92,67 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// then
 		assertIsFeedbackNotFound(resultActions);
+	}
+
+	@Test
+	@DisplayName("북마크된 피드백 조회 성공 인수테스트")
+	void FIND_BOOKMARKED_FEED_BACK_SUCCESS() throws Exception {
+		// given
+		Long surveyId = setUpSurveyAndFeedbackAndBookmark();
+
+		// when
+		ResultActions resultActions = findBookmarkedFeedback(surveyId);
+
+		// then
+		assertIsBookmarkedFeedbackFound(resultActions);
+	}
+
+	@Test
+	@DisplayName("북마크된 피드백 조회 성공 인수테스트 - 피드백이 없을때")
+	void FIND_BOOKMARKED_FEED_BACK_SUCCESS_ANY_FEEDBACK() throws Exception {
+		// given
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
+		String token = "mock token";
+		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
+																	.expectedId(targetId)
+																	.expectedToken(token)
+																	.build());
+
+		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
+
+		// when
+		ResultActions resultActions = findBookmarkedFeedback(surveyId);
+
+		// then
+		assertIsBookmarkedFeedbackNotFound(resultActions);
+	}
+
+	private Long setUpSurveyAndFeedbackAndBookmark() throws Exception {
+		// 유저 생성
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
+		String token = "mock token";
+		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
+																	.expectedId(targetId)
+																	.expectedToken(token)
+																	.build());
+		// 서베이 생성
+		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
+		SurveyFindResponse surveyFindResponse = getSurveyFindResponse(surveyId);
+		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
+		// 피드백 생성
+		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
+
+		// 피드백 조회
+		String stringResponse = findFeedback(token, surveyId).andReturn()
+															 .getResponse()
+															 .getContentAsString();
+		JSONObject jsonObject = new JSONObject(stringResponse);
+		String feedbackId = jsonObject.getJSONArray("question_feedback").getJSONObject(2).getJSONArray("feedbacks")
+						 .getJSONObject(0).getString("form_question_feedback_id");
+		// 북마크 처리
+		replaceBookmark(token, feedbackId);
+
+		return surveyId;
 	}
 
 	private Long createAndGetSurveyId(String token, String content) throws Exception {

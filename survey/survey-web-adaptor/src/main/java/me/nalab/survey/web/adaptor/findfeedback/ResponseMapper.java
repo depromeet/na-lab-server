@@ -7,16 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import me.nalab.survey.application.common.feedback.dto.BookmarkDto;
-import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto;
-import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
-import me.nalab.survey.application.common.feedback.dto.ReviewerDto;
-import me.nalab.survey.application.common.feedback.dto.ShortFormQuestionFeedbackDto;
-import me.nalab.survey.application.common.survey.dto.ChoiceDto;
-import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDto;
-import me.nalab.survey.application.common.survey.dto.QuestionDtoType;
-import me.nalab.survey.application.common.survey.dto.ShortFormQuestionDto;
-import me.nalab.survey.application.common.survey.dto.SurveyDto;
+import me.nalab.survey.application.common.feedback.dto.*;
+import me.nalab.survey.application.common.survey.dto.*;
 import me.nalab.survey.web.adaptor.findfeedback.response.QuestionFeedbackResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.BookmarkResponse;
 import me.nalab.survey.web.adaptor.findfeedback.response.feedback.ChoiceFeedbackResponse;
@@ -42,6 +34,27 @@ final class ResponseMapper {
 					return toShortSurveyResponse((ShortFormQuestionDto)f, feedbackDtoList);
 				}
 			).collect(Collectors.toList())).build();
+	}
+
+	static QuestionFeedbackResponse toBookmarkedQuestionFeedbackResponse(SurveyDto surveyDto, List<FeedbackDto> feedbackDtoList) {
+		Set<Long> questionIds = feedbackDtoList.stream()
+											   .flatMap(feedbackDto -> feedbackDto.getFormQuestionFeedbackDtoableList().stream())
+											   .map(FormQuestionFeedbackDtoable::getQuestionId)
+											   .collect(Collectors.toSet());
+
+		List<FormQuestionDtoable> formQuestionDtoableList = surveyDto.getFormQuestionDtoableList()
+																	 .stream()
+																	 .filter(formQuestionDtoable -> questionIds.contains(formQuestionDtoable.getId()))
+																	 .collect(Collectors.toList());
+		return QuestionFeedbackResponse.builder()
+									   .abstractSurveyResponse(formQuestionDtoableList.stream().map(
+				f -> {
+					if (f.getQuestionDtoType() == QuestionDtoType.CHOICE) {
+						return toChoiceSurveyResponse((ChoiceFormQuestionDto)f, feedbackDtoList);
+					}
+					return toShortSurveyResponse((ShortFormQuestionDto)f, feedbackDtoList);
+				}
+																								   ).collect(Collectors.toList())).build();
 	}
 
 	private static AbstractSurveyResponse toChoiceSurveyResponse(ChoiceFormQuestionDto choiceFormQuestionDto,

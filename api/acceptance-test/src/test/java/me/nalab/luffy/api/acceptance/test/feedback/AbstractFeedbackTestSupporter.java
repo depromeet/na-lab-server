@@ -61,10 +61,19 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 
 	protected ResultActions findFeedback(String token, Long surveyId) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.get(String.format("/v2/surveys/%d/feedbacks", surveyId))
+									   .get(String.format("/v2/surveys/%d/feedbacks", surveyId))
+									   .accept(MediaType.APPLICATION_JSON)
+									   .contentType(MediaType.APPLICATION_JSON)
+									   .header(HttpHeaders.AUTHORIZATION, token)
+							  );
+	}
+
+	protected ResultActions findBookmarkedFeedback(Long surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get("/v1/feedbacks/bookmarks")
+			.queryParam("survey-id", surveyId.toString())
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
-			.header(HttpHeaders.AUTHORIZATION, token)
 		);
 	}
 
@@ -84,6 +93,15 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)
+		);
+	}
+
+	protected ResultActions findFeedbackByType(Long surveyId, String formType) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get("/v2/feedbacks?survey-id=" + surveyId)
+			.queryParam("form-type", formType)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
 		);
 	}
 
