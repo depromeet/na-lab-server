@@ -1,4 +1,4 @@
-package me.nalab.survey.application.service.findfeedback.type;
+package me.nalab.survey.application.service.findfeedback.formtype;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ import me.nalab.survey.application.common.survey.dto.SurveyDto;
 import me.nalab.survey.application.common.survey.mapper.SurveyDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.exception.SurveyDoesNotHasTargetException;
-import me.nalab.survey.application.port.in.web.findfeedback.type.FeedbackFindByTypeUseCase;
-import me.nalab.survey.application.port.out.persistence.findfeedback.type.FeedbackFindPort;
-import me.nalab.survey.application.port.out.persistence.findfeedback.type.SurveyFindPort;
-import me.nalab.survey.application.port.out.persistence.findfeedback.type.TargetIdFindPort;
+import me.nalab.survey.application.port.in.web.findfeedback.formtype.FeedbackFindByTypeUseCase;
+import me.nalab.survey.application.port.out.persistence.findfeedback.formtype.FeedbackFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.formtype.SurveyFindPort;
+import me.nalab.survey.application.port.out.persistence.findfeedback.formtype.TargetIdFindPort;
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.survey.Survey;
 
