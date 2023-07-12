@@ -63,7 +63,6 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 
-	// TODO : refactoring 필요
 	private static void validateFormType(String formType, List<FormQuestionDtoable> formQuestionDtoableList,
 		FormQuestionDtoable q) {
 		if (q instanceof ChoiceFormQuestionDto && ((ChoiceFormQuestionDto)q).getChoiceFormQuestionDtoType()
