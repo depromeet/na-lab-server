@@ -4,20 +4,11 @@ import java.util.List;
 
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto;
 import me.nalab.survey.application.common.survey.dto.FormQuestionDtoable;
-import me.nalab.survey.application.common.survey.dto.SurveyDto;
 
 /**
  * type으로 Feedback을 찾는 UseCase 입니다.
  */
 public interface FeedbackFindByTypeUseCase {
-
-	/**
-	 * surveyId를 입력으로 받아, surveyId에 해당하는 SurveyDto를 반환합니다.
-	 *
-	 * @param surveyId survey의 id
-	 * @return SurveyDto, Survey를 SurveyDto로 변환한 Dto type 을 반환합니다.
-	 */
-	SurveyDto findSurvey(Long surveyId);
 
 	/**
 	 * surveyId를 입력으로 받아, surveyId에 해당하는 모든 FeedbackDto를 반환합니다.
@@ -29,10 +20,10 @@ public interface FeedbackFindByTypeUseCase {
 
 	/**
 	 *
-	 * @param surveyDto survey의 DTO type
+	 * @param surveyId survey의 id
 	 * @param formType
 	 * @return 질문 폼의 질문 중 formType에 해당하는 FormQuestionDtoable을 List의 형태로 반환합니다.
 	 */
-	List<FormQuestionDtoable> formQuestionMatchingWithType(SurveyDto surveyDto, String formType);
+	List<FormQuestionDtoable> formQuestionMatchingWithType(Long surveyId, String formType);
 
 }

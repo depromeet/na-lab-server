@@ -2,7 +2,6 @@ package me.nalab.survey.application.service.findfeedback.type;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -33,21 +32,7 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 	private final FeedbackFindPort feedbackFindPort;
 	private final TargetIdFindPort targetIdFindPort;
 
-	@Transactional
-	@Override
-	public SurveyDto findSurvey(Long surveyId) {
-		Optional<Survey> survey = surveyFindPort.findSurveyById(surveyId);
-		if (survey.isEmpty()) {
-			throw new SurveyDoesNotExistException(surveyId);
-		}
-		Optional<Long> targetId = targetIdFindPort.findTargetIdBySurveyId(surveyId);
-		if (targetId.isEmpty()) {
-			throw new SurveyDoesNotHasTargetException(surveyId);
-		}
-		return SurveyDtoMapper.toSurveyDto(targetId.get(), survey.get());
-	}
-
-	@Transactional
+	@Transactional(readOnly = true)
 	@Override
 	public List<FeedbackDto> findFeedbackBySurveyId(Long surveyId) {
 		List<Feedback> feedbackList = feedbackFindPort.findFeedbackBySurveyId(surveyId);
@@ -56,8 +41,10 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 			.collect(Collectors.toList());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
-	public List<FormQuestionDtoable> formQuestionMatchingWithType(SurveyDto surveyDto, String formType) {
+	public List<FormQuestionDtoable> formQuestionMatchingWithType(Long surveyId, String formType) {
+		SurveyDto surveyDto = findSurvey(surveyId);
 		List<FormQuestionDtoable> formQuestionDtoableList = new ArrayList<>();
 		surveyDto.getFormQuestionDtoableList()
 			.forEach(q ->
@@ -66,6 +53,17 @@ public class FeedbackFindByTypeService implements FeedbackFindByTypeUseCase {
 		return formQuestionDtoableList;
 	}
 
+	private SurveyDto findSurvey(Long surveyId) {
+		Survey survey = surveyFindPort.findSurveyById(surveyId).orElseThrow(
+			() -> new SurveyDoesNotExistException(surveyId)
+		);
+		Long targetId = targetIdFindPort.findTargetIdBySurveyId(surveyId).orElseThrow(
+			() -> new SurveyDoesNotHasTargetException(surveyId)
+		);
+		return SurveyDtoMapper.toSurveyDto(targetId, survey);
+	}
+
+	// TODO : refactoring 필요
 	private static void validateFormType(String formType, List<FormQuestionDtoable> formQuestionDtoableList,
 		FormQuestionDtoable q) {
 		if (q instanceof ChoiceFormQuestionDto && ((ChoiceFormQuestionDto)q).getChoiceFormQuestionDtoType()
