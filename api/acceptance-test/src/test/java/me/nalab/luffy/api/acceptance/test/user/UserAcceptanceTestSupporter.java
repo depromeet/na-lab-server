@@ -23,6 +23,16 @@ public class UserAcceptanceTestSupporter {
 		);
 	}
 
+	protected ResultActions updateTargetPosition(String token, String content) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.patch(API_VERSION + "/users")
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token)
+			.content(content)
+		);
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;

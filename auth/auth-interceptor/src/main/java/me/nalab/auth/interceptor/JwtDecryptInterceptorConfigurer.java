@@ -25,6 +25,7 @@ public class JwtDecryptInterceptorConfigurer implements WebMvcConfigurer {
 		"/v1/reviewers/summary*",
 		"/v2/surveys/*/feedbacks",
 		"/v1/feedbacks/bookmarks",
+		"/v1/users"
 	};
 
 	@Override
