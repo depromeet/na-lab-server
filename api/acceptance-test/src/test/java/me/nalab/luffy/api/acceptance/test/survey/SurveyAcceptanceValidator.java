@@ -1,8 +1,6 @@
 package me.nalab.luffy.api.acceptance.test.survey;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -52,7 +50,6 @@ public class SurveyAcceptanceValidator {
 			.andExpect(jsonPath("$.question[0].choices[2].order").value(3))
 			.andExpect(jsonPath("$.question[0].choices[3].order").value(4))
 
-
 			.andExpect(jsonPath("$.question[1].type").value("choice"))
 			.andExpect(jsonPath("$.question[1].title").value("예진님의 성향은 어떤 것이 돋보이나요?"))
 			.andExpect(jsonPath("$.question[1].order").value(4))
@@ -75,6 +72,16 @@ public class SurveyAcceptanceValidator {
 			.andExpect(jsonPath("$.question[3].form_type").isString())
 			.andExpect(jsonPath("$.question[3].title").value("당신이 생각하는 예진님의 직무적 약점은 무엇인가요?"))
 			.andExpect(jsonPath("$.question[3].order").value(6));
+	}
+
+	public static void assertIsTargetFound(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.target_id").isNumber(),
+			jsonPath("$.nickname").isString(),
+			jsonPath("$.position").hasJsonPath()
+		);
 	}
 
 }

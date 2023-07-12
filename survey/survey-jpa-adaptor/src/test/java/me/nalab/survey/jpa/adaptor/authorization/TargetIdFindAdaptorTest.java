@@ -1,10 +1,11 @@
 package me.nalab.survey.jpa.adaptor.authorization;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -165,6 +166,37 @@ class TargetIdFindAdaptorTest {
 		// then
 		assertThat(result).isPresent();
 		assertThat(result).contains(targetId);
+	}
+
+	@Test
+	@DisplayName("formQuestionFeedbackId에 해당하는 target이 있다면, 조회된 타겟의 id를 반환한다.")
+	void FIND_TARGET_ID_BY_FORM_QUESTION_FEEDBACK_ID() {
+		// given
+		Long targetId = 101L;
+		TargetEntity targetEntity = TargetEntity.builder()
+			.id(targetId)
+			.createdAt(Instant.now())
+			.updatedAt(Instant.now())
+			.nickname("test target")
+			.build();
+		Survey survey = RandomSurveyFixture.createRandomSurvey();
+		SurveyEntity surveyEntity = SurveyEntityMapper.toSurveyEntity(targetId, survey);
+		FeedbackEntity feedbackEntity = FeedbackEntityMapper.toEntity(
+			RandomFeedbackFixture.getRandomFeedbackBySurvey(survey));
+
+		testTargetJpaRepository.saveAndFlush(targetEntity);
+		testSurveyJpaRepository.saveAndFlush(surveyEntity);
+		testFeedbackJpaRepository.saveAndFlush(feedbackEntity);
+
+		// when
+		List<Optional<Long>> resultList = feedbackEntity.getFormFeedbackEntityList().stream()
+			.map(formQuestionFeedbackEntity -> targetIdFindPort.findTargetIdByFormQuestionFeedbackId(
+				formQuestionFeedbackEntity.getId()))
+			.collect(Collectors.toList());
+
+		// then
+		resultList.forEach(r -> assertThat(r).isPresent());
+		resultList.forEach(r -> assertThat(r).contains(targetId));
 	}
 
 }
