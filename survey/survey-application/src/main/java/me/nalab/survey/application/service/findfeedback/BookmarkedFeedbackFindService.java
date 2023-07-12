@@ -8,6 +8,7 @@ import me.nalab.survey.application.port.out.persistence.findfeedback.FeedbackFin
 import me.nalab.survey.domain.feedback.Feedback;
 import me.nalab.survey.domain.feedback.FormQuestionFeedbackable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class BookmarkedFeedbackFindService implements BookmarkedFeedbackFindUseC
 	private final FeedbackFindPort feedbackFindPort;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<FeedbackDto> findAllBySurveyId(Long surveyId) {
 		List<Feedback> allFeedbacks = feedbackFindPort.findAllFeedbackBySurveyId(surveyId);
 
