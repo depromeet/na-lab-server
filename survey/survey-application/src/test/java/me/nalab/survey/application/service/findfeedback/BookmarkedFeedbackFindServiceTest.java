@@ -75,9 +75,9 @@ class BookmarkedFeedbackFindServiceTest {
         List<FeedbackDto> result = bookmarkedFeedbackFindService.findAllBySurveyId(survey.getId());
 
         // then
-        org.assertj.core.api.Assertions.assertThat(result).isNotEmpty();
         org.assertj.core.api.Assertions.assertThat(result)
-                                       .allMatch(feedbackDto -> feedbackDto.getFormQuestionFeedbackDtoableList()
+                .isNotEmpty()
+                .allMatch(feedbackDto -> feedbackDto.getFormQuestionFeedbackDtoableList()
                                                                            .stream()
                                                                            .allMatch(formQuestionFeedbackDtoable -> formQuestionFeedbackDtoable.getBookmarkDto().isBookmarked()));
     }
