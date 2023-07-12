@@ -87,6 +87,15 @@ public abstract class AbstractFeedbackTestSupporter extends AbstractSurveyTestSu
 		);
 	}
 
+	protected ResultActions findFeedbackByType(Long surveyId, String formType) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get("/v2/feedbacks?survey-id=" + surveyId)
+			.queryParam("form-type", formType)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+		);
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;

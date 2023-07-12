@@ -130,4 +130,53 @@ public final class FeedbackAcceptanceValidator {
 		resultActions.andExpectAll(status().isOk());
 	}
 
+	public static void assertIsFeedbackFoundByTendency(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").value("tendency"),
+			jsonPath("$.question_feedback.[0].title").isString(),
+			jsonPath("$.question_feedback.[0].choices").isArray()
+		);
+	}
+
+	public static void assertIsFeedbackFoundByCustom(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").value("custom"),
+			jsonPath("$.question_feedback.[0].title").isString()
+		);
+	}
+
+	public static void assertIsFeedbackFoundByFormTypeWithNoFeedback(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+
+			jsonPath("$.question_feedback").isArray(),
+			jsonPath("$.question_feedback").isNotEmpty(),
+
+			jsonPath("$.question_feedback.[0].question_id").isString(),
+			jsonPath("$.question_feedback.[0].order").isNumber(),
+			jsonPath("$.question_feedback.[0].type").isString(),
+			jsonPath("$.question_feedback.[0].form_type").isString(),
+			jsonPath("$.question_feedback.[0].title").isString()
+		);
+	}
+
 }

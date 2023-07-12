@@ -23,7 +23,7 @@ import me.nalab.survey.domain.survey.Survey;
 
 public final class SurveyEntityMapper {
 
-	private SurveyEntityMapper(){
+	private SurveyEntityMapper() {
 		throw new UnsupportedOperationException("Cannot invoke constructor \"SurveyEntityMapper()\"");
 	}
 
@@ -44,7 +44,7 @@ public final class SurveyEntityMapper {
 	}
 
 	private static FormQuestionEntity toFormQuestionEntity(FormQuestionable formQuestionable) {
-		if(formQuestionable.getQuestionType() == QuestionType.CHOICE) {
+		if (formQuestionable.getQuestionType() == QuestionType.CHOICE) {
 			return toChoiceFormQuestionEntity((ChoiceFormQuestion)formQuestionable);
 		}
 		return toShortFormQuestionEntity((ShortFormQuestion)formQuestionable);
@@ -125,8 +125,8 @@ public final class SurveyEntityMapper {
 			.collect(Collectors.toList());
 	}
 
-	private static FormQuestionable toFormQuestionable(FormQuestionEntity formQuestionEntity) {
-		if(formQuestionEntity.getQuestionType() == QuestionEntityType.CHOICE) {
+	public static FormQuestionable toFormQuestionable(FormQuestionEntity formQuestionEntity) {
+		if (formQuestionEntity.getQuestionType() == QuestionEntityType.CHOICE) {
 			return toChoiceFormQuestion((ChoiceFormQuestionEntity)formQuestionEntity);
 		}
 		return toShortFormQuestion((ShortFormQuestionEntity)formQuestionEntity);
