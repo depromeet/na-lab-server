@@ -59,8 +59,8 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	}
 
 	@Test
-	@DisplayName("타입에 해당하는 피드백 조회 성공 인수테스트 - 피드백이 있을때")
-	void FIND_FEEDBACK_BY_TYPE_SUCCESS_TEST() throws Exception {
+	@DisplayName("타입에 해당하는 피드백 조회 성공 인수테스트 - formType이 tendency일 때")
+	void FIND_FEEDBACK_BY_FORM_TYPE_TENDENCY() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
 		String token = "mock token";
@@ -77,13 +77,36 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ResultActions resultActions = findFeedbackByType(surveyId, "tendency");
 
 		// then
-		assertIsFeedbackFoundByType(resultActions);
+		assertIsFeedbackFoundByTendency(resultActions);
+
+	}
+
+	@Test
+	@DisplayName("타입에 해당하는 피드백 조회 성공 인수테스트 - formType이 custom일 때")
+	void FIND_FEEDBACK_BY_FORM_TYPE_CUSTOM() throws Exception {
+		// given
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
+		String token = "mock token";
+		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
+			.expectedId(targetId)
+			.expectedToken(token)
+			.build());
+		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
+		SurveyFindResponse surveyFindResponse = getSurveyFindResponse(surveyId);
+		FeedbackCreateRequest feedbackCreateRequest = getFeedbackCreateRequest(surveyFindResponse, true, "developer");
+		createFeedback(surveyId, OBJECT_MAPPER.writeValueAsString(feedbackCreateRequest));
+
+		// when
+		ResultActions resultActions = findFeedbackByType(surveyId, "custom");
+
+		// then
+		assertIsFeedbackFoundByCustom(resultActions);
 
 	}
 
 	@Test
 	@DisplayName("타입에 해당하는 피드백 조회 성공 인수테스트 - 피드백이 없을때")
-	void FIND_FEEDBACK_BY_TYPE_FAIL_TEST() throws Exception {
+	void FIND_FEEDBACK_BY_TYPE_TENDENCY_WITH_NO_FEEDBACK() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
 		String token = "mock token";
@@ -97,7 +120,27 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 		ResultActions resultActions = findFeedbackByType(surveyId, "tendency");
 
 		// then
-		assertIsFeedbackFoundByType(resultActions);
+		assertIsFeedbackFoundByFormTypeWithNoFeedback(resultActions);
+
+	}
+
+	@Test
+	@DisplayName("타입에 해당하는 피드백 조회 성공 인수테스트 - 피드백이 없을때")
+	void FIND_FEEDBACK_BY_TYPE_CUSTOM_WITH_NO_FEEDBACK() throws Exception {
+		// given
+		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
+		String token = "mock token";
+		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
+			.expectedId(targetId)
+			.expectedToken(token)
+			.build());
+		Long surveyId = createAndGetSurveyId(token, RequestSample.DEFAULT_JSON);
+
+		// when
+		ResultActions resultActions = findFeedbackByType(surveyId, "custom");
+
+		// then
+		assertIsFeedbackFoundByFormTypeWithNoFeedback(resultActions);
 
 	}
 
