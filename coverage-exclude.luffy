@@ -51,3 +51,4 @@ exclude me/nalab/core/authorization/aop/advice/*
 exclude me/nalab/core/secure/cors/CorsConfig
 exclude me/nalab/core/secure/xss/config/XssConfig
 exclude me/nalab/core/secure/xss/json/JsonXssFilterException
+exclude me/nalab/api/sentry/*
