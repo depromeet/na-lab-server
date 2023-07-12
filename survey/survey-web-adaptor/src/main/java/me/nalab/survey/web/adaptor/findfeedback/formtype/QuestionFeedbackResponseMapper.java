@@ -66,13 +66,11 @@ final class QuestionFeedbackResponseMapper {
 					if (Objects.equals(q.getQuestionId(), questionId)) {
 						Set<Long> selectedChoiceIdSet = ((ChoiceFormQuestionFeedbackDto)q).getSelectedChoiceIdSet();
 						selectedChoiceIdSet
-							.forEach(sc -> {
-								choiceFormQuestionResponse.getChoiceResponseList()
-									.forEach(cq -> {
-										if (Objects.equals(sc, Long.valueOf(cq.getChoiceId())))
-											cq.updateSelectedCount();
-									});
-							});
+							.forEach(sc -> choiceFormQuestionResponse.getChoiceResponseList()
+								.forEach(cq -> {
+									if (Objects.equals(sc, Long.valueOf(cq.getChoiceId())))
+										cq.updateSelectedCount();
+								}));
 					}
 				})
 			);
@@ -108,20 +106,18 @@ final class QuestionFeedbackResponseMapper {
 	private static void toShortResponseList(ShortFormQuestionResponse shortFormQuestionResponse,
 		List<FeedbackDto> feedbackDtoList) {
 		feedbackDtoList
-			.forEach(f -> {
-				f.getFormQuestionFeedbackDtoableList().stream()
-					.filter(q -> Objects.equals(q.getQuestionId(),
-						Long.valueOf(shortFormQuestionResponse.getQuestionId())))
-					.forEach(sq -> shortFormQuestionResponse.getShortResponseList().add(
-						ShortResponse.builder()
-							.feedbackId(String.valueOf(f.getId()))
-							.createdAt(
-								ZonedDateTime.ofInstant(f.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
-							.replyList(((ShortFormQuestionFeedbackDto)sq).getReplyList())
-							.build()
+			.forEach(f -> f.getFormQuestionFeedbackDtoableList().stream()
+				.filter(q -> Objects.equals(q.getQuestionId(),
+					Long.valueOf(shortFormQuestionResponse.getQuestionId())))
+				.forEach(sq -> shortFormQuestionResponse.getShortResponseList().add(
+					ShortResponse.builder()
+						.feedbackId(String.valueOf(f.getId()))
+						.createdAt(
+							ZonedDateTime.ofInstant(f.getCreatedAt(), ZoneId.of("Asia/Seoul")).toLocalDateTime())
+						.replyList(((ShortFormQuestionFeedbackDto)sq).getReplyList())
+						.build()
 
-					));
-			});
+				)));
 
 	}
 
