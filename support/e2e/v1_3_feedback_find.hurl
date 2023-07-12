@@ -103,6 +103,10 @@ short_strength_question_id: jsonpath "$.question.[1].question_id"
 choice_custom_question_id: jsonpath "$.question.[2].question_id"
 choice_custom_choice_id: jsonpath "$.question.[2].choices.[0].choice_id"
 short_custom_question_id: jsonpath "$.question.[3].question_id"
+formtype_tendency: jsonpath "$.question.[0].form_type"
+formtype_strength: jsonpath "$.question.[1].form_type"
+formtype_custom: jsonpath "$.question.[2].form_type"
+
 
 ##########
 
@@ -314,3 +318,109 @@ header "Content-type" == "application/json"
 
 jsonpath "$.all_feedback_count" == 2
 jsonpath "$.new_feedback_count" == 1
+
+##########
+
+GET http://nalab-server:8080/v2/feedbacks # 생성된 survey와 feedback 2개를 바탕으로, 질문폼의 타입 "tendency"에 해당하는 피드백을 조회한다
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+form-type: {{ formtype_tendency }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.question_feedback" count == 1
+jsonpath "$.question_feedback.[0].question_id" exists
+jsonpath "$.question_feedback.[0].order" exists
+jsonpath "$.question_feedback.[0].type" matches "choice"
+jsonpath "$.question_feedback.[0].form_type" matches "tendency"
+jsonpath "$.question_feedback.[0].title" exists
+
+jsonpath "$.question_feedback.[0].choices" count == 4
+jsonpath "$.question_feedback.[0].choices.[0].order" exists
+jsonpath "$.question_feedback.[0].choices.[0].content" exists
+jsonpath "$.question_feedback.[0].choices.[0].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[0].selected_count" == 2
+jsonpath "$.question_feedback.[0].choices.[1].order" exists
+jsonpath "$.question_feedback.[0].choices.[1].content" exists
+jsonpath "$.question_feedback.[0].choices.[1].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[1].selected_count" == 0
+jsonpath "$.question_feedback.[0].choices.[2].order" exists
+jsonpath "$.question_feedback.[0].choices.[2].content" exists
+jsonpath "$.question_feedback.[0].choices.[2].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[2].selected_count" == 0
+jsonpath "$.question_feedback.[0].choices.[3].order" exists
+jsonpath "$.question_feedback.[0].choices.[3].content" exists
+jsonpath "$.question_feedback.[0].choices.[3].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[3].selected_count" == 0
+
+##########
+
+GET http://nalab-server:8080/v2/feedbacks # 생성된 survey와 feedback 2개를 바탕으로, 질문폼의 타입 "strength"에 해당하는 피드백을 조회한다
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+form-type: {{ formtype_strength }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.question_feedback" count == 1
+jsonpath "$.question_feedback.[0].question_id" exists
+jsonpath "$.question_feedback.[0].order" exists
+jsonpath "$.question_feedback.[0].type" matches "short"
+jsonpath "$.question_feedback.[0].form_type" matches "strength"
+jsonpath "$.question_feedback.[0].title" exists
+
+jsonpath "$.question_feedback.[0].feedbacks" count == 2
+jsonpath "$.question_feedback.[0].feedbacks.[0].feedback_id" exists
+jsonpath "$.question_feedback.[0].feedbacks.[0].created_at" exists
+jsonpath "$.question_feedback.[0].feedbacks.[0].reply" exists
+jsonpath "$.question_feedback.[0].feedbacks.[1].feedback_id" exists
+jsonpath "$.question_feedback.[0].feedbacks.[1].created_at" exists
+jsonpath "$.question_feedback.[0].feedbacks.[1].reply" exists
+
+##########
+
+GET http://nalab-server:8080/v2/feedbacks # 생성된 survey와 feedback 2개를 바탕으로, 질문폼의 타입 "custom"에 해당하는 피드백을 조회한다
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+form-type: {{ formtype_custom }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.question_feedback" count == 2
+
+jsonpath "$.question_feedback.[0].question_id" exists
+jsonpath "$.question_feedback.[0].order" exists
+jsonpath "$.question_feedback.[0].type" matches "choice"
+jsonpath "$.question_feedback.[0].form_type" matches "custom"
+jsonpath "$.question_feedback.[0].title" exists
+jsonpath "$.question_feedback.[0].choices" count == 2
+jsonpath "$.question_feedback.[0].choices.[0].order" exists
+jsonpath "$.question_feedback.[0].choices.[0].content" exists
+jsonpath "$.question_feedback.[0].choices.[0].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[0].selected_count" == 2
+jsonpath "$.question_feedback.[0].choices.[1].order" exists
+jsonpath "$.question_feedback.[0].choices.[1].content" exists
+jsonpath "$.question_feedback.[0].choices.[1].choice_id" exists
+jsonpath "$.question_feedback.[0].choices.[1].selected_count" == 0
+
+jsonpath "$.question_feedback.[1].question_id" exists
+jsonpath "$.question_feedback.[1].order" exists
+jsonpath "$.question_feedback.[1].type" matches "short"
+jsonpath "$.question_feedback.[1].form_type" matches "custom"
+jsonpath "$.question_feedback.[1].title" exists
+jsonpath "$.question_feedback.[1].feedbacks" count == 2
+jsonpath "$.question_feedback.[1].feedbacks.[0].feedback_id" exists
+jsonpath "$.question_feedback.[1].feedbacks.[0].created_at" exists
+jsonpath "$.question_feedback.[1].feedbacks.[0].reply" exists
+jsonpath "$.question_feedback.[1].feedbacks.[1].feedback_id" exists
+jsonpath "$.question_feedback.[1].feedbacks.[1].created_at" exists
+jsonpath "$.question_feedback.[1].feedbacks.[1].reply" exists
