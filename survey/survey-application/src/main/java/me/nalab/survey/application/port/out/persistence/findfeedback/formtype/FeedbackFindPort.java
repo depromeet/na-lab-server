@@ -1,4 +1,4 @@
-package me.nalab.survey.application.port.out.persistence.findfeedback.type;
+package me.nalab.survey.application.port.out.persistence.findfeedback.formtype;
 
 import java.util.List;
 
