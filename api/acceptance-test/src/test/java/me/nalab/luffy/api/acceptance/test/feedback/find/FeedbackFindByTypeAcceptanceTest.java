@@ -43,7 +43,7 @@ import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
 @ComponentScan("me.nalab")
 @EnableJpaRepositories(basePackages = {"me.nalab"})
 @EntityScan(basePackages = {"me.nalab"})
-public class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
+class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;
@@ -115,7 +115,7 @@ public class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSuppor
 			SurveyFindResponse.class);
 	}
 
-	public static FeedbackCreateRequest getFeedbackCreateRequest(SurveyFindResponse surveyFindResponse,
+	private static FeedbackCreateRequest getFeedbackCreateRequest(SurveyFindResponse surveyFindResponse,
 		boolean collaborationExperience, String position) {
 		return FeedbackCreateRequest.builder()
 			.reviewerRequest(getReviewerRequest(collaborationExperience, position))
