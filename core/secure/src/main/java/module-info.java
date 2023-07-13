@@ -4,6 +4,7 @@ module luffy.core.secure.main {
 	requires spring.context;
 	requires com.fasterxml.jackson.databind;
 	requires org.apache.commons.text;
+	requires spring.webmvc;
 
 	exports me.nalab.core.secure.xss.meta;
 
