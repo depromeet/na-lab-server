@@ -5,7 +5,7 @@ import me.nalab.user.domain.user.Provider;
 import me.nalab.user.domain.user.UserOAuthInfo;
 import org.assertj.core.api.Assertions;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class UserOAuthInfoTestUtils {
 
@@ -16,7 +16,7 @@ public class UserOAuthInfoTestUtils {
 	public static final String DEFAULT_PHONE_NUMBER = null;
 
 	public static UserOAuthInfo.UserOAuthInfoBuilder createDomain() {
-		var now = LocalDateTime.now();
+		var now = Instant.now();
 		return UserOAuthInfo.builder()
 			.id(DEFAULT_ID)
 			.provider(DEFAULT_PROVIDER)
@@ -28,7 +28,7 @@ public class UserOAuthInfoTestUtils {
 	}
 
 	public static UserOAuthInfoEntity.UserOAuthInfoEntityBuilder createEntity() {
-		var now = LocalDateTime.now();
+		var now = Instant.now();
 		return UserOAuthInfoEntity.builder()
 			.id(DEFAULT_ID)
 			.provider(DEFAULT_PROVIDER.name())

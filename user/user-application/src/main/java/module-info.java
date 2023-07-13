@@ -16,4 +16,5 @@ module luffy.user.application.main {
 	requires spring.context;
 	requires spring.tx;
 	requires spring.beans;
+	requires luffy.core.time.main;
 }

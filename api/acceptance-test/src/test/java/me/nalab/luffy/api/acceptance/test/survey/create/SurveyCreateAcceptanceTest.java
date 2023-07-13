@@ -4,6 +4,7 @@ import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidato
 import static me.nalab.luffy.api.acceptance.test.survey.SurveyAcceptanceValidator.assertIsSurveyCreated;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -46,7 +47,8 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("새로운 Survey 생성 성공 테스트 - 기본 질문")
 	void CREATE_NEW_SURVEY_SUCCESS_DEFAULT() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
+		Long targetId = targetInitializer.saveTargetAndGetId("luffy",
+			LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
 		String token = "luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
@@ -64,7 +66,8 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("새로운 Survey 생성 성공 테스트 - 커스텀 질문 포함")
 	void CREATE_NEW_SURVEY_SUCCESS_SUCCESS_CUSTOM() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
+		Long targetId = targetInitializer.saveTargetAndGetId("luffy",
+			LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
 		String token = "luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
@@ -82,7 +85,7 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("새로운 Survey 생성 시 Valid에 걸리면 예외가 발생한다")
 	void CREATE_NEW_SURVEY_WITH_FAIL() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24));
+		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
 		String token = "luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)

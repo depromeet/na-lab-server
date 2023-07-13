@@ -1,0 +1,24 @@
+name: Start release server
+
+on:
+  workflow_run:
+    workflows:
+      - "Docker release image publisher"
+    types:
+      - completed
+      
+jobs:
+  server_start:
+    name: start release server
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull samillmu/luffy:latest
+            docker ps -aq | xargs docker stop | xargs docker rm
+            docker run -d -p 8080:8080 samillmu/luffy:latest

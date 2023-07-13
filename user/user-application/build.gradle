@@ -1,8 +1,10 @@
 dependencies {
     implementation project(':user:user-domain')
-    implementation project(':survey:domain')
-    implementation project(':survey:application')
+    implementation project(':survey:survey-domain')
+    implementation project(':survey:survey-application')
     implementation project(':core:id-generator:id-generator-starter')
+    implementation project(':core:time')
+
     testImplementation project(':user:user-domain')
 
     implementation 'javax.validation:validation-api:2.0.1.Final'

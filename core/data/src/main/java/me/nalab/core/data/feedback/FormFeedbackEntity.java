@@ -1,5 +1,7 @@
 package me.nalab.core.data.feedback;
 
+import java.time.Instant;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,4 +39,9 @@ public abstract class FormFeedbackEntity {
 	@JoinColumn(name = "feedback_id", nullable = false)
 	protected FeedbackEntity feedbackEntity;
 
+	@Column(name = "is_bookmarked", nullable = false)
+	protected boolean isBookmarked;
+
+	@Column(name = "bookmarked_at", columnDefinition = "TIMESTAMP(6)")
+	protected Instant bookmarkedAt;
 }

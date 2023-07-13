@@ -4,7 +4,7 @@ import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceVali
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -65,7 +65,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	@DisplayName("Survey에 feedback 생성 성공 테스트")
 	void CREATE_FEEDBACK_TO_SURVEY_SUCCESS() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("nalab", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
 		String token = "nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
@@ -87,7 +87,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	@DisplayName("Survey에 feedback 생성 성공 테스트 - 여러명이 feedback")
 	void CREATE_MULTIPLE_FEEDBACK_TO_SURVEY_SUCCESS() throws Exception {
 		// given
-		Long targetId = targetInitializer.saveTargetAndGetId("hello", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("hello", Instant.now());
 		String token = "hello-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)

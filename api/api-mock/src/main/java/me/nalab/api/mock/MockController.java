@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -97,43 +98,6 @@ public class MockController {
 		return "{\n"
 			+ "    \"all_feedback_count\": 6,\n"
 			+ "    \"new_feedback_count\": 1\n"
-			+ "}";
-	}
-
-	@GetMapping("/feedbacks")
-	@ResponseStatus(HttpStatus.OK)
-	Object findFeedback(@RequestParam(name = "survey-id", required = false) Long surveyId) {
-		return "{\n"
-			+ "    \"reviewer\": {\n"
-			+ "        \"collaboration_experience\": true,\n"
-			+ "        \"position\": \"developer\"\n"
-			+ "    },\n"
-			+ "    \"question_feedback\": [\n"
-			+ "        {\n"
-			+ "            \"question_id\": \"1\",\n"
-			+ "            \"type\": \"choice\",\n"
-			+ "            \"choices\": [\n"
-			+ "                \"1\",\n"
-			+ "                \"2\"\n"
-			+ "            ]\n"
-			+ "        },\n"
-			+ "        {\n"
-			+ "            \"question_id\": \"2\",\n"
-			+ "            \"type\": \"choice\",\n"
-			+ "            \"choices\": [\n"
-			+ "                \"1\",\n"
-			+ "                \"2\"\n"
-			+ "            ]\n"
-			+ "        },\n"
-			+ "        {\n"
-			+ "            \"question_id\": \"10\",\n"
-			+ "            \"type\": \"short\",\n"
-			+ "            \"reply\": [\n"
-			+ "                \"예진이는 개발 관련 지식을 조금 더 공부해봐도\\n좋을 것 같아! 요즘 프로덕트 디자이너에겐 개발\\n지식을 아는 게 좋은 역량이 될 수 있어.\",\n"
-			+ "                \"안녕\"\n"
-			+ "            ]\n"
-			+ "        }\n"
-			+ "    ]\n"
 			+ "}";
 	}
 
@@ -313,5 +277,203 @@ public class MockController {
 			+ "    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ1NTEwMjE1LCJpYXQiOjE2NDU1MDk5MTUsImp0aSI6IjExYTEyNmE1OWZlNzQ5ZmI5YmU1MDQwOGUxOWNkNGU4IiwidXNlcl9pZCI6Mn0.Jpr1gg76_LrjXbWrc_y_ohstacwrgJj1p5jNFJWdyr4\"\n"
 			+ "}";
 	}
+
+	@PatchMapping("/users")
+	@ResponseStatus(HttpStatus.OK)
+	void updateTarget() {
+		// 200 OK 반환용 mock api 메소드로 비어있음
+	}
+
+	@GetMapping("/users")
+	@ResponseStatus(HttpStatus.OK)
+	Object getTargetBySurveyId(@RequestParam("survey-id") Long surveyId) {
+		return "{\n"
+			+ "    \"target_id\": 26,\n"
+			+ "    \"nickname\": \"예진\",\n"
+			+ "    \"position\": \"개발자\"\n"
+			+ "}";
+	}
+
+	@GetMapping("/feedbacks")
+	@ResponseStatus(HttpStatus.OK)
+	Object getFeedbackBySurveyIdAndFormType(@RequestParam("survey-id") Long surveyId,
+		@RequestParam(value = "form-type", required = false) String formType) {
+		if(formType == null || formType.isBlank()) {
+			return "{\n"
+				+ "    \"question_feedback\": [\n"
+				+ "        {\n"
+				+ "            \"question_id\": 1,\n"
+				+ "            \"order\": 1,\n"
+				+ "            \"type\": \"choice\",\n"
+				+ "            \"form_type\": \"tendency\",\n"
+				+ "            \"title\": \"성향\",\n"
+				+ "            \"choices\": [\n"
+				+ "                {\n"
+				+ "                    \"choice_id\": \"1\",\n"
+				+ "                    \"order\": 1,\n"
+				+ "                    \"content\": \"UI\"\n"
+				+ "                },\n"
+				+ "                {\n"
+				+ "                    \"choice_id\": \"2\",\n"
+				+ "                    \"order\": 2,\n"
+				+ "                    \"content\": \"UX\"\n"
+				+ "                },\n"
+				+ "                {\n"
+				+ "                    \"choice_id\": 3,\n"
+				+ "                    \"order\": 3,\n"
+				+ "                    \"content\": \"BX\"\n"
+				+ "                }\n"
+				+ "            ],\n"
+				+ "            \"feedbacks\": [\n"
+				+ "                {\n"
+				+ "                    \"feedback_id\": \"1\",\n"
+				+ "                    \"form_question_feedback_id\": \"2\",\n"
+				+ "                    \"choice_id\": [\n"
+				+ "                        2,\n"
+				+ "                        1,\n"
+				+ "                        3\n"
+				+ "                    ],\n"
+				+ "                    \"created_at\": \"2023-01-24T12:00:00\",\n"
+				+ "                    \"is_read\": true,\n"
+				+ "                    \"bookmark\": {\n"
+				+ "                        \"bookmarked_at\": \"2023-01-24T12:00:00\",\n"
+				+ "                        \"is_bookmarked\": true\n"
+				+ "                    },\n"
+				+ "                    \"reviewer\": {\n"
+				+ "                        \"reviewer_id\": 1,\n"
+				+ "                        \"nickname\": \"A\",\n"
+				+ "                        \"collaboration_experience\": true,\n"
+				+ "                        \"position\": \"developer\"\n"
+				+ "                    }\n"
+				+ "                }\n"
+				+ "            ]\n"
+				+ "        },\n"
+				+ "        {\n"
+				+ "            \"question_id\": 2,\n"
+				+ "            \"order\": 2,\n"
+				+ "            \"type\": \"short\",\n"
+				+ "            \"form_type\": \"strength\",\n"
+				+ "            \"title\": \"저는 UI, UI, GUI 중에 어떤 분야를 가장 잘하는 것 같나요?\",\n"
+				+ "            \"feedbacks\": [\n"
+				+ "                {\n"
+				+ "                    \"feedback_id\": \"5\",\n"
+				+ "                    \"form_question_feedback_id\": \"3\",\n"
+				+ "                    \"created_at\": \"2023-01-24T12:00:00\",\n"
+				+ "                    \"reply\": [\n"
+				+ "                        \"예진이는 개발 관련 지식을 조금 더 공부해봐도\\n좋을 것 같아! 요즘 프로덕트 디자이너에겐 개발\\n지식을 아는 게 좋은 역량이 될 수 있어.\",\n"
+				+ "                        \"안녕\"\n"
+				+ "                    ],\n"
+				+ "                    \"is_read\": false,\n"
+				+ "                    \"bookmark\": { \n"
+				+ "                        \"bookmarked_at\": \"2023-01-24T12:00:00\",\n"
+				+ "                        \"is_bookmarked\": true\n"
+				+ "                    },\n"
+				+ "                    \"reviwer\": {\n"
+				+ "                        \"reviewer_id\": 1,\n"
+				+ "                        \"nickname\": \"A\",\n"
+				+ "                        \"collaboration_experience\": true,\n"
+				+ "                        \"position\": \"developer\"\n"
+				+ "                    }\n"
+				+ "                }\n"
+				+ "            ]\n"
+				+ "        }\n"
+				+ "    ]\n"
+				+ "}";
+		}
+ 		return "{\n"
+			+ "    \"question_feedback\": [\n"
+			+ "        {\n"
+			+ "            \"question_id\": 1,\n"
+			+ "            \"order\": 1,\n"
+			+ "            \"type\": \"choice\",\n"
+			+ "            \"form_type\": \"tendency\",\n"
+			+ "            \"title\": \"성향\",\n"
+			+ "            \"choices\": [\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": 1,\n"
+			+ "                    \"order\": 1,\n"
+			+ "                    \"selected_count\": 5,\n"
+			+ "                    \"content\": \"UI\"\n"
+			+ "                },\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": 2,\n"
+			+ "                    \"order\": 2,\n"
+			+ "                    \"selected_count\": 10,\n"
+			+ "                    \"content\": \"UX\"\n"
+			+ "                },\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": 3,\n"
+			+ "                    \"order\": 3,\n"
+			+ "                    \"selected_count\": 0,\n"
+			+ "                    \"content\": \"BX\"\n"
+			+ "                }\n"
+			+ "            ]\n"
+			+ "        }\n"
+			+ "    ]\n"
+			+ "}";
+	}
+
+	@GetMapping("/feedbacks/bookmarks")
+	@ResponseStatus(HttpStatus.OK)
+	Object findBookmarkedFeedbacks(@RequestParam("survey-id") Long surveyId) {
+		return "{\n"
+			+ "    \"question_feedback\": [\n"
+			+ "        {\n"
+			+ "            \"question_id\": 1,\n"
+			+ "            \"order\": 1,\n"
+			+ "            \"type\": \"choice\",\n"
+			+ "            \"form_type\": \"tendency\",\n"
+			+ "            \"title\": \"성향\",\n"
+			+ "            \"choices\": [\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": \"1\",\n"
+			+ "                    \"order\": 1,\n"
+			+ "                    \"content\": \"UI\"\n"
+			+ "                },\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": \"2\",\n"
+			+ "                    \"order\": 2,\n"
+			+ "                    \"content\": \"UX\"\n"
+			+ "                },\n"
+			+ "                {\n"
+			+ "                    \"choice_id\": 3,\n"
+			+ "                    \"order\": 3,\n"
+			+ "                    \"content\": \"BX\"\n"
+			+ "                }\n"
+			+ "            ],\n"
+			+ "            \"feedbacks\": [\n"
+			+ "                {\n"
+			+ "                    \"feedback_id\": \"1\",\n"
+			+ "                    \"form_question_feedback_id\": \"2\",\n"
+			+ "                    \"choice_id\": [\n"
+			+ "                        2,\n"
+			+ "                        1,\n"
+			+ "                        3\n"
+			+ "                    ],\n"
+			+ "                    \"created_at\": \"2023-01-24T12:00:00\",\n"
+			+ "                    \"is_read\": true,\n"
+			+ "                    \"bookmark\": {\n"
+			+ "                        \"bookmarked_at\": \"2023-01-24T12:00:00\",\n"
+			+ "                        \"is_bookmarked\": true\n"
+			+ "                    },\n"
+			+ "                    \"reviewer\": {\n"
+			+ "                        \"reviewer_id\": 1,\n"
+			+ "                        \"nickname\": \"A\",\n"
+			+ "                        \"collaboration_experience\": true,\n"
+			+ "                        \"position\": \"developer\"\n"
+			+ "                    }\n"
+			+ "                }\n"
+			+ "            ]\n"
+			+ "        }\n"
+			+ "    ]\n"
+			+ "}";
+	}
+
+	@PatchMapping("/feedbacks/bookmarks")
+	@ResponseStatus(HttpStatus.OK)
+	void bookmark(@RequestParam("form-question-feedback-id") Long formQuestionFeedbackId) {
+		// 200 OK 반환용 mock api 메소드로 비어있음
+	}
+
 
 }

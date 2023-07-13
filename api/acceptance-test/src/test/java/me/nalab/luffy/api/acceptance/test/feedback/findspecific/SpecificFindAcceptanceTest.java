@@ -2,7 +2,7 @@ package me.nalab.luffy.api.acceptance.test.feedback.findspecific;
 
 import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.assertIsSpecificFound;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -64,7 +64,7 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		String token = "token";
-		Long targetId = targetInitializer.saveTargetAndGetId("sujin", LocalDateTime.now());
+		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
 

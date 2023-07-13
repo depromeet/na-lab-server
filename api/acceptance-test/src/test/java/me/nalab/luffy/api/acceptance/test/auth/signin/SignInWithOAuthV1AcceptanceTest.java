@@ -19,6 +19,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
 
 import javax.transaction.Transactional;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -77,7 +79,7 @@ class SignInWithOAuthV1AcceptanceTest extends AbstractAuthTestSupporter {
 		var oauthProvider = provider.name();
 		var apiRequest = new SignInWithOAuthV1Controller.Request(nickname, email);
 
-		var now = LocalDateTime.now();
+		var now = Instant.now();
 		userInitializer.saveUserWithOAuth(provider, nickname, email, now);
 		targetInitializer.saveTargetAndGetId(nickname, now);
 
