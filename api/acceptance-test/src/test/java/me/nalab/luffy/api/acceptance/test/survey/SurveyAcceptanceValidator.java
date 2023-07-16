@@ -84,4 +84,21 @@ public class SurveyAcceptanceValidator {
 		);
 	}
 
+
+	public static void assertIsSurveyExists(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.exists").value(true)
+		);
+	}
+
+	public static void assertIsSurveyDoesNotExists(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.exists").value(false)
+		);
+	}
+
 }
