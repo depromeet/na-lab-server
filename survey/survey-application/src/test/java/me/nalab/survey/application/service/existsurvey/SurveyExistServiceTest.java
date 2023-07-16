@@ -11,14 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import me.nalab.survey.application.port.in.web.existsurvey.SurveyExistUseCase;
-import me.nalab.survey.application.port.out.persistence.existsurvey.SurveyExistCheckPort;
+import me.nalab.survey.application.port.out.persistence.existsurvey.SurveyExistPort;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {SurveyExistService.class})
 class SurveyExistServiceTest {
 
 	@MockBean
-	private SurveyExistCheckPort surveyExistCheckPort;
+	private SurveyExistPort surveyExistPort;
 
 	@Autowired
 	private SurveyExistUseCase surveyExistUseCase;
@@ -29,7 +29,7 @@ class SurveyExistServiceTest {
 		// given
 		Long targetId = 1L;
 
-		Mockito.when(surveyExistCheckPort.isSurveyExistByTargetId(targetId)).thenReturn(true);
+		Mockito.when(surveyExistPort.isSurveyExistByTargetId(targetId)).thenReturn(true);
 
 		// when
 		boolean result = surveyExistUseCase.isSurveyExistByTargetId(targetId);
@@ -44,7 +44,7 @@ class SurveyExistServiceTest {
 		// given
 		Long targetId = 1L;
 
-		Mockito.when(surveyExistCheckPort.isSurveyExistByTargetId(targetId)).thenReturn(false);
+		Mockito.when(surveyExistPort.isSurveyExistByTargetId(targetId)).thenReturn(false);
 
 		// when
 		boolean result = surveyExistUseCase.isSurveyExistByTargetId(targetId);
