@@ -53,15 +53,6 @@ public abstract class AbstractSurveyTestSupporter {
 		);
 	}
 
-	protected ResultActions existsSurveyByToken(String token) throws Exception {
-		return mockMvc.perform(MockMvcRequestBuilders
-			.get(API_VERSION + "/surveys/exists")
-			.header("Authorization", token)
-			.accept(MediaType.APPLICATION_JSON)
-			.contentType(MediaType.APPLICATION_JSON)
-		);
-	}
-
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;
