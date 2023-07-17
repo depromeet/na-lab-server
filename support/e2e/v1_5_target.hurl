@@ -17,6 +17,17 @@ auth_token: jsonpath "$.access_token"
 
 ##########
 
+GET http://nalab-server:8080/v1/surveys/exists # 질문폼이 없는 상태에서 질문폼 존재 유무 확인 -> false
+Authorization: {{ token_type }} {{ auth_token }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.exists" == false
+
+##########
+
 POST http://nalab-server:8080/v1/surveys # 발급받은 토큰으로 survey를 생성한다
 Authorization: {{ token_type }} {{ auth_token }}
 {
@@ -60,6 +71,17 @@ jsonpath "$.survey_id" exists
 
 [Captures]
 survey_id: jsonpath "$.survey_id"
+
+##########
+
+GET http://nalab-server:8080/v1/surveys/exists # 질문폼이 있는 상태에서 질문폼 존재 유무 확인 -> true
+Authorization: {{ token_type }} {{ auth_token }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+jsonpath "$.exists" == true
 
 ##########
 
