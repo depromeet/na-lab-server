@@ -11,6 +11,6 @@ public interface SurveyExistUseCase {
 	 * @param targetId survey를 확인할 target의 id
 	 * @return boolean 존재한다면 true, 없다면 false
 	 */
-	boolean isSurveyExistByTargetId(Long targetId);
+	boolean existSurveyByTargetId(Long targetId);
 
 }
