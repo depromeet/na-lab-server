@@ -15,7 +15,7 @@ public class SurveyExistService implements SurveyExistUseCase {
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean isSurveyExistByTargetId(Long targetId) {
+	public boolean existSurveyByTargetId(Long targetId) {
 		return surveyExistPort.isSurveyExistByTargetId(targetId);
 	}
 }

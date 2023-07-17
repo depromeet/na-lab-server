@@ -32,7 +32,7 @@ class SurveyExistServiceTest {
 		Mockito.when(surveyExistPort.isSurveyExistByTargetId(targetId)).thenReturn(true);
 
 		// when
-		boolean result = surveyExistUseCase.isSurveyExistByTargetId(targetId);
+		boolean result = surveyExistUseCase.existSurveyByTargetId(targetId);
 
 		// then
 		Assertions.assertThat(result).isTrue();
@@ -47,7 +47,7 @@ class SurveyExistServiceTest {
 		Mockito.when(surveyExistPort.isSurveyExistByTargetId(targetId)).thenReturn(false);
 
 		// when
-		boolean result = surveyExistUseCase.isSurveyExistByTargetId(targetId);
+		boolean result = surveyExistUseCase.existSurveyByTargetId(targetId);
 
 		// then
 		Assertions.assertThat(result).isFalse();
