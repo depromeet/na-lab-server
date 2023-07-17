@@ -298,7 +298,7 @@ public class MockController {
 	@ResponseStatus(HttpStatus.OK)
 	Object getFeedbackBySurveyIdAndFormType(@RequestParam("survey-id") Long surveyId,
 		@RequestParam(value = "form-type", required = false) String formType) {
-		if(formType == null || formType.isBlank()) {
+		if (formType == null || formType.isBlank()) {
 			return "{\n"
 				+ "    \"question_feedback\": [\n"
 				+ "        {\n"
@@ -311,17 +311,17 @@ public class MockController {
 				+ "                {\n"
 				+ "                    \"choice_id\": \"1\",\n"
 				+ "                    \"order\": 1,\n"
-				+ "                    \"content\": \"UI\"\n"
+				+ "                    \"content\": \"꼼꼼한\"\n"
 				+ "                },\n"
 				+ "                {\n"
 				+ "                    \"choice_id\": \"2\",\n"
 				+ "                    \"order\": 2,\n"
-				+ "                    \"content\": \"UX\"\n"
+				+ "                    \"content\": \"도전적인\"\n"
 				+ "                },\n"
 				+ "                {\n"
 				+ "                    \"choice_id\": 3,\n"
 				+ "                    \"order\": 3,\n"
-				+ "                    \"content\": \"BX\"\n"
+				+ "                    \"content\": \"사교적인\"\n"
 				+ "                }\n"
 				+ "            ],\n"
 				+ "            \"feedbacks\": [\n"
@@ -380,7 +380,7 @@ public class MockController {
 				+ "    ]\n"
 				+ "}";
 		}
- 		return "{\n"
+		return "{\n"
 			+ "    \"question_feedback\": [\n"
 			+ "        {\n"
 			+ "            \"question_id\": 1,\n"
@@ -393,19 +393,19 @@ public class MockController {
 			+ "                    \"choice_id\": 1,\n"
 			+ "                    \"order\": 1,\n"
 			+ "                    \"selected_count\": 5,\n"
-			+ "                    \"content\": \"UI\"\n"
+			+ "                    \"content\": \"꼼꼼한\"\n"
 			+ "                },\n"
 			+ "                {\n"
 			+ "                    \"choice_id\": 2,\n"
 			+ "                    \"order\": 2,\n"
 			+ "                    \"selected_count\": 10,\n"
-			+ "                    \"content\": \"UX\"\n"
+			+ "                    \"content\": \"도전적인\"\n"
 			+ "                },\n"
 			+ "                {\n"
 			+ "                    \"choice_id\": 3,\n"
 			+ "                    \"order\": 3,\n"
 			+ "                    \"selected_count\": 0,\n"
-			+ "                    \"content\": \"BX\"\n"
+			+ "                    \"content\": \"사교적인\"\n"
 			+ "                }\n"
 			+ "            ]\n"
 			+ "        }\n"
@@ -474,6 +474,5 @@ public class MockController {
 	void bookmark(@RequestParam("form-question-feedback-id") Long formQuestionFeedbackId) {
 		// 200 OK 반환용 mock api 메소드로 비어있음
 	}
-
 
 }
