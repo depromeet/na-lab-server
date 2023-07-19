@@ -1,7 +1,3 @@
-<img src ="https://github.com/depromeet/na-lab-server/assets/71487608/198b482e-53f6-4526-a7a0-a03a07051c6c" alt="na lab" width="1000" height="550" />
-
-<br/>
-
 # Na Lab <img src="https://github.com/depromeet/na-lab-server/assets/71487608/7975a91f-83e2-4dd3-88f0-e5d9d429cd8f" align=left width=100>
 
 > 동료의 익명 피드백을 통한 나의 커리어 브랜딩, Na Lab &nbsp;&nbsp; • <b>백엔드</b> 레포지토리
