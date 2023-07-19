@@ -90,9 +90,13 @@
 - 유연하고 확장가능한 서비스를 위해 멀티모듈과 헥사고날 아키텍처를 적용
 - E2E 부터 깃허브 라벨링, PR 알람 등의 가능한 모든 작업을 자동화시켜 팀의 생산성 증대
 
+</br>
+
 ## 🏛️ System Architecture
 
 ![아키텍처이미지](https://github.com/oyeon-kwon/personal_color/assets/61301574/794d7625-f63f-418f-b03a-a7ab396f015b)
+
+</br>
 
 ## 📚 Tech Stack
 
