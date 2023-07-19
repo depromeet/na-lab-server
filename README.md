@@ -3,6 +3,8 @@
 > 동료의 익명 피드백을 통한 나의 커리어 브랜딩, Na Lab &nbsp;&nbsp; • <b>백엔드</b> 레포지토리
 
 
+</br>
+
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=depromeet_na-lab-server&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=depromeet_na-lab-server)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=depromeet_na-lab-server&metric=coverage)](https://sonarcloud.io/summary/new_code?id=depromeet_na-lab-server)
@@ -25,8 +27,9 @@
 </br>
 
 
-![질문폼만들기1](https://github.com/oyeon-kwon/personal_color/assets/61301574/e5acce5d-a9b9-4200-bc3c-7e6846b89702)
-![질문폼만들기2](https://github.com/depromeet/na-lab-client/assets/26461307/02ec7d6a-4a82-4d0a-9c5a-1eaa0de7d166)
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/e5acce5d-a9b9-4200-bc3c-7e6846b89702" alt="na lab" width="1000" height="750" />
+<img src ="https://github.com/depromeet/na-lab-client/assets/26461307/02ec7d6a-4a82-4d0a-9c5a-1eaa0de7d166" alt="na lab" width="1000" />   
+
 > 나의 커리어 브랜딩을 완성해주는 기본질문을 통해 손쉽게 질문폼을 만들 수 있어요    
 > 새로운 질문을 추가하고 싶다면 객관식, 주관식으로 자유롭게 질문을 만들어보세요!
 
@@ -34,8 +37,9 @@
 
 <br />
 
-![질문폼답변하기1](https://github.com/oyeon-kwon/personal_color/assets/61301574/16b0b65b-69ef-4915-a7be-c5ea9b1335ba)
-![질문폼답변하기2](https://github.com/depromeet/na-lab-client/assets/26461307/53664ba1-0970-4054-9b49-8071f0a4bf6c)
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/16b0b65b-69ef-4915-a7be-c5ea9b1335ba" alt="na lab" width="1000" height="750" />
+<img src = "https://github.com/depromeet/na-lab-client/assets/26461307/53664ba1-0970-4054-9b49-8071f0a4bf6c" alt="na lab" width="1000" />   
+
 > 부담스러웠던 동료 평가의 경험을 마치 친구와 심리테스트 하듯 즐겁게 할 수 있도록 설계했어요     
 > 나랩의 연구를 책임지는 Dr. 왓슨 박사님과 함께 채팅으로 대화하며 익명으로 피드백을 남길 수 있어요
 
@@ -44,8 +48,9 @@
 <br />
 
 
-![결과페이지1](https://github.com/oyeon-kwon/personal_color/assets/61301574/f6ae2893-0969-4122-a76a-dca99555d6f0)
-![결과페이지2](https://github.com/depromeet/na-lab-client/assets/26461307/459be0a9-1ba9-4d75-9a33-b36ed1747db8)
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/f6ae2893-0969-4122-a76a-dca99555d6f0" alt="na lab" width="1000" height="750" />
+<img src ="https://github.com/depromeet/na-lab-client/assets/26461307/459be0a9-1ba9-4d75-9a33-b36ed1747db8" alt="na lab" width="1000" />   
+
 > 많은 사람들의 답변 속에서 정말 나에게 도움이 되는 피드백은 어느 것일까요?   
 > 나랩은 유저가 개별 답변에 대한 이해도를 높이며 의미 있는 피드백을 얻을 수 있도록 결과를 정리했어요
 
@@ -53,9 +58,8 @@
 
 <br />
 
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/35ce40d7-c57c-4f61-80c9-6f7d643f0fe1" alt="na lab" width="1000" height="750" />   
 
-![커리어명함1](https://github.com/oyeon-kwon/personal_color/assets/61301574/35ce40d7-c57c-4f61-80c9-6f7d643f0fe1)
-![커리어명함2](https://github.com/oyeon-kwon/personal_color/assets/61301574/35ce40d7-c57c-4f61-80c9-6f7d643f0fe1)
 > 피드백 결과를 통해 나의 커리어 연구 결과를 확인할 수 있고,   
 > 동료들의 피드백을 저장해 나만의 커리어 명함을 만들 수 있어요
 
@@ -76,7 +80,8 @@
 
 - 안정성과 유지보수를 위해서 단위테스트, 통합테스트, E2E 테스트를 모두 짜는 전략으로 진행
 - 테스트 커버리는 분기와 라인 커버리지를 모두 검증하였으며 ***테스트 커버리지 93.7%를 달성***
-- 특히, E2E 테스트를 통해 실제 사용자의 여러 시나리오를 테스트함으로써 애플리케이션의 무결성을 검증하고자 하였으며 도입 이후 2차 MVP의 QA 에서 ***버그 제로 달성***
+- 특히, E2E 테스트를 통해 실제 사용자의 여러 시나리오를 테스트함으로써 애플리케이션의 무결성을 검증하고자 하였으며   
+  도입 이후 2차 MVP의 QA 에서 ***버그 제로 달성***
 - 유연하고 확장가능한 서비스를 위해 멀티모듈과 헥사고날 아키텍처를 적용
 - E2E 부터 깃허브 라벨링, PR 알람 등의 가능한 모든 작업을 자동화시켜 팀의 생산성 증대
 
