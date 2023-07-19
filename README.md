@@ -35,7 +35,7 @@
 </br>
 
 
-<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/e5acce5d-a9b9-4200-bc3c-7e6846b89702" alt="na lab" width="1000" height="550" />
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/e5acce5d-a9b9-4200-bc3c-7e6846b89702" alt="na lab" width="1000" height="750" />
 <img src ="https://github.com/depromeet/na-lab-client/assets/26461307/02ec7d6a-4a82-4d0a-9c5a-1eaa0de7d166" alt="na lab" />   
 
 > 나의 커리어 브랜딩을 완성해주는 기본질문을 통해 손쉽게 질문폼을 만들 수 있어요    
@@ -45,7 +45,7 @@
 
 <br />
 
-<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/16b0b65b-69ef-4915-a7be-c5ea9b1335ba" alt="na lab" width="1000" height="550" />
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/16b0b65b-69ef-4915-a7be-c5ea9b1335ba" alt="na lab" width="1000" height="750" />
 <img src = "https://github.com/depromeet/na-lab-client/assets/26461307/53664ba1-0970-4054-9b49-8071f0a4bf6c" alt="na lab" />   
 
 > 부담스러웠던 동료 평가의 경험을 마치 친구와 심리테스트 하듯 즐겁게 할 수 있도록 설계했어요     
@@ -56,7 +56,7 @@
 <br />
 
 
-<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/f6ae2893-0969-4122-a76a-dca99555d6f0" alt="na lab" width="1000" height="550" />
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/f6ae2893-0969-4122-a76a-dca99555d6f0" alt="na lab" width="1000" height="750" />
 <img src ="https://github.com/depromeet/na-lab-client/assets/26461307/459be0a9-1ba9-4d75-9a33-b36ed1747db8" alt="na lab" />   
 
 > 많은 사람들의 답변 속에서 정말 나에게 도움이 되는 피드백은 어느 것일까요?   
@@ -66,7 +66,7 @@
 
 <br />
 
-<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/35ce40d7-c57c-4f61-80c9-6f7d643f0fe1" alt="na lab" width="1000" height="550" />   
+<img src ="https://github.com/oyeon-kwon/personal_color/assets/61301574/35ce40d7-c57c-4f61-80c9-6f7d643f0fe1" alt="na lab" width="1000" height="750" />   
 
 > 피드백 결과를 통해 나의 커리어 연구 결과를 확인할 수 있고,   
 > 동료들의 피드백을 저장해 나만의 커리어 명함을 만들 수 있어요
