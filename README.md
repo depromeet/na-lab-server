@@ -1,4 +1,4 @@
-<img src ="https://github.com/depromeet/na-lab-server/assets/71487608/83984e60-f096-478c-a8c1-512308d78ee6" alt="na lab" />
+<img src ="https://github.com/depromeet/na-lab-server/assets/71487608/198b482e-53f6-4526-a7a0-a03a07051c6c" alt="na lab" />
 
 <br/>
 
