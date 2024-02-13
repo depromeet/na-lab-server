@@ -1,10 +1,11 @@
-
 subprojects {
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.18.24'
+        implementation "org.projectlombok:lombok:${lombokVersion}"
+
+        runtimeOnly "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor 'org.projectlombok:lombok'
 
-        testCompileOnly 'org.projectlombok:lombok:1.18.24'
+        testRuntimeOnly "org.projectlombok:lombok:${lombokVersion}"
         testAnnotationProcessor 'org.projectlombok:lombok'
     }
 }
