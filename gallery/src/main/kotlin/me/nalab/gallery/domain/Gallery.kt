@@ -1,12 +1,7 @@
 package me.nalab.gallery.domain
 
 import me.nalab.core.data.common.TimeBaseEntity
-import javax.persistence.Column
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
-import javax.persistence.Version
+import javax.persistence.*
 
 @Entity
 @Table(name = "gallery")
@@ -23,7 +18,19 @@ class Gallery(
 
     @Version
     private val version: Long? = null,
-): TimeBaseEntity() {
+) : TimeBaseEntity() {
+
+    fun userId(): Long = user.id
+
+    fun userName(): String = user.name
+
+    fun userPosition(): String = user.position
+
+    fun surveyId(): Long = survey.id
+
+    fun surveyFeedbackCount(): Int = survey.feedbackCount
+
+    fun surveySaveCount(): Int = survey.saveCount
 
     fun increaseFeedbackCount() = survey.feedbackCount++
 
