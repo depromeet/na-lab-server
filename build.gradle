@@ -3,6 +3,10 @@ plugins {
 	id 'org.springframework.boot' apply false
 	id 'io.spring.dependency-management'
 	id 'org.sonarqube'
+	id "org.jetbrains.kotlin.jvm"
+	id "org.jetbrains.kotlin.plugin.jpa"
+	id "org.jetbrains.kotlin.plugin.spring"
+	id "org.jetbrains.kotlin.plugin.allopen"
 }
 
 apply from: 'gradle/spring.gradle'
@@ -10,6 +14,7 @@ apply from: 'gradle/sonar.gradle'
 apply from: 'gradle/jacoco.gradle'
 apply from: 'gradle/junit.gradle'
 apply from: 'gradle/lombok.gradle'
+apply from: 'gradle/kotlin.gradle'
 
 allprojects {
 

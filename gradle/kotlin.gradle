@@ -1,0 +1,28 @@
+allprojects {
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.plugin.jpa'
+    apply plugin: 'org.jetbrains.kotlin.plugin.spring'
+    apply plugin: 'org.jetbrains.kotlin.plugin.allopen'
+
+    allOpen {
+        annotation("jakarta.persistence.Entity")
+    }
+
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+        testImplementation "org.jetbrains.kotlin:kotlin-test"
+        testImplementation "io.kotest:kotest-runner-junit5:${kotestVersion}"
+        testImplementation "io.kotest:kotest-assertions-core:${kotestVersion}"
+        testImplementation "io.kotest.extensions:kotest-extensions-spring:${kotestExtensionSpringVersion}"
+    }
+}
