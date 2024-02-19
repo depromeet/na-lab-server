@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowMessage
 import io.kotest.core.annotation.DisplayName
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.equality.shouldBeEqualUsingFields
+import me.nalab.gallery.domain.response.GalleryResponse
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.ContextConfiguration
@@ -25,12 +26,13 @@ class GalleryServiceTest(
         context("userId에 해당하는 Gallery 가 존재한다면,") {
             val userId = 100L
             val gallery = gallery(user = user(id = userId))
+            val expected = GalleryResponse(gallery)
             galleryRepository.saveAndFlush(gallery)
 
-            it("Gallery 를 반환한다.") {
+            it("GalleryResponse 를 반환한다.") {
                 val result = galleryService.getByUserId(userId)
 
-                result shouldBeEqualUsingFields gallery
+                result shouldBeEqualUsingFields expected
             }
         }
 

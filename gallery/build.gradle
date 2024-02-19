@@ -1,3 +1,8 @@
+repositories {
+    google()
+    mavenCentral()
+}
+
 dependencies {
     implementation project(":core:data")
 
@@ -5,4 +10,13 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
 
     testRuntimeOnly "com.h2database:h2"
+    testImplementation("io.rest-assured:rest-assured:${restAssuredVersion}") {
+        exclude group: 'org.apache.groovy'
+    }
+    testImplementation("io.rest-assured:kotlin-extensions:${restAssuredVersion}") {
+        exclude group: 'org.apache.groovy'
+    }
+    testImplementation("io.rest-assured:rest-assured-all:${restAssuredVersion}") {
+        exclude group: 'org.apache.groovy'
+    }
 }
