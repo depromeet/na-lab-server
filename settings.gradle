@@ -4,6 +4,10 @@ pluginManagement {
         id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
         id 'jacoco'
         id 'org.sonarqube' version "${sonarVersion}"
+        id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
+        id "org.jetbrains.kotlin.plugin.jpa" version "${kotlinVersion}"
+        id "org.jetbrains.kotlin.plugin.spring" version "${kotlinVersion}"
+        id "org.jetbrains.kotlin.plugin.allopen" version "${kotlinVersion}"
     }
 }
 
@@ -49,3 +53,5 @@ include 'user:user-domain'
 include 'user:user-jpa-adapter'
 include 'user:user-application'
 include 'user:user-web-adaptor'
+
+include 'gallery'
