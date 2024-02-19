@@ -13,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.TestPropertySource
 
 @DisplayName("Gallery 통합테스트의")
+@TestPropertySource("classpath:h2.properties")
 @ContextConfiguration(classes = [TestRoot::class])
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

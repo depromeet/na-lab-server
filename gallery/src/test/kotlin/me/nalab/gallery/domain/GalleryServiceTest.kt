@@ -8,15 +8,17 @@ import me.nalab.gallery.domain.response.GalleryResponse
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.TestPropertySource
 
 @DataJpaTest
+@EnableAutoConfiguration
 @ContextConfiguration(
     classes = [
         GalleryService::class,
     ]
 )
 @DisplayName("GalleryService 클래스의")
-@EnableAutoConfiguration
+@TestPropertySource("classpath:h2.properties")
 class GalleryServiceTest(
     private val galleryService: GalleryService,
     private val galleryRepository: GalleryRepository,
