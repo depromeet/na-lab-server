@@ -6,11 +6,14 @@ import javax.persistence.Embeddable
 @Embeddable
 class User(
     @Column(name = "user_id", nullable = false, unique = true, updatable = false)
-    internal val id: Long,
+    val id: Long,
 
     @Column(name = "user_name", nullable = false)
-    internal val name: String,
+    val name: String,
 
-    @Column(name = "user_position", nullable = false)
-    internal val position: String,
+    @Column(name = "user_nickname", nullable = false)
+    val nickname: String,
+
+    @Column(name = "user_image_url", nullable = true)
+    val userImageUrl: String,
 )

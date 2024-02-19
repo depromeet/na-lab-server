@@ -4,7 +4,10 @@ import me.nalab.core.data.common.TimeBaseEntity
 import javax.persistence.*
 
 @Entity
-@Table(name = "gallery")
+@Table(
+    name = "gallery",
+    indexes = [Index(columnList = "user_id")],
+)
 class Gallery(
     @Id
     @Column(name = "id")
@@ -24,15 +27,17 @@ class Gallery(
 
     fun userName(): String = user.name
 
-    fun userPosition(): String = user.position
+    fun userNickname(): String = user.nickname
 
     fun surveyId(): Long = survey.id
 
     fun surveyFeedbackCount(): Int = survey.feedbackCount
 
+    fun userImageUrl(): String = user.userImageUrl
+
     fun surveySaveCount(): Int = survey.saveCount
 
-    fun increaseFeedbackCount() = survey.feedbackCount++
+    fun feedback(): String = survey.feedback.reply
 
-    fun increaseSaveCount() = survey.saveCount++
+    fun tendencies(): List<Tendency> = ArrayList(survey.tendencies)
 }
