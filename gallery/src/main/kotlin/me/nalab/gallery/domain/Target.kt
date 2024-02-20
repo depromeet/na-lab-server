@@ -10,5 +10,4 @@ class Target(
 
     @Column(name = "position", nullable = false)
     val position: String,
-) {
-}
+)
