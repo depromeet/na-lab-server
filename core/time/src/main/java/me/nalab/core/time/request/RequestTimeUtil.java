@@ -2,8 +2,10 @@ package me.nalab.core.time.request;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
+import java.time.format.DateTimeFormatter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,10 @@ public class RequestTimeUtil implements TimeUtil {
 	private final Instant instant;
 
 	public RequestTimeUtil() {
-		instant = Instant.now();
+		var current = Instant.now();
+		var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSX")
+			.withZone(ZoneId.of("UTC"));
+		this.instant = Instant.parse(formatter.format(current));
 	}
 
 	/**
