@@ -2,6 +2,7 @@ package me.nalab.gallery.domain
 
 import me.nalab.core.data.common.TimeBaseEntity
 import javax.persistence.Column
+import javax.persistence.Embedded
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -13,9 +14,9 @@ class Gallery(
     @Column(name = "gallery_id")
     val id: Long,
 
-    @Column(name = "target_id", unique = true, nullable = false, updatable = false)
-    val targetId: Long,
+    @Embedded
+    val target: Target,
 
-    @Column(name = "survey_id", unique = true, nullable = false)
-    val surveyId: Long,
+    @Embedded
+    val survey: Survey,
 ) : TimeBaseEntity()
