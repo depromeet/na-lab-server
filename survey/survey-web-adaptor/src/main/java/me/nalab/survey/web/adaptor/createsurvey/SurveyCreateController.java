@@ -26,7 +26,6 @@ class SurveyCreateController {
 
 	private final CreateSurveyUseCase createSurveyUseCase;
 	private final LatestSurveyIdFindUseCase latestSurveyIdFindUseCase;
-	private final TimeUtil timeUtil;
 
 	@XssFiltering
 	@PostMapping("/surveys")
@@ -34,7 +33,7 @@ class SurveyCreateController {
 	public SurveyIdResponse createSurvey(@RequestAttribute("logined") Long loginId,
 		@Xss("json") @Valid @RequestBody SurveyCreateRequest surveyCreateRequest) {
 		createSurveyUseCase.createSurvey(loginId,
-			SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, timeUtil.toInstant()));
+			SurveyCreateRequestMapper.toSurveyDto(surveyCreateRequest, TimeUtil.toInstant()));
 		String latestSurveyId = String.valueOf(latestSurveyIdFindUseCase.getLatestSurveyIdByTargetId(loginId));
 		return new SurveyIdResponse(latestSurveyId);
 	}

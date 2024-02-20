@@ -2,11 +2,11 @@ package me.nalab.survey.jpa.adaptor.findfeedback.formtype;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import me.nalab.core.time.TimeUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
 @DataJpaTest
 @EnableJpaRepositories
 @EntityScan("me.nalab.core.data")
-@ContextConfiguration(classes = FeedbackFindAdaptor.class)
+@ContextConfiguration(classes = {FeedbackFindAdaptor.class})
 @TestPropertySource("classpath:h2.properties")
 class FeedbackFindAdaptorTest {
 
@@ -89,8 +89,8 @@ class FeedbackFindAdaptorTest {
 	private TargetEntity getTargetEntity() {
 		return TargetEntity.builder()
 			.id(1L)
-			.createdAt(Instant.now())
-			.updatedAt(Instant.now())
+			.createdAt(TimeUtil.toInstant())
+			.updatedAt(TimeUtil.toInstant())
 			.nickname("nalab")
 			.build();
 	}

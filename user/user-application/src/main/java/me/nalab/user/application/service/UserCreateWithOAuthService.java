@@ -22,7 +22,6 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
 	private final UserCreateWithOAuthPort userCreateWithOAuthPort;
 	private final CreateTargetUseCase createTargetUseCase;
 	private final IdGenerator idGenerator;
-	private final TimeUtil timeUtil;
 
 	@Override
 	public long createUser(CreateUserWithOAuthRequest request) {
@@ -32,7 +31,7 @@ public class UserCreateWithOAuthService implements UserCreateWithOAuthUseCase {
 		Objects.requireNonNull(email, "유저를 생성하기 위해서는 이메일 값은 필수입니다.");
 
 		var userId = idGenerator.generate();
-		var now = timeUtil.toInstant();
+		var now = TimeUtil.toInstant();
 
 		var user = new User(userId, request.getUsername(), email, now, now);
 		var userOAuthInfo = new UserOAuthInfo(
