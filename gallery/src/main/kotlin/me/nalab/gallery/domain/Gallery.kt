@@ -1,11 +1,8 @@
 package me.nalab.gallery.domain
 
 import me.nalab.core.data.common.TimeBaseEntity
-import javax.persistence.Column
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import java.time.Instant
+import javax.persistence.*
 
 @Entity
 @Table(name = "gallery")
@@ -19,4 +16,7 @@ class Gallery(
 
     @Embedded
     val survey: Survey,
+
+    @Column(name = "update_order", columnDefinition = "TIMESTAMP(6)", nullable = false)
+    private var updateOrder: Instant,
 ) : TimeBaseEntity()
