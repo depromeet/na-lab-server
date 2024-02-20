@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import me.nalab.survey.jpa.adaptor.TestTimeUtil;
+import me.nalab.core.time.TimeUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,8 +89,8 @@ class FeedbackFindAdaptorTest {
 	private TargetEntity getTargetEntity() {
 		return TargetEntity.builder()
 			.id(1L)
-			.createdAt(TestTimeUtil.now())
-			.updatedAt(TestTimeUtil.now())
+			.createdAt(TimeUtil.toInstant())
+			.updatedAt(TimeUtil.toInstant())
 			.nickname("nalab")
 			.build();
 	}

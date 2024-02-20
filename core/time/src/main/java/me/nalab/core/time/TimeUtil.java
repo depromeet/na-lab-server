@@ -1,23 +1,34 @@
 package me.nalab.core.time;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
-/**
- * 저장된 시간을 일간되게 반환하는 util 입니다.
- */
-public interface TimeUtil {
+public class TimeUtil {
 
-	/**
-	 * 저장된 시간을 LocalDateTime으로 반환합니다.
-	 * @return LocalDateTime
-	 */
-	LocalDateTime toLocalDateTime();
+	private static Clock clock = null;
 
-	/**
-	 * 저장된 시간을 Instant로 반환합니다.
-	 * @return Instant
-	 */
-	Instant toInstant();
+	private TimeUtil() {
+		throw new UnsupportedOperationException("Cannot invoke constructor \"TimeUtil()\"");
+	}
 
+	public static Instant toInstant() {
+		var current = Instant.now();
+		if (clock != null) {
+			current = Instant.now(clock);
+		}
+		return formatTo6Digit(current);
+	}
+
+	private static Instant formatTo6Digit(Instant instant) {
+		var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSX")
+			.withZone(ZoneId.of("UTC"));
+		return Instant.parse(formatter.format(instant));
+	}
+
+	public static void fixed(Clock clock) {
+		TimeUtil.clock = clock;
+	}
 }

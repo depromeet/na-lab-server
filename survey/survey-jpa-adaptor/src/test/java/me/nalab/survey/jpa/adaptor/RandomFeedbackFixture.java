@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import lombok.Setter;
+import me.nalab.core.time.TimeUtil;
 import me.nalab.survey.domain.feedback.Bookmark;
 import me.nalab.survey.domain.feedback.ChoiceFormQuestionFeedback;
 import me.nalab.survey.domain.feedback.Feedback;
@@ -106,7 +107,7 @@ public class RandomFeedbackFixture {
 			.isRead(randomBooleanGenerator.getAsBoolean())
 			.bookmark(Bookmark.builder()
 				.isBookmarked(false)
-				.bookmarkedAt(TestTimeUtil.now())
+				.bookmarkedAt(TimeUtil.toInstant())
 				.build())
 			.selectedChoiceIdSet(selectedIdSet)
 			.build();
@@ -120,7 +121,7 @@ public class RandomFeedbackFixture {
 			.isRead(randomBooleanGenerator.getAsBoolean())
 			.bookmark(Bookmark.builder()
 				.isBookmarked(false)
-				.bookmarkedAt(TestTimeUtil.now())
+				.bookmarkedAt(TimeUtil.toInstant())
 				.build())
 			.replyList(List.of(randomStringGenerator.get()))
 			.build();

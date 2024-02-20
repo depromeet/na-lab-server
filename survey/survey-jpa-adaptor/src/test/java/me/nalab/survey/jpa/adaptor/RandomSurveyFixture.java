@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import lombok.Setter;
+import me.nalab.core.time.TimeUtil;
 import me.nalab.survey.domain.survey.Choice;
 import me.nalab.survey.domain.survey.ChoiceFormQuestion;
 import me.nalab.survey.domain.survey.ChoiceFormQuestionType;
@@ -47,9 +48,7 @@ public class RandomSurveyFixture {
 				return id;
 			}
 		};
-		randomDateTimeGenerator = () -> {
-			return TestTimeUtil.now();
-		};
+		randomDateTimeGenerator = TimeUtil::toInstant;
 
 		randomQuestionCountGenerator = () -> (new Random()).nextInt(10) + 1;
 		randomStringGenerator = () -> {
