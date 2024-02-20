@@ -31,4 +31,8 @@ public class TimeUtil {
 	public static void fixed(Clock clock) {
 		TimeUtil.clock = clock;
 	}
+
+	public static void clear() {
+		TimeUtil.clock = null;
+	}
 }
