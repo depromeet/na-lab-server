@@ -3,10 +3,9 @@ package me.nalab.survey.jpa.adaptor.create;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.time.Instant;
-
 import javax.persistence.EntityManager;
 
+import me.nalab.survey.jpa.adaptor.TestTimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,8 +54,8 @@ class SurveyCreateAdaptorTest {
 		// given
 		TargetEntity targetEntity = TargetEntity.builder()
 			.id(101L)
-			.createdAt(Instant.now())
-			.updatedAt(Instant.now())
+			.createdAt(TestTimeUtil.now())
+			.updatedAt(TestTimeUtil.now())
 			.nickname("test target")
 			.build();
 		Survey survey = RandomSurveyFixture.createRandomSurvey();

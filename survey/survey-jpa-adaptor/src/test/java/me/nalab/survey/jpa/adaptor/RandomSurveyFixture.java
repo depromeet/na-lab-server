@@ -47,7 +47,10 @@ public class RandomSurveyFixture {
 				return id;
 			}
 		};
-		randomDateTimeGenerator = Instant::now;
+		randomDateTimeGenerator = () -> {
+			return TestTimeUtil.now();
+		};
+
 		randomQuestionCountGenerator = () -> (new Random()).nextInt(10) + 1;
 		randomStringGenerator = () -> {
 			Random random = new Random();

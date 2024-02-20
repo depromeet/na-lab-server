@@ -1,6 +1,5 @@
 package me.nalab.survey.jpa.adaptor;
 
-import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
@@ -107,7 +106,7 @@ public class RandomFeedbackFixture {
 			.isRead(randomBooleanGenerator.getAsBoolean())
 			.bookmark(Bookmark.builder()
 				.isBookmarked(false)
-				.bookmarkedAt(Instant.now())
+				.bookmarkedAt(TestTimeUtil.now())
 				.build())
 			.selectedChoiceIdSet(selectedIdSet)
 			.build();
@@ -121,10 +120,9 @@ public class RandomFeedbackFixture {
 			.isRead(randomBooleanGenerator.getAsBoolean())
 			.bookmark(Bookmark.builder()
 				.isBookmarked(false)
-				.bookmarkedAt(Instant.now())
+				.bookmarkedAt(TestTimeUtil.now())
 				.build())
 			.replyList(List.of(randomStringGenerator.get()))
 			.build();
 	}
-
 }
