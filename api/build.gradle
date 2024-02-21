@@ -17,6 +17,8 @@ dependencies {
     implementation project(':user:user-jpa-adapter')
     implementation project(':user:user-web-adaptor')
 
+    implementation project(':gallery')
+
     implementation project(":support:logging")
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
