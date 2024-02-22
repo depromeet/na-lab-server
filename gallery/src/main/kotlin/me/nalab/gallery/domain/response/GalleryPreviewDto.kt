@@ -14,6 +14,7 @@ data class GalleryPreviewDto(
         val nickname: String,
         val position: String?,
         val job: Job = Job.OTHER,
+        @JsonProperty("image_url")
         val imageUrl: String = "empty_image",
     )
 

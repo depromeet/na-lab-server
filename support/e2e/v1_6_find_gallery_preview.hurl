@@ -109,6 +109,29 @@ HTTP 201
 
 ##########
 
+GET http://nalab-server:8080/v1/feedbacks # 북마크를 위해 feedback id 저장
+Authorization: {{ token_type }} {{ auth_token }}
+
+[QueryStringParams]
+survey-id: {{ survey_id }}
+
+HTTP 200
+[Asserts]
+header "Content-type" == "application/json"
+
+[Captures]
+form_question_feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].form_question_feedback_id"
+
+##########
+
+PATCH http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크를 진행한다.
+Authorization: {{ token_type }} {{ auth_token }}
+
+[QueryStringParams]
+form-question-feedback-id: {{form_question_feedback_id}}
+
+##########
+
 GET http://nalab-server:8080/v1/gallerys/previews # 생성된 유저의 Gallery Preview 조회
 Authorization: {{ token_type }} {{ auth_token }}
 
