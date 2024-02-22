@@ -50,6 +50,31 @@ internal class GalleryPreviewAppTest(
                 response shouldBeEqualUsingFields expected
             }
         }
+
+        context("피드백이 하나도 없다면,") {
+            val expected = galleryPreviewDto(
+                target = galleryPreviewDtoTarget(DEFAULT_TARGET_ID.toString()),
+                survey = galleryPreviewDtoSurvey(
+                    surveyId = DEFAULT_SURVEY_ID.toString(),
+                    feedbackCount = 0,
+                    bookmarkedCount = 0,
+                    feedbacks = emptyList(),
+                    tendencies = emptyList(),
+                )
+            )
+
+
+            it("feedback이 비어있는 GalleryPreviewDto를 반환한다.") {
+                every { surveyFindUseCase.findSurveyByTargetId(DEFAULT_TARGET_ID) } returns surveyDto(
+                    id = DEFAULT_SURVEY_ID, formQuestionDtos = listOf(choiceFormQuestionDto())
+                )
+                every { feedbackFindUseCase.findAllFeedbackDtoBySurveyId(DEFAULT_SURVEY_ID) } returns emptyList()
+
+                val response = galleryPreviewApp.getGalleryPreview(DEFAULT_TARGET_ID)
+
+                response shouldBeEqualUsingFields expected
+            }
+        }
     }
 
 }) {

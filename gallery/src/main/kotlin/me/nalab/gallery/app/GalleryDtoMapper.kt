@@ -35,8 +35,8 @@ private fun findLatestBookmark(feedbacks: List<FeedbackDto>): List<String> {
     return feedbacks.filterBookmarkedFeedback()
         .mapBookmarkedWithReply()
         .sortedByDescending { (bookmark, _) -> bookmark.bookmarkedAt }
-        .first()
-        .second
+        .firstOrNull()
+        ?.second ?: emptyList()
 }
 
 private fun List<FeedbackDto>.filterBookmarkedFeedback(): List<FeedbackDto> {
