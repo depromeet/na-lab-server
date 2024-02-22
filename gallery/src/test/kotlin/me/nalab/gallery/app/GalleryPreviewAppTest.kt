@@ -40,7 +40,7 @@ internal class GalleryPreviewAppTest(
                 target = galleryPreviewDtoTarget(DEFAULT_TARGET_ID.toString()),
                 survey = galleryPreviewDtoSurvey(
                     surveyId = DEFAULT_SURVEY_ID.toString(),
-                    bookmarkedCount = 1
+                    bookmarkedCount = 0
                 ),
             )
 

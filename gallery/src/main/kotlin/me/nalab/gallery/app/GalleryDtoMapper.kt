@@ -24,23 +24,11 @@ fun toGalleryPreviewDto(
         survey = GalleryPreviewDto.Survey(
             surveyId = survey.id.toString(),
             feedbackCount = feedbacks.size,
-            bookmarkedCount = getBookmarkedCount(feedbacks),
+            bookmarkedCount = 0,
             feedbacks = findLatestBookmark(feedbacks),
             tendencies = findTendencies(survey, feedbacks),
         )
     )
-}
-
-private fun getBookmarkedCount(feedbacks: List<FeedbackDto>): Int {
-    var bookmarkedCount = 0
-    feedbacks.forEach { feedback ->
-        feedback.formQuestionFeedbackDtoableList.forEach { formQuestionFeedback ->
-            if (formQuestionFeedback.bookmarkDto.isBookmarked) {
-                bookmarkedCount++
-            }
-        }
-    }
-    return bookmarkedCount
 }
 
 private fun findLatestBookmark(feedbacks: List<FeedbackDto>): List<String> {
