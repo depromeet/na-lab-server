@@ -12,7 +12,7 @@ data class GalleryPreviewDto(
         @JsonProperty("target_id")
         val targetId: String,
         val nickname: String,
-        val position: String,
+        val position: String?,
         val job: Job = Job.OTHER,
         val imageUrl: String = "empty_image",
     )
