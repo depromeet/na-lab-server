@@ -161,6 +161,6 @@ jsonpath "$.target.image_url" == "empty_image"
 jsonpath "$.survey.survey_id" == {{ survey_id }}
 jsonpath "$.survey.feedback_count" == 1
 jsonpath "$.survey.bookmarked_count" == 0
-jsonpath "$.survey.feedbacks" = ["Hello world"]
-jsonpath "$.survey.tendencies.[0].name" = "UI"
-jsonpath "$.survey.tendencies.[0].count" = 1
+jsonpath "$.survey.feedbacks.[0]" == "Hello world"
+jsonpath "$.survey.tendencies.[0].name" == "UI"
+jsonpath "$.survey.tendencies.[0].count" == 1
