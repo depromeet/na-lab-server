@@ -1,15 +1,13 @@
 package me.nalab.survey.jpa.adaptor.find;
 
 import java.util.Optional;
-
-import org.springframework.stereotype.Repository;
-
 import lombok.RequiredArgsConstructor;
 import me.nalab.core.data.survey.SurveyEntity;
 import me.nalab.survey.application.port.out.persistence.survey.find.SurveyFindPort;
 import me.nalab.survey.domain.survey.Survey;
 import me.nalab.survey.jpa.adaptor.common.mapper.SurveyEntityMapper;
 import me.nalab.survey.jpa.adaptor.find.repository.SurveyFindRepository;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,4 +25,10 @@ public class SurveyFindAdaptor implements SurveyFindPort {
 		return Optional.of(survey);
 	}
 
+
+    @Override
+    public Optional<Survey> findSurveyByTargetId(Long targetId) {
+        return surveyFindRepository.findByTargetId(targetId)
+            .flatMap(surveyEntity -> Optional.of(SurveyEntityMapper.toSurvey(surveyEntity)));
+    }
 }

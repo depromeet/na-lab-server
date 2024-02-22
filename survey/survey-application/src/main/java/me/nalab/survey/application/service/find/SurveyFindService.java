@@ -1,5 +1,6 @@
 package me.nalab.survey.application.service.find;
 
+import me.nalab.survey.application.exception.TargetDoesNotHasSurveyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,13 @@ public class SurveyFindService implements SurveyFindUseCase {
 			throw new SurveyDoesNotExistException(surveyId);
 		});
 
+		return SurveyDtoMapper.toSurveyDto(targetId, survey);
+	}
+
+	@Override
+	public SurveyDto findSurveyByTargetId(Long targetId) {
+		var survey = surveyFindPort.findSurveyByTargetId(targetId)
+			.orElseThrow(() -> new TargetDoesNotHasSurveyException(targetId));
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
 }
