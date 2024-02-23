@@ -23,7 +23,6 @@ public abstract class AbstractSurveyTestSupporter {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.post(API_VERSION + "/surveys/" + surveyId + "/bookmarks")
 			.accept(MediaType.APPLICATION_JSON)
-			.contentType(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token));
 	}
 
