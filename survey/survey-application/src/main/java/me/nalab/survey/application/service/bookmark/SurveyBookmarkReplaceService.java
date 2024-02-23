@@ -28,13 +28,6 @@ public class SurveyBookmarkReplaceService implements SurveyBookmarkReplaceUseCas
 
         target.flipBookmark(surveyId);
 
-        return SurveyBookmarkDto.builder()
-            .surveyId(surveyId)
-            .targetId(target.getId())
-            .nickname(target.getNickname())
-            .job(target.getJob())
-            .imageUrl(target.getImageUrl())
-            .position(target.getPosition())
-            .build();
+        return SurveyBookmarkDto.from(surveyId, target);
     }
 }

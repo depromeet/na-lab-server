@@ -24,14 +24,7 @@ public class SurveyBookmarkReplaceController {
         @PathVariable("survey_id") Long surveyId) {
         var surveyBookmarked = surveyBookmarkReplaceUseCase.flipBookmark(targetId, surveyId);
 
-        return SurveyBookmarkResponse.builder()
-            .targetId(surveyBookmarked.targetId().toString())
-            .surveyId(surveyBookmarked.surveyId().toString())
-            .job(surveyBookmarked.job())
-            .nickname(surveyBookmarked.nickname())
-            .imageUrl(surveyBookmarked.imageUrl())
-            .position(surveyBookmarked.position())
-            .build();
+        return SurveyBookmarkResponse.of(surveyBookmarked);
     }
 
 }
