@@ -29,8 +29,6 @@ public class SurveyBookmarkReplaceService implements SurveyBookmarkReplaceUseCas
 
         target.flipBookmark(surveyId);
 
-        System.out.println(">>> nickname " + target.getNickname());
-
         return SurveyBookmarkDto.builder()
             .surveyId(surveyId)
             .targetId(target.getId())
