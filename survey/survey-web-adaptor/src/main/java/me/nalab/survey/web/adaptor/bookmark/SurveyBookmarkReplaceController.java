@@ -25,12 +25,12 @@ public class SurveyBookmarkReplaceController {
         var surveyBookmarked = surveyBookmarkReplaceUseCase.flipBookmark(targetId, surveyId);
 
         return SurveyBookmarkResponse.builder()
-            .targetId(surveyBookmarked.getTargetId().toString())
-            .surveyId(surveyBookmarked.getSurveyId().toString())
-            .job(surveyBookmarked.getJob())
-            .nickname(surveyBookmarked.getNickname())
-            .imageUrl(surveyBookmarked.getImageUrl())
-            .position(surveyBookmarked.getPosition())
+            .targetId(surveyBookmarked.targetId().toString())
+            .surveyId(surveyBookmarked.surveyId().toString())
+            .job(surveyBookmarked.job())
+            .nickname(surveyBookmarked.nickname())
+            .imageUrl(surveyBookmarked.imageUrl())
+            .position(surveyBookmarked.position())
             .build();
     }
 
