@@ -19,14 +19,14 @@ import me.nalab.survey.domain.survey.Survey;
 @ToString
 public class Target implements IdGeneratable {
 
-	private static final Set<Long> NONE_BOOKMARKED_SURVEYS = new HashSet<>();
+	private static final Set<SurveyBookmark> NONE_BOOKMARKED_SURVEYS = new HashSet<>();
 
 	private Long id;
 	private final List<Survey> surveyList;
 	private final String nickname;
 	private final String job;
 	private final String imageUrl;
-	private final Set<Long> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
+	private final Set<SurveyBookmark> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
 	private String position;
 
 	@Override
@@ -42,10 +42,11 @@ public class Target implements IdGeneratable {
 	}
 
 	public void flipBookmark(Long surveyId) {
-		if (bookmarkedSurveys.contains(surveyId)) {
-			bookmarkedSurveys.remove(surveyId);
+		var bookmark = new SurveyBookmark(surveyId);
+		if (bookmarkedSurveys.contains(bookmark)) {
+			bookmarkedSurveys.remove(bookmark);
 			return;
 		}
-		bookmarkedSurveys.add(surveyId);
+		bookmarkedSurveys.add(bookmark);
 	}
 }
