@@ -21,7 +21,7 @@ public abstract class AbstractSurveyTestSupporter {
 
 	protected ResultActions bookmarkSurvey(String token, Long surveyId) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.post(API_VERSION + "/surveys/" + surveyId + "/bookmarks")
+			.post("/{version}/surveys/{surveyId}/bookmarks", "v1", surveyId)
 			.accept(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token));
 	}
