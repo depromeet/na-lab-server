@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import javax.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,5 +48,9 @@ public class TargetEntity extends TimeBaseEntity {
         joinColumns = @JoinColumn(name = "target_id")
     )
     private Set<SurveyBookmarkEntity> bookmarkedSurveys;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 
 }
