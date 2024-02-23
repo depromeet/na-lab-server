@@ -19,6 +19,13 @@ public abstract class AbstractSurveyTestSupporter {
 	private static final String API_VERSION = "/v1";
 	private static final Set<String> tableNameSet = Set.of("target", "survey", "form_question", "choice");
 
+	protected ResultActions bookmarkSurvey(String token, Long surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.post("/{version}/surveys/{surveyId}/bookmarks", "v1", surveyId)
+			.accept(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token));
+	}
+
 	protected ResultActions createSurvey(String token, String content) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.post(API_VERSION + "/surveys")

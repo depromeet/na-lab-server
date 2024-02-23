@@ -14,6 +14,8 @@ public class TargetEntityMapper {
 			.id(target.getId())
 			.nickname(target.getNickname())
 			.position(target.getPosition())
+			.imageUrl(target.getImageUrl())
+			.job(target.getJob())
 			.build();
 	}
 
@@ -22,6 +24,7 @@ public class TargetEntityMapper {
 			.id(targetEntity.getId())
 			.nickname(targetEntity.getNickname())
 			.position(targetEntity.getPosition())
+			.job(targetEntity.getJob())
 			.build();
 	}
 }

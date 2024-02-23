@@ -17,4 +17,10 @@ public interface TargetFindPort {
 	 */
 	Optional<Target> findTargetById(Long targetId);
 
+	/**
+	 * targetId를 받아 Target을 반환합니다.
+	 * targetId에 해당하는 Target이 없다면 예외를 던집니다.
+	 */
+	Target getTargetById(Long targetId);
+
 }
