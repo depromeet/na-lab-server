@@ -1,6 +1,9 @@
 package me.nalab.survey.domain.target;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.LongSupplier;
 
 import lombok.Builder;
@@ -17,9 +20,14 @@ import me.nalab.survey.domain.survey.Survey;
 @ToString
 public class Target implements IdGeneratable {
 
+	private static final Set<Long> NONE_BOOKMARKED_SURVEYS = new HashSet<>();
+
 	private Long id;
 	private final List<Survey> surveyList;
 	private final String nickname;
+	private final String job;
+	private final String imageUrl;
+	private final Set<Long> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
 	private String position;
 
 	@Override
@@ -32,5 +40,13 @@ public class Target implements IdGeneratable {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public void flipBookmark(Long surveyId) {
+		if (bookmarkedSurveys.contains(surveyId)) {
+			bookmarkedSurveys.remove(surveyId);
+			return;
+		}
+		bookmarkedSurveys.add(surveyId);
 	}
 }

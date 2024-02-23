@@ -1,8 +1,12 @@
 package me.nalab.core.data.target;
 
+import java.util.Set;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -30,5 +34,18 @@ public class TargetEntity extends TimeBaseEntity {
 
 	@Column(name = "position")
 	private String position;
+
+    @Column(name = "job", columnDefinition = "TEXT")
+    private String job;
+
+    @Column(name = "image_url", columnDefinition = "TEXT")
+    private String imageUrl;
+
+    @ElementCollection
+    @CollectionTable(
+        name = "bookmarked_survey",
+        joinColumns = @JoinColumn(name = "target_id")
+    )
+    private Set<SurveyBookmarkEntity> bookmarkedSurveys;
 
 }

@@ -28,6 +28,7 @@ public class TargetInitializer {
 			.nickname(name)
 			.createdAt(date)
 			.updatedAt(date)
+			.imageUrl("empty image")
 			.build();
 		entityManager.persist(targetEntity);
 		return targetEntity.getId();
