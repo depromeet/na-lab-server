@@ -18,14 +18,14 @@ public class SurveyBookmarkReplaceService implements SurveyBookmarkReplaceUseCas
 
     @Override
     @Transactional
-    public SurveyBookmarkDto flipBookmark(Long targetId, Long surveyId) {
+    public SurveyBookmarkDto bookmark(Long targetId, Long surveyId) {
         var target = targetFindPort.getTargetById(targetId);
 
         if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
             throw new SurveyDoesNotExistException(surveyId);
         }
 
-        target.flipBookmark(surveyId);
+        target.bookmark(surveyId);
 
         return SurveyBookmarkDto.from(surveyId, target);
     }

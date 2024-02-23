@@ -22,7 +22,7 @@ public class SurveyBookmarkReplaceController {
     @PostMapping("/surveys/{survey_id}/bookmarks")
     public SurveyBookmarkResponse replaceBookmark(@RequestAttribute("logined") Long targetId,
         @PathVariable("survey_id") Long surveyId) {
-        var surveyBookmarked = surveyBookmarkReplaceUseCase.flipBookmark(targetId, surveyId);
+        var surveyBookmarked = surveyBookmarkReplaceUseCase.bookmark(targetId, surveyId);
 
         return SurveyBookmarkResponse.of(surveyBookmarked);
     }

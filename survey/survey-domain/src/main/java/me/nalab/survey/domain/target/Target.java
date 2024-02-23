@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.LongSupplier;
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,34 +18,30 @@ import me.nalab.survey.domain.survey.Survey;
 @ToString
 public class Target implements IdGeneratable {
 
-	private static final Set<SurveyBookmark> NONE_BOOKMARKED_SURVEYS = new HashSet<>();
+    private static final Set<SurveyBookmark> NONE_BOOKMARKED_SURVEYS = new HashSet<>();
 
-	private Long id;
-	private final List<Survey> surveyList;
-	private final String nickname;
-	private final String job;
-	private final String imageUrl;
-	private final Set<SurveyBookmark> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
-	private String position;
+    private Long id;
+    private final List<Survey> surveyList;
+    private final String nickname;
+    private final String job;
+    private final String imageUrl;
+    private final Set<SurveyBookmark> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
+    private String position;
 
-	@Override
-	public void withId(LongSupplier idSupplier) {
-		if (id != null) {
-			throw new IdAlreadyGeneratedException(this);
-		}
-		id = idSupplier.getAsLong();
-	}
+    @Override
+    public void withId(LongSupplier idSupplier) {
+        if (id != null) {
+            throw new IdAlreadyGeneratedException(this);
+        }
+        id = idSupplier.getAsLong();
+    }
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-	public void flipBookmark(Long surveyId) {
-		var bookmark = new SurveyBookmark(surveyId);
-		if (bookmarkedSurveys.contains(bookmark)) {
-			bookmarkedSurveys.remove(bookmark);
-			return;
-		}
-		bookmarkedSurveys.add(bookmark);
-	}
+    public void bookmark(Long surveyId) {
+        var bookmark = new SurveyBookmark(surveyId);
+        bookmarkedSurveys.add(bookmark);
+    }
 }
