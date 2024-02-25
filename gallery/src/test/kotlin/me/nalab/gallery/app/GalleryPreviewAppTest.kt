@@ -28,7 +28,7 @@ internal class GalleryPreviewAppTest(
 
     beforeEach {
         every { targetFindUseCase.findTarget(DEFAULT_TARGET_ID) } returns defaultTargetDto
-        every { surveyFindUseCase.findSurveyByTargetId(DEFAULT_TARGET_ID) } returns defaultSurveyDto
+        every { surveyFindUseCase.getSurveyByTargetId(DEFAULT_TARGET_ID) } returns defaultSurveyDto
         every { feedbackFindUseCase.findAllFeedbackDtoBySurveyId(DEFAULT_SURVEY_ID) } returns listOf(
             defaultFeedbackDto
         )
@@ -65,7 +65,7 @@ internal class GalleryPreviewAppTest(
 
 
             it("feedback이 비어있는 GalleryPreviewDto를 반환한다.") {
-                every { surveyFindUseCase.findSurveyByTargetId(DEFAULT_TARGET_ID) } returns surveyDto(
+                every { surveyFindUseCase.getSurveyByTargetId(DEFAULT_TARGET_ID) } returns surveyDto(
                     id = DEFAULT_SURVEY_ID, formQuestionDtos = listOf(choiceFormQuestionDto())
                 )
                 every { feedbackFindUseCase.findAllFeedbackDtoBySurveyId(DEFAULT_SURVEY_ID) } returns emptyList()

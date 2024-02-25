@@ -19,6 +19,6 @@ public interface SurveyFindUseCase {
 	 * @param targetId target의 id
 	 * @return SurveyDto
 	 */
-	SurveyDto findSurveyByTargetId(Long targetId);
+	SurveyDto getSurveyByTargetId(Long targetId);
 
 }

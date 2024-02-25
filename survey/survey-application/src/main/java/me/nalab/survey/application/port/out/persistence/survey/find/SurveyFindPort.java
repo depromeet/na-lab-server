@@ -23,5 +23,5 @@ public interface SurveyFindPort {
 	 * @param targetId survey를 조회할 target의 ID
 	 * @return Optional 만약, 어떠한 surveyId도 없을 경우, Optional.empty() 를 반환해야 합니다.
 	 */
-	Optional<Survey> findSurveyByTargetId(Long targetId);
+	Survey getSurveyByTargetId(Long targetId);
 }

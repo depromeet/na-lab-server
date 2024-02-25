@@ -15,7 +15,7 @@ class GalleryPreviewApp(
 
     fun findGalleryPreview(targetId: Long): GalleryPreviewDto {
         val target = targetFindUseCase.findTarget(targetId)
-        val survey = surveyFindUseCase.findSurveyByTargetId(targetId)
+        val survey = surveyFindUseCase.getSurveyByTargetId(targetId)
         val feedbacks = feedbackFindUseCase.findAllFeedbackDtoBySurveyId(survey.id)
 
         return toGalleryPreviewDto(target, survey, feedbacks)
