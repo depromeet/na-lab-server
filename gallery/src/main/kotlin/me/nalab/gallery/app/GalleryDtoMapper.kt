@@ -25,13 +25,13 @@ fun toGalleryPreviewDto(
             surveyId = survey.id.toString(),
             feedbackCount = feedbacks.size,
             bookmarkedCount = 0,
-            feedbacks = findLatestBookmark(feedbacks),
+            feedbacks = findLatestBookmarkedReply(feedbacks),
             tendencies = findTendencies(survey, feedbacks),
         )
     )
 }
 
-private fun findLatestBookmark(feedbacks: List<FeedbackDto>): List<String> {
+private fun findLatestBookmarkedReply(feedbacks: List<FeedbackDto>): List<String> {
     return feedbacks.filterBookmarkedFeedback()
         .mapBookmarkedWithReply()
         .sortedByDescending { (bookmark, _) -> bookmark.bookmarkedAt }
