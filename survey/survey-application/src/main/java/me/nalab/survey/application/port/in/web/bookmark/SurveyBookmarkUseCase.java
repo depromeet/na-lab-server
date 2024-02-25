@@ -2,7 +2,7 @@ package me.nalab.survey.application.port.in.web.bookmark;
 
 import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
 
-public interface SurveyBookmarkReplaceUseCase {
+public interface SurveyBookmarkUseCase {
 
     /**
      * targetId에 해당하는 유저에게 survey를 북마크합니다.

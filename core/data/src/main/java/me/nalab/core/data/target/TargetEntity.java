@@ -1,5 +1,6 @@
 package me.nalab.core.data.target;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 
 import javax.persistence.Version;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,7 +49,8 @@ public class TargetEntity extends TimeBaseEntity {
         name = "bookmarked_survey",
         joinColumns = @JoinColumn(name = "target_id")
     )
-    private Set<SurveyBookmarkEntity> bookmarkedSurveys;
+    @Builder.Default
+    private Set<SurveyBookmarkEntity> bookmarkedSurveys = new HashSet<>();
 
     @Version
     @Column(name = "version")

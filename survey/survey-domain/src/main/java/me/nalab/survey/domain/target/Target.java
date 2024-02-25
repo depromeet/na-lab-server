@@ -25,6 +25,7 @@ public class Target implements IdGeneratable {
     private final String nickname;
     private final String job;
     private final String imageUrl;
+    @Builder.Default
     private final Set<SurveyBookmark> bookmarkedSurveys = NONE_BOOKMARKED_SURVEYS;
     private String position;
 
