@@ -2,6 +2,7 @@ package me.nalab.survey.jpa.adaptor.findtarget;
 
 import java.util.Optional;
 
+import me.nalab.survey.application.exception.TargetDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -26,11 +27,14 @@ public class TargetFindAdaptor implements TargetFindPort {
 	@Override
 	public Optional<Target> findTargetById(Long targetId) {
 		Optional<TargetEntity> targetEntity = targetFindJpaRepository.findById(targetId);
-		if (targetEntity.isEmpty()) {
-			return Optional.empty();
-		}
-
-		return Optional.of(TargetEntityMapper.toTarget(targetEntity.get()));
+		return targetEntity.map(TargetEntityMapper::toTarget);
 	}
 
+	@Override
+	public Target getTargetById(Long targetId) {
+		var targetEntity = targetFindJpaRepository.findById(targetId)
+			.orElseThrow(() -> new TargetDoesNotExistException(targetId));
+
+		return TargetEntityMapper.toTarget(targetEntity);
+	}
 }
