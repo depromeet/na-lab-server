@@ -18,6 +18,6 @@ class GalleryController(
     @GetMapping("/previews")
     @ResponseStatus(HttpStatus.OK)
     fun getGalleryPreview(@RequestAttribute("logined") targetId: Long): GalleryPreviewDto =
-        galleryPreviewApp.getGalleryPreview(targetId)
+        galleryPreviewApp.findGalleryPreview(targetId)
 
 }

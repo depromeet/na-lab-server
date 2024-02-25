@@ -45,7 +45,7 @@ internal class GalleryPreviewAppTest(
             )
 
             it("GalleryPreviewDto를 반환한다.") {
-                val response = galleryPreviewApp.getGalleryPreview(DEFAULT_TARGET_ID)
+                val response = galleryPreviewApp.findGalleryPreview(DEFAULT_TARGET_ID)
 
                 response shouldBeEqualUsingFields expected
             }
@@ -70,7 +70,7 @@ internal class GalleryPreviewAppTest(
                 )
                 every { feedbackFindUseCase.findAllFeedbackDtoBySurveyId(DEFAULT_SURVEY_ID) } returns emptyList()
 
-                val response = galleryPreviewApp.getGalleryPreview(DEFAULT_TARGET_ID)
+                val response = galleryPreviewApp.findGalleryPreview(DEFAULT_TARGET_ID)
 
                 response shouldBeEqualUsingFields expected
             }
