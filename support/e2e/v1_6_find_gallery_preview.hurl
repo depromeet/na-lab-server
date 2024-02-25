@@ -142,7 +142,7 @@ header "Content-type" == "application/json"
 jsonpath "$.target.target_id" exists
 jsonpath "$.target.nickname" == "find_gallery"
 jsonpath "$.target.position" == null
-jsonpath "$.target.job" == "OTHER"
+jsonpath "$.target.job" == "OTHERS"
 jsonpath "$.target.image_url" == "empty_image"
 
 jsonpath "$.survey.survey_id" == {{ survey_id }}

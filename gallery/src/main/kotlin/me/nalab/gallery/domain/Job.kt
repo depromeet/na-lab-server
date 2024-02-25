@@ -4,5 +4,5 @@ enum class Job {
     PM,
     DEVELOPER,
     DESIGNER,
-    OTHER,
+    OTHERS,
 }
