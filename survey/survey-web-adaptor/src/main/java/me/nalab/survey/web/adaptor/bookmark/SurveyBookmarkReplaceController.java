@@ -1,7 +1,7 @@
 package me.nalab.survey.web.adaptor.bookmark;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkReplaceUseCase;
+import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.web.adaptor.bookmark.response.SurveyBookmarkResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SurveyBookmarkReplaceController {
 
-    private final SurveyBookmarkReplaceUseCase surveyBookmarkReplaceUseCase;
+    private final SurveyBookmarkUseCase surveyBookmarkReplaceUseCase;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/surveys/{survey_id}/bookmarks")

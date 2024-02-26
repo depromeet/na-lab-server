@@ -3,7 +3,8 @@ package me.nalab.survey.application.service.bookmark;
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
-import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkReplaceUseCase;
+import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
+import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkPort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.application.port.out.persistence.findtarget.TargetFindPort;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SurveyBookmarkReplaceService implements SurveyBookmarkReplaceUseCase {
+public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     private final TargetFindPort targetFindPort;
     private final SurveyExistCheckPort surveyExistCheckPort;
+    private final SurveyBookmarkPort surveyBookmarkPort;
 
     @Override
     @Transactional
@@ -26,6 +28,7 @@ public class SurveyBookmarkReplaceService implements SurveyBookmarkReplaceUseCas
         }
 
         target.bookmark(surveyId);
+        surveyBookmarkPort.bookmark(target);
 
         return SurveyBookmarkDto.from(surveyId, target);
     }
