@@ -11,6 +11,7 @@ dependencies {
     testImplementation project(':user:user-application')
     testImplementation project(':user:user-jpa-adapter')
     testImplementation project(':user:user-web-adaptor')
+    testImplementation project(':gallery')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
