@@ -1,6 +1,7 @@
 package me.nalab.gallery.domain
 
 import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.core.time.TimeUtil
 import java.time.Instant
 import javax.persistence.*
 
