@@ -29,8 +29,8 @@ class Gallery(
         targetId: Long,
         job: Job,
         surveyId: Long,
-        bookmarkedCount: Int,
-        updateOrder: Instant,
+        bookmarkedCount: Int = 0,
+        updateOrder: Instant = TimeUtil.toInstant(),
     ): this(id, Target(targetId, job), Survey(surveyId, bookmarkedCount), updateOrder)
 
     fun getTargetId(): Long = target.targetId
