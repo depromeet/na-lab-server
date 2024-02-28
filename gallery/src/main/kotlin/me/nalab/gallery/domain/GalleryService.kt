@@ -4,9 +4,15 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class GalleryService(
     private val galleryRepository: GalleryRepository,
 ) {
+
+    fun getGalleryByTargetId(targetId: Long): Gallery {
+        return galleryRepository.findByTargetIdOrNull(targetId)
+            ?: throw IllegalArgumentException("targetId \"$targetId\" 에 해당하는 Gallery를 찾을 수 없습니다.")
+    }
 
     @Transactional
     fun registerGallery(gallery: Gallery): Gallery {
