@@ -5,7 +5,9 @@ import me.nalab.gallery.domain.response.GalleryDto
 import me.nalab.survey.application.port.`in`.web.findfeedback.FeedbackFindUseCase
 import me.nalab.survey.application.port.`in`.web.survey.find.SurveyFindUseCase
 import me.nalab.survey.application.port.`in`.web.target.find.TargetFindUseCase
+import org.springframework.stereotype.Service
 
+@Service
 class GalleryGetApp(
     private val targetFindUseCase: TargetFindUseCase,
     private val surveyFindUseCase: SurveyFindUseCase,
