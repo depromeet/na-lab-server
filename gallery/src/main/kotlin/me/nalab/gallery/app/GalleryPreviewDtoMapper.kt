@@ -1,7 +1,6 @@
 package me.nalab.gallery.app
 
-import me.nalab.gallery.domain.Gallery
-import me.nalab.gallery.domain.response.GalleryDto
+import me.nalab.gallery.domain.response.GalleryPreviewDto
 import me.nalab.survey.application.common.feedback.dto.BookmarkDto
 import me.nalab.survey.application.common.feedback.dto.ChoiceFormQuestionFeedbackDto
 import me.nalab.survey.application.common.feedback.dto.FeedbackDto
@@ -11,24 +10,21 @@ import me.nalab.survey.application.common.survey.dto.ChoiceFormQuestionDtoType
 import me.nalab.survey.application.common.survey.dto.SurveyDto
 import me.nalab.survey.application.common.survey.dto.TargetDto
 
-fun toGalleryDto(
-    gallery: Gallery,
+fun toGalleryPreviewDto(
     target: TargetDto,
     survey: SurveyDto,
     feedbacks: List<FeedbackDto>,
-): GalleryDto {
-    return GalleryDto(
-        galleryId = gallery.id,
-        target = GalleryDto.Target(
-            targetId = gallery.getTargetId().toString(),
+): GalleryPreviewDto {
+    return GalleryPreviewDto(
+        target = GalleryPreviewDto.Target(
+            targetId = target.id.toString(),
             nickname = target.nickname,
-            job = gallery.getJob(),
             position = target.position,
         ),
-        survey = GalleryDto.Survey(
+        survey = GalleryPreviewDto.Survey(
             surveyId = survey.id.toString(),
             feedbackCount = feedbacks.size,
-            bookmarkedCount = gallery.getBookmarkedCount(),
+            bookmarkedCount = 0,
             feedbacks = findLatestBookmarkedReply(feedbacks),
             tendencies = findTendencies(survey, feedbacks),
         )
@@ -62,7 +58,7 @@ private fun List<FeedbackDto>.mapBookmarkedWithReply(): List<Pair<BookmarkDto, L
 private fun findTendencies(
     survey: SurveyDto,
     feedbacks: List<FeedbackDto>,
-): List<GalleryDto.Survey.Tendency> {
+): List<GalleryPreviewDto.Survey.Tendency> {
     val tendencyQuestion = survey.formQuestionDtoableList
         .filterIsInstance<ChoiceFormQuestionDto>()
         .find { it.choiceFormQuestionDtoType == ChoiceFormQuestionDtoType.TENDENCY }
@@ -84,7 +80,7 @@ private fun findTendencies(
         }
 
     return countPerTendency.map { (name, count) ->
-        GalleryDto.Survey.Tendency(name, count)
+        GalleryPreviewDto.Survey.Tendency(name, count)
     }
 }
 

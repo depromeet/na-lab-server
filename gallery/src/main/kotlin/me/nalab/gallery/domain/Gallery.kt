@@ -1,6 +1,7 @@
 package me.nalab.gallery.domain
 
 import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.core.time.TimeUtil
 import java.time.Instant
 import javax.persistence.*
 
@@ -19,4 +20,27 @@ class Gallery(
 
     @Column(name = "update_order", columnDefinition = "TIMESTAMP(6)", nullable = false)
     private var updateOrder: Instant,
-) : TimeBaseEntity()
+
+    @Version
+    private var version: Long? = null,
+) : TimeBaseEntity() {
+
+    constructor(
+        id: Long,
+        targetId: Long,
+        job: Job,
+        surveyId: Long,
+        bookmarkedCount: Int = 0,
+        updateOrder: Instant = TimeUtil.toInstant(),
+    ): this(id, Target(targetId, job), Survey(surveyId, bookmarkedCount), updateOrder)
+
+    fun getTargetId(): Long = target.targetId
+
+    fun getJob(): Job = target.job
+
+    fun getBookmarkedCount(): Int = survey.bookmarkedCount
+
+    fun increaseBookmarkedCount() {
+        survey.bookmarkedCount++
+    }
+}

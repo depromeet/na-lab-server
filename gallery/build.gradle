@@ -4,6 +4,8 @@ repositories {
 
 dependencies {
     implementation project(":core:data")
+    implementation project(":core:id-generator:id-core")
+    implementation project(":core:time")
     implementation project(":survey:survey-application")
 
     implementation "org.springframework.boot:spring-boot-starter-web"
