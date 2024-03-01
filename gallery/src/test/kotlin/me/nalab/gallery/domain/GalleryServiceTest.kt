@@ -3,6 +3,7 @@ package me.nalab.gallery.domain
 import io.kotest.assertions.throwables.shouldThrowMessage
 import io.kotest.core.annotation.DisplayName
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.equality.FieldsEqualityCheckConfig
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.equality.shouldBeEqualUsingFields
 import io.kotest.matchers.equals.shouldBeEqual
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.test.context.ContextConfiguration
 import java.time.temporal.ChronoUnit
+import kotlin.reflect.full.memberProperties
 
 @DataJpaTest
 @EnableJpaRepositories
@@ -190,7 +192,10 @@ internal class GalleryServiceTest(
         private fun List<Gallery>.shouldBeExactlyEqualToComparingFields(galleries: List<Gallery>) {
             this.size shouldBeEqual galleries.size
             for (i in galleries.indices) {
-                this[i] shouldBeEqualToComparingFields galleries[i]
+                this[i].shouldBeEqualToComparingFields(
+                    galleries[i],
+                    FieldsEqualityCheckConfig(propertiesToExclude = Gallery::class.memberProperties.filter { it.name == "createdAt" || it.name == "updatedAt" })
+                )
             }
         }
     }
