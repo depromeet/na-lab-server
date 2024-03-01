@@ -200,6 +200,7 @@ jsonpath "$.survey.tendencies.[0].count" == 1
 ##########
 
 GET http://nalab-server:8080/v1/gallerys/logins # 내 gallery 를 조회한다
+Authorization: {{ token_type }} {{ auth_token }}
 
 HTTP 200
 [Asserts]
