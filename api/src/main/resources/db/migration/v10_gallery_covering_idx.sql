@@ -1,0 +1,6 @@
+CREATE INDEX gallery_idx_bookmark ON gallery(bookmarked_count)
+CREATE INDEX gallery_idx_update_order ON gallery(update_order)
+CREATE UNIQUE INDEX gallery_idx_survey_id ON gallery(survey_id)
+CREATE INDEX gallery_idx_job ON gallery(job)
+CREATE INDEX gallery_idx_created_at ON gallery(created_at)
+CREATE INDEX gallery_idx_updated_at ON gallery(updated_at)
