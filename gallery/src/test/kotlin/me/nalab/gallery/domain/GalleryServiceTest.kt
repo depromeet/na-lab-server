@@ -6,13 +6,13 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.equality.shouldBeEqualUsingFields
 import io.kotest.matchers.equals.shouldBeEqual
+import me.nalab.core.time.TimeUtil
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.test.context.ContextConfiguration
-import java.time.Instant
 import java.time.temporal.ChronoUnit
 
 @DataJpaTest
@@ -157,14 +157,15 @@ internal class GalleryServiceTest(
         private const val EXIST_SURVEY_ID = 100L
 
         val updatePage: PageRequest = PageRequest.of(0, 5, Sort.by("updateOrder").descending())
-        val bookmarkPage: PageRequest = PageRequest.of(0, 5, Sort.by("survey.bookmarkedCount").descending())
+        val bookmarkPage: PageRequest =
+            PageRequest.of(0, 5, Sort.by("survey.bookmarkedCount").descending())
 
         val oldDesignerGallery = gallery(
             id = 1,
             targetId = 101,
             surveyId = 101,
             job = Job.DESIGNER,
-            updateOrder = Instant.now().minus(1, ChronoUnit.DAYS),
+            updateOrder = TimeUtil.toInstant().minus(1, ChronoUnit.DAYS),
             bookmarkedCount = 3
         )
 
@@ -173,7 +174,7 @@ internal class GalleryServiceTest(
             targetId = 102,
             surveyId = 102,
             job = Job.DEVELOPER,
-            updateOrder = Instant.now(),
+            updateOrder = TimeUtil.toInstant(),
             bookmarkedCount = 2
         )
 
@@ -182,7 +183,7 @@ internal class GalleryServiceTest(
             targetId = 103,
             surveyId = 103,
             job = Job.PM,
-            updateOrder = Instant.now().plus(1, ChronoUnit.DAYS),
+            updateOrder = TimeUtil.toInstant().plus(1, ChronoUnit.DAYS),
             bookmarkedCount = 1
         )
 
