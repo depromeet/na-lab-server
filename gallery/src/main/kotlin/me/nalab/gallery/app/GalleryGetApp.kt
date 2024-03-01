@@ -39,8 +39,8 @@ class GalleryGetApp(
         return GalleriesDto(galleries.totalPages, galleryDtos)
     }
 
-    private fun toGalleryDtos(galleries: Page<Gallery>) =
-        galleries.asSequence()
+    private fun toGalleryDtos(galleries: Page<Gallery>): List<GalleryDto> {
+        return galleries.asSequence()
             .map { gallery ->
                 val target = targetFindUseCase.findTarget(gallery.getTargetId())
                 val survey = surveyFindUseCase.getSurveyByTargetId(gallery.getTargetId())
@@ -48,6 +48,7 @@ class GalleryGetApp(
 
                 toGalleryDto(gallery, target, survey, feedbacks)
             }.toList()
+    }
 
     private fun getPage(page: Int, count: Int, orderType: String): Pageable {
         return when (orderType.lowercase()) {
