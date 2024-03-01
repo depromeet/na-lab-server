@@ -1,5 +1,7 @@
 package me.nalab.gallery.domain
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -26,5 +28,14 @@ class GalleryService(
     @Transactional
     fun increaseBookmarkCount(targetId: Long) {
         galleryRepository.findByTargetIdOrNull(targetId)?.increaseBookmarkedCount()
+    }
+
+    fun getGalleries(job: String, pageable: Pageable): Page<Gallery> {
+        val jobs = when (job) {
+            "all" -> Job.entries.toList()
+            else -> listOf(Job.valueOf(job.uppercase()))
+        }
+
+        return galleryRepository.findGalleries(jobs, pageable)
     }
 }
