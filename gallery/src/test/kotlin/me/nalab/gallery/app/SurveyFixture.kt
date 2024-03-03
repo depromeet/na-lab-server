@@ -1,5 +1,6 @@
 package me.nalab.gallery.app
 
+import me.nalab.core.time.TimeUtil
 import me.nalab.survey.application.common.feedback.dto.*
 import me.nalab.survey.application.common.survey.dto.*
 import java.time.Instant
@@ -23,7 +24,7 @@ fun surveyDto(
         choiceFormQuestionDto(),
         shortFormQuestionDto()
     ),
-    time: Instant = Instant.now(),
+    time: Instant = TimeUtil.toInstant(),
 ): SurveyDto {
     return SurveyDto.builder()
         .id(id)
@@ -36,7 +37,7 @@ fun surveyDto(
 
 fun choiceFormQuestionDto(
     id: Long = 0L,
-    time: Instant = Instant.now(),
+    time: Instant = TimeUtil.toInstant(),
     type: ChoiceFormQuestionDtoType = ChoiceFormQuestionDtoType.TENDENCY,
     choices: List<ChoiceDto> = listOf(choiceDto()),
     maxSelectableCount: Int = 5,
@@ -67,7 +68,7 @@ fun choiceDto(
 
 fun shortFormQuestionDto(
     id: Long = 0L,
-    time: Instant = Instant.now(),
+    time: Instant = TimeUtil.toInstant(),
     type: ShortFormQuestionDtoType = ShortFormQuestionDtoType.CUSTOM,
     title: String = "제가 고쳐야할점을 알려주세요.",
     order: Int = 1,
@@ -85,7 +86,7 @@ fun shortFormQuestionDto(
 fun feedbackDto(
     id: Long = 0L,
     surveyId: Long = 0L,
-    time: Instant = Instant.now(),
+    time: Instant = TimeUtil.toInstant(),
     formQuestionFeedbackDtos: List<FormQuestionFeedbackDtoable> = listOf(
         choiceFormQuestionFeedbackDto(),
         shortFormQuestionFeedbackDto()
@@ -136,7 +137,7 @@ fun shortFormQuestionFeedbackDto(
 
 fun bookmarkDto(
     isBookmarked: Boolean = false,
-    time: Instant = Instant.now(),
+    time: Instant = TimeUtil.toInstant(),
 ): BookmarkDto {
     return BookmarkDto.builder()
         .isBookmarked(isBookmarked)
