@@ -3,6 +3,7 @@ package me.nalab.user.application.service;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.time.Clock;
 import java.time.Instant;
 
 import org.assertj.core.api.Assertions;
@@ -37,9 +38,6 @@ class UserCreateWithOAuthServiceTest {
 	@MockBean
 	private MockIdGenerator mockIdGenerator;
 
-	@MockBean
-	private TimeUtil timeUtil;
-
 	@Test
 	@DisplayName("Provider가 null이면 예외를 던진다")
 	void THROW_EXCEPTION_WHEN_PROVIDER_IS_NULL() {
@@ -53,8 +51,7 @@ class UserCreateWithOAuthServiceTest {
 			username,
 			null
 		);
-
-        when(timeUtil.toInstant()).thenReturn(Instant.now());
+		TimeUtil.fixed(Clock.systemUTC());
 
 		// when
 		var throwable = Assertions.catchThrowable(() -> userCreateWithOAuthService.createUser(request));
@@ -76,8 +73,7 @@ class UserCreateWithOAuthServiceTest {
 			username,
 			null
 		);
-
-        when(timeUtil.toInstant()).thenReturn(Instant.now());
+		TimeUtil.fixed(Clock.systemUTC());
 
 		// when
 		var throwable = Assertions.catchThrowable(() -> userCreateWithOAuthService.createUser(request));
@@ -102,7 +98,7 @@ class UserCreateWithOAuthServiceTest {
 
 		long createdUserId = 1L;
 		when(userCreateWithOAuthPort.createUserWithOAuth(any(), any())).thenReturn(createdUserId);
-        when(timeUtil.toInstant()).thenReturn(Instant.now());
+		TimeUtil.fixed(Clock.systemUTC());
 
 		// when
 		var userId = userCreateWithOAuthService.createUser(request);

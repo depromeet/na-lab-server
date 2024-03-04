@@ -1,6 +1,7 @@
 package me.nalab.survey.application.common.survey.mapper;
 
 import me.nalab.survey.application.common.survey.dto.TargetDto;
+import me.nalab.survey.domain.target.SurveyBookmark;
 import me.nalab.survey.domain.target.Target;
 
 public class TargetDtoMapper {
@@ -21,6 +22,9 @@ public class TargetDtoMapper {
 			.id(target.getId())
 			.nickname(target.getNickname())
 			.position(target.getPosition())
+			.bookmarkedSurveys(target.getBookmarkedSurveys().stream()
+				.map(SurveyBookmark::surveyId)
+				.toList())
 			.build();
 	}
 }

@@ -2,6 +2,7 @@ package me.nalab.luffy.api.acceptance.test.survey;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import me.nalab.survey.web.adaptor.bookmark.response.SurveyBookmarkResponse;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -81,6 +82,35 @@ public class SurveyAcceptanceValidator {
 			jsonPath("$.target_id").isNumber(),
 			jsonPath("$.nickname").isString(),
 			jsonPath("$.position").hasJsonPath()
+		);
+	}
+
+
+	public static void assertIsSurveyExists(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.exists").value(true)
+		);
+	}
+
+	public static void assertIsSurveyDoesNotExists(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.exists").value(false)
+		);
+	}
+
+	public static void assertIsBookmarked(ResultActions resultActions) throws Exception {
+		resultActions.andExpectAll(
+			status().isOk(),
+			content().contentType(MediaType.APPLICATION_JSON),
+			jsonPath("$.target_id").isString(),
+			jsonPath("$.survey_id").isString(),
+			jsonPath("$.nickname").isString(),
+			jsonPath("$.position").doesNotExist(),
+			jsonPath("$.image_url").doesNotExist()
 		);
 	}
 

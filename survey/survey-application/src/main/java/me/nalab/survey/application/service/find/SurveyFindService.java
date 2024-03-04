@@ -33,4 +33,10 @@ public class SurveyFindService implements SurveyFindUseCase {
 
 		return SurveyDtoMapper.toSurveyDto(targetId, survey);
 	}
+
+	@Override
+	public SurveyDto getSurveyByTargetId(Long targetId) {
+		var survey = surveyFindPort.getSurveyByTargetId(targetId);
+		return SurveyDtoMapper.toSurveyDto(targetId, survey);
+	}
 }

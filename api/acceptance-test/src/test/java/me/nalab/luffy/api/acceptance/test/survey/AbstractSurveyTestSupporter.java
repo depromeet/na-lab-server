@@ -19,6 +19,13 @@ public abstract class AbstractSurveyTestSupporter {
 	private static final String API_VERSION = "/v1";
 	private static final Set<String> tableNameSet = Set.of("target", "survey", "form_question", "choice");
 
+	protected ResultActions bookmarkSurvey(String token, Long surveyId) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.post("/{version}/surveys/{surveyId}/bookmarks", "v1", surveyId)
+			.accept(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, token));
+	}
+
 	protected ResultActions createSurvey(String token, String content) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.post(API_VERSION + "/surveys")
@@ -48,6 +55,15 @@ public abstract class AbstractSurveyTestSupporter {
 	protected ResultActions findTargetBySurveyId(Long survey_Id) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
 			.get(API_VERSION + "/users?survey-id=" + survey_Id)
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+		);
+	}
+
+	protected ResultActions existsSurveyByToken(String token) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.get(API_VERSION + "/surveys/exists")
+			.header("Authorization", token)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 		);

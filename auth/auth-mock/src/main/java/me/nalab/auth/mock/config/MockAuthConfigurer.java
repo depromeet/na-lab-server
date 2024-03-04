@@ -13,6 +13,7 @@ public class MockAuthConfigurer implements WebMvcConfigurer {
 
 	private static final String[] INTERCEPTOR_URLS = {
 		"/v1/surveys",
+		"/v1/surveys/exists",
 		"/v1/users",
 		"/v1/surveys-id",
 		"/v1/questions",
@@ -21,6 +22,7 @@ public class MockAuthConfigurer implements WebMvcConfigurer {
 		"/v1/reviewers*",
 		"/v1/reviewers/summary*",
 		"/v2/surveys/*/feedbacks",
+		"/v1/surveys/*/bookmarks",
 	};
 
 	@Override

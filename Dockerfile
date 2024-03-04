@@ -1,4 +1,4 @@
-FROM openjdk:11.0.11-jre-slim
+FROM openjdk:17-jdk-slim
 
 ARG JAR_FILE=./api/build/libs/*-SNAPSHOT.jar
 ARG DB_URL

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Provider {
 	KAKAO(true),
+	APPLE(true),
 	DEFAULT(false)
 	;
 

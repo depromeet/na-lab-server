@@ -11,13 +11,6 @@ import me.nalab.luffy.api.acceptance.test.feedback.create.request.FeedbackCreate
 import me.nalab.luffy.api.acceptance.test.feedback.create.response.SurveyFindResponse;
 import me.nalab.luffy.api.acceptance.test.survey.RequestSample;
 import org.json.JSONObject;
-
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackAcceptanceValidator.*;
-import static me.nalab.luffy.api.acceptance.test.feedback.FeedbackCreateRequestFixture.*;
-
-import java.time.Instant;
-import java.util.Map;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

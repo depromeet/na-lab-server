@@ -16,6 +16,7 @@ public class JwtDecryptInterceptorConfigurer implements WebMvcConfigurer {
 
 	private static final String[] INTERCEPTOR_URLS = {
 		"/v1/surveys",
+		"/v1/surveys/exists",
 		"/v1/surveys-id",
 		"/v1/users",
 		"/v1/questions",
@@ -25,7 +26,11 @@ public class JwtDecryptInterceptorConfigurer implements WebMvcConfigurer {
 		"/v1/reviewers/summary*",
 		"/v2/surveys/*/feedbacks",
 		"/v1/feedbacks/bookmarks",
-		"/v1/users"
+		"/v1/users",
+		"/v1/gallerys/previews",
+		"/v1/surveys/*/bookmarks",
+		"/v1/gallerys/logins",
+		"/v1/gallerys",
 	};
 
 	@Override

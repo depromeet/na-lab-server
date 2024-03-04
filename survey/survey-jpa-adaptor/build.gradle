@@ -5,5 +5,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    testImplementation project(':core:time')
     testImplementation 'com.h2database:h2:2.1.214'
 }

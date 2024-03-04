@@ -2,11 +2,11 @@ package me.nalab.survey.jpa.adaptor.findfeedback.formtype;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.Instant;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import me.nalab.core.time.TimeUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +74,8 @@ class SurveyFindAdaptorTest {
 	private TargetEntity getTargetEntity() {
 		return TargetEntity.builder()
 			.id(1L)
-			.createdAt(Instant.now())
-			.updatedAt(Instant.now())
+			.createdAt(TimeUtil.toInstant())
+			.updatedAt(TimeUtil.toInstant())
 			.nickname("nalab")
 			.build();
 	}
