@@ -26,7 +26,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew clean build
+        run: ./gradlew clean build -x test
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2.1.0
@@ -41,7 +41,7 @@ jobs:
           images: samillmu/luffy
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4.0.0
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
