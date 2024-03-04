@@ -1,6 +1,9 @@
 name: Docker release image publisher
 
 on:
+  pull_request:
+    branches:
+      - release
   push:
     branches:
       - release
@@ -33,7 +36,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4.4.0
+        uses: docker/metadata-action@v5
         with:
           images: samillmu/luffy
 
