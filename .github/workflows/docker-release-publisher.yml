@@ -53,8 +53,8 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: |
-            DB_URL=${{ secrets.DB_URL }} 
-            DB_USERNAME=${{ secrets.DB_USERNAME }} 
+            DB_URL=${{ secrets.DB_URL }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             KAKAO_CLIENT_ID=${{ secrets.KAKAO_CIENT_ID }}
