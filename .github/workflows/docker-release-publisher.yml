@@ -55,4 +55,4 @@ jobs:
             SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           tags: | 
             samillmu/luffy:latest
-            ${{ steps.meta.outputs.tags }}
+#            ${{ steps.meta.outputs.tags }}
