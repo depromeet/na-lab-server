@@ -1,7 +1,7 @@
 POST http://nalab-server:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
 {
     "nickname": "devxb",
-    "email": "hello@12345"
+    "email": "bookmark@google.com"
 }
 
 HTTP 200

@@ -1,7 +1,7 @@
 POST http://nalab-server:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
 {
     "nickname": "find_gallery",
-    "email": "hello@1234567"
+    "email": "find_gallery_preview@naver.com"
 }
 
 HTTP 200
