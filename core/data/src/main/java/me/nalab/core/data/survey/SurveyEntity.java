@@ -32,7 +32,7 @@ public class SurveyEntity extends TimeBaseEntity {
 	@OneToMany(mappedBy = "survey", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<FormQuestionEntity> formQuestionableList;
 
-	@JoinColumn(name = "target_id", nullable = false)
+	@JoinColumn(name = "target_id", nullable = false, unique = true)
 	private Long targetId;
 
 	SurveyEntity(SurveyEntityBuilder<?, ?> surveyEntityBuilder){
