@@ -1,6 +1,9 @@
 name: Docker release image publisher
 
 on:
+  pull_request:
+    branches:
+      - release
   push:
     branches:
       - release
@@ -23,7 +26,13 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew clean build
+        run: ./gradlew clean build -x test
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2.1.0
@@ -33,23 +42,23 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4.4.0
+        uses: docker/metadata-action@v5
         with:
           images: samillmu/luffy
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4.0.0
+        uses: docker/build-push-action@v5
         with:
+          push: true
           context: .
           file: ./Dockerfile
-          push: true
           build-args: |
-            DB_URL=${{ secrets.DB_URL }} 
-            DB_USERNAME=${{ secrets.DB_USERNAME }} 
+            DB_URL=${{ secrets.DB_URL }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             KAKAO_CLIENT_ID=${{ secrets.KAKAO_CIENT_ID }}
             SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          tags: | 
+          tags: |
             samillmu/luffy:latest
             ${{ steps.meta.outputs.tags }}
