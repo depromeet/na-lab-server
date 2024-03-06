@@ -9,18 +9,18 @@ import javax.persistence.*
 class Survey(
     @Id
     @Column(name = "gallery_id")
-    private var id: Long? = null,
+    val id: Long,
 
     @OneToMany(
         mappedBy = "survey",
         fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST, CascadeType.MERGE]
     )
-    private val formQuestionables: MutableList<FormQuestionable>,
+    val formQuestionables: MutableList<FormQuestionable>,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "target_id")
-    private val target: Target,
+    val target: Target,
 ) : TimeBaseEntity() {
 
     init {

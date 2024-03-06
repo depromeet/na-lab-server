@@ -8,17 +8,17 @@ class Choice(
 
     @Id
     @Column(name = "choice_id")
-    private var id: Long? = null,
+    val id: Long,
 
     @Column(name = "content", length = 18, nullable = false)
-    private val content: String,
+    val content: String,
 
     @Column(name = "orders", nullable = false)
     val order: Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "form_question_id", nullable = false)
-    private val choiceFormQuestion: ChoiceFormQuestion,
+    val choiceFormQuestion: ChoiceFormQuestion,
 ) : Comparable<Choice> {
 
     override fun compareTo(other: Choice): Int {
