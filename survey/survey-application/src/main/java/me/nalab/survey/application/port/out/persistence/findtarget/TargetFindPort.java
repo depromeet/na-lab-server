@@ -1,7 +1,8 @@
 package me.nalab.survey.application.port.out.persistence.findtarget;
 
+import java.util.List;
 import java.util.Optional;
-
+import java.util.Set;
 import me.nalab.survey.domain.target.Target;
 
 /**
@@ -23,4 +24,8 @@ public interface TargetFindPort {
 	 */
 	Target getTargetById(Long targetId);
 
+	/**
+	 * surveyId 들로 Target들을 조회합니다.
+	 */
+	List<Target> findAllTargetBySurveyIds(Set<Long> surveyIds);
 }
