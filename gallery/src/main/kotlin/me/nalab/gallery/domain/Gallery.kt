@@ -40,7 +40,7 @@ class Gallery(
 
     fun getBookmarkedCount(): Int = survey.bookmarkedCount
 
-    fun increaseBookmarkedCount() {
-        survey.bookmarkedCount++
+    fun setBookmarkedCount(bookmarkedCount: Int) {
+        survey.bookmarkedCount = bookmarkedCount
     }
 }

@@ -14,17 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1")
 @RequiredArgsConstructor
-public class SurveyBookmarkReplaceController {
+public class SurveyBookmarkController {
 
     private final SurveyBookmarkUseCase surveyBookmarkReplaceUseCase;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/surveys/{survey_id}/bookmarks")
-    public SurveyBookmarkResponse replaceBookmark(@RequestAttribute("logined") Long targetId,
+    public SurveyBookmarkResponse bookmark(@RequestAttribute("logined") Long targetId,
         @PathVariable("survey_id") Long surveyId) {
         var surveyBookmarked = surveyBookmarkReplaceUseCase.bookmark(targetId, surveyId);
 
         return SurveyBookmarkResponse.of(surveyBookmarked);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/surveys/{survey_id}/bookmarks/cancels")
+    public SurveyBookmarkResponse cancelBookmark(@RequestAttribute("logined") Long targetId,
+        @PathVariable("survey_id") Long surveyId) {
+        var surveyBookmarked = surveyBookmarkReplaceUseCase.cancelBookmark(targetId, surveyId);
+
+        return SurveyBookmarkResponse.of(surveyBookmarked);
+    }
 }

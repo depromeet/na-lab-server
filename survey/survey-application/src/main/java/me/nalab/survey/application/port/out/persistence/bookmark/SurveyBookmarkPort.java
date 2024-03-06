@@ -4,5 +4,5 @@ import me.nalab.survey.domain.target.Target;
 
 public interface SurveyBookmarkPort {
 
-    void bookmark(Target target);
+    void updateBookmark(Target target);
 }
