@@ -34,10 +34,6 @@ class Target(
     private var version: Long? = null
 ) : TimeBaseEntity() {
 
-    fun setPosition(position: String) {
-        this.position = position
-    }
-
     fun bookmark(surveyId: Long) {
         val bookmark = SurveyBookmark(surveyId)
         bookmarkedSurveys.add(bookmark)
