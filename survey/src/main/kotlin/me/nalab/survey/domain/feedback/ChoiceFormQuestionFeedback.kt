@@ -1,0 +1,17 @@
+package me.nalab.survey.domain.feedback
+
+import javax.persistence.*
+
+@Entity
+class ChoiceFormQuestionFeedback(
+    id: Long? = null,
+    formQuestionId: Long,
+    isRead: Boolean = false,
+    bookmark: Bookmark,
+    feedback: Feedback,
+
+    @ElementCollection
+    @Column(name = "selects")
+    @CollectionTable(name = "selects", joinColumns = [JoinColumn(name = "form_feedback_id")])
+    private val selectedChoiceIds: MutableSet<Long>,
+) : FormQuestionFeedbackable(id, formQuestionId, isRead, bookmark, feedback)
