@@ -8,28 +8,47 @@ import javax.persistence.*
 class Feedback(
     @Id
     @Column(name = "feedback_id")
-    private var id: Long? = null,
+    val id: Long,
 
     @JoinColumn(name = "survey_id", nullable = false)
-    private val surveyId: Long,
+    val surveyId: Long,
 
     @OneToMany(
         mappedBy = "feedback",
         fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST, CascadeType.MERGE]
     )
-    private val allQuestionFeedbacks: MutableList<FormQuestionFeedbackable>,
+    val allQuestionFeedbacks: MutableList<FormQuestionFeedbackable>,
 
     @Column(name = "is_read", nullable = false)
     private var isRead: Boolean = false,
 
     @JoinColumn(name = "reviewer_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-    private val reviewer: Reviewer,
+    val reviewer: Reviewer,
 ) : Comparable<Feedback>, TimeBaseEntity() {
 
     fun read(read: Boolean) {
         isRead = read
+    }
+
+    fun generateFirstReviewerNickName() {
+        reviewer.nickName = "A"
+    }
+
+    fun generateNickName(lastName: String) {
+        reviewer.nickName = getNextNickName(lastName)
+    }
+
+    private fun getNextNickName(lastName: String): String {
+        for (i in lastName.length - 1 downTo 0) {
+            if (lastName[i] != 'Z') {
+                return lastName.substring(0, i) + (lastName[i].code + 1).toChar() + "A".repeat(
+                    lastName.length - (i + 1)
+                )
+            }
+        }
+        return "A".repeat(Math.max(0, lastName.length + 1))
     }
 
     override fun compareTo(other: Feedback): Int {

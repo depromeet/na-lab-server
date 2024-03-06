@@ -8,23 +8,26 @@ import javax.persistence.*
 class Target(
     @Id
     @Column(name = "target_id")
-    private var id: Long? = null,
+    val id: Long,
 
     @Column(name = "target_name", nullable = false)
-    private val nickname: String,
+    val nickname: String,
 
     @Column(name = "job", columnDefinition = "TEXT")
-    private val job: String,
+    val job: String,
 
     @Column(name = "image_url", columnDefinition = "TEXT")
-    private val imageUrl: String,
+    val imageUrl: String,
 
     @Column(name = "position")
-    private var position: String? = null,
+    var position: String? = null,
+
+    @OneToMany(mappedBy = "target", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val survey: Survey,
 
     @ElementCollection
     @CollectionTable(name = "bookmarked_survey", joinColumns = [JoinColumn(name = "target_id")])
-    private val bookmarkedSurveys: MutableSet<SurveyBookmark> = NONE_BOOKMARKED_SURVEYS,
+    val bookmarkedSurveys: MutableSet<SurveyBookmark> = NONE_BOOKMARKED_SURVEYS,
 
     @Version
     @Column(name = "version")

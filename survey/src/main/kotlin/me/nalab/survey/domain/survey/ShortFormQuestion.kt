@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 class ShortFormQuestion(
-    id: Long? = null,
+    id: Long,
     title: String,
     order: Int,
     questionType: QuestionType,
@@ -12,5 +12,5 @@ class ShortFormQuestion(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "short_form_question_type")
-    private val shortFormQuestionType: ShortFormQuestionType,
+    val shortFormQuestionType: ShortFormQuestionType,
 ) : FormQuestionable(id, title, order, questionType, survey)

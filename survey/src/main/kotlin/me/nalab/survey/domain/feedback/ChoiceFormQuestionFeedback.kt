@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 class ChoiceFormQuestionFeedback(
-    id: Long? = null,
+    id: Long,
     formQuestionId: Long,
     isRead: Boolean = false,
     bookmark: Bookmark,

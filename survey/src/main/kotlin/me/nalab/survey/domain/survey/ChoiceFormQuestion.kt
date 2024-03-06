@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 class ChoiceFormQuestion(
-    id: Long? = null,
+    id: Long,
     title: String,
     order: Int,
     questionType: QuestionType,
@@ -16,14 +16,14 @@ class ChoiceFormQuestion(
         fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],
     )
-    private val choices: MutableList<Choice>,
+    val choices: MutableList<Choice>,
 
     @Column(name = "max_selection_count")
-    private val maxSelectableCount: Int,
+    val maxSelectableCount: Int,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "choice_question_type")
-    private val choiceFormQuestionType: ChoiceFormQuestionType,
+    val choiceFormQuestionType: ChoiceFormQuestionType,
 ) : FormQuestionable(id, title, order, questionType, survey) {
 
     init {

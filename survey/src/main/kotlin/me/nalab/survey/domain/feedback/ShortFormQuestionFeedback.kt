@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 class ShortFormQuestionFeedback(
-    id: Long? = null,
+    id: Long,
     formQuestionId: Long,
     isRead: Boolean = false,
     bookmark: Bookmark,
@@ -13,5 +13,5 @@ class ShortFormQuestionFeedback(
     @ElementCollection
     @CollectionTable(name = "reply", joinColumns = [JoinColumn(name = "form_feedback_id")])
     @Column(name = "replies")
-    private val replies: MutableList<String>,
+    val replies: MutableList<String>,
 ) : FormQuestionFeedbackable(id, formQuestionId, isRead, bookmark, feedback)
