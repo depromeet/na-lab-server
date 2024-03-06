@@ -2,12 +2,15 @@ package me.nalab.survey.application.service.create;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import me.nalab.survey.application.port.out.persistence.existsurvey.SurveyExistPort;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,6 +45,15 @@ class SurveyCreateServiceTest {
 
 	@MockBean
 	private TargetExistCheckPort findTargetPort;
+
+	@MockBean
+	private SurveyExistPort surveyExistPort;
+
+	@BeforeEach
+	void mockingSurveyExistPort() {
+		when(surveyExistPort.isSurveyExistByTargetId(anyLong())).thenReturn(false);
+	}
+
 
 	@ParameterizedTest
 	@MethodSource("surveyDtoLargeNullIdSources")
