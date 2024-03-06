@@ -1,7 +1,7 @@
 POST http://nalab-server:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
 {
     "nickname": "bookmark_survey",
-    "email": "hello@123456"
+    "email": "bookmark_survey@kakao.com"
 }
 
 HTTP 200

@@ -1,7 +1,7 @@
 POST http://nalab-server:8080/v1/oauth/default # 로그인
 {
     "nickname" : "luffy",
-    "email" : "test@gmail.com"
+    "email" : "feedback_find_1@gmail.com"
 }
 
 HTTP 200

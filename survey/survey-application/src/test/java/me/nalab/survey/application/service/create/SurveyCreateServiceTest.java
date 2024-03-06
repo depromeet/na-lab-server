@@ -2,12 +2,17 @@ package me.nalab.survey.application.service.create;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import me.nalab.survey.application.exception.DuplicateSurveyException;
+import me.nalab.survey.application.port.out.persistence.existsurvey.SurveyExistPort;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,6 +47,33 @@ class SurveyCreateServiceTest {
 
 	@MockBean
 	private TargetExistCheckPort findTargetPort;
+
+	@MockBean
+	private SurveyExistPort surveyExistPort;
+
+	@BeforeEach
+	void mockingSurveyExistPort() {
+		when(surveyExistPort.isSurveyExistByTargetId(anyLong())).thenReturn(false);
+	}
+
+    @Test
+    @DisplayName("targetId에 해당하는 유저가 survey를 이미 등록했다면, DuplicateSurveyException을 던진다.")
+    void THROW_DUPLICATE_SURVEY_EXCEPTION_WHEN_SURVEY_WAS_DUPLICATED() {
+        // given
+        RandomSurveyDtoFixture.initGenerator();
+        var surveyDto = RandomSurveyDtoFixture.createRandomSurveyDto();
+        Long targetId = 1L;
+
+		when(findTargetPort.isExistTargetByTargetId(targetId)).thenReturn(true);
+        when(surveyExistPort.isSurveyExistByTargetId(anyLong())).thenReturn(true);
+
+        // when
+        var result = Assertions.catchException(() -> createSurveyUseCase.createSurvey(targetId, surveyDto));
+
+        // then
+        Assertions.assertThat(result.getClass()).isEqualTo(DuplicateSurveyException.class);
+    }
+
 
 	@ParameterizedTest
 	@MethodSource("surveyDtoLargeNullIdSources")
