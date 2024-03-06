@@ -51,9 +51,9 @@ class GalleryGetApp(
     }
 
     private fun getPage(page: Int, count: Int, orderType: String): Pageable {
-        return when (orderType.lowercase()) {
-            "update" -> PageRequest.of(page, count, Sort.by("updateOrder").descending())
-            "job" -> PageRequest.of(page, count, Sort.by("survey.bookmarkedCount").descending())
+        return when (orderType.uppercase()) {
+            "UPDATE" -> PageRequest.of(page, count, Sort.by("updateOrder").descending())
+            "BOOKMARK" -> PageRequest.of(page, count, Sort.by("survey.bookmarkedCount").descending())
             else -> throw IllegalArgumentException("orderType 은 update와 bookmark중 하나여야 합니다. 현재 orderType \"$orderType\"")
         }
     }

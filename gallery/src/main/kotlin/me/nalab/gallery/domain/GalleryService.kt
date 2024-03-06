@@ -31,9 +31,9 @@ class GalleryService(
     }
 
     fun getGalleries(job: String, pageable: Pageable): Page<Gallery> {
-        val jobs = when (job) {
-            "all" -> Job.entries.toList()
-            else -> listOf(Job.valueOf(job.uppercase()))
+        val jobs = when (job.uppercase()) {
+            "ALL" -> Job.entries.toList()
+            else -> listOf(Job.valueOf(job))
         }
 
         return galleryRepository.findGalleries(jobs, pageable)

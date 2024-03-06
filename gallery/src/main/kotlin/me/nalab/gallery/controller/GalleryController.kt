@@ -40,10 +40,10 @@ class GalleryController(
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun getGalleries(
-        @RequestParam(name = "job", defaultValue = "all") job: String,
+        @RequestParam(name = "job", defaultValue = "ALL") job: String,
         @RequestParam(name = "page", defaultValue = "0") page: Int,
         @RequestParam(name = "count", defaultValue = "5") count: Int,
-        @RequestParam(name = "order-type", defaultValue = "update") orderType: String
+        @RequestParam(name = "order-type", defaultValue = "UPDATE") orderType: String
     ): GalleriesDto {
         return galleryGetApp.getGalleries(job, page, count, orderType)
     }
