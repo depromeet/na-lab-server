@@ -30,10 +30,18 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 		if (!isExcludedURI(request)) {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
-			Long targetId = targetIdGetPort.getTargetId(token.split(" ")[1]);
+			Long targetId = getTargetId(token);
 			request.setAttribute("logined", targetId);
 		}
 		return true;
+	}
+
+	private Long getTargetId(String token) {
+		try {
+			return targetIdGetPort.getTargetId(token.split(" ")[1]);
+		} catch (Exception exception) {
+			throw new CannotValidTokenException(exception.getMessage());
+		}
 	}
 
 	private boolean isPreflight(HttpServletRequest request) {
@@ -63,7 +71,7 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 
 	private void throwIfCannotValidToken(String token) {
 		if (token == null) {
-			throw new CannotValidMockTokenException();
+			throw new CannotValidTokenException("Null token");
 		}
 	}
 

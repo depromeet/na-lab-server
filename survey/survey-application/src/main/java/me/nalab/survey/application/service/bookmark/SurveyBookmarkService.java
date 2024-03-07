@@ -1,7 +1,6 @@
 package me.nalab.survey.application.service.bookmark;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort;
@@ -22,7 +21,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     @Override
     @Transactional
-    public SurveyBookmarkDto bookmark(Long targetId, Long surveyId) {
+    public void bookmark(Long targetId, Long surveyId) {
         var target = targetFindPort.getTargetById(targetId);
 
         if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
@@ -30,10 +29,23 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         }
 
         target.bookmark(surveyId);
-        surveyBookmarkPort.bookmark(target);
+        surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(targetId);
+        surveyBookmarkListener.increaseBookmarked(targetId);
+    }
 
-        return SurveyBookmarkDto.from(surveyId, target);
+    @Override
+    @Transactional
+    public void cancelBookmark(Long targetId, Long surveyId) {
+        var target = targetFindPort.getTargetById(targetId);
+
+        if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
+            throw new SurveyDoesNotExistException(surveyId);
+        }
+
+        target.cancelBookmark(surveyId);
+        surveyBookmarkPort.updateBookmark(target);
+
+        surveyBookmarkListener.decreaseBookmarked(targetId);
     }
 }

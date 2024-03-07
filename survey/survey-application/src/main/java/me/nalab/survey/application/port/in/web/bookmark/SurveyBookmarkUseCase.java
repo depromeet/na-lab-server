@@ -1,13 +1,15 @@
 package me.nalab.survey.application.port.in.web.bookmark;
 
-import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
-
 public interface SurveyBookmarkUseCase {
 
     /**
      * targetId에 해당하는 유저에게 survey를 북마크합니다.
-     * 이미 북마크되어있다면 북마크를 취소합니다.
      */
-    SurveyBookmarkDto bookmark(Long targetId, Long surveyId);
+    void bookmark(Long targetId, Long surveyId);
+
+    /**
+     * targetId에 해당하는 유저에게 survey를 북마크 취소합니다. 북마크 되어있지 않다면, 아무동작도 하지 않습니다.
+     */
+    void cancelBookmark(Long targetId, Long surveyId);
 
 }

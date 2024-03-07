@@ -1,7 +1,7 @@
 POST http://nalab-server:8080/v1/oauth/default # Default provider를 통해서 로그인 진행
 {
-    "nickname": "logined_gallery",
-    "email": "loginedgallery@123456"
+    "nickname": "cancel_bookmark_survey",
+    "email": "cancel_bookmark_survey@123456"
 }
 
 HTTP 200
@@ -72,7 +72,7 @@ header "Content-type" == "application/json"
 jsonpath "$.survey_id" exists
 
 jsonpath "$.target.id" exists
-jsonpath "$.target.nickname" == "logined_gallery"
+jsonpath "$.target.nickname" == "cancel_bookmark_survey"
 
 jsonpath "$.question_count" == 2
 jsonpath "$.question.[0].question_id" exists
@@ -98,14 +98,10 @@ jsonpath "$.question.[1].order" == 2
 
 [Captures]
 target_id: jsonpath "$.target.id"
-tendency_question_id: jsonpath "$.question.[0].question_id"
-tendency_question_choice_id: jsonpath "$.question.[0].choices.[0].choice_id"
-strength_question_id: jsonpath "$.question.[1].question_id"
-
 
 ##########
 
-POST http://nalab-server:8080/v1/surveys/{{ survey_id }}/bookmarks # survey_id를 북마크한다.
+POST http://nalab-server:8080/v1/surveys/{{ survey_id }}/bookmarks
 Authorization: {{ token_type }} {{ auth_token }}
 
 HTTP 200
@@ -113,104 +109,8 @@ HTTP 200
 
 ##########
 
-POST http://nalab-server:8080/v1/feedbacks # 생성된 survey에 feedback을 남긴다.
-
-[QueryStringParams]
-survey-id: {{ survey_id }}
-
-{
-    "reviewer": {
-        "collaboration_experience": true,
-        "position": "pm"
-    },
-    "question_feedback": [
-        {
-            "question_id": {{ tendency_question_id }},
-            "type": "choice",
-            "choices": [
-                {{ tendency_question_choice_id }}
-            ]
-        },
-        {
-            "question_id": {{ strength_question_id }},
-            "type": "short",
-            "reply": [
-                "Hello world"
-            ]
-        }
-    ]
-}
-
-HTTP 201
-[Asserts]
-
-##########
-
-GET http://nalab-server:8080/v1/feedbacks # 북마크를 위해 feedback id 저장
-Authorization: {{ token_type }} {{ auth_token }}
-
-[QueryStringParams]
-survey-id: {{ survey_id }}
-
-HTTP 200
-[Asserts]
-header "Content-type" == "application/json"
-
-[Captures]
-form_question_feedback_id: jsonpath "$.question_feedback.[0].feedbacks.[0].form_question_feedback_id"
-
-##########
-
-PATCH http://nalab-server:8080/v1/feedbacks/bookmarks # 북마크를 진행한다.
-Authorization: {{ token_type }} {{ auth_token }}
-
-[QueryStringParams]
-form-question-feedback-id: {{form_question_feedback_id}}
-
-##########
-
-POST http://nalab-server:8080/v1/gallerys # gallery를 등록한다
-Authorization: {{ token_type }} {{ auth_token }}
-{
-    "job": "designer"
-}
-
-HTTP 200
-[Asserts]
-header "Content-type" == "application/json"
-
-jsonpath "$.target.target_id" == {{ target_id }}
-jsonpath "$.target.nickname" == "logined_gallery"
-jsonpath "$.target.position" == null
-jsonpath "$.target.job" == "DESIGNER"
-jsonpath "$.target.image_url" == "empty_image"
-
-jsonpath "$.survey.survey_id" == {{ survey_id }}
-jsonpath "$.survey.feedback_count" == 1
-jsonpath "$.survey.bookmarked_count" == 1
-jsonpath "$.survey.feedbacks.[0]" == "Hello world"
-jsonpath "$.survey.tendencies.[0].name" == "UI"
-jsonpath "$.survey.tendencies.[0].count" == 1
-
-##########
-
-GET http://nalab-server:8080/v1/gallerys/logins # 내 gallery 를 조회한다
+POST http://nalab-server:8080/v1/surveys/{{ survey_id }}/bookmarks/cancels
 Authorization: {{ token_type }} {{ auth_token }}
 
 HTTP 200
 [Asserts]
-header "Content-type" == "application/json"
-
-jsonpath "$.target.target_id" == {{ target_id }}
-jsonpath "$.target.nickname" == "logined_gallery"
-jsonpath "$.target.position" == null
-jsonpath "$.target.job" == "DESIGNER"
-jsonpath "$.target.image_url" == "empty_image"
-
-jsonpath "$.survey.survey_id" == {{ survey_id }}
-jsonpath "$.survey.feedback_count" == 1
-jsonpath "$.survey.bookmarked_count" == 1
-jsonpath "$.survey.feedbacks.[0]" == "Hello world"
-jsonpath "$.survey.tendencies.[0].name" == "UI"
-jsonpath "$.survey.tendencies.[0].count" == 1
-
