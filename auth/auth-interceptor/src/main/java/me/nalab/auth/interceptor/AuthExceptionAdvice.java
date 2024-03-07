@@ -1,5 +1,6 @@
 package me.nalab.auth.interceptor;
 
+import me.nalab.core.exception.handler.ErrorTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

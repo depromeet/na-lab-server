@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':auth:auth-application')
-
+    implementation project(':core:exception-handler')
+    
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }

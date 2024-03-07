@@ -1,5 +1,6 @@
 package me.nalab.gallery.controller
 
+import me.nalab.core.exception.handler.ErrorTemplate
 import me.nalab.gallery.app.GalleryGetApp
 import me.nalab.gallery.app.GalleryPreviewApp
 import me.nalab.gallery.app.GalleryRegisterApp
