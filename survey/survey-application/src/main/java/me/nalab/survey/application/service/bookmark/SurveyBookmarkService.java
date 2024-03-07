@@ -21,7 +21,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     @Override
     @Transactional
-    public Long bookmark(Long targetId, Long surveyId) {
+    public void bookmark(Long targetId, Long surveyId) {
         var target = targetFindPort.getTargetById(targetId);
 
         if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
@@ -32,7 +32,5 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         surveyBookmarkPort.bookmark(target);
 
         surveyBookmarkListener.listenBookmarked(targetId);
-
-        return surveyId;
     }
 }
