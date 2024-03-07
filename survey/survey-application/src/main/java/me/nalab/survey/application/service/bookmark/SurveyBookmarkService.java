@@ -1,7 +1,6 @@
 package me.nalab.survey.application.service.bookmark;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort;
@@ -22,7 +21,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     @Override
     @Transactional
-    public SurveyBookmarkDto bookmark(Long targetId, Long surveyId) {
+    public void bookmark(Long targetId, Long surveyId) {
         var target = targetFindPort.getTargetById(targetId);
 
         if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
@@ -33,7 +32,5 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         surveyBookmarkPort.bookmark(target);
 
         surveyBookmarkListener.listenBookmarked(targetId);
-
-        return SurveyBookmarkDto.from(surveyId, target);
     }
 }
