@@ -26,8 +26,13 @@ class GalleryService(
     }
 
     @Transactional
-    fun setBookmarkCount(targetId: Long, bookmarkCount: Int) {
-        galleryRepository.findByTargetIdOrNull(targetId)?.setBookmarkedCount(bookmarkCount)
+    fun increaseBookmarkCount(targetId: Long) {
+        galleryRepository.findByTargetIdOrNull(targetId)?.increaseBookmarkCount()
+    }
+
+    @Transactional
+    fun decreaseBookmarkCount(targetId: Long) {
+        galleryRepository.findByTargetIdOrNull(targetId)?.decreaseBookmarkCount()
     }
 
     fun getGalleries(job: String, pageable: Pageable): Page<Gallery> {

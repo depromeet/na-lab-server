@@ -33,7 +33,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         target.bookmark(surveyId);
         surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(TargetDtoMapper.toTargetDto(target));
+        surveyBookmarkListener.increaseBookmarked(targetId);
 
         return SurveyBookmarkDto.from(surveyId, target);
     }
@@ -50,6 +50,6 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         target.cancelBookmark(surveyId);
         surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(TargetDtoMapper.toTargetDto(target));
+        surveyBookmarkListener.decreaseBookmarked(targetId);
     }
 }
