@@ -65,6 +65,8 @@ internal class GalleryServiceTest(
 
     describe("getGalleries 메소드는") {
         beforeEach {
+            galleryRepository.deleteAll()
+
             galleryService.registerGallery(oldDesignerGallery)
             galleryService.registerGallery(midDeveloperGallery)
             galleryService.registerGallery(latestPmGallery)
@@ -150,6 +152,33 @@ internal class GalleryServiceTest(
             }
         }
     }
+
+    describe("increaseBookmarkCount 메소드는") {
+        context("targetId를 입력받으면,") {
+            galleryService.registerGallery(defaultGallery)
+            galleryService.increaseBookmarkCount(EXIST_TARGET_ID)
+
+            it("targetId에 해당하는 target gallery의 bookmarked count를 증가시킨다.") {
+                val gallery = galleryService.getGalleryByTargetId(EXIST_TARGET_ID)
+
+                gallery.getBookmarkedCount() shouldBeEqual 1
+            }
+        }
+    }
+
+    describe("decreaseBookmarkCount 메소드는") {
+        context("targetId를 입력받으면,") {
+            galleryService.registerGallery(defaultGallery)
+            galleryService.increaseBookmarkCount(EXIST_TARGET_ID)
+            galleryService.decreaseBookmarkCount(EXIST_TARGET_ID)
+
+            it("targetId에 해당하는 target gallery의 bookmarked count를 감소 시킨다.") {
+                val gallery = galleryService.getGalleryByTargetId(EXIST_TARGET_ID)
+
+                gallery.getBookmarkedCount() shouldBeEqual 0
+            }
+        }
+    }
 }) {
 
     companion object {
@@ -161,6 +190,15 @@ internal class GalleryServiceTest(
         val updatePage: PageRequest = PageRequest.of(0, 5, Sort.by("updateOrder").descending())
         val bookmarkPage: PageRequest =
             PageRequest.of(0, 5, Sort.by("survey.bookmarkedCount").descending())
+
+        val defaultGallery = gallery(
+            id = EXIST_GALLERY_ID,
+            targetId = EXIST_TARGET_ID,
+            surveyId = EXIST_SURVEY_ID,
+            job = Job.DESIGNER,
+            updateOrder = TimeUtil.toInstant().minus(1, ChronoUnit.DAYS),
+            bookmarkedCount = 0
+        )
 
         val oldDesignerGallery = gallery(
             id = 1,

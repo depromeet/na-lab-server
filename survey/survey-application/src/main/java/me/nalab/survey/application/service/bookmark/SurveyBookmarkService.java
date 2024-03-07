@@ -2,11 +2,13 @@ package me.nalab.survey.application.service.bookmark;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
+import me.nalab.survey.application.exception.TargetDoesNotHasSurveyException;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkPort;
 import me.nalab.survey.application.port.out.persistence.findfeedback.SurveyExistCheckPort;
 import me.nalab.survey.application.port.out.persistence.findtarget.TargetFindPort;
+import me.nalab.survey.application.port.out.persistence.findtarget.TargetIdFindPort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     private final TargetFindPort targetFindPort;
+    private final TargetIdFindPort targetIdFindPort;
     private final SurveyExistCheckPort surveyExistCheckPort;
     private final SurveyBookmarkPort surveyBookmarkPort;
     private final SurveyBookmarkListenPort surveyBookmarkListener;
@@ -28,10 +31,13 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
             throw new SurveyDoesNotExistException(surveyId);
         }
 
-        target.bookmark(surveyId);
-        surveyBookmarkPort.updateBookmark(target);
-
-        surveyBookmarkListener.increaseBookmarked(targetId);
+        var bookmarkSuccess = target.bookmark(surveyId);
+        if (bookmarkSuccess) {
+            var bookmarkTargetId = targetIdFindPort.findTargetIdBySurveyId(surveyId)
+                .orElseThrow(() -> new TargetDoesNotHasSurveyException(surveyId));
+            surveyBookmarkListener.increaseBookmarked(bookmarkTargetId);
+            surveyBookmarkPort.updateBookmark(target);
+        }
     }
 
     @Override
@@ -43,9 +49,12 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
             throw new SurveyDoesNotExistException(surveyId);
         }
 
-        target.cancelBookmark(surveyId);
-        surveyBookmarkPort.updateBookmark(target);
-
-        surveyBookmarkListener.decreaseBookmarked(targetId);
+        var cancelSuccess = target.cancelBookmark(surveyId);
+        if (cancelSuccess) {
+            var bookmarkTargetId = targetIdFindPort.findTargetIdBySurveyId(surveyId)
+                .orElseThrow(() -> new TargetDoesNotHasSurveyException(surveyId));
+            surveyBookmarkListener.decreaseBookmarked(bookmarkTargetId);
+            surveyBookmarkPort.updateBookmark(target);
+        }
     }
 }
