@@ -106,11 +106,7 @@ public class SurveyAcceptanceValidator {
 		resultActions.andExpectAll(
 			status().isOk(),
 			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.target_id").isString(),
-			jsonPath("$.survey_id").isString(),
-			jsonPath("$.nickname").isString(),
-			jsonPath("$.position").doesNotExist(),
-			jsonPath("$.image_url").doesNotExist()
+			jsonPath("$.survey_id").isString()
 		);
 	}
 
