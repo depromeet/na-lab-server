@@ -1,7 +1,9 @@
 package me.nalab.survey.jpa.adaptor.common.mapper;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import me.nalab.core.data.survey.SurveyEntity;
 import me.nalab.core.data.target.SurveyBookmarkEntity;
 import me.nalab.core.data.target.TargetEntity;
 import me.nalab.survey.domain.target.SurveyBookmark;
@@ -37,6 +39,17 @@ public class TargetEntityMapper {
 			.position(targetEntity.getPosition())
 			.job(targetEntity.getJob())
             .bookmarkedSurveys(toSurveyBookmark(targetEntity.getBookmarkedSurveys()))
+			.build();
+	}
+
+	public static Target toTargetWithSurvey(TargetEntity targetEntity, SurveyEntity surveyEntity) {
+		return Target.builder()
+			.id(targetEntity.getId())
+			.surveyList(List.of(SurveyEntityMapper.toSurvey(surveyEntity)))
+			.nickname(targetEntity.getNickname())
+			.position(targetEntity.getPosition())
+			.job(targetEntity.getJob())
+			.bookmarkedSurveys(toSurveyBookmark(targetEntity.getBookmarkedSurveys()))
 			.build();
 	}
 
