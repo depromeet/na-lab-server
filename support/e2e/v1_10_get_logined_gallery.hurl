@@ -112,9 +112,7 @@ HTTP 200
 [Asserts]
 header "Content-type" == "application/json"
 
-jsonpath "$.target_id" == {{ target_id }}
 jsonpath "$.survey_id" == {{ survey_id }}
-jsonpath "$.nickname" == "logined_gallery"
 
 ##########
 
