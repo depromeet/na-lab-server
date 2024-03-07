@@ -1,5 +1,6 @@
 package me.nalab.gallery.controller
 
+import me.nalab.core.exception.handler.ErrorTemplate
 import me.nalab.gallery.app.GalleryGetApp
 import me.nalab.gallery.app.GalleryPreviewApp
 import me.nalab.gallery.app.GalleryRegisterApp
@@ -48,4 +49,8 @@ class GalleryController(
         return galleryGetApp.getGalleries(job, page, count, orderType)
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ErrorTemplate =
+        ErrorTemplate.of(exception.message ?: "잘못된 요청입니다.")
 }
