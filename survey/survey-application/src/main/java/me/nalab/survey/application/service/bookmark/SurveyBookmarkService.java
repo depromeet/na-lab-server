@@ -1,7 +1,6 @@
 package me.nalab.survey.application.service.bookmark;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort;
