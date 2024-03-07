@@ -15,7 +15,7 @@ public class SurveyBookmarkAdaptor implements SurveyBookmarkPort {
     private final TargetFindRepository targetFindRepository;
 
     @Override
-    public void bookmark(Target target) {
+    public void updateBookmark(Target target) {
         var savedTarget = targetFindRepository.findById(target.getId())
             .orElseThrow(() -> new TargetDoesNotExistException(target.getId()));
 

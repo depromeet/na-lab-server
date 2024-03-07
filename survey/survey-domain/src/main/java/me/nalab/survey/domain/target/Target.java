@@ -2,6 +2,7 @@ package me.nalab.survey.domain.target;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.LongSupplier;
 import lombok.Builder;
@@ -44,5 +45,12 @@ public class Target implements IdGeneratable {
     public void bookmark(Long surveyId) {
         var bookmark = new SurveyBookmark(surveyId);
         bookmarkedSurveys.add(bookmark);
+    }
+
+    public void cancelBookmark(Long surveyId) {
+        bookmarkedSurveys.stream()
+            .filter(surveyBookmark -> Objects.equals(surveyBookmark.surveyId(), surveyId))
+            .findFirst()
+            .ifPresent(bookmarkedSurveys::remove);
     }
 }

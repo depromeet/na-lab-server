@@ -29,8 +29,23 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         }
 
         target.bookmark(surveyId);
-        surveyBookmarkPort.bookmark(target);
+        surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(targetId);
+        surveyBookmarkListener.increaseBookmarked(targetId);
+    }
+
+    @Override
+    @Transactional
+    public void cancelBookmark(Long targetId, Long surveyId) {
+        var target = targetFindPort.getTargetById(targetId);
+
+        if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
+            throw new SurveyDoesNotExistException(surveyId);
+        }
+
+        target.cancelBookmark(surveyId);
+        surveyBookmarkPort.updateBookmark(target);
+
+        surveyBookmarkListener.decreaseBookmarked(targetId);
     }
 }

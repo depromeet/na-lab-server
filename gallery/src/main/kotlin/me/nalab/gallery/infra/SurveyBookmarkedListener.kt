@@ -13,20 +13,37 @@ class SurveyBookmarkedListener(
 ) : SurveyBookmarkListenPort {
 
     @Async
-    override fun listenBookmarked(targetId: Long) {
+    override fun increaseBookmarked(targetId: Long) {
         runCatching {
             galleryService.increaseBookmarkCount(targetId)
         }.recoverCatching {
             when (it is OptimisticLockingFailureException) {
                 true -> {
                     waitJitter()
-                    listenBookmarked(targetId)
+                    increaseBookmarked(targetId)
                 }
 
                 false -> throw it
             }
         }
     }
+
+    @Async
+    override fun decreaseBookmarked(targetId: Long) {
+        runCatching {
+            galleryService.decreaseBookmarkCount(targetId)
+        }.recoverCatching {
+            when (it is OptimisticLockingFailureException) {
+                true -> {
+                    waitJitter()
+                    decreaseBookmarked(targetId)
+                }
+
+                false -> throw it
+            }
+        }
+    }
+
 
     private fun waitJitter() {
         Thread.sleep(Random.nextLong(500, 1000))
