@@ -28,10 +28,8 @@ public class SurveyBookmarkController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/surveys/{survey_id}/bookmarks/cancels")
-    public SurveyBookmarkedResponse cancelBookmark(@RequestAttribute("logined") Long targetId,
+    public void cancelBookmark(@RequestAttribute("logined") Long targetId,
         @PathVariable("survey_id") Long surveyId) {
-        var bookmarkedSurveyId = surveyBookmarkReplaceUseCase.cancelBookmark(targetId, surveyId);
-
-        return SurveyBookmarkedResponse.of(bookmarkedSurveyId);
+        surveyBookmarkReplaceUseCase.cancelBookmark(targetId, surveyId);
     }
 }

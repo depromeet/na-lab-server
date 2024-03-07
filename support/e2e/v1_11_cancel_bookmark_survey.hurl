@@ -119,6 +119,3 @@ Authorization: {{ token_type }} {{ auth_token }}
 
 HTTP 200
 [Asserts]
-header "Content-type" == "application/json"
-
-jsonpath "$.survey_id" == {{ survey_id }}
