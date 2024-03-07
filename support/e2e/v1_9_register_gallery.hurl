@@ -112,8 +112,6 @@ HTTP 200
 [Asserts]
 header "Content-type" == "application/json"
 
-jsonpath "$.survey_id" == {{ survey_id }}
-
 ##########
 
 POST http://nalab-server:8080/v1/feedbacks # 생성된 survey에 feedback을 남긴다.

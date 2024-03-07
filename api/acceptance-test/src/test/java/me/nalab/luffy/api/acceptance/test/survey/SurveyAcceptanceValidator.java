@@ -103,11 +103,7 @@ public class SurveyAcceptanceValidator {
 	}
 
 	public static void assertIsBookmarked(ResultActions resultActions) throws Exception {
-		resultActions.andExpectAll(
-			status().isOk(),
-			content().contentType(MediaType.APPLICATION_JSON),
-			jsonPath("$.survey_id").isString()
-		);
+		resultActions.andExpectAll(status().isOk());
 	}
 
 }

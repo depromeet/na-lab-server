@@ -2,7 +2,6 @@ package me.nalab.survey.web.adaptor.bookmark;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
-import me.nalab.survey.web.adaptor.bookmark.response.SurveyBookmarkedResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,11 +19,9 @@ public class SurveyBookmarkReplaceController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/surveys/{survey_id}/bookmarks")
-    public SurveyBookmarkedResponse replaceBookmark(@RequestAttribute("logined") Long targetId,
+    public void replaceBookmark(@RequestAttribute("logined") Long targetId,
         @PathVariable("survey_id") Long surveyId) {
-        var bookmarkedSurveyId = surveyBookmarkReplaceUseCase.bookmark(targetId, surveyId);
-
-        return SurveyBookmarkedResponse.of(bookmarkedSurveyId);
+        surveyBookmarkReplaceUseCase.bookmark(targetId, surveyId);
     }
 
 }
