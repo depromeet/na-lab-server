@@ -48,4 +48,8 @@ class GalleryController(
         return galleryGetApp.getGalleries(job, page, count, orderType)
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ErrorTemplate =
+        ErrorTemplate.of(exception.message ?: "잘못된 요청입니다.")
 }
