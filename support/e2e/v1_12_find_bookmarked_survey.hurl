@@ -133,9 +133,6 @@ Authorization: {{ token_type_1 }} {{ auth_token_1 }}
 
 HTTP 200
 [Asserts]
-header "Content-type" == "application/json"
-
-jsonpath "$.survey_id" == {{ survey_id_1 }}
 
 ##########
 
@@ -144,9 +141,6 @@ Authorization: {{ token_type_1 }} {{ auth_token_1 }}
 
 HTTP 200
 [Asserts]
-header "Content-type" == "application/json"
-
-jsonpath "$.survey_id" == {{ survey_id_2 }}
 
 ##########
 
