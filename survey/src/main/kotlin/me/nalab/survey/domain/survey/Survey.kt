@@ -8,7 +8,7 @@ import javax.persistence.*
 @Entity(name = "survey")
 class Survey(
     @Id
-    @Column(name = "gallery_id")
+    @Column(name = "survey_id")
     val id: Long,
 
     @OneToMany(
@@ -16,15 +16,14 @@ class Survey(
         fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST, CascadeType.MERGE]
     )
-    val formQuestionables: MutableList<FormQuestionable>,
+    val formQuestionables: MutableList<FormQuestionable> = mutableListOf(),
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "target_id", nullable = false)
     val target: Target,
 ) : TimeBaseEntity() {
 
     init {
-        formQuestionables.sorted()
         validNoDuplicatedFormOrder()
     }
 

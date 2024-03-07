@@ -1,6 +1,7 @@
 package me.nalab.survey.domain.feedback
 
 import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.survey.domain.feedback.value.NickName
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -14,11 +15,11 @@ class Reviewer(
     val id: Long,
 
     @Column(name = "nick_name", nullable = false)
-    var nickName: String,
+    internal var nickName: NickName,
 
     @Column(name = "collaboration_experience", nullable = false)
     val collaborationExperience: Boolean,
 
     @Column(name = "position", nullable = false)
-    var position: String? = null,
+    var position: String,
 ) : TimeBaseEntity()

@@ -1,6 +1,9 @@
 package me.nalab.survey.domain.survey
 
 import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.survey.domain.survey.value.ImageUrl
+import me.nalab.survey.domain.survey.value.Job
+import me.nalab.survey.domain.survey.value.Position
 import javax.persistence.*
 
 @Entity
@@ -13,16 +16,16 @@ class Target(
     @Column(name = "target_name", nullable = false)
     val nickname: String,
 
-    @Column(name = "job", columnDefinition = "TEXT")
-    val job: String,
+    @Embedded
+    val job: Job = Job.empty(),
 
-    @Column(name = "image_url", columnDefinition = "TEXT")
-    val imageUrl: String,
+    @Embedded
+    val imageUrl: ImageUrl = ImageUrl.empty(),
 
     @Column(name = "position")
-    var position: String? = null,
+    private var position: Position = Position.empty(),
 
-    @OneToMany(mappedBy = "target", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToOne(mappedBy = "target", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     val survey: Survey,
 
     @ElementCollection
@@ -33,11 +36,6 @@ class Target(
     @Column(name = "version")
     private var version: Long? = null
 ) : TimeBaseEntity() {
-
-    fun bookmark(surveyId: Long) {
-        val bookmark = SurveyBookmark(surveyId)
-        bookmarkedSurveys.add(bookmark)
-    }
 
     companion object {
         private val NONE_BOOKMARKED_SURVEYS: MutableSet<SurveyBookmark> = HashSet()

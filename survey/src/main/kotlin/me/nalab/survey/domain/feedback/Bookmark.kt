@@ -1,5 +1,6 @@
 package me.nalab.survey.domain.feedback
 
+import me.nalab.core.time.TimeUtil
 import java.time.Instant
 import javax.persistence.Column
 import javax.persistence.Embeddable
@@ -15,5 +16,7 @@ class Bookmark(
 
     companion object {
         private const val BOOKMARK_DEFAULT_STATE = false
+
+        fun impossible(): Bookmark = Bookmark(bookmarkedAt = TimeUtil.toInstant())
     }
 }

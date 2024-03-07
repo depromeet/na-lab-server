@@ -7,7 +7,7 @@ class ChoiceFormQuestionFeedback(
     id: Long,
     formQuestionId: Long,
     isRead: Boolean = false,
-    bookmark: Bookmark,
+    bookmark: Bookmark = Bookmark.impossible(),
     feedback: Feedback,
 
     @ElementCollection
