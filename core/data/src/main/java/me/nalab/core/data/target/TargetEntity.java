@@ -54,6 +54,6 @@ public class TargetEntity extends TimeBaseEntity {
 
     @Version
     @Column(name = "version")
-    private Long version = 0L;
+    private Long version;
 
 }
