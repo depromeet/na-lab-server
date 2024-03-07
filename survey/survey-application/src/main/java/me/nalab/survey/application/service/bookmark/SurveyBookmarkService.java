@@ -37,7 +37,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
     @Override
     @Transactional
-    public SurveyBookmarkDto cancelBookmark(Long targetId, Long surveyId) {
+    public Long cancelBookmark(Long targetId, Long surveyId) {
         var target = targetFindPort.getTargetById(targetId);
 
         if (!surveyExistCheckPort.isExistSurveyBySurveyId(surveyId)) {
@@ -49,6 +49,6 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
 
         surveyBookmarkListener.listenBookmarked(TargetDtoMapper.toTargetDto(target));
 
-        return SurveyBookmarkDto.from(surveyId, target);
+        return surveyId;
     }
 }
