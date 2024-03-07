@@ -36,8 +36,8 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
             var bookmarkTargetId = targetIdFindPort.findTargetIdBySurveyId(surveyId)
                 .orElseThrow(() -> new TargetDoesNotHasSurveyException(surveyId));
             surveyBookmarkListener.increaseBookmarked(bookmarkTargetId);
+            surveyBookmarkPort.updateBookmark(target);
         }
-        surveyBookmarkPort.updateBookmark(target);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
             var bookmarkTargetId = targetIdFindPort.findTargetIdBySurveyId(surveyId)
                 .orElseThrow(() -> new TargetDoesNotHasSurveyException(surveyId));
             surveyBookmarkListener.decreaseBookmarked(bookmarkTargetId);
+            surveyBookmarkPort.updateBookmark(target);
         }
-        surveyBookmarkPort.updateBookmark(target);
     }
 }
