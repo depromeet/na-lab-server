@@ -2,6 +2,7 @@ package me.nalab.survey.application.service.bookmark;
 
 import lombok.RequiredArgsConstructor;
 import me.nalab.survey.application.common.survey.dto.SurveyBookmarkDto;
+import me.nalab.survey.application.common.survey.mapper.TargetDtoMapper;
 import me.nalab.survey.application.exception.SurveyDoesNotExistException;
 import me.nalab.survey.application.port.in.web.bookmark.SurveyBookmarkUseCase;
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort;
@@ -32,7 +33,7 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         target.bookmark(surveyId);
         surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(TargetDtoMapper.toTargetDto(target));
+        surveyBookmarkListener.increaseBookmarked(targetId);
     }
 
     @Override
@@ -47,6 +48,6 @@ public class SurveyBookmarkService implements SurveyBookmarkUseCase {
         target.cancelBookmark(surveyId);
         surveyBookmarkPort.updateBookmark(target);
 
-        surveyBookmarkListener.listenBookmarked(TargetDtoMapper.toTargetDto(target));
+        surveyBookmarkListener.decreaseBookmarked(targetId);
     }
 }

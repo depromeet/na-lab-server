@@ -1,7 +1,6 @@
 package me.nalab.gallery.infra
 
 import me.nalab.gallery.domain.GalleryService
-import me.nalab.survey.application.common.survey.dto.TargetDto
 import me.nalab.survey.application.port.out.persistence.bookmark.SurveyBookmarkListenPort
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.scheduling.annotation.Async
@@ -14,20 +13,37 @@ class SurveyBookmarkedListener(
 ) : SurveyBookmarkListenPort {
 
     @Async
-    override fun listenBookmarked(target: TargetDto) {
+    override fun increaseBookmarked(targetId: Long) {
         runCatching {
-            galleryService.setBookmarkCount(target.id, target.bookmarkedSurveys.count())
+            galleryService.increaseBookmarkCount(targetId)
         }.recoverCatching {
             when (it is OptimisticLockingFailureException) {
                 true -> {
                     waitJitter()
-                    listenBookmarked(target)
+                    increaseBookmarked(targetId)
                 }
 
                 false -> throw it
             }
         }
     }
+
+    @Async
+    override fun decreaseBookmarked(targetId: Long) {
+        runCatching {
+            galleryService.decreaseBookmarkCount(targetId)
+        }.recoverCatching {
+            when (it is OptimisticLockingFailureException) {
+                true -> {
+                    waitJitter()
+                    decreaseBookmarked(targetId)
+                }
+
+                false -> throw it
+            }
+        }
+    }
+
 
     private fun waitJitter() {
         Thread.sleep(Random.nextLong(500, 1000))
