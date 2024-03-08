@@ -1,10 +1,16 @@
 package me.nalab.auth.application.common.utils;
 
+import com.auth0.jwt.exceptions.AlgorithmMismatchException;
+import com.auth0.jwt.exceptions.IncorrectClaimException;
+import com.auth0.jwt.exceptions.MissingClaimException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import me.nalab.auth.application.common.exception.AuthException;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -33,7 +39,16 @@ public class JwtUtils {
 		var algorithm = getAlgorithm();
 		var verifier = getVerifier(algorithm);
 
-		return verifier.verify(jwt);
+		try {
+			return verifier.verify(jwt);
+		} catch (TokenExpiredException tokenExpiredException) {
+			throw new AuthException("Expired token");
+		} catch (IncorrectClaimException
+				 | MissingClaimException
+				 | SignatureVerificationException
+				 | AlgorithmMismatchException invalidTokenException) {
+			throw new AuthException("Invalid token");
+		}
 	}
 
 	private JWTVerifier getVerifier(Algorithm algorithm) {
