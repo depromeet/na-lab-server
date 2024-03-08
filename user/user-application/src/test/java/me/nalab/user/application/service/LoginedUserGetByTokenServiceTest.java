@@ -31,7 +31,7 @@ class LoginedUserGetByTokenServiceTest {
 	@DisplayName("토큰을 이용해 로그인된 유저의 정보를 조회 성공 테스트")
 	void GET_LOGINED_INFO_BY_TOKEN_SUCCESS() {
 		// given
-		LoginedInfo expected = new LoginedInfo("hello", 12345L, 54321L, "email");
+		LoginedInfo expected = new LoginedInfo("hello", 12345L, 54321L);
 		String token = "hello token";
 
 		Mockito.when(loginedUserGetByTokenPort.decryptToken(token.split(" ")[1])).thenReturn(expected);

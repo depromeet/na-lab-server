@@ -15,6 +15,5 @@ public class Payload {
 		USER_ID,
 		TARGET_ID,
 		NICKNAME,
-		EMAIL,
 	}
 }

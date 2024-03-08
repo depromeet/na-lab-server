@@ -45,12 +45,9 @@ class LoginedTargetFindAcceptanceTest extends UserAcceptanceTestSupporter {
 	void GET_LOGINED_USER_SUCCESS() throws Exception {
 		// given
 		String nickname = "devxb";
-		String email = "email";
 		Long targetId = targetInitializer.saveTargetAndGetId(nickname, Instant.now());
 		String token = jwtUtils.createAccessToken(Set.of(new Payload(Payload.Key.NICKNAME, nickname),
-			new Payload(Payload.Key.USER_ID, 12345 + ""),
-			new Payload(Payload.Key.TARGET_ID, targetId + ""),
-			new Payload(Payload.Key.EMAIL, email)));
+			new Payload(Payload.Key.USER_ID, 12345 + ""), new Payload(Payload.Key.TARGET_ID, targetId + "")));
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken("bearer " + token).expectedId(targetId).build());
 
@@ -58,7 +55,7 @@ class LoginedTargetFindAcceptanceTest extends UserAcceptanceTestSupporter {
 		ResultActions resultActions = getLoginedUser("bearer " + token);
 
 		// then
-		assertIsLogined(resultActions, targetId, nickname, email);
+		assertIsLogined(resultActions, targetId, nickname);
 	}
 
 }

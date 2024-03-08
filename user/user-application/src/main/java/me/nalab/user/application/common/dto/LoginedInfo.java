@@ -8,5 +8,5 @@ public class LoginedInfo {
 	private final String nickName;
 	private final Long targetId;
 	private final Long userId;
-	private final String email;
+
 }
