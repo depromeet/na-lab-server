@@ -17,7 +17,7 @@ public class UserAcceptanceTestSupporter {
 
 	protected ResultActions getLoginedUser(String token) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.get(API_VERSION + "/users/logined")
+			.get(API_VERSION + "/users/logins")
 			.accept(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)
 		);

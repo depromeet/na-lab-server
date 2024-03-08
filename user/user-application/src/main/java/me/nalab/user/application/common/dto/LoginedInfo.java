@@ -1,12 +1,15 @@
 package me.nalab.user.application.common.dto;
 
-import lombok.Data;
+import me.nalab.user.domain.user.User;
 
-@Data
-public class LoginedInfo {
+public record LoginedInfo(
+    Long id,
+    Long targetId,
+    String nickname,
+    String email
+) {
 
-	private final String nickName;
-	private final Long targetId;
-	private final Long userId;
-
+    public static LoginedInfo from(Long targetId, User user) {
+        return new LoginedInfo(user.getId(), targetId, user.getNickname(), user.getEmail());
+    }
 }

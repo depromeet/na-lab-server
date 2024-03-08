@@ -4,6 +4,7 @@ import me.nalab.core.data.user.UserEntity;
 import me.nalab.core.data.user.UserOAuthInfoEntity;
 import me.nalab.core.idgenerator.idcore.IdGenerator;
 import me.nalab.user.domain.user.Provider;
+import me.nalab.user.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class UserInitializer {
 	private IdGenerator idGenerator;
 
 	@Transactional
-	public void saveUserWithOAuth(Provider provider, String name, String email, Instant date) {
+	public Long saveUserWithOAuth(Provider provider, String name, String email, Instant date) {
 		var userEntity = UserEntity.builder()
 			.id(idGenerator.generate())
 			.nickname(name)
@@ -42,6 +43,7 @@ public class UserInitializer {
 
 		entityManager.persist(userEntity);
 		entityManager.persist(userOauthInfoEntity);
+		return userEntity.getId();
 	}
 
 }
