@@ -13,6 +13,6 @@ public interface LoginedUserGetByTokenUseCase {
 	 * @param encryptedToken 암호화된 토큰
 	 * @return 복호화된 정보
 	 */
-	LoginedInfo decryptToken(String encryptedToken);
+	LoginedInfo getLoginedInfoByToken(String encryptedToken);
 
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.user.application.common.dto.LoginedInfo;
 import me.nalab.user.application.port.in.LoginedUserGetByTokenUseCase;
 import me.nalab.user.web.adaptor.logined.response.LoginedInfoResponse;
 
@@ -20,9 +19,7 @@ public class LoginedUserGetController {
 
 	@GetMapping("/users/logined")
 	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
-		LoginedInfo loginedInfo = loginedUserGetByTokenUseCase.decryptToken(token);
-
-		return new LoginedInfoResponse(String.valueOf(loginedInfo.getTargetId()), loginedInfo.getNickName());
+		return LoginedInfoResponse.of(loginedUserGetByTokenUseCase.getLoginedInfoByToken(token));
 	}
 
 }
