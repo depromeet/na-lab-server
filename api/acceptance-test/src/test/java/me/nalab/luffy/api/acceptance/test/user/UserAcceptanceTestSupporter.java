@@ -33,6 +33,12 @@ public class UserAcceptanceTestSupporter {
 		);
 	}
 
+	protected ResultActions deleteUser(String token) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.delete(API_VERSION + "/users")
+			.header(HttpHeaders.AUTHORIZATION, token));
+	}
+
 	@Autowired
 	final void setMockMvc(MockMvc mockMvc) {
 		this.mockMvc = mockMvc;
