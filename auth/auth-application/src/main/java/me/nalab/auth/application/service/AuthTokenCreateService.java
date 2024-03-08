@@ -24,14 +24,17 @@ public class AuthTokenCreateService implements AuthTokenCreateUseCase {
 		var userId = request.getUserId();
 		var nickname = request.getNickname();
 		var targetId = request.getTargetId();
+		var email = request.getEmail();
 		Assert.isTrue(userId != null && !userId.isBlank(), "Authentication token 생성 시 유저 식별자는 필수입니다.");
 		Assert.isTrue(nickname != null && !nickname.isBlank(), "Authentication token 생성 시 유저의 별명은 필수입니다.");
 		Assert.isTrue(targetId != null && !targetId.isBlank(), "Authentication token 생성 시 유저의 별명은 필수입니다.");
+		Assert.isTrue(email != null && !email.isBlank(), "Authentication token 생성 시 유저의 이메일은 필수입니다.");
 
 		Set<Payload> payload = new HashSet<>();
 		payload.add(new Payload(Payload.Key.USER_ID, userId));
 		payload.add(new Payload(Payload.Key.NICKNAME, nickname));
 		payload.add(new Payload(Payload.Key.TARGET_ID, targetId));
+		payload.add(new Payload(Payload.Key.EMAIL, email));
 
 		String token = createToken(payload);
 		return new AuthToken(token);

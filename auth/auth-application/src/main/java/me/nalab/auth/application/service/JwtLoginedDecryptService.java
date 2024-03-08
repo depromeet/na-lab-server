@@ -26,7 +26,8 @@ public class JwtLoginedDecryptService implements LoginedUserGetByTokenPort, Targ
 		String nickName = decodedJWT.getClaim(Payload.Key.NICKNAME.name()).asString();
 		Long userId = Long.valueOf(decodedJWT.getClaim(Payload.Key.USER_ID.name()).asString());
 		Long targetId = Long.valueOf(decodedJWT.getClaim(Payload.Key.TARGET_ID.name()).asString());
-		return new LoginedInfo(nickName, targetId, userId);
+		String email = decodedJWT.getClaim(Payload.Key.EMAIL.name()).asString();
+		return new LoginedInfo(nickName, targetId, userId, email);
 	}
 
 	@Override

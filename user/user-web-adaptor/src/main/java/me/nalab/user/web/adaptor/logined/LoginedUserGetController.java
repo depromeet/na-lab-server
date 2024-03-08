@@ -18,11 +18,11 @@ public class LoginedUserGetController {
 
 	private final LoginedUserGetByTokenUseCase loginedUserGetByTokenUseCase;
 
-	@GetMapping("/users/logined")
+	@GetMapping("/users/logins")
 	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 		LoginedInfo loginedInfo = loginedUserGetByTokenUseCase.decryptToken(token);
 
-		return new LoginedInfoResponse(String.valueOf(loginedInfo.getTargetId()), loginedInfo.getNickName());
+		return LoginedInfoResponse.of(loginedInfo);
 	}
 
 }

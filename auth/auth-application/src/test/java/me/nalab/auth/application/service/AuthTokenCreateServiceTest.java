@@ -33,7 +33,8 @@ class AuthTokenCreateServiceTest {
 		// given
 		var nickname = "nickname";
 		var targetId = "targetId";
-		var request = new CreateAuthTokenRequest(userId, nickname, targetId);
+		var email = "email";
+		var request = new CreateAuthTokenRequest(userId, nickname, targetId, email);
 
 		// when
 		var throwable = Assertions.catchThrowable(() -> authTokenCreateService.create(request));
@@ -49,7 +50,8 @@ class AuthTokenCreateServiceTest {
 		// given
 		var userId = "userId";
 		var targetId = "targetId";
-		var request = new CreateAuthTokenRequest(userId, nickname, targetId);
+		var email = "email";
+		var request = new CreateAuthTokenRequest(userId, nickname, targetId, email);
 
 		// when
 		var throwable = Assertions.catchThrowable(() -> authTokenCreateService.create(request));
@@ -65,7 +67,25 @@ class AuthTokenCreateServiceTest {
 		// given
 		var userId = "userId";
 		var nickname = "nickname";
-		var request = new CreateAuthTokenRequest(userId, nickname, targetId);
+		var email = "email";
+		var request = new CreateAuthTokenRequest(userId, nickname, targetId, email);
+
+		// when
+		var throwable = Assertions.catchThrowable(() -> authTokenCreateService.create(request));
+
+		// then
+		Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+	@DisplayName("이메일이 비어있거나 null이면 예외를 발생시킨다.")
+	void THROW_EXCEPTION_WHEN_EMAIL_IS_BLANK(String email) {
+		// given
+		var userId = "userId";
+		var targetId = "targetId";
+		var nickname = "nickname";
+		var request = new CreateAuthTokenRequest(userId, nickname, targetId, email);
 
 		// when
 		var throwable = Assertions.catchThrowable(() -> authTokenCreateService.create(request));
@@ -81,7 +101,8 @@ class AuthTokenCreateServiceTest {
 		var userId = "userId";
 		var nickname = "nickname";
 		var targetId = "targetId";
-		var request = new CreateAuthTokenRequest(userId, nickname, targetId);
+		var email = "email";
+		var request = new CreateAuthTokenRequest(userId, nickname, targetId, email);
 		var expectedToken = "token";
 
 		when(jwtUtils.createAccessToken(any())).thenReturn(expectedToken);

@@ -6,11 +6,12 @@ import org.springframework.test.web.servlet.ResultActions;
 
 public class UserAcceptanceValidator {
 
-	public static void assertIsLogined(ResultActions resultActions, Long targetId, String nickname) throws Exception {
+	public static void assertIsLogined(ResultActions resultActions, Long targetId, String nickname, String email) throws Exception {
 		resultActions.andExpectAll(
 			status().isOk(),
 			jsonPath("$.target_id").value(targetId),
-			jsonPath("$.nickname").value(nickname)
+			jsonPath("$.nickname").value(nickname),
+			jsonPath("$.email").value(email)
 		);
 	}
 
