@@ -45,7 +45,7 @@ class LoginedUserGetByTokenServiceTest {
 	void GET_LOGINED_INFO_BY_TOKEN_SUCCESS() {
 		// given
 		LoginedInfo expected = new LoginedInfo(DEFAULT_USER.getId(), 12345L, DEFAULT_USER.getNickname(), DEFAULT_USER.getEmail());
-		TokenInfo tokenInfo = new TokenInfo(DEFAULT_USER.getNickname(), 12345L, DEFAULT_USER.getId());
+		TokenInfo tokenInfo = new TokenInfo(12345L, DEFAULT_USER.getId());
 		String token = "hello token";
 
 		Mockito.when(loginedUserGetByTokenPort.decryptToken(token.split(" ")[1])).thenReturn(tokenInfo);

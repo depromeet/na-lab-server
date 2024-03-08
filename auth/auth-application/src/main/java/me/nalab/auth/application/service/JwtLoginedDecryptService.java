@@ -23,10 +23,9 @@ public class JwtLoginedDecryptService implements LoginedUserGetByTokenPort, Targ
 		Assert.isTrue(encryptedToken != null && !encryptedToken.isBlank(),
 			"encryptedToken 으로 blank나 null 값이 들어올 수 없습니다.");
 		DecodedJWT decodedJWT = jwtUtils.verify(encryptedToken);
-		String nickName = decodedJWT.getClaim(Payload.Key.NICKNAME.name()).asString();
 		Long userId = Long.valueOf(decodedJWT.getClaim(Payload.Key.USER_ID.name()).asString());
 		Long targetId = Long.valueOf(decodedJWT.getClaim(Payload.Key.TARGET_ID.name()).asString());
-		return new TokenInfo(nickName, targetId, userId);
+		return new TokenInfo(targetId, userId);
 	}
 
 	@Override

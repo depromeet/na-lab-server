@@ -53,8 +53,8 @@ class LoginedTargetFindAcceptanceTest extends UserAcceptanceTestSupporter {
 		String email = "email";
 		Long userId = userInitializer.saveUserWithOAuth(Provider.DEFAULT, nickname, "email", Instant.now());
 		Long targetId = targetInitializer.saveTargetAndGetId(nickname, Instant.now());
-		String token = jwtUtils.createAccessToken(Set.of(new Payload(Payload.Key.NICKNAME, nickname),
-			new Payload(Payload.Key.USER_ID, String.valueOf(userId)), new Payload(Payload.Key.TARGET_ID, String.valueOf(targetId))));
+		String token = jwtUtils.createAccessToken(Set.of(new Payload(Payload.Key.USER_ID, String.valueOf(userId)),
+			new Payload(Payload.Key.TARGET_ID, String.valueOf(targetId))));
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken("bearer " + token).expectedId(targetId).build());
 
