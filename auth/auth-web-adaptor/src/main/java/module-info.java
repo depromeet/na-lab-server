@@ -3,6 +3,7 @@ module luffy.auth.auth.web.adaptor.main {
 
     requires luffy.auth.auth.application.main;
     requires luffy.auth.oauth.application.main;
+    requires luffy.core.exception.handler.main;
 
     requires lombok;
     requires java.validation;
