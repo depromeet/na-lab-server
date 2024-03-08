@@ -17,7 +17,7 @@ public class LoginedUserGetController {
 
 	private final LoginedUserGetByTokenUseCase loginedUserGetByTokenUseCase;
 
-	@GetMapping("/users/logined")
+	@GetMapping("/users/logins")
 	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 		return LoginedInfoResponse.of(loginedUserGetByTokenUseCase.getLoginedInfoByToken(token));
 	}
