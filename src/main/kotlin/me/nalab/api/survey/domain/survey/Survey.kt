@@ -1,7 +1,7 @@
-package domain.survey
+package me.nalab.api.survey.domain.survey
 
+import me.nalab.api.survey.domain.survey.exception.DuplicatedOrderException
 import me.nalab.core.data.common.TimeBaseEntity
-import me.nalab.survey.domain.survey.exception.DuplicatedOrderException
 import javax.persistence.*
 
 @Table(name = "survey")

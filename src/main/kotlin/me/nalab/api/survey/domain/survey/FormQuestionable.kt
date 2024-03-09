@@ -1,4 +1,4 @@
-package domain.survey
+package me.nalab.api.survey.domain.survey
 
 import me.nalab.core.data.common.TimeBaseEntity
 import javax.persistence.*

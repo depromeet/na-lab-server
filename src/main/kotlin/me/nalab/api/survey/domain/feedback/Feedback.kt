@@ -1,4 +1,4 @@
-package domain.feedback
+package me.nalab.api.survey.domain.feedback
 
 import me.nalab.core.data.common.TimeBaseEntity
 import javax.persistence.*
@@ -18,17 +18,17 @@ class Feedback(
         fetch = FetchType.LAZY,
         cascade = [CascadeType.PERSIST, CascadeType.MERGE]
     )
-    val questionFeedbacks: MutableList<domain.feedback.FormQuestionFeedbackable> = mutableListOf(),
+    val questionFeedbacks: MutableList<FormQuestionFeedbackable> = mutableListOf(),
 
     @Column(name = "is_read", nullable = false)
     private var isRead: Boolean = false,
 
     @JoinColumn(name = "reviewer_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-    val reviewer: domain.feedback.Reviewer,
-) : Comparable<domain.feedback.Feedback>, TimeBaseEntity() {
+    val reviewer: Reviewer,
+) : Comparable<Feedback>, TimeBaseEntity() {
 
-    override fun compareTo(other: domain.feedback.Feedback): Int {
+    override fun compareTo(other: Feedback): Int {
         if (updatedAt.isAfter(other.updatedAt)) {
             return -1
         }

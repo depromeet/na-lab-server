@@ -1,7 +1,7 @@
-package domain.feedback
+package me.nalab.api.survey.domain.feedback
 
 import me.nalab.core.data.common.TimeBaseEntity
-import domain.feedback.value.NickName
+import me.nalab.api.survey.domain.feedback.value.NickName
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -15,7 +15,7 @@ class Reviewer(
     val id: Long,
 
     @Column(name = "nick_name", nullable = false)
-    internal var nickName: domain.feedback.value.NickName,
+    internal var nickName: NickName,
 
     @Column(name = "collaboration_experience", nullable = false)
     val collaborationExperience: Boolean,
