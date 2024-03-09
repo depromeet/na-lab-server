@@ -17,11 +17,7 @@ public class UserDeleteService implements UserDeleteUseCase {
     @Override
     @Transactional
     public void deleteByToken(String token) {
-        var tokenInfo = loginedUserGetByTokenPort.decryptToken(getTokenValuePart(token));
+        var tokenInfo = loginedUserGetByTokenPort.decryptToken(token);
         userDeletePort.deleteUserById(tokenInfo.getUserId());
-    }
-
-    private String getTokenValuePart(String token) {
-        return token.split(" ")[1];
     }
 }
