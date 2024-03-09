@@ -1,9 +1,9 @@
 package me.nalab.api.survey.domain.survey
 
+import me.nalab.api.core.TimeBaseEntity
 import me.nalab.api.survey.domain.survey.value.ImageUrl
 import me.nalab.api.survey.domain.survey.value.Job
 import me.nalab.api.survey.domain.survey.value.Position
-import me.nalab.core.data.common.TimeBaseEntity
 import javax.persistence.*
 
 @Entity

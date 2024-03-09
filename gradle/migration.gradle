@@ -4,8 +4,6 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
 
     dependencies {
-        implementation project(':core:data')
-        implementation project(':core:time')
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     }
 }

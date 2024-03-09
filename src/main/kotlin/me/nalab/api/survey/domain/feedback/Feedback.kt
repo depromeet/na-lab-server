@@ -1,6 +1,6 @@
 package me.nalab.api.survey.domain.feedback
 
-import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.api.core.TimeBaseEntity
 import javax.persistence.*
 
 @Entity(name = "feedback")
@@ -29,7 +29,7 @@ class Feedback(
 ) : Comparable<Feedback>, TimeBaseEntity() {
 
     override fun compareTo(other: Feedback): Int {
-        return DEFAULT_COMPARATOR.compare(this, other);
+        return DEFAULT_COMPARATOR.compare(this, other)
     }
 
     companion object {

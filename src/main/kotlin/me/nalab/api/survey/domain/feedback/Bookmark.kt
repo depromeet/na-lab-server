@@ -1,6 +1,6 @@
 package me.nalab.api.survey.domain.feedback
 
-import me.nalab.core.time.TimeUtil
+import me.nalab.api.core.TimeUtil
 import java.time.Instant
 import javax.persistence.Column
 import javax.persistence.Embeddable

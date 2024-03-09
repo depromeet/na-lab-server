@@ -1,6 +1,6 @@
 package me.nalab.api.survey.domain.feedback
 
-import me.nalab.core.data.common.TimeBaseEntity
+import me.nalab.api.core.TimeBaseEntity
 import me.nalab.api.survey.domain.feedback.value.NickName
 import javax.persistence.Column
 import javax.persistence.Entity
