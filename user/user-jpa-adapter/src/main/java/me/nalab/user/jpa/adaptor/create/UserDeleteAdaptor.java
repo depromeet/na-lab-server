@@ -15,7 +15,9 @@ public class UserDeleteAdaptor implements UserDeletePort {
 
     @Override
     public void deleteUserById(Long userId) {
-        userOAuthInfoJpaRepository.deleteByUserId(userId);
-        userJpaRepository.deleteById(userId);
+        var user = userJpaRepository.findById(userId)
+            .orElseThrow(() -> new IllegalArgumentException("Cannot find exist user"));
+        userOAuthInfoJpaRepository.deleteByUserId(user.getId());
+        userJpaRepository.deleteById(user.getId());
     }
 }
