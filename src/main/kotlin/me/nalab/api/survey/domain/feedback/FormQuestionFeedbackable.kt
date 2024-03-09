@@ -1,4 +1,4 @@
-package domain.feedback
+package me.nalab.api.survey.domain.feedback
 
 import javax.persistence.*
 
@@ -17,9 +17,9 @@ abstract class FormQuestionFeedbackable(
     open var isRead: Boolean = false,
 
     @Embedded
-    open val bookmark: domain.feedback.Bookmark,
+    open val bookmark: Bookmark,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedback_id")
-    val feedback: domain.feedback.Feedback,
+    val feedback: Feedback,
 )

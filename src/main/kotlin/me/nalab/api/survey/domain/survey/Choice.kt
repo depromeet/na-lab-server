@@ -1,4 +1,4 @@
-package domain.survey
+package me.nalab.api.survey.domain.survey
 
 import javax.persistence.*
 

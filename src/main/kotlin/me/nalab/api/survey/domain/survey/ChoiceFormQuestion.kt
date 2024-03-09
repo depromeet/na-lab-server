@@ -1,4 +1,4 @@
-package domain.survey
+package me.nalab.api.survey.domain.survey
 
 import me.nalab.api.survey.domain.survey.exception.DuplicatedOrderException
 import javax.persistence.*
