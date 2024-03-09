@@ -1,4 +1,4 @@
-package me.nalab.api.survey.domain.survey
+package domain.survey
 
 import org.springframework.data.jpa.repository.JpaRepository
 

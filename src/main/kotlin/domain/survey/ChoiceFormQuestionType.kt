@@ -1,4 +1,4 @@
-package me.nalab.api.survey.domain.survey
+package domain.survey
 
 enum class ChoiceFormQuestionType {
     TENDENCY,

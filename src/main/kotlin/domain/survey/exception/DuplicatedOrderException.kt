@@ -1,4 +1,4 @@
-package me.nalab.api.survey.domain.survey.exception
+package domain.survey.exception
 
 class DuplicatedOrderException internal constructor(duplicated: Int, orders: HashSet<Int>) :
     RuntimeException(

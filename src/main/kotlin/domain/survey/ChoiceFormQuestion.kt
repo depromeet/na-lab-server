@@ -1,6 +1,6 @@
 package domain.survey
 
-import me.nalab.api.survey.domain.survey.exception.DuplicatedOrderException
+import me.nalab.survey.domain.survey.exception.DuplicatedOrderException
 import javax.persistence.*
 
 @Entity

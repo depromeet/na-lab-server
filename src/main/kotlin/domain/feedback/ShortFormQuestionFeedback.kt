@@ -1,4 +1,4 @@
-package me.nalab.api.survey.domain.feedback
+package domain.feedback
 
 import javax.persistence.*
 
@@ -7,11 +7,11 @@ class ShortFormQuestionFeedback(
     id: Long,
     formQuestionId: Long,
     isRead: Boolean = false,
-    bookmark: Bookmark,
-    feedback: Feedback,
+    bookmark: domain.feedback.Bookmark,
+    feedback: domain.feedback.Feedback,
 
     @ElementCollection
     @CollectionTable(name = "reply", joinColumns = [JoinColumn(name = "form_feedback_id")])
     @Column(name = "replies")
     val replies: MutableList<String>,
-) : FormQuestionFeedbackable(id, formQuestionId, isRead, bookmark, feedback)
+) : domain.feedback.FormQuestionFeedbackable(id, formQuestionId, isRead, bookmark, feedback)

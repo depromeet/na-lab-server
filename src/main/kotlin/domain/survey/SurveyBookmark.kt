@@ -1,4 +1,4 @@
-package me.nalab.api.survey.domain.survey
+package domain.survey
 
 import javax.persistence.Column
 import javax.persistence.Embeddable
