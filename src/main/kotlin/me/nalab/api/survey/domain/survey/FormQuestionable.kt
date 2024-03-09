@@ -25,8 +25,5 @@ abstract class FormQuestionable(
     open val survey: Survey,
 ) : Comparable<FormQuestionable>, TimeBaseEntity() {
 
-    override fun compareTo(other: FormQuestionable): Int {
-        return Comparator.comparingInt { obj: FormQuestionable -> obj.order }
-            .compare(this, other)
-    }
+    override fun compareTo(other: FormQuestionable): Int = this.order.compareTo(other.order)
 }
