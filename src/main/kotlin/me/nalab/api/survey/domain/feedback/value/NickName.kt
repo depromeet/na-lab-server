@@ -2,8 +2,9 @@ package me.nalab.api.survey.domain.feedback.value
 
 import javax.persistence.Embeddable
 
+@JvmInline
 @Embeddable
-class NickName(
+value class NickName(
     val value: String
 ) {
 
