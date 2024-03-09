@@ -63,7 +63,7 @@ public class SpecificFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_SPECIFIC_FEEDBACK_SUCCESS_TEST() throws Exception {
 
 		// given
-		String token = "token";
+		String token = "bearer token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());

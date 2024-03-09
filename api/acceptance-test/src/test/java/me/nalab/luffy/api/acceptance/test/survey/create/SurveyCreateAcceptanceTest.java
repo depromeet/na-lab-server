@@ -49,7 +49,7 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("luffy",
 			LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
@@ -68,7 +68,7 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("luffy",
 			LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
@@ -86,7 +86,7 @@ class SurveyCreateAcceptanceTest extends AbstractSurveyTestSupporter {
 	void CREATE_NEW_SURVEY_WITH_FAIL() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("luffy", LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)

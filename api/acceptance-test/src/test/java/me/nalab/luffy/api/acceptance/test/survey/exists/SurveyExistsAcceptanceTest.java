@@ -38,7 +38,7 @@ class SurveyExistsAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("token에 해당하는 survey가 존재한다면, true를 반환한다.")
 	void RETURN_TRUE_IF_SURVEY_EXISTS() throws Exception {
 		// given
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		Long targetId = targetInitializer.saveTargetAndGetId("devxb", Instant.now());
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
@@ -59,7 +59,7 @@ class SurveyExistsAcceptanceTest extends AbstractSurveyTestSupporter {
 	@DisplayName("token에 해당하는 survey가 존재하지 않는다면, false를 반환한다.")
 	void RETURN_FALSE_IF_SURVEY_DOES_NOT_EXISTS() throws Exception {
 		// given
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		Long targetId = targetInitializer.saveTargetAndGetId("devxb", Instant.now());
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)

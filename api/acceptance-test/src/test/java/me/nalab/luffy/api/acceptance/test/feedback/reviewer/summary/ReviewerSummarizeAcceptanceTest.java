@@ -97,7 +97,7 @@ class ReviewerSummarizeAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 	private String saveTargetAndGetToken(String name) {
 		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
-		String token = "nalab-token";
+		String token = "bearer nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)

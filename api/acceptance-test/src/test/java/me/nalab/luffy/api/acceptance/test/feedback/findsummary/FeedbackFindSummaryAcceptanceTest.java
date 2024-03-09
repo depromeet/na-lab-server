@@ -63,7 +63,7 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FEEFBACK_SUMMARY_FIND_SUCCESS_TEST_WITH_NO_FEEDBACK() throws Exception {
 
 		// given
-		String token = "token";
+		String token = "bearer token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
@@ -81,7 +81,7 @@ class FeedbackFindSummaryAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FEEFBACK_SUMMARY_FIND_SUCCESS_TEST_WITH_FEEDBACK() throws Exception {
 
 		// given
-		String token = "token";
+		String token = "bearer token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());

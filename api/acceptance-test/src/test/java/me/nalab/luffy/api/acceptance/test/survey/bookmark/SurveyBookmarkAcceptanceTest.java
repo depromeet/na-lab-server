@@ -43,7 +43,7 @@ class SurveyBookmarkAcceptanceTest extends AbstractSurveyTestSupporter {
         // given
         var targetId = targetInitializer.saveTargetAndGetId("luffy",
             LocalDateTime.now().minusYears(24).toInstant(ZoneOffset.UTC));
-        var token = "luffy's-double-token";
+        var token = "bearer luffy's-double-token";
         applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
             .expectedToken(token)
             .expectedId(targetId)
