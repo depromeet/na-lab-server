@@ -3,9 +3,8 @@ package me.nalab.api.survey.domain.survey.value
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
-@Embeddable
-class Position(
-    @Column(name = "position", nullable = false)
+@JvmInline
+value class Position(
     val value: String,
 ) {
 

@@ -3,9 +3,8 @@ package me.nalab.api.survey.domain.survey.value
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
-@Embeddable
-class ImageUrl(
-    @Column(name = "image_url", nullable = false)
+@JvmInline
+value class ImageUrl(
     val value: String,
 ) {
 

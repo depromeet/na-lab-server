@@ -16,13 +16,13 @@ class Target(
     @Column(name = "target_name", nullable = false)
     val nickname: String,
 
-    @Embedded
+    @Column(name = "job", nullable = false)
     val job: Job = Job.empty(),
 
-    @Embedded
+    @Column(name = "image_url", nullable = false)
     val imageUrl: ImageUrl = ImageUrl.empty(),
 
-    @Column(name = "position")
+    @Column(name = "position", nullable = false)
     private var position: Position = Position.empty(),
 
     @OneToOne(mappedBy = "target", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
