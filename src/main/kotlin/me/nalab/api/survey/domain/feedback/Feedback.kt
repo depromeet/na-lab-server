@@ -29,18 +29,11 @@ class Feedback(
 ) : Comparable<Feedback>, TimeBaseEntity() {
 
     override fun compareTo(other: Feedback): Int {
-        if (updatedAt.isAfter(other.updatedAt)) {
-            return -1
-        }
-        if (updatedAt.isBefore(other.updatedAt)) {
-            return 1
-        }
-        if (createdAt.isAfter(other.createdAt)) {
-            return -1
-        }
-        if (createdAt.isBefore(other.createdAt)) {
-            return 1
-        }
-        return 0
+        return DEFAULT_COMPARATOR.compare(this, other);
+    }
+
+    companion object {
+        val DEFAULT_COMPARATOR =
+            compareByDescending<Feedback> { it.updatedAt }.thenByDescending { it.createdAt }
     }
 }
