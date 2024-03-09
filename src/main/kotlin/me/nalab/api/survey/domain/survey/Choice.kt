@@ -21,8 +21,5 @@ class Choice(
     val choiceFormQuestion: ChoiceFormQuestion,
 ) : Comparable<Choice> {
 
-    override fun compareTo(other: Choice): Int {
-        return Comparator.comparingInt { obj: Choice -> obj.order }
-            .compare(this, other)
-    }
+    override fun compareTo(other: Choice): Int = this.order.compareTo(other.order)
 }
