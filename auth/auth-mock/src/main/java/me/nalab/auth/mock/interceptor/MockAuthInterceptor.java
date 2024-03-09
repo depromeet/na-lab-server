@@ -26,6 +26,8 @@ public class MockAuthInterceptor implements HandlerInterceptor {
 			String token = request.getHeader("Authorization");
 			throwIfCannotValidToken(token);
 			request.setAttribute("logined", expectedId);
+			request.setAttribute("tokenType", token.split(" ")[0]);
+			request.setAttribute("tokenValue", token.split(" ")[1]);
 		}
 		return true;
 	}
