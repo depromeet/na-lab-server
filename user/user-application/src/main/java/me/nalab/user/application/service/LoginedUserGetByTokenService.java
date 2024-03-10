@@ -23,17 +23,9 @@ public class LoginedUserGetByTokenService implements LoginedUserGetByTokenUseCas
 	@Transactional(readOnly = true)
 	public LoginedInfo getLoginedInfoByToken(String encryptedToken) {
 		Objects.requireNonNull(encryptedToken, "encryptedToken은 null이 되면 안됩니다.");
-		String[] split = encryptedToken.split(" ");
-		throwIfInvalidToken(split);
-		var tokenInfo = loginedUserGetByTokenPort.decryptToken(split[1]);
+		var tokenInfo = loginedUserGetByTokenPort.decryptToken(encryptedToken);
 		var user = userGetPort.getById(tokenInfo.userId());
 		return LoginedInfo.from(tokenInfo.targetId(), user);
-	}
-
-	private void throwIfInvalidToken(String[] split) {
-		if(split.length < 2) {
-			throw new InvalidTokenException(split[0]);
-		}
 	}
 
 }
