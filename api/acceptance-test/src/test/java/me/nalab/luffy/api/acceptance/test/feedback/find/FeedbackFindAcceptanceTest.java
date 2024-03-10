@@ -55,7 +55,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEED_BACK_SUCCESS() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)
@@ -79,7 +79,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEED_BACK_SUCCESS_ANY_FEEDBACK() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)
@@ -112,7 +112,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_BOOKMARKED_FEED_BACK_SUCCESS_ANY_FEEDBACK() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 																	.expectedId(targetId)
 																	.expectedToken(token)
@@ -130,7 +130,7 @@ class FeedbackFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	private Long setUpSurveyAndFeedbackAndBookmark() throws Exception {
 		// 유저 생성
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 																	.expectedId(targetId)
 																	.expectedToken(token)

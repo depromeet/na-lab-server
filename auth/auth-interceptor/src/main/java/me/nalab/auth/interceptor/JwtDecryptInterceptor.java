@@ -32,7 +32,7 @@ public class JwtDecryptInterceptor implements HandlerInterceptor {
 			throwIfCannotValidToken(token);
 			Long targetId = getTargetId(token);
 			request.setAttribute("logined", targetId);
-			request.setAttribute("tokenType", token.split(" ")[0]);
+			request.setAttribute("tokenType", AuthenticateHeaderPrefix.valueOf(token.split(" ")[0].toUpperCase()));
 			request.setAttribute("tokenValue", token.split(" ")[1]);
 		}
 		return true;
