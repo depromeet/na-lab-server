@@ -34,6 +34,8 @@ class Feedback(
 
     companion object {
         val DEFAULT_COMPARATOR =
-            compareByDescending<Feedback> { it.updatedAt }.thenByDescending { it.createdAt }
+            compareByDescending<Feedback> { it.updatedAt }
+                .thenByDescending { it.createdAt }
+                .thenByDescending { it.id }
     }
 }
