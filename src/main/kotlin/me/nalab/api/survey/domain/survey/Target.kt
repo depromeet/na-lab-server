@@ -30,14 +30,9 @@ class Target(
 
     @ElementCollection
     @CollectionTable(name = "bookmarked_survey", joinColumns = [JoinColumn(name = "target_id")])
-    val bookmarkedSurveys: MutableSet<SurveyBookmark> = NO_BOOKMARKED_SURVEYS,
+    val bookmarkedSurveys: MutableSet<SurveyBookmark> = HashSet(),
 
     @Version
     @Column(name = "version")
     private var version: Long? = null
-) : TimeBaseEntity() {
-
-    companion object {
-        private val NO_BOOKMARKED_SURVEYS: MutableSet<SurveyBookmark> = HashSet()
-    }
-}
+) : TimeBaseEntity()
