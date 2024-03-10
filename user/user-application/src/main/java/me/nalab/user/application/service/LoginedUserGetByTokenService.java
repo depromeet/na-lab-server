@@ -7,7 +7,6 @@ import me.nalab.user.application.port.out.persistence.UserGetPort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import me.nalab.user.application.exception.InvalidTokenException;
 import me.nalab.user.application.port.in.LoginedUserGetByTokenUseCase;
 import me.nalab.user.application.port.out.persistence.LoginedUserGetByTokenPort;
 import org.springframework.transaction.annotation.Transactional;
