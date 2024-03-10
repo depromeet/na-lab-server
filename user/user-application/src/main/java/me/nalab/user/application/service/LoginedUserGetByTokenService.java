@@ -26,8 +26,8 @@ public class LoginedUserGetByTokenService implements LoginedUserGetByTokenUseCas
 		String[] split = encryptedToken.split(" ");
 		throwIfInvalidToken(split);
 		var tokenInfo = loginedUserGetByTokenPort.decryptToken(split[1]);
-		var user = userGetPort.getById(tokenInfo.getUserId());
-		return LoginedInfo.from(tokenInfo.getTargetId(), user);
+		var user = userGetPort.getById(tokenInfo.userId());
+		return LoginedInfo.from(tokenInfo.targetId(), user);
 	}
 
 	private void throwIfInvalidToken(String[] split) {

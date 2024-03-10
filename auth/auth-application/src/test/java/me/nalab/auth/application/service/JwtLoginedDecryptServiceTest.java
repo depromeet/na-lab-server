@@ -61,8 +61,8 @@ class JwtLoginedDecryptServiceTest {
 
 	private void assertDecryptedInfo(TokenInfo response, String expectedName, Long expectedUserId,
 		Long expectedTargetId) {
-		Assertions.assertEquals(response.getUserId(), expectedUserId);
-		Assertions.assertEquals(response.getTargetId(), expectedTargetId);
+		Assertions.assertEquals(response.userId(), expectedUserId);
+		Assertions.assertEquals(response.targetId(), expectedTargetId);
 	}
 
 	@Test
