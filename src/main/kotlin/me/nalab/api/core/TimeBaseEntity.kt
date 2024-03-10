@@ -29,7 +29,7 @@ abstract class TimeBaseEntity {
 
     @PreUpdate
     fun preUpdate() {
-        updatedAt = if (updatedAt != null) updatedAt else Instant.now()
+        updatedAt = Instant.now()
     }
 }
 
