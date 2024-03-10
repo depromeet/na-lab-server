@@ -8,21 +8,21 @@ import javax.persistence.*
 abstract class FormQuestionable(
     @Id
     @Column(name = "form_question_id")
-    open val id: Long,
+    val id: Long,
 
     @Column(name = "title", nullable = false, length = 45)
-    open val title: String,
+    val title: String,
 
     @Column(name = "orders", nullable = false)
-    open val order: Int,
+    val order: Int,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "question_type")
-    open val questionType: QuestionType,
+    val questionType: QuestionType,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id", nullable = false)
-    open val survey: Survey,
+    val survey: Survey,
 ) : Comparable<FormQuestionable>, TimeBaseEntity() {
 
     override fun compareTo(other: FormQuestionable): Int = this.order.compareTo(other.order)
