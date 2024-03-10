@@ -38,7 +38,7 @@ class SurveyFindAcceptanceTest extends AbstractSurveyTestSupporter {
 	@Test
 	void SURVEY_FIND_SUCCESS_TEST() throws Exception {
 
-		String token = "luffy's-double-token";
+		String token = "bearer luffy's-double-token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());

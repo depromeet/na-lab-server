@@ -5,9 +5,9 @@ import me.nalab.user.application.port.out.persistence.UserGetPort;
 import me.nalab.user.domain.user.User;
 import me.nalab.user.jpa.adaptor.create.common.mapper.UserObjectMapper;
 import me.nalab.user.jpa.adaptor.create.repository.UserJpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
+@Service
 @RequiredArgsConstructor
 public class UserGetAdaptor implements UserGetPort {
 

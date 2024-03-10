@@ -63,7 +63,7 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEEDBACK_BY_FORM_TYPE_TENDENCY() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)
@@ -86,7 +86,7 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEEDBACK_BY_FORM_TYPE_CUSTOM() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)
@@ -109,7 +109,7 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEEDBACK_BY_TYPE_TENDENCY_WITH_NO_FEEDBACK() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)
@@ -129,7 +129,7 @@ class FeedbackFindByTypeAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FIND_FEEDBACK_BY_TYPE_CUSTOM_WITH_NO_FEEDBACK() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello world", Instant.now());
-		String token = "mock token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)

@@ -41,7 +41,7 @@ class TargetPositionUpdateAcceptanceTest extends UserAcceptanceTestSupporter {
 		// given
 		String nickname = "nickname";
 		Long targetId = targetInitializer.saveTargetAndGetId(nickname, Instant.now());
-		String token = "token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
