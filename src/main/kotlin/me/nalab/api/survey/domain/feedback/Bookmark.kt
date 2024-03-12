@@ -17,6 +17,6 @@ class Bookmark(
     companion object {
         private const val BOOKMARK_DEFAULT_STATE = false
 
-        fun impossible(): Bookmark = Bookmark(bookmarkedAt = TimeUtil.toInstant())
+        fun impossible(): Bookmark = Bookmark(bookmarkedAt = TimeUtil.now())
     }
 }

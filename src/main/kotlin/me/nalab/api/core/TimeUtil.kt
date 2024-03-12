@@ -12,7 +12,7 @@ object TimeUtil {
 
     private var clock: Clock? = null
 
-    fun toInstant(): Instant {
+    fun now(): Instant {
         val current = if (clock != null) {
             Instant.now(clock)
         } else {
