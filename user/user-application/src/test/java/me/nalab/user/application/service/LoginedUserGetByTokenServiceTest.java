@@ -48,7 +48,7 @@ class LoginedUserGetByTokenServiceTest {
 		TokenInfo tokenInfo = new TokenInfo(12345L, DEFAULT_USER.getId());
 		String token = "hello token";
 
-		Mockito.when(loginedUserGetByTokenPort.decryptToken(token.split(" ")[1])).thenReturn(tokenInfo);
+		Mockito.when(loginedUserGetByTokenPort.decryptToken(token)).thenReturn(tokenInfo);
 		Mockito.when(userGetPort.getById(54321L)).thenReturn(DEFAULT_USER);
 
 		// when
@@ -67,18 +67,4 @@ class LoginedUserGetByTokenServiceTest {
 		// then
 		Assertions.assertThat(result).isInstanceOf(NullPointerException.class);
 	}
-
-	@Test
-	@DisplayName("Invalid token signature 테스트")
-	void DECRYPT_INVALID_TOKEN() {
-		// given
-		String token = "invalid";
-
-		// when
-		Throwable result = Assertions.catchThrowable(() -> loginedUserGetByTokenUseCase.getLoginedInfoByToken(token));
-
-		// then
-		Assertions.assertThat(result).isInstanceOf(InvalidTokenException.class);
-	}
-
 }

@@ -1,8 +1,7 @@
 package me.nalab.user.web.adaptor.logined;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +17,7 @@ public class LoginedUserGetController {
 	private final LoginedUserGetByTokenUseCase loginedUserGetByTokenUseCase;
 
 	@GetMapping("/users/logins")
-	public LoginedInfoResponse getLoginedUserByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+	public LoginedInfoResponse getLoginedUserByToken(@RequestAttribute("tokenValue") String token) {
 		return LoginedInfoResponse.of(loginedUserGetByTokenUseCase.getLoginedInfoByToken(token));
 	}
 
