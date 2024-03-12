@@ -24,7 +24,7 @@ object TimeUtil {
         return Instant.parse(formatter.format(instant))
     }
 
-    fun fixed(clock: Clock?) {
+    fun fixed(clock: Clock) {
         this.clock = clock
     }
 
