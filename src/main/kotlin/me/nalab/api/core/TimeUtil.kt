@@ -10,9 +10,10 @@ object TimeUtil {
     private var clock: Clock? = null
 
     fun toInstant(): Instant {
-        var current = Instant.now()
-        if (clock != null) {
-            current = Instant.now(clock)
+        val current = if (clock != null) {
+            Instant.now(clock)
+        } else {
+            Instant.now()
         }
         return formatTo6Digit(current)
     }
