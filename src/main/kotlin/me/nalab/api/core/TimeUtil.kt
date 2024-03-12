@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter
 
 object TimeUtil {
 
+    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSX")
+        .withZone(ZoneId.of("UTC"))
+
     private var clock: Clock? = null
 
     fun toInstant(): Instant {
@@ -18,11 +21,7 @@ object TimeUtil {
         return formatTo6Digit(current)
     }
 
-    private fun formatTo6Digit(instant: Instant): Instant {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSX")
-            .withZone(ZoneId.of("UTC"))
-        return Instant.parse(formatter.format(instant))
-    }
+    private fun formatTo6Digit(instant: Instant): Instant = Instant.parse(formatter.format(instant))
 
     fun fixed(clock: Clock) {
         this.clock = clock
