@@ -15,21 +15,21 @@ abstract class TimeBaseEntity {
         nullable = false,
         updatable = false,
     )
-    protected var createdAt: Instant? = null
+    protected lateinit var createdAt: Instant
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP(6)", nullable = false)
-    protected var updatedAt: Instant? = null
+    protected lateinit var updatedAt: Instant
 
     @PrePersist
     fun prePersist() {
-        val now = Instant.now()
-        createdAt = if (createdAt != null) createdAt else now
-        updatedAt = if (updatedAt != null) updatedAt else now
+        val now = TimeUtil.now()
+        createdAt = now
+        updatedAt = now
     }
 
     @PreUpdate
     fun preUpdate() {
-        updatedAt = Instant.now()
+        updatedAt = TimeUtil.now()
     }
 }
 
