@@ -58,7 +58,7 @@ class BookmarkReplaceAcceptanceTest extends AbstractFeedbackTestSupporter {
 
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("target", Instant.now());
-		String token = "token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedId(targetId)
 			.expectedToken(token)

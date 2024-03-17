@@ -66,7 +66,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void CREATE_FEEDBACK_TO_SURVEY_SUCCESS() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
-		String token = "nalab-token";
+		String token = "bearer nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
@@ -88,7 +88,7 @@ class FeedbackCreateAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void CREATE_MULTIPLE_FEEDBACK_TO_SURVEY_SUCCESS() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("hello", Instant.now());
-		String token = "hello-token";
+		String token = "bearer hello-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)

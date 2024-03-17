@@ -59,7 +59,7 @@ class TargetFindAcceptanceTest extends AbstractSurveyTestSupporter {
 	void FIND_TARGET_BY_SURVEY_ID_WITH_NO_AUTHORIZATION() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("target", Instant.now());
-		String token = "token";
+		String token = "bearer token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)

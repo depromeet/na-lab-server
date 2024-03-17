@@ -17,7 +17,7 @@ public class UserAcceptanceTestSupporter {
 
 	protected ResultActions getLoginedUser(String token) throws Exception {
 		return mockMvc.perform(MockMvcRequestBuilders
-			.get(API_VERSION + "/users/logined")
+			.get(API_VERSION + "/users/logins")
 			.accept(MediaType.APPLICATION_JSON)
 			.header(HttpHeaders.AUTHORIZATION, token)
 		);
@@ -31,6 +31,12 @@ public class UserAcceptanceTestSupporter {
 			.header(HttpHeaders.AUTHORIZATION, token)
 			.content(content)
 		);
+	}
+
+	protected ResultActions deleteUser(String token) throws Exception {
+		return mockMvc.perform(MockMvcRequestBuilders
+			.delete(API_VERSION + "/users")
+			.header(HttpHeaders.AUTHORIZATION, token));
 	}
 
 	@Autowired

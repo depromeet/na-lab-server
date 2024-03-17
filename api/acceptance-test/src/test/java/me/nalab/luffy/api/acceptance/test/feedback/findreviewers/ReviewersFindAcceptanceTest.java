@@ -64,7 +64,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FEEDBACKS_WITH_NO_REVIEWER_TEST() throws Exception {
 
 		// given
-		String token = "token";
+		String token = "bearer token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());
@@ -84,7 +84,7 @@ class ReviewersFindAcceptanceTest extends AbstractFeedbackTestSupporter {
 	void FEEDBACKS_WITH_REVIEWERS_TEST() throws Exception {
 
 		// given
-		String token = "token";
+		String token = "bearer token";
 		Long targetId = targetInitializer.saveTargetAndGetId("sujin", Instant.now());
 		applicationEventPublisher.publishEvent(
 			MockUserRegisterEvent.builder().expectedToken(token).expectedId(targetId).build());

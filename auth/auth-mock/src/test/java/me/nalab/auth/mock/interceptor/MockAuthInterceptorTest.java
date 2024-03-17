@@ -62,24 +62,24 @@ class MockAuthInterceptorTest extends AbstractMockAuthTest {
 
 	static Stream<Arguments> successSources() {
 		return Stream.of(
-			of(HttpMethod.POST, "/v1/surveys", "token1", 1L)
-			, of(HttpMethod.POST, "/v1/surveys", "token1", 2L)
-			, of(HttpMethod.GET, "/v1/surveys-id", "token3", 3L)
-			, of(HttpMethod.GET, "/v1/questions?survey-id=4", "token4", 4L)
-			, of(HttpMethod.GET, "/v1/feedbacks?survey-id=5", "token5", 5L)
-			, of(HttpMethod.GET, "/v1/feedbacks/6", "token6", 6L)
-			, of(HttpMethod.GET, "/v1/feedbacks/summary?survey-id=7", "token7", 7L)
-			, of(HttpMethod.GET, "/v1/feedbacks?question-id=8", "token8", 8L)
+			of(HttpMethod.POST, "/v1/surveys", "bearer token1", 1L)
+			, of(HttpMethod.POST, "/v1/surveys", "bearer token1", 2L)
+			, of(HttpMethod.GET, "/v1/surveys-id", "bearer token3", 3L)
+			, of(HttpMethod.GET, "/v1/questions?survey-id=4", "bearer token4", 4L)
+			, of(HttpMethod.GET, "/v1/feedbacks?survey-id=5", "bearer token5", 5L)
+			, of(HttpMethod.GET, "/v1/feedbacks/6", "bearer token6", 6L)
+			, of(HttpMethod.GET, "/v1/feedbacks/summary?survey-id=7", "bearer token7", 7L)
+			, of(HttpMethod.GET, "/v1/feedbacks?question-id=8", "bearer token8", 8L)
 		);
 	}
 
 	static Stream<Arguments> failSources() {
 		return Stream.of(
 			of(HttpMethod.POST, "/v1/surveys", null, null, null)
-			, of(HttpMethod.GET, "/v1/users", null, "token2", 2L)
-			, of(HttpMethod.GET, "/v1/users", "token3", null, 3L)
-			, of(HttpMethod.GET, "/v1/users", "token4", "4nekot", 4L)
-			, of(HttpMethod.GET, "/v1/users", "token4", "token4", null)
+			, of(HttpMethod.GET, "/v1/users", null, "bearer token2", 2L)
+			, of(HttpMethod.GET, "/v1/users", "bearer token3", null, 3L)
+			, of(HttpMethod.GET, "/v1/users", "bearer token4", "bearer 4nekot", 4L)
+			, of(HttpMethod.GET, "/v1/users", "bearer token4", "bearer token4", null)
 		);
 	}
 

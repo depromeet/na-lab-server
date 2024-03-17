@@ -3,6 +3,7 @@ module luffy.auth.auth.application.main {
 	exports me.nalab.auth.application.port.in.web;
 	exports me.nalab.auth.application.port.in;
 	exports me.nalab.auth.application.port.out;
+	exports me.nalab.auth.application.common.exception;
 
 	requires lombok;
 	requires com.fasterxml.jackson.annotation;

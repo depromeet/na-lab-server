@@ -41,7 +41,7 @@ class SurveyFindidAcceptanceTest extends AbstractSurveyTestSupporter {
 	void GET_LOGINED_SURVEY_ID_SUCCESS() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
-		String token = "nalab-token";
+		String token = "bearer nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
@@ -60,7 +60,7 @@ class SurveyFindidAcceptanceTest extends AbstractSurveyTestSupporter {
 	void GET_LOGINED_SURVEY_ID_FAIL_NO_SURVEY() throws Exception {
 		// given
 		Long targetId = targetInitializer.saveTargetAndGetId("nalab", Instant.now());
-		String token = "nalab-token";
+		String token = "bearer nalab-token";
 		applicationEventPublisher.publishEvent(MockUserRegisterEvent.builder()
 			.expectedToken(token)
 			.expectedId(targetId)
